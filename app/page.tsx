@@ -47,18 +47,7 @@ export default function HomePage() {
                 <SecondaryButton href="#services">Explore Services</SecondaryButton>
               </div>
             </Reveal>
-            <Reveal delay={320}>
-              <div className="mt-10 text-xs uppercase tracking-[0.2em] text-[var(--muted)]">
-                Featured by top news stations
-              </div>
-              <div className="mt-3 flex flex-wrap items-center gap-x-7 gap-y-2 text-[var(--muted)]/80 text-sm font-display">
-                <span>ABC</span>
-                <span>NBC</span>
-                <span>CBS</span>
-                <span>FOX</span>
-                <span>KTLA</span>
-              </div>
-            </Reveal>
+
           </div>
 
           <div className="lg:col-span-5 relative">
@@ -225,27 +214,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Video */}
-      <section className="py-16 sm:py-20 bg-white">
-        <div className="mx-auto max-w-5xl px-5 sm:px-8">
-          <div className="text-center max-w-2xl mx-auto">
-            <Eyebrow>Watch</Eyebrow>
-            <h2 className="font-display text-3xl sm:text-4xl text-[var(--navy)] mt-4 tracking-tight">
-              A glimpse inside our practice.
-            </h2>
-          </div>
-          <div className="mt-10 relative aspect-video rounded-3xl overflow-hidden shadow-xl shadow-[var(--navy)]/10 border border-[var(--line)] bg-black">
-            <iframe
-              src="https://www.youtube.com/embed/v5Ncys2dTDU?rel=0&modestbranding=1&playsinline=1"
-              title="Dr. Avi Ishaaya Wellness Centers"
-              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen"
-              loading="lazy"
-              className="absolute inset-0 w-full h-full"
-            />
-          </div>
-        </div>
-      </section>
-
       {/* Five Promises */}
       <section className="py-20 sm:py-28 bg-[var(--navy)] text-white">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
@@ -276,36 +244,26 @@ export default function HomePage() {
       {/* VIP Teaser */}
       <section className="py-20 sm:py-28">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          <div className="rounded-3xl overflow-hidden bg-gradient-to-br from-[var(--warm-soft)] via-white to-[var(--warm-soft)]/60 border border-[var(--line)] p-10 sm:p-16 grid lg:grid-cols-2 gap-10 items-center">
+          <div className="rounded-3xl overflow-hidden relative bg-gradient-to-br from-[var(--warm-soft)] via-white to-[var(--warm-soft)]/60 border border-[var(--line)] p-10 sm:p-16 grid lg:grid-cols-2 gap-10 items-center">
             <div>
               <Eyebrow>VIP Plans</Eyebrow>
               <h2 className="font-display text-3xl sm:text-4xl text-[var(--navy)] mt-4 tracking-tight">
                 Exclusive VIP Health Plans
               </h2>
-              <p className="mt-4 text-[var(--navy-soft)]/85 max-w-xl">
-                Four comprehensive wellness packages designed to match your
-                individual goals — from foundational health screenings to the
-                most advanced diagnostics medicine has to offer.
+              <p className="mt-4 text-lg italic text-[var(--navy-soft)]/85 max-w-xl">
+                &ldquo;Discover the transformative power of yoga: Strengthen your body &amp; calm your mind.&rdquo;
               </p>
               <div className="mt-7">
                 <PrimaryButton href="/vip">Learn More</PrimaryButton>
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-4">
-              {["Bronze", "Silver", "Gold", "Platinum"].map((tier, i) => (
-                <div
-                  key={tier}
-                  className="rounded-2xl bg-white p-6 border border-[var(--line)] shadow-sm"
-                >
-                  <div className="text-xs uppercase tracking-[0.22em] text-[var(--teal-deep)]">
-                    Tier 0{i + 1}
-                  </div>
-                  <div className="font-display text-2xl text-[var(--navy)] mt-2">
-                    {tier}
-                  </div>
-                  <div className="text-xs text-[var(--muted)] mt-2">Package</div>
-                </div>
-              ))}
+            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/scraped/48cUzxZLj1fsBF3sPX6ycI0y0jc.jpg"
+                alt="VIP Wellness"
+                className="absolute inset-0 w-full h-full object-cover"
+              />
             </div>
           </div>
         </div>
