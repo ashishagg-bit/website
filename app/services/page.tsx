@@ -46,9 +46,16 @@ export default function ServicesPage() {
                   className="group block h-full rounded-2xl bg-white p-7 border border-[var(--line)] hover:shadow-xl hover:shadow-[var(--navy)]/5 hover:-translate-y-1 transition-all"
                 >
                   <div
-                    className={`h-32 rounded-xl bg-gradient-to-br ${s.accent} flex items-end p-4`}
+                    className={`relative h-32 rounded-xl bg-gradient-to-br ${s.accent} flex items-end p-4 overflow-hidden`}
                   >
-                    <div className="text-xs uppercase tracking-[0.2em] text-[var(--navy)]/70">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={s.image}
+                      alt=""
+                      className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                    <div className="relative text-xs uppercase tracking-[0.2em] text-white/90">
                       Service · {String(i + 1).padStart(2, "0")}
                     </div>
                   </div>

@@ -11,6 +11,7 @@ export default function AllergyPage() {
   return (
     <ServiceLayout
       title="Allergy & Sensitivity"
+      heroImage="/images/scraped/tPS1IoVSxxS52DtZ4UKoc5HbWk8.jpg"
       tagline="Identifying allergens will allow you to eliminate potential triggers that may cause your allergy related symptoms."
       intro={
         <>

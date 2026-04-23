@@ -45,13 +45,18 @@ export default function AboutPage() {
           <div className="lg:col-span-5">
             <Reveal>
               <div className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl shadow-[var(--navy)]/10">
-                <div className="absolute inset-0 bg-gradient-to-br from-[var(--warm)] via-[var(--warm-soft)] to-white" />
-                <div className="absolute inset-0 opacity-30 [background-image:radial-gradient(circle_at_70%_30%,rgba(13,36,54,0.15),transparent_60%)]" />
-                <div className="absolute bottom-6 left-6 text-[var(--navy)]">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/scraped/H7UrHayerIUtTsCZGEBgPaXM.png"
+                  alt="Dr. Abraham Avi Ishaaya"
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                <div className="absolute bottom-6 left-6 text-white">
                   <div className="font-display text-xl">
                     Dr. Abraham &ldquo;Avi&rdquo; Ishaaya
                   </div>
-                  <div className="text-xs tracking-widest uppercase mt-1 text-[var(--navy-soft)]">
+                  <div className="text-xs tracking-widest uppercase mt-1 text-white/80">
                     M.D., FCCP, FAASM, FACGS, MACGS
                   </div>
                 </div>

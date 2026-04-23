@@ -10,6 +10,7 @@ export type Post = {
   excerpt: string;
   body: string;
   gradient: string;
+  image: string;
 };
 
 const POSTS_DIR = path.join(process.cwd(), "content/blog");
@@ -23,6 +24,41 @@ const GRADIENTS = [
   "from-teal-100 via-sky-50 to-indigo-100",
   "from-yellow-100 via-amber-50 to-orange-100",
   "from-cyan-100 via-emerald-50 to-teal-100",
+];
+
+const IMAGES = [
+  "/images/scraped/0HUPsipnJwiW8Wacf4kCltNs96o.jpg",
+  "/images/scraped/1VMNJeKjBpsJmP9YWwhXyzKSvA.jpg",
+  "/images/scraped/1xImPKfaVIwVWRaj2OXuBmLUT2E.jpg",
+  "/images/scraped/2mlNIbjadwhQWpJGw7OmBIMeTBQ.jpg",
+  "/images/scraped/41W4msn8A5xW2nbNOonFypPQ.jpg",
+  "/images/scraped/48cUzxZLj1fsBF3sPX6ycI0y0jc.jpg",
+  "/images/scraped/4FVQUutQWdB7NtLwRY17tioTIY0.jpg",
+  "/images/scraped/4OSBaHObMlbjYP7NUCUgbVAQ.jpg",
+  "/images/scraped/793ONR8hKKyrrxWSaatYJDLTY.jpg",
+  "/images/scraped/9aYbh8GFanv0iSwq9TzyjtrXI.jpg",
+  "/images/scraped/AC2cC1c4vV9tRfYLtq2lf4Xc.jpg",
+  "/images/scraped/AW9fDereVg3UqlpvRjrLYPxriaQ.jpg",
+  "/images/scraped/CFF1DUFdivK5TpaCrBZ7K0tvS8Y.jpg",
+  "/images/scraped/EUHKdtt4LEj5EAli0JMrqZJAwgo.jpg",
+  "/images/scraped/JVZl3xuus4kdE4dkIWKAgT4iaRw.jpg",
+  "/images/scraped/NNYb6EQUA1mNgpJztWHgD74Qa5Q.jpg",
+  "/images/scraped/NsX0K6LWw0DzYH5UMBEqleRtJs.jpg",
+  "/images/scraped/O2iHhRT8vmitOPuaycFWlsis.jpg",
+  "/images/scraped/efoh9O2ooJNsKsSWH5IqobEyBw.jpg",
+  "/images/scraped/ffT3BOcYoxhizWCVE2QIrQ4EpIA.jpg",
+  "/images/scraped/l3Z56b8C3m7noD9iY9kR1sPGXoA.jpg",
+  "/images/scraped/nGkU8nBZfE7cc5Q21x8OtSmMV9A.jpg",
+  "/images/scraped/nhJJNYrCrH8gQRcPktO9uTIiSO8.jpg",
+  "/images/scraped/oPX6yLhJwtA59zKfImuewbNCGE.jpg",
+  "/images/scraped/oz3Pwa5yGzcFxboF19d8KrIw.jpg",
+  "/images/scraped/qkCKTBlHXakXTN4bu7Qoe3xgc.jpg",
+  "/images/scraped/vJcCoQOaSPFFb1mZKUNODZviiw.jpg",
+  "/images/scraped/vz9gFU9ucii7BiCwOGtkPagjpE.jpg",
+  "/images/scraped/x0UIr7XcCuSrIE9C2w85F3AnccI.jpg",
+  "/images/scraped/xdxxmdJJ4ctXIDICB936iWQs0k.jpg",
+  "/images/scraped/yNpo2KbfILa6GHNo6fYNQThQ.jpg",
+  "/images/scraped/yTu1hAtGOIU7W1I4AhgsYjgmNcQ.jpg",
 ];
 
 function fmtDate(d: Date) {
@@ -51,6 +87,7 @@ export function getAllPosts(): Post[] {
       excerpt: data.excerpt as string,
       body: content,
       gradient: GRADIENTS[i % GRADIENTS.length],
+      image: IMAGES[i % IMAGES.length],
     };
   });
   posts.sort((a, b) => b.rawDate.getTime() - a.rawDate.getTime());

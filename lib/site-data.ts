@@ -5,12 +5,14 @@ export const services = [
     blurb:
       "Your lungs are essential to delivering vital oxygen to every cell in your body.",
     accent: "from-sky-200 to-teal-100",
+    image: "/images/scraped/Ok6cd4z826F0Gks9sFfcGFjFzY.jpg",
   },
   {
     slug: "cardiovascular",
     title: "Cardiovascular",
     blurb: "Your cardiovascular health is fundamental to your overall wellbeing.",
     accent: "from-rose-100 to-amber-100",
+    image: "/images/scraped/IppKL0cvGoYnkzaVfgS112yoo.jpg",
   },
   {
     slug: "wellness-preventive-medicine",
@@ -18,6 +20,7 @@ export const services = [
     blurb:
       "Wellness and prevention are where each piece connects to form the complete picture of how you can attain your optimal wellbeing.",
     accent: "from-emerald-100 to-amber-100",
+    image: "/images/scraped/Pqq2TKWlgMDe9nT6krgeFQ6euj0.jpg",
   },
   {
     slug: "allergy-sensitivity",
@@ -25,6 +28,7 @@ export const services = [
     blurb:
       "Identifying allergens will allow you to eliminate potential triggers that may cause your allergy related symptoms.",
     accent: "from-yellow-100 to-orange-100",
+    image: "/images/scraped/tPS1IoVSxxS52DtZ4UKoc5HbWk8.jpg",
   },
   {
     slug: "sleep",
@@ -32,6 +36,7 @@ export const services = [
     blurb:
       "Good sleep is essential for both your physical and mental well-being. During sleep, your brain processes the day's information and consolidates memories.",
     accent: "from-indigo-100 to-sky-100",
+    image: "/images/scraped/VfRH12CL491NDPBxF2q2K2kyP1w.jpg",
   },
 ];
 

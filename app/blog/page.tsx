@@ -35,7 +35,10 @@ export default function BlogIndex() {
               href={`/blog/${hero.slug}`}
               className="group grid lg:grid-cols-12 gap-8 rounded-3xl border border-[var(--line)] overflow-hidden bg-white hover:shadow-xl hover:shadow-[var(--navy)]/5 transition-shadow"
             >
-              <div className={`lg:col-span-6 aspect-[16/10] lg:aspect-auto bg-gradient-to-br ${hero.gradient}`} />
+              <div className={`relative lg:col-span-6 aspect-[16/10] lg:aspect-auto bg-gradient-to-br ${hero.gradient} overflow-hidden`}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={hero.image} alt="" className="absolute inset-0 w-full h-full object-cover" />
+              </div>
               <div className="lg:col-span-6 p-8 sm:p-10 flex flex-col justify-center">
                 <div className="text-xs uppercase tracking-[0.2em] text-[var(--teal-deep)]">Featured</div>
                 <h2 className="mt-3 font-display text-3xl text-[var(--navy)] group-hover:text-[var(--teal-deep)] transition-colors text-balance">
@@ -69,7 +72,10 @@ export default function BlogIndex() {
                 href={`/blog/${post.slug}`}
                 className="group block h-full rounded-2xl border border-[var(--line)] overflow-hidden bg-white hover:shadow-xl hover:shadow-[var(--navy)]/5 transition-all hover:-translate-y-1"
               >
-                <div className={`aspect-[16/10] bg-gradient-to-br ${post.gradient}`} />
+                <div className={`relative aspect-[16/10] bg-gradient-to-br ${post.gradient} overflow-hidden`}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={post.image} alt="" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                </div>
                 <div className="p-6">
                   <div className="text-xs text-[var(--muted)]">
                     Avi Ishaaya · {post.date}

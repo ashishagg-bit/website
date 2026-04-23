@@ -23,9 +23,14 @@ export function SiteHeader() {
     <header className="sticky top-0 z-50 backdrop-blur-md bg-[var(--background)]/85 border-b border-[var(--line)]">
       <div className="mx-auto max-w-7xl px-5 sm:px-8 h-16 sm:h-20 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-3 group">
-          <span className="inline-block w-9 h-9 rounded-full bg-gradient-to-br from-[var(--teal)] to-[var(--navy)] grid place-items-center text-white font-display text-lg shadow-sm group-hover:shadow-md transition-shadow">
-            A
-          </span>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/scraped/U0UsntSPmAe3llDpejljKb08Ps.svg"
+            alt="Dr. Avi Ishaaya Center"
+            width={40}
+            height={40}
+            className="w-10 h-10"
+          />
           <span className="font-display text-base sm:text-lg leading-tight text-[var(--navy)]">
             <span className="block tracking-tight">Dr. Avi Ishaaya</span>
             <span className="block text-[10px] uppercase tracking-[0.2em] text-[var(--muted)]">

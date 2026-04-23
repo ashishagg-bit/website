@@ -2,6 +2,9 @@ import Link from "next/link";
 import { services, promises, dimensions } from "@/lib/site-data";
 import { Reveal, Eyebrow, PrimaryButton, SecondaryButton } from "@/components/ui";
 import { getAllPosts } from "@/lib/posts";
+import { NewsScroller } from "@/components/news-scroller";
+import { GoogleReviews } from "@/components/google-reviews";
+import { PuzzlePiece } from "@/components/puzzle";
 
 export default function HomePage() {
   const recentPosts = getAllPosts().slice(0, 3);
@@ -52,16 +55,12 @@ export default function HomePage() {
           <div className="lg:col-span-5 relative">
             <Reveal delay={120}>
               <div className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl shadow-[var(--navy)]/10">
-                <div className="absolute inset-0 bg-gradient-to-br from-[var(--teal)] via-[var(--navy-soft)] to-[var(--navy)]" />
-                <div className="absolute inset-0 opacity-30 mix-blend-overlay [background-image:radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.6),transparent_60%)]" />
-                <div className="absolute bottom-6 left-6 right-6 text-white">
-                  <div className="text-xs uppercase tracking-[0.25em] text-white/70">Beverly Hills</div>
-                  <div className="font-display text-2xl mt-2">A New Era of Care</div>
-                  <p className="text-white/80 text-sm mt-2">
-                    A spacious, calming, beautifully designed space — where comfort meets
-                    cutting-edge medicine.
-                  </p>
-                </div>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/scraped/H7UrHayerIUtTsCZGEBgPaXM.png"
+                  alt="Dr. Abraham Avi Ishaaya"
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
               </div>
             </Reveal>
             <Reveal delay={300}>
@@ -72,9 +71,16 @@ export default function HomePage() {
                 </div>
               </div>
             </Reveal>
+            <PuzzlePiece
+              className="absolute -bottom-6 -right-6 w-28 h-28 text-[var(--teal)] hidden sm:block"
+              opacity={0.35}
+              rotate={18}
+            />
           </div>
         </div>
       </section>
+
+      <NewsScroller />
 
       {/* Dimensions */}
       <section className="py-20 sm:py-28">
@@ -122,8 +128,15 @@ export default function HomePage() {
                   href={`/service/${s.slug}`}
                   className="group block h-full rounded-2xl bg-white p-7 border border-[var(--line)] hover:shadow-xl hover:shadow-[var(--navy)]/5 hover:-translate-y-1 transition-all"
                 >
-                  <div className={`h-32 rounded-xl bg-gradient-to-br ${s.accent} flex items-end p-4`}>
-                    <div className="text-xs uppercase tracking-[0.2em] text-[var(--navy)]/70">
+                  <div className={`h-32 rounded-xl bg-gradient-to-br ${s.accent} flex items-end p-4 relative overflow-hidden`}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={s.image}
+                      alt=""
+                      className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                    <div className="relative text-xs uppercase tracking-[0.2em] text-white/90">
                       Service · {String(i + 1).padStart(2, "0")}
                     </div>
                   </div>
@@ -152,11 +165,16 @@ export default function HomePage() {
           <div className="lg:col-span-5">
             <Reveal>
               <div className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl shadow-[var(--navy)]/10">
-                <div className="absolute inset-0 bg-gradient-to-br from-[var(--warm)] via-[var(--warm-soft)] to-white" />
-                <div className="absolute inset-0 opacity-30 [background-image:radial-gradient(circle_at_70%_30%,rgba(13,36,54,0.15),transparent_60%)]" />
-                <div className="absolute bottom-6 left-6 text-[var(--navy)]">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/scraped/z40GSxCTx1p8Yl8dajpSuGt52I.jpeg"
+                  alt="Dr. Abraham Avi Ishaaya"
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                <div className="absolute bottom-6 left-6 text-white">
                   <div className="font-display text-xl">Dr. Abraham &ldquo;Avi&rdquo; Ishaaya</div>
-                  <div className="text-xs tracking-widest uppercase mt-1 text-[var(--navy-soft)]">
+                  <div className="text-xs tracking-widest uppercase mt-1 text-white/80">
                     M.D., FCCP, FAASM, FACGS, MACGS
                   </div>
                 </div>
@@ -331,7 +349,14 @@ export default function HomePage() {
                   href={`/blog/${post.slug}`}
                   className="group block h-full rounded-2xl border border-[var(--line)] overflow-hidden hover:shadow-xl hover:shadow-[var(--navy)]/5 transition-all"
                 >
-                  <div className={`aspect-[16/10] bg-gradient-to-br ${post.gradient}`} />
+                  <div className={`aspect-[16/10] relative overflow-hidden bg-gradient-to-br ${post.gradient}`}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={post.image}
+                      alt=""
+                      className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
                   <div className="p-6">
                     <div className="text-xs text-[var(--muted)]">
                       Avi Ishaaya · {post.date}
@@ -349,6 +374,8 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <GoogleReviews />
     </>
   );
 }

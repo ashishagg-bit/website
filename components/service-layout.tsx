@@ -12,6 +12,7 @@ export function ServiceLayout({
   services,
   ctaText = "Schedule Your Evaluation",
   cta,
+  heroImage,
 }: {
   title: string;
   tagline: string;
@@ -21,12 +22,20 @@ export function ServiceLayout({
   services: ServiceSubItem[];
   ctaText?: string;
   cta?: React.ReactNode;
+  heroImage?: string;
 }) {
   return (
     <>
       {/* Hero */}
-      <section className="gradient-bg">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8 pt-14 pb-16 sm:pt-20 sm:pb-24">
+      <section className="gradient-bg relative overflow-hidden">
+        {heroImage && (
+          <div className="absolute inset-0 opacity-20">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={heroImage} alt="" className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[var(--background)] via-[var(--background)]/70 to-transparent" />
+          </div>
+        )}
+        <div className="relative mx-auto max-w-7xl px-5 sm:px-8 pt-14 pb-16 sm:pt-20 sm:pb-24">
           <nav className="text-xs uppercase tracking-[0.18em] text-[var(--muted)] mb-6">
             <Link href="/" className="hover:text-[var(--navy)]">Home</Link>
             <span className="mx-2">/</span>

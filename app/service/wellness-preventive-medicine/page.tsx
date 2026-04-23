@@ -11,6 +11,7 @@ export default function WellnessPage() {
   return (
     <ServiceLayout
       title="Wellness & Preventive Medicine"
+      heroImage="/images/scraped/Pqq2TKWlgMDe9nT6krgeFQ6euj0.jpg"
       tagline="Wellness and prevention are where each piece connects to form the complete picture of how you can attain your optimal wellbeing."
       intro={
         <>

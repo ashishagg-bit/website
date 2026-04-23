@@ -11,6 +11,7 @@ export default function CardioPage() {
   return (
     <ServiceLayout
       title="Cardiovascular"
+      heroImage="/images/scraped/IppKL0cvGoYnkzaVfgS112yoo.jpg"
       tagline="Your cardiovascular health is fundamental to your overall wellbeing."
       intro={
         <>

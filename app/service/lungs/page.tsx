@@ -12,6 +12,7 @@ export default function LungsPage() {
     <ServiceLayout
       title="Lungs & Breathing"
       tagline="Your lungs are essential to delivering vital oxygen to every cell in your body."
+      heroImage="/images/scraped/Ok6cd4z826F0Gks9sFfcGFjFzY.jpg"
       intro={
         <>
           <p>

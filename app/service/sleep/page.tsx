@@ -11,6 +11,7 @@ export default function SleepPage() {
   return (
     <ServiceLayout
       title="Sleep"
+      heroImage="/images/scraped/VfRH12CL491NDPBxF2q2K2kyP1w.jpg"
       tagline="Good sleep is essential for both your physical and mental well-being. During sleep, your brain processes the day's information and consolidates memories."
       intro={
         <>
