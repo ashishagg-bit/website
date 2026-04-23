@@ -143,7 +143,7 @@ export default function HomePage() {
               <div className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl shadow-[var(--navy)]/10">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/images/scraped/z40GSxCTx1p8Yl8dajpSuGt52I.jpeg"
+                  src="/images/scraped/piPOUcGww89HYaJTpCR7kEFYeLk.webp"
                   alt="Dr. Abraham Avi Ishaaya"
                   className="absolute inset-0 w-full h-full object-cover"
                 />
@@ -215,14 +215,11 @@ export default function HomePage() {
       </section>
 
       {/* Five Promises */}
-      <section className="py-20 sm:py-28 bg-[var(--navy)] text-white">
+      <section className="py-20 sm:py-28">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-[var(--warm)]">
-              <span className="block w-6 h-px bg-[var(--warm)]" />
-              Promises
-            </div>
-            <h2 className="font-display text-3xl sm:text-4xl mt-4 tracking-tight">
+            <Eyebrow>Our values</Eyebrow>
+            <h2 className="font-display text-3xl sm:text-4xl text-[var(--navy)] mt-4 tracking-tight">
               Our Five Fundamental Promises
             </h2>
           </div>
@@ -230,10 +227,12 @@ export default function HomePage() {
           <div className="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
             {promises.map((p, i) => (
               <Reveal key={p.n} delay={i * 80}>
-                <div className="h-full rounded-2xl bg-white/5 border border-white/10 p-7 hover:bg-white/10 transition-colors">
-                  <div className="font-display text-3xl text-[var(--warm)]">{p.n}</div>
-                  <h3 className="font-display text-xl mt-3">{p.title}</h3>
-                  <p className="mt-3 text-sm text-white/70 leading-relaxed">{p.body}</p>
+                <div className="h-full rounded-2xl bg-[#fafafa] p-7 hover:shadow-lg transition-shadow">
+                  <div className="w-12 h-12 rounded-full bg-[var(--teal-deep)] grid place-items-center text-white font-display text-lg">
+                    {parseInt(p.n)}
+                  </div>
+                  <h3 className="font-display text-xl text-[var(--navy)] mt-4">{p.title}</h3>
+                  <p className="mt-3 text-sm text-[var(--navy-soft)]/80 leading-relaxed">{p.body}</p>
                 </div>
               </Reveal>
             ))}
@@ -260,7 +259,7 @@ export default function HomePage() {
             <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/images/scraped/48cUzxZLj1fsBF3sPX6ycI0y0jc.jpg"
+                src="/images/scraped/Ok6cd4z826F0Gks9sFfcGFjFzY.jpg"
                 alt="VIP Wellness"
                 className="absolute inset-0 w-full h-full object-cover"
               />
@@ -335,6 +334,27 @@ export default function HomePage() {
               </p>
             </div>
           </Reveal>
+          <div className="mt-12 grid grid-cols-2 md:grid-cols-3 gap-4">
+            {[
+              "/images/scraped/4FVQUutQWdB7NtLwRY17tioTIY0.jpg",
+              "/images/scraped/vJcCoQOaSPFFb1mZKUNODZviiw.jpg",
+              "/images/scraped/VfRH12CL491NDPBxF2q2K2kyP1w.jpg",
+              "/images/scraped/2mlNIbjadwhQWpJGw7OmBIMeTBQ.jpg",
+              "/images/scraped/48cUzxZLj1fsBF3sPX6ycI0y0jc.jpg",
+              "/images/scraped/41W4msn8A5xW2nbNOonFypPQ.jpg",
+            ].map((src, i) => (
+              <Reveal key={src} delay={i * 60}>
+                <div className="aspect-[4/3] rounded-2xl overflow-hidden">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={src}
+                    alt="Dr. Avi Ishaaya Center office"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
     </>
