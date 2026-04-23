@@ -7,7 +7,7 @@ import { GoogleReviews } from "@/components/google-reviews";
 import { PuzzlePiece } from "@/components/puzzle";
 
 export default function HomePage() {
-  const recentPosts = getAllPosts().slice(0, 3);
+  const recentPosts = getAllPosts().slice(0, 8);
 
   return (
     <>
@@ -31,6 +31,15 @@ export default function HomePage() {
                 Together, we shall piece together your unique path to complete
                 wellbeing, honoring every dimension of your health puzzle.
               </p>
+            </Reveal>
+            <Reveal delay={200}>
+              <div className="mt-6 space-y-2">
+                {dimensions.map((d) => (
+                  <h6 key={d.title} className="text-xs uppercase tracking-[0.18em] text-[var(--teal-deep)] font-medium">
+                    {d.title}
+                  </h6>
+                ))}
+              </div>
             </Reveal>
             <Reveal delay={240}>
               <div className="mt-8 flex flex-wrap gap-3">
@@ -81,28 +90,6 @@ export default function HomePage() {
       </section>
 
       <NewsScroller />
-
-      {/* Dimensions */}
-      <section className="py-20 sm:py-28">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          <div className="max-w-2xl">
-            <Eyebrow>Our philosophy</Eyebrow>
-            <h2 className="font-display text-3xl sm:text-4xl text-[var(--navy)] mt-4 tracking-tight">
-              Honoring every dimension of your health puzzle.
-            </h2>
-          </div>
-          <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {dimensions.map((d, i) => (
-              <Reveal key={d.title} delay={i * 80}>
-                <div className="h-full rounded-2xl border border-[var(--line)] bg-white/70 p-6 hover:bg-white transition-colors">
-                  <div className="font-display text-lg text-[var(--navy)]">{d.title}</div>
-                  <p className="mt-3 text-sm text-[var(--navy-soft)]/80 leading-relaxed">{d.body}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Services */}
       <section id="services" className="py-20 sm:py-28 bg-gradient-to-b from-white to-[var(--warm-soft)]/40">
@@ -342,7 +329,7 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <div className="mt-12 grid md:grid-cols-3 gap-6">
+          <div className="mt-12 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {recentPosts.map((post, i) => (
               <Reveal key={post.slug} delay={i * 80}>
                 <Link
@@ -376,6 +363,22 @@ export default function HomePage() {
       </section>
 
       <GoogleReviews />
+
+      {/* A New Era of Care */}
+      <section className="py-20 sm:py-28 bg-gradient-to-b from-[var(--warm-soft)]/40 to-white">
+        <div className="mx-auto max-w-7xl px-5 sm:px-8">
+          <Reveal>
+            <div className="max-w-3xl mx-auto text-center">
+              <h2 className="font-display text-3xl sm:text-4xl text-[var(--navy)] tracking-tight">
+                <strong>A New Era of Care</strong>
+              </h2>
+              <p className="mt-6 text-lg text-[var(--navy-soft)]/80">
+                Relocated in 2024 after 30+ years as an independent practice, our spacious, calming, and beautifully designed space redefines the medical experience—where comfort meets cutting-edge care.
+              </p>
+            </div>
+          </Reveal>
+        </div>
+      </section>
     </>
   );
 }
