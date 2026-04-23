@@ -18,8 +18,8 @@ export function SiteFooter() {
         <div>
           <h4 className="text-xs uppercase tracking-widest text-white/50 mb-4">Explore</h4>
           <ul className="space-y-2 text-sm">
-            <li><Link href="/#about" className="hover:text-white">About</Link></li>
-            <li><Link href="/#services" className="hover:text-white">Our Services</Link></li>
+            <li><Link href="/about" className="hover:text-white">About</Link></li>
+            <li><Link href="/services" className="hover:text-white">Our Services</Link></li>
             <li><Link href="/vip" className="hover:text-white">VIP</Link></li>
             <li><Link href="/blog" className="hover:text-white">Blog</Link></li>
             <li><Link href="/contact" className="hover:text-white">Contact</Link></li>

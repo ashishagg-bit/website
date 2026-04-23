@@ -220,6 +220,27 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Video */}
+      <section className="py-16 sm:py-20 bg-white">
+        <div className="mx-auto max-w-5xl px-5 sm:px-8">
+          <div className="text-center max-w-2xl mx-auto">
+            <Eyebrow>Watch</Eyebrow>
+            <h2 className="font-display text-3xl sm:text-4xl text-[var(--navy)] mt-4 tracking-tight">
+              A glimpse inside our practice.
+            </h2>
+          </div>
+          <div className="mt-10 relative aspect-video rounded-3xl overflow-hidden shadow-xl shadow-[var(--navy)]/10 border border-[var(--line)] bg-black">
+            <iframe
+              src="https://www.youtube.com/embed/v5Ncys2dTDU?rel=0&modestbranding=1&playsinline=1"
+              title="Dr. Avi Ishaaya Wellness Centers"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+              loading="lazy"
+              className="absolute inset-0 w-full h-full"
+            />
+          </div>
+        </div>
+      </section>
+
       {/* Five Promises */}
       <section className="py-20 sm:py-28 bg-[var(--navy)] text-white">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">

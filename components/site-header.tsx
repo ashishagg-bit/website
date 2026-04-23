@@ -1,12 +1,20 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
+import { services } from "@/lib/site-data";
 
 const nav = [
-  { href: "/#about", label: "About" },
-  { href: "/#services", label: "Our Services" },
+  { href: "/about", label: "About" },
+  { href: "/services", label: "Our Services", hasDropdown: true },
   { href: "/vip", label: "VIP" },
   { href: "/blog", label: "Blog" },
+];
+
+const vipTiers = [
+  { slug: "bronze", name: "Bronze" },
+  { slug: "silver", name: "Silver" },
+  { slug: "gold", name: "Gold" },
+  { slug: "platinum", name: "Platinum" },
 ];
 
 export function SiteHeader() {
@@ -27,15 +35,99 @@ export function SiteHeader() {
         </Link>
 
         <nav className="hidden md:flex items-center gap-8">
-          {nav.map((n) => (
-            <Link
-              key={n.href}
-              href={n.href}
-              className="text-sm text-[var(--navy-soft)] hover:text-[var(--teal-deep)] transition-colors"
-            >
-              {n.label}
-            </Link>
-          ))}
+          {nav.map((n) =>
+            n.hasDropdown ? (
+              <div key={n.href} className="relative group">
+                <Link
+                  href={n.href}
+                  className="text-sm text-[var(--navy-soft)] hover:text-[var(--teal-deep)] transition-colors inline-flex items-center gap-1"
+                >
+                  {n.label}
+                  <svg
+                    width="10"
+                    height="10"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.4"
+                    className="group-hover:rotate-180 transition-transform"
+                  >
+                    <path d="M6 9l6 6 6-6" />
+                  </svg>
+                </Link>
+                <div className="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all absolute left-1/2 -translate-x-1/2 top-full pt-3 w-72 z-40">
+                  <div className="rounded-2xl bg-white shadow-xl shadow-[var(--navy)]/10 border border-[var(--line)] p-3">
+                    {services.map((s) => (
+                      <Link
+                        key={s.slug}
+                        href={`/service/${s.slug}`}
+                        className="block px-3 py-2 rounded-lg text-sm text-[var(--navy)] hover:bg-[var(--warm-soft)]/50 hover:text-[var(--teal-deep)] transition-colors"
+                      >
+                        {s.title}
+                      </Link>
+                    ))}
+                    <div className="mt-1 border-t border-[var(--line)] pt-2">
+                      <Link
+                        href="/services"
+                        className="block px-3 py-2 rounded-lg text-xs uppercase tracking-[0.18em] text-[var(--teal-deep)] hover:bg-[var(--warm-soft)]/50 transition-colors"
+                      >
+                        View all services →
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ) : n.href === "/vip" ? (
+              <div key={n.href} className="relative group">
+                <Link
+                  href={n.href}
+                  className="text-sm text-[var(--navy-soft)] hover:text-[var(--teal-deep)] transition-colors inline-flex items-center gap-1"
+                >
+                  {n.label}
+                  <svg
+                    width="10"
+                    height="10"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.4"
+                    className="group-hover:rotate-180 transition-transform"
+                  >
+                    <path d="M6 9l6 6 6-6" />
+                  </svg>
+                </Link>
+                <div className="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all absolute left-1/2 -translate-x-1/2 top-full pt-3 w-56 z-40">
+                  <div className="rounded-2xl bg-white shadow-xl shadow-[var(--navy)]/10 border border-[var(--line)] p-3">
+                    {vipTiers.map((t) => (
+                      <Link
+                        key={t.slug}
+                        href={`/vip/${t.slug}`}
+                        className="block px-3 py-2 rounded-lg text-sm text-[var(--navy)] hover:bg-[var(--warm-soft)]/50 hover:text-[var(--teal-deep)] transition-colors"
+                      >
+                        {t.name} Package
+                      </Link>
+                    ))}
+                    <div className="mt-1 border-t border-[var(--line)] pt-2">
+                      <Link
+                        href="/vip"
+                        className="block px-3 py-2 rounded-lg text-xs uppercase tracking-[0.18em] text-[var(--teal-deep)] hover:bg-[var(--warm-soft)]/50 transition-colors"
+                      >
+                        Compare all tiers →
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <Link
+                key={n.href}
+                href={n.href}
+                className="text-sm text-[var(--navy-soft)] hover:text-[var(--teal-deep)] transition-colors"
+              >
+                {n.label}
+              </Link>
+            )
+          )}
           <Link
             href="/contact"
             className="text-sm font-medium px-4 py-2 rounded-full bg-[var(--navy)] text-white hover:bg-[var(--teal-deep)] transition-colors"

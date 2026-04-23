@@ -1,117 +1,13 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import { Eyebrow, PrimaryButton } from "@/components/ui";
+import { tiers, baseAssessments } from "@/lib/vip-tiers";
 
 export const metadata: Metadata = {
   title: "VIP Health Plans",
   description:
     "Four comprehensive wellness packages designed to match your individual health goals — Bronze, Silver, Gold, and Platinum.",
 };
-
-const baseAssessments = [
-  "Comprehensive Physical Examination",
-  "Detailed Medical History Review",
-  "Complete Medication Evaluation",
-];
-
-type Tier = {
-  name: string;
-  tag: string;
-  blurb: string;
-  description: string;
-  inclusions: string[];
-  accent: string;
-  border: string;
-  highlight?: boolean;
-};
-
-const tiers: Tier[] = [
-  {
-    name: "Bronze",
-    tag: "Building the framework",
-    blurb: "A solid foundation for your wellness journey.",
-    description:
-      "Includes an X-ray of one body part and PNOĒ initial assessment.",
-    inclusions: [
-      "Basic Lab Panels",
-      "X-Ray (one body part)",
-      "Electrocardiogram (EKG) Testing",
-      "PNOĒ Wellness & Prevention Assessment",
-    ],
-    accent: "from-[#f0e2c5] to-[#e7d2a4]",
-    border: "border-[#d6b97a]/40",
-  },
-  {
-    name: "Silver",
-    tag: "Connecting key pieces",
-    blurb: "Enhanced health monitoring and preventive care.",
-    description:
-      "Includes X-rays of two body parts, full PNOĒ assessment, consultation, and 3-month app access.",
-    inclusions: [
-      "Extensive Lab Panels",
-      "Micronutrient Testing & Personalized Supplements",
-      "Hormone Panel",
-      "Pulmonary Function Testing (PFT)",
-      "X-Ray (two body parts)",
-      "Electrocardiogram (EKG)",
-      "Echocardiogram (ECHO)",
-      "PNOĒ Assessment + 3-month app access",
-    ],
-    accent: "from-[#e3eaef] to-[#c8d3db]",
-    border: "border-[#9aabb6]/40",
-  },
-  {
-    name: "Gold",
-    tag: "Bringing wellness into focus",
-    blurb: "Comprehensive wellness with advanced screenings.",
-    description:
-      "Choice between environmental or food allergy panel, full X-ray, ultrasound of upper and lower extremities, PNOĒ assessment, consultation, and 3-month app access.",
-    inclusions: [
-      "Extensive Lab Panels",
-      "Micronutrient Testing",
-      "Telomere Testing",
-      "Hormone Panel",
-      "Pulmonary Function Testing (PFT)",
-      "FeNO Testing",
-      "Six-Minute Oxygen Walk Study",
-      "Allergy Testing (env. or food panel)",
-      "Full X-Ray",
-      "EKG, Echocardiogram, Stress Echo",
-      "Diagnostic Ultrasound (upper & lower extremities)",
-      "At-Home Holter Monitor",
-      "PNOĒ Assessment + 3-month app access",
-      "At-Home Sleep Studies",
-    ],
-    accent: "from-[#f8e7b6] to-[#e6c66c]",
-    border: "border-[#c8a437]/50",
-    highlight: true,
-  },
-  {
-    name: "Platinum",
-    tag: "Premium precision",
-    blurb: "The ultimate wellness program — every available data point.",
-    description:
-      "Includes food, preservative, additive and environmental chemical sensitivity panels, full allergy panels, ultrasound of upper/lower extremities, thyroid, abdominal, and abdominal aorta, full PNOĒ assessment, consultation, and 3-month app access.",
-    inclusions: [
-      "Extensive Lab Panels",
-      "Micronutrient Testing",
-      "Telomere Testing",
-      "Hormone Panel",
-      "Pulmonary Function Testing (PFT)",
-      "FeNO + Methacholine Challenge",
-      "Six-Minute Oxygen Walk Study",
-      "Full Allergy & Food Sensitivity Panels",
-      "Full Body MRI",
-      "EKG, Echocardiogram, Stress Echo",
-      "Comprehensive Ultrasound (extremities, thyroid, abdominal, aorta)",
-      "At-Home Holter Monitor",
-      "PNOĒ Assessment + 3-month app access",
-      "At-Home Sleep Studies",
-    ],
-    accent: "from-[#dee5ec] to-[#aab9c5]",
-    border: "border-[#0d2436]/30",
-  },
-];
 
 export default function VipPage() {
   return (
@@ -163,7 +59,7 @@ export default function VipPage() {
         <div className="mx-auto max-w-7xl px-5 sm:px-8 grid md:grid-cols-2 gap-6">
           {tiers.map((t) => (
             <div
-              key={t.name}
+              key={t.slug}
               className={`relative rounded-3xl border ${t.border} bg-white p-7 sm:p-8 hover:shadow-xl hover:shadow-[var(--navy)]/5 transition-shadow ${t.highlight ? "ring-1 ring-[var(--teal)]/40" : ""}`}
             >
               {t.highlight && (
@@ -195,12 +91,18 @@ export default function VipPage() {
                   </li>
                 ))}
               </ul>
-              <div className="mt-7">
+              <div className="mt-7 flex flex-wrap gap-3">
                 <Link
                   href="/contact"
                   className="inline-flex items-center gap-2 rounded-full bg-[var(--navy)] px-5 py-2.5 text-sm font-medium text-white hover:bg-[var(--teal-deep)] transition-colors"
                 >
                   Call to Book
+                </Link>
+                <Link
+                  href={`/vip/${t.slug}`}
+                  className="inline-flex items-center gap-2 rounded-full border border-[var(--line)] px-5 py-2.5 text-sm font-medium text-[var(--navy)] hover:border-[var(--teal-deep)] hover:text-[var(--teal-deep)] transition-colors"
+                >
+                  Learn More →
                 </Link>
               </div>
             </div>
