@@ -25,7 +25,7 @@ export function SiteHeader() {
         <Link href="/" className="flex items-center gap-3 group">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/images/scraped/U0UsntSPmAe3llDpejljKb08Ps.svg"
+            src="/images/scraped/XWBP80T3z4iK83VN5FqdFyDdSxE.svg"
             alt="Dr. Avi Ishaaya Center"
             width={40}
             height={40}

@@ -26,7 +26,19 @@ const GRADIENTS = [
   "from-cyan-100 via-emerald-50 to-teal-100",
 ];
 
-const IMAGES = [
+// Exact image mapping from the live Framer site (slug → image)
+const SLUG_IMAGE_MAP: Record<string, string> = {
+  "the-healing-power-of-love-more-than-just-a-warm-fuzzy-feeling": "/images/scraped/IppKL0cvGoYnkzaVfgS112yoo.jpg",
+  "micronutrients-the-essential-building-blocks-of-optimal-health": "/images/scraped/tPS1IoVSxxS52DtZ4UKoc5HbWk8.jpg",
+  "the-vital-connection-how-sleep-impacts-your-heart-and-metabolism": "/images/scraped/24gjnpcrXVmldIyVSCnUuDXc.jpg",
+  "what-can-an-ekg-tell-you-about-blood-pressure": "/images/scraped/Pqq2TKWlgMDe9nT6krgeFQ6euj0.jpg",
+  "the-importance-of-regular-annual-physicals-for-preventive-health": "/images/scraped/Rf04pBe6rnVQfH4IqhWEgHbAP4.webp",
+  "learn-the-difference-between-acute-vs-chronic-asthma": "/images/scraped/qpI5vBIDT7Q6ptU0HElINibug.webp",
+  "what-happens-if-you-cannot-sleep-during-a-sleep-study": "/images/scraped/SuB9MMJE894OJarlMRKNfVP0.webp",
+  "eight-tips-to-help-maintain-telomere-length": "/images/scraped/O5Yo4TB5KdO02Lqh2k4DgSSq0.webp",
+};
+
+const IMAGES_FALLBACK = [
   "/images/scraped/0HUPsipnJwiW8Wacf4kCltNs96o.jpg",
   "/images/scraped/1VMNJeKjBpsJmP9YWwhXyzKSvA.jpg",
   "/images/scraped/1xImPKfaVIwVWRaj2OXuBmLUT2E.jpg",
@@ -35,30 +47,6 @@ const IMAGES = [
   "/images/scraped/48cUzxZLj1fsBF3sPX6ycI0y0jc.jpg",
   "/images/scraped/4FVQUutQWdB7NtLwRY17tioTIY0.jpg",
   "/images/scraped/4OSBaHObMlbjYP7NUCUgbVAQ.jpg",
-  "/images/scraped/793ONR8hKKyrrxWSaatYJDLTY.jpg",
-  "/images/scraped/9aYbh8GFanv0iSwq9TzyjtrXI.jpg",
-  "/images/scraped/AC2cC1c4vV9tRfYLtq2lf4Xc.jpg",
-  "/images/scraped/AW9fDereVg3UqlpvRjrLYPxriaQ.jpg",
-  "/images/scraped/CFF1DUFdivK5TpaCrBZ7K0tvS8Y.jpg",
-  "/images/scraped/EUHKdtt4LEj5EAli0JMrqZJAwgo.jpg",
-  "/images/scraped/JVZl3xuus4kdE4dkIWKAgT4iaRw.jpg",
-  "/images/scraped/NNYb6EQUA1mNgpJztWHgD74Qa5Q.jpg",
-  "/images/scraped/NsX0K6LWw0DzYH5UMBEqleRtJs.jpg",
-  "/images/scraped/O2iHhRT8vmitOPuaycFWlsis.jpg",
-  "/images/scraped/efoh9O2ooJNsKsSWH5IqobEyBw.jpg",
-  "/images/scraped/ffT3BOcYoxhizWCVE2QIrQ4EpIA.jpg",
-  "/images/scraped/l3Z56b8C3m7noD9iY9kR1sPGXoA.jpg",
-  "/images/scraped/nGkU8nBZfE7cc5Q21x8OtSmMV9A.jpg",
-  "/images/scraped/nhJJNYrCrH8gQRcPktO9uTIiSO8.jpg",
-  "/images/scraped/oPX6yLhJwtA59zKfImuewbNCGE.jpg",
-  "/images/scraped/oz3Pwa5yGzcFxboF19d8KrIw.jpg",
-  "/images/scraped/qkCKTBlHXakXTN4bu7Qoe3xgc.jpg",
-  "/images/scraped/vJcCoQOaSPFFb1mZKUNODZviiw.jpg",
-  "/images/scraped/vz9gFU9ucii7BiCwOGtkPagjpE.jpg",
-  "/images/scraped/x0UIr7XcCuSrIE9C2w85F3AnccI.jpg",
-  "/images/scraped/xdxxmdJJ4ctXIDICB936iWQs0k.jpg",
-  "/images/scraped/yNpo2KbfILa6GHNo6fYNQThQ.jpg",
-  "/images/scraped/yTu1hAtGOIU7W1I4AhgsYjgmNcQ.jpg",
 ];
 
 function fmtDate(d: Date) {
@@ -87,7 +75,7 @@ export function getAllPosts(): Post[] {
       excerpt: data.excerpt as string,
       body: content,
       gradient: GRADIENTS[i % GRADIENTS.length],
-      image: IMAGES[i % IMAGES.length],
+      image: SLUG_IMAGE_MAP[slug] || IMAGES_FALLBACK[i % IMAGES_FALLBACK.length],
     };
   });
   posts.sort((a, b) => b.rawDate.getTime() - a.rawDate.getTime());
