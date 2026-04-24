@@ -23,6 +23,7 @@ export function SiteFooter() {
             <li><Link href="/vip" className="hover:text-white">VIP</Link></li>
             <li><Link href="/blog" className="hover:text-white">Blog</Link></li>
             <li><Link href="/contact" className="hover:text-white">Contact</Link></li>
+            <li><Link href="/privacy-policy" className="hover:text-white">Privacy</Link></li>
           </ul>
         </div>
 

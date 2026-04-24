@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { services, promises, dimensions } from "@/lib/site-data";
-import { Reveal, Eyebrow, PrimaryButton, SecondaryButton } from "@/components/ui";
+import { Reveal, Eyebrow, PrimaryButton } from "@/components/ui";
 import { getAllPosts } from "@/lib/posts";
 import { NewsScroller } from "@/components/news-scroller";
 import { GoogleReviews } from "@/components/google-reviews";
@@ -44,7 +44,6 @@ export default function HomePage() {
             <Reveal delay={240}>
               <div className="mt-8 flex flex-wrap gap-3">
                 <PrimaryButton href="/contact">Request Appointment</PrimaryButton>
-                <SecondaryButton href="#services">Explore Services</SecondaryButton>
               </div>
             </Reveal>
 
