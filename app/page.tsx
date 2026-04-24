@@ -3,7 +3,6 @@ import { services, promises, dimensions } from "@/lib/site-data";
 import { Reveal, Eyebrow, PrimaryButton } from "@/components/ui";
 import { getAllPosts } from "@/lib/posts";
 import { NewsScroller } from "@/components/news-scroller";
-import { GoogleReviews } from "@/components/google-reviews";
 import { PuzzlePiece } from "@/components/puzzle";
 
 export default function HomePage() {
@@ -15,15 +14,13 @@ export default function HomePage() {
       <section className="relative gradient-bg overflow-hidden">
         <div className="mx-auto max-w-7xl px-5 sm:px-8 pt-16 sm:pt-24 pb-20 sm:pb-32 grid lg:grid-cols-12 gap-10 items-center">
           <div className="lg:col-span-7">
-            <Reveal>
-              <Eyebrow>Dr. Avi Ishaaya Center</Eyebrow>
-            </Reveal>
             <Reveal delay={80}>
               <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight text-[var(--navy)] mt-5 text-balance">
-                Piece by piece,
+                <span className="block text-base sm:text-lg uppercase tracking-[0.15em] text-[var(--teal-deep)] font-medium mb-4 not-italic">Dr. Avi Ishaaya Center</span>
+                Piece by Piece,
                 <br />
-                build a healthier{" "}
-                <span className="italic text-[var(--teal-deep)]">you.</span>
+                Build A Healthier{" "}
+                <span className="italic text-[var(--teal-deep)]">You</span>
               </h1>
             </Reveal>
             <Reveal delay={160}>
@@ -50,6 +47,17 @@ export default function HomePage() {
           </div>
 
           <div className="lg:col-span-5 relative">
+            <Reveal delay={280}>
+              <button
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-white/90 shadow-lg shadow-[var(--navy)]/10 text-sm font-medium text-[var(--navy)] hover:bg-white transition-colors mb-6"
+                aria-label="Play introduction video"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="var(--teal-deep)" className="text-[var(--teal-deep)]">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+                Play
+              </button>
+            </Reveal>
             <Reveal delay={120}>
               <div className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl shadow-[var(--navy)]/10">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -317,8 +325,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      <GoogleReviews />
 
       {/* A New Era of Care */}
       <section className="py-20 sm:py-28 bg-gradient-to-b from-[var(--warm-soft)]/40 to-white">
