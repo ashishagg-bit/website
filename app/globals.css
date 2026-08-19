@@ -11,6 +11,19 @@
   --warm-soft: #f1e4cf;
   --muted: #6b7c8a;
   --line: #e7e2d8;
+
+  /* Figma "Aviishaaya Dev" palette (file TdifdqKlRJcGSLC8Kpz1Sz) */
+  --cream: #fcfaf6;
+  --ink: #152032;
+  --ink-80: rgba(21, 32, 50, 0.8);
+  --ink-60: rgba(21, 32, 50, 0.6);
+  --ink-40: rgba(21, 32, 50, 0.4);
+  --blue: #3376eb;
+  --blue-hover: #2a63c8;
+  --lilac: #e5cdf8;
+  --sky: #c7dafa;
+  --dark: #111822;
+  --hairline: rgba(21, 114, 148, 0.2);
 }
 
 @theme inline {
@@ -24,8 +37,15 @@
   --color-warm-soft: var(--warm-soft);
   --color-muted: var(--muted);
   --color-line: var(--line);
+  --color-cream: var(--cream);
+  --color-ink: var(--ink);
+  --color-blue: var(--blue);
+  --color-lilac: var(--lilac);
+  --color-sky: var(--sky);
+  --color-dark: var(--dark);
   --font-sans: var(--font-inter);
   --font-display: var(--font-display);
+  --font-accent: var(--font-manrope);
 }
 
 html {
@@ -95,3 +115,47 @@ body {
   color: #2c3e50;
   margin: 1.25rem 0;
 }
+
+/* --- Figma homepage primitives --- */
+
+/* Display face stands in for Kalice Trial (licensed); Fraunces is the closest
+   free serif at the 56px/68px headline size the design uses. */
+.font-kalice {
+  font-family: var(--font-display), "Fraunces", Georgia, serif;
+  font-optical-sizing: auto;
+}
+
+/* Kalice headline: 56px / 68px / +1px tracking */
+.h-display {
+  font-family: var(--font-display), "Fraunces", Georgia, serif;
+  font-size: 56px;
+  line-height: 68px;
+  letter-spacing: 1px;
+  color: var(--ink);
+}
+
+/* Apercu Pro eyebrow: 12px / uppercase / 3px tracking */
+.eyebrow {
+  font-size: 12px;
+  line-height: normal;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+/* Soft-light puzzle wash used behind the method + service imagery. Stands in
+   for the Figma puzzle illustration until the asset can be exported. */
+.puzzle-wash {
+  background-image:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.28) 25%, transparent 25%),
+    linear-gradient(225deg, rgba(255, 255, 255, 0.28) 25%, transparent 25%),
+    linear-gradient(45deg, rgba(21, 32, 50, 0.18) 25%, transparent 25%),
+    linear-gradient(315deg, rgba(21, 32, 50, 0.18) 25%, transparent 25%);
+  background-position: 0 0, 55px 0, 55px -55px, 0 55px;
+  background-size: 110px 110px;
+  mix-blend-mode: soft-light;
+  opacity: 0.35;
+}
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }

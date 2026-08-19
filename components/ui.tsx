@@ -68,3 +68,73 @@ export function SecondaryButton({
     </Link>
   );
 }
+
+/* --- Figma "Aviishaaya Dev" primitives (file TdifdqKlRJcGSLC8Kpz1Sz) --- */
+
+/** #3376eb / 8px radius / 20x10 padding / 15px-21px label. */
+export function BlueButton({
+  href,
+  children,
+  className = "",
+}: {
+  href: string;
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <Link
+      href={href}
+      className={`inline-flex w-fit shrink-0 items-center justify-center rounded-lg bg-[var(--blue)] px-5 py-2.5 text-[15px] leading-[21px] text-white transition-colors hover:bg-[var(--blue-hover)] ${className}`}
+    >
+      {children}
+    </Link>
+  );
+}
+
+/** Hairline-outlined counterpart to BlueButton. */
+export function OutlineButton({
+  href,
+  children,
+  className = "",
+}: {
+  href: string;
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <Link
+      href={href}
+      className={`inline-flex w-fit shrink-0 items-center justify-center rounded-lg border border-[var(--hairline)] px-5 py-2.5 text-[15px] leading-[21px] text-[var(--ink)] transition-colors hover:bg-white ${className}`}
+    >
+      {children}
+    </Link>
+  );
+}
+
+/** 12px / uppercase / 3px tracking label above every section heading. */
+export function Kicker({
+  children,
+  className = "",
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return <p className={`eyebrow ${className}`}>{children}</p>;
+}
+
+/** Kalice display heading — 56px/68px at desktop, fluid below. */
+export function Display({
+  children,
+  className = "",
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <h2
+      className={`font-kalice text-[clamp(2rem,1.2rem+2.6vw,3.5rem)] leading-[1.21] tracking-[1px] ${className}`}
+    >
+      {children}
+    </h2>
+  );
+}

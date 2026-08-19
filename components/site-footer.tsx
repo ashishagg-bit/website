@@ -1,59 +1,109 @@
 import Link from "next/link";
+import { BlueButton } from "@/components/ui";
 
+const explore = [
+  { href: "/about", label: "About" },
+  { href: "/services", label: "Our Services" },
+  { href: "/vip", label: "VIP" },
+  { href: "/blog", label: "Blog" },
+  { href: "/contact", label: "Contact" },
+];
+
+function Column({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div className="flex min-w-0 flex-col items-start justify-center gap-5 text-sm">
+      <p className="leading-[21px] text-white">{title}</p>
+      {children}
+    </div>
+  );
+}
+
+/** Footer — Figma node 1:2696 ("Footer - Desktop"). */
 export function SiteFooter() {
   return (
-    <footer className="bg-[var(--navy)] text-white/85 mt-24">
-      <div className="mx-auto max-w-7xl px-5 sm:px-8 py-14 grid gap-10 md:grid-cols-4">
-        <div className="md:col-span-1">
-          <div className="font-display text-2xl text-white">Dr. Avi Ishaaya</div>
-          <div className="text-xs uppercase tracking-[0.2em] text-white/50 mt-1">
-            Wellness Centers
-          </div>
-          <p className="mt-5 text-sm text-white/70 max-w-xs">
-            Piece by piece, build a healthier you. A modern Beverly Hills
-            practice rooted in science and compassion.
-          </p>
-        </div>
-
-        <div>
-          <h4 className="text-xs uppercase tracking-widest text-white/50 mb-4">Explore</h4>
-          <ul className="space-y-2 text-sm">
-            <li><Link href="/about" className="hover:text-white">About</Link></li>
-            <li><Link href="/services" className="hover:text-white">Our Services</Link></li>
-            <li><Link href="/vip" className="hover:text-white">VIP</Link></li>
-            <li><Link href="/blog" className="hover:text-white">Blog</Link></li>
-            <li><Link href="/contact" className="hover:text-white">Contact</Link></li>
-            <li><Link href="/privacy-policy" className="hover:text-white">Privacy</Link></li>
-          </ul>
-        </div>
-
-        <div>
-          <h4 className="text-xs uppercase tracking-widest text-white/50 mb-4">Visit</h4>
-          <address className="not-italic text-sm leading-relaxed text-white/80">
-            9230 West Olympic Boulevard<br />
-            Second Floor<br />
-            Beverly Hills, CA 90212
-          </address>
-          <div className="mt-4 text-sm text-white/80">
-            <div className="text-xs uppercase tracking-widest text-white/50 mb-1">Open Hours</div>
-            Mon / Tue / Thu / Fri · 8:00 AM – 5:00 PM<br />
-            Wed · 10:00 AM – 5:00 PM
+    <footer className="flex w-full flex-col items-center justify-center gap-14 overflow-clip bg-[var(--dark)] px-6 pb-10 pt-20 sm:px-[60px]">
+      <div className="flex w-full max-w-[1320px] flex-col items-start justify-between gap-12 lg:h-[248px] lg:flex-row lg:gap-12">
+        <div className="flex w-full shrink-0 flex-col items-start justify-between gap-8 pt-[5px] lg:h-full lg:w-[421px]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/logo-wordmark.svg"
+            alt="Dr. Avi Ishaaya Centers"
+            width={332}
+            height={60}
+            className="h-[60px] w-[332px] max-w-full object-contain object-left brightness-0 invert"
+          />
+          <div className="flex w-full flex-col items-start gap-6">
+            <p className="text-base leading-[22px] text-white/80">
+              Piece by piece, build a healthier you. A modern Beverly Hills
+              practice rooted in science and compassion.
+            </p>
+            <BlueButton href="/contact">Schedule a Consultation</BlueButton>
           </div>
         </div>
 
-        <div>
-          <h4 className="text-xs uppercase tracking-widest text-white/50 mb-4">Reach Us</h4>
-          <ul className="text-sm space-y-2">
-            <li>Call: <a href="tel:+13239541788" className="hover:text-white">(323) 954-1788</a></li>
-            <li>Text: <a href="sms:+13239184258" className="hover:text-white">(323) 918-4258</a></li>
-            <li>Email: <a href="mailto:info@aviishaaya.com" className="hover:text-white">info@aviishaaya.com</a></li>
-          </ul>
+        <div className="grid w-full flex-1 grid-cols-2 items-start gap-8 sm:grid-cols-4 lg:gap-12">
+          <Column title="Explore">
+            <ul className="flex flex-col items-start justify-center gap-[7px] text-white/60">
+              {explore.map((e) => (
+                <li key={e.href}>
+                  <Link href={e.href} className="leading-[21px] transition-colors hover:text-white">
+                    {e.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </Column>
+
+          <Column title="Visit">
+            <address className="not-italic leading-[21px] text-white/60">
+              9230 West Olympic Boulevard, Second Floor
+              <br />
+              Beverly Hills, CA 90212
+            </address>
+          </Column>
+
+          <Column title="Open Hours">
+            <p className="leading-[21px] text-white/60">
+              Mon / Tue / Thu / Fri · 8:00 AM – 5:00 PM
+              <br />
+              Wed · 10:00 AM – 5:00 PM
+            </p>
+          </Column>
+
+          <Column title="Reach Us">
+            <ul className="flex flex-col gap-[7px] leading-[21px] text-white/60">
+              <li>
+                <a href="tel:+13239541788" className="transition-colors hover:text-white">
+                  Call: (323) 954-1788
+                </a>
+              </li>
+              <li>
+                <a href="sms:+13239184258" className="transition-colors hover:text-white">
+                  Text: (323) 918-4258
+                </a>
+              </li>
+              <li>
+                <a
+                  href="mailto:info@aviishaaya.com"
+                  className="transition-colors hover:text-white"
+                >
+                  Email: info@aviishaaya.com
+                </a>
+              </li>
+            </ul>
+          </Column>
         </div>
       </div>
 
-      <div className="border-t border-white/10">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8 py-5 text-xs flex flex-col sm:flex-row justify-between gap-2 text-white/50">
-          <span>© {new Date().getFullYear()} Dr. Avi Ishaaya Centers. All rights reserved.</span>
+      <div className="flex w-full max-w-[1320px] flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 text-sm text-white/60 sm:flex-row">
+        <p>© {new Date().getFullYear()} Dr. Avi Ishaaya Centers. All rights reserved.</p>
+        <div className="flex items-center gap-6">
+          <Link href="/privacy-policy" className="transition-colors hover:text-white">
+            Privacy Policy
+          </Link>
+          <Link href="/privacy-policy" className="transition-colors hover:text-white">
+            Terms of Use
+          </Link>
           <span>Beverly Hills · California</span>
         </div>
       </div>

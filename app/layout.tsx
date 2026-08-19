@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, DM_Sans } from "next/font/google";
+import { Inter, Fraunces, Manrope } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
@@ -10,11 +10,18 @@ const inter = Inter({
   display: "swap",
 });
 
-const dmSans = DM_Sans({
+// Stands in for Kalice Trial (licensed) as the display serif.
+const fraunces = Fraunces({
   variable: "--font-display",
   subsets: ["latin"],
   display: "swap",
-  weight: ["400", "500", "600", "700"],
+  axes: ["SOFT", "WONK", "opsz"],
+});
+
+const manrope = Manrope({
+  variable: "--font-manrope",
+  subsets: ["latin"],
+  display: "swap",
 });
 
 const SITE_URL = "https://aviishaaya.com";
@@ -106,9 +113,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${dmSans.variable} h-full`}
+      className={`${inter.variable} ${fraunces.variable} ${manrope.variable} h-full`}
     >
-      <body className="min-h-full flex flex-col bg-[var(--background)] text-[var(--foreground)]">
+      <body className="min-h-full flex flex-col bg-[var(--cream)] text-[var(--ink)]">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }}
