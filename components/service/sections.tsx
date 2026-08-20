@@ -24,16 +24,21 @@ function Check() {
 export function Approach({
   title,
   paragraphs,
+  body,
   bullets,
   highlight = 1,
   cta = { href: "/contact", label: "Request Appointment" },
 }: {
   title: React.ReactNode;
-  paragraphs: string[];
-  bullets: string[];
+  /** Plain-string paragraphs (data-driven pages). */
+  paragraphs?: string[];
+  /** Pre-rendered copy, for pages whose intro is already JSX. */
+  body?: React.ReactNode;
+  bullets?: string[];
   highlight?: number;
   cta?: { href: string; label: string };
 }) {
+  const hasList = Boolean(bullets && bullets.length > 0);
   return (
     <section className="flex w-full flex-col items-center justify-center gap-12 overflow-clip bg-white px-6 py-16 sm:px-14 lg:flex-row lg:gap-[120px] lg:px-20 lg:py-[104px]">
       <div className="flex w-full flex-col items-center gap-10 lg:flex-1 lg:gap-16">
@@ -43,21 +48,21 @@ export function Approach({
             <Display>{title}</Display>
           </div>
           <BlueButton href={cta.href}>{cta.label}</BlueButton>
-          <div className="flex flex-col gap-4 text-base leading-6 text-black/60">
-            {paragraphs.map((t) => (
-              <p key={t.slice(0, 24)}>{t}</p>
-            ))}
+          <div className="flex flex-col gap-4 text-base leading-6 text-black/60 [&>p]:mb-0">
+            {paragraphs?.map((t) => <p key={t.slice(0, 24)}>{t}</p>)}
+            {body}
           </div>
         </div>
       </div>
 
+      {hasList && (
       <div className="w-full lg:flex-1">
         <ul className={`overflow-clip rounded-2xl border ${HAIRLINE}`}>
-          {bullets.map((b, i) => (
+          {bullets!.map((b, i) => (
             <li
               key={b}
               className={`flex items-center gap-3 p-8 ${
-                i < bullets.length - 1 ? `border-b ${HAIRLINE}` : ""
+                i < bullets!.length - 1 ? `border-b ${HAIRLINE}` : ""
               } ${
                 i === highlight
                   ? // Copy sits at the cream end of the gradient, so it stays ink.
@@ -71,6 +76,7 @@ export function Approach({
           ))}
         </ul>
       </div>
+      )}
     </section>
   );
 }
