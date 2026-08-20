@@ -23,7 +23,7 @@ const vipTiers = [
  * top of the image in white. Everything else keeps the cream bar.
  * Add routes here as their Figma pages get built.
  */
-const OVERLAY_ROUTES = ["/services"];
+const OVERLAY_ROUTES = ["/services", "/service/lungs"];
 
 /** 4px dot flanking the announcement copy (Figma I64:10192;57:9479 / 9481). */
 function Dot() {
