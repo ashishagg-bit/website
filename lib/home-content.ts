@@ -88,6 +88,25 @@ export const vipTile = {
   href: "/vip",
 };
 
+/** Closing tile of the "All services" bento — node 74:22082, Service 08. */
+export const healingDawnTile = {
+  n: "08",
+  title: "The Healing Dawn",
+  blurb:
+    "Explore four wellness packages tailored to your goals — from basic health screenings to advanced diagnostics.",
+  href: "/vip",
+};
+
+/** The services page shortens the Wellness blurb (node 74:22082). */
+export const servicesPageTiles = serviceTiles.map((t) =>
+  t.n === "03"
+    ? {
+        ...t,
+        blurb: "Wellness and prevention connect to form the picture of your wellbeing.",
+      }
+    : t
+);
+
 /** "Our values" — node 1:1498. The first promise is the wide blue card. */
 export const homePromises = [
   {

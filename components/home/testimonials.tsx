@@ -64,8 +64,8 @@ function Card({
   );
 }
 
-/** "What our patients say" — Figma node 1:2040. */
-export function Testimonials() {
+/** "What our patients say" — Figma node 1:2040 (and 103:29525 on inner pages). */
+export function Testimonials({ items = testimonials }: { items?: typeof testimonials } = {}) {
   return (
     <section className="flex w-full flex-col items-center gap-12 overflow-clip bg-[linear-gradient(180deg,#ffffff_0%,var(--cream)_32.667%)] px-6 py-16 sm:px-14 sm:py-[104px] lg:gap-16">
       <header className="flex w-full max-w-[700px] flex-col items-center gap-6 text-center">
@@ -88,7 +88,7 @@ export function Testimonials() {
       </header>
 
       <div className="w-full max-w-[1328px] columns-1 gap-2 sm:columns-2 lg:columns-3 [&>figure]:mb-2">
-        {testimonials.map((t) => (
+        {items.map((t) => (
           <Card key={t.name} {...t} />
         ))}
       </div>

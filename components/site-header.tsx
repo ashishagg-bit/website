@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { services } from "@/lib/site-data";
 
@@ -16,6 +17,13 @@ const vipTiers = [
   { slug: "gold", name: "Gold" },
   { slug: "platinum", name: "Platinum" },
 ];
+
+/**
+ * Routes whose hero is the dark photographic PageHero — there the nav sits on
+ * top of the image in white. Everything else keeps the cream bar.
+ * Add routes here as their Figma pages get built.
+ */
+const OVERLAY_ROUTES = ["/services"];
 
 /** 4px dot flanking the announcement copy (Figma I64:10192;57:9479 / 9481). */
 function Dot() {
@@ -72,6 +80,12 @@ function Dropdown({
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  const overlay = OVERLAY_ROUTES.includes(pathname);
+
+  const linkColor = overlay
+    ? "text-white hover:text-white/70"
+    : "text-[var(--ink)] hover:text-[var(--blue)]";
 
   return (
     <header className="relative z-50">
@@ -92,7 +106,13 @@ export function SiteHeader() {
       </div>
 
       {/* Nav — Figma I64:10192;57:9726 */}
-      <div className="relative z-[2] rounded-t-3xl bg-[var(--cream)]">
+      <div
+        className={
+          overlay
+            ? "relative z-[2] -mb-[92px] h-[92px] bg-transparent"
+            : "relative z-[2] rounded-t-3xl bg-[var(--cream)]"
+        }
+      >
         <div className="mx-auto flex w-full max-w-[1440px] items-center justify-between px-6 py-6 sm:px-14">
           <Link href="/" className="flex w-[190px] shrink-0 items-start">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -101,7 +121,9 @@ export function SiteHeader() {
               alt="Dr. Avi Ishaaya Center"
               width={155}
               height={28}
-              className="h-7 w-[155px] object-contain object-left"
+              className={`h-7 w-[155px] object-contain object-left ${
+                overlay ? "brightness-0 invert" : ""
+              }`}
             />
           </Link>
 
@@ -111,7 +133,7 @@ export function SiteHeader() {
                 <div key={n.href} className="group relative">
                   <Link
                     href={n.href}
-                    className="flex items-baseline justify-center gap-2 rounded-[3px] px-5 py-3 text-[15px] leading-[21px] text-[var(--ink)] transition-colors hover:text-[var(--blue)]"
+                    className={`flex items-baseline justify-center gap-2 rounded-[3px] px-5 py-3 text-[15px] leading-[21px] transition-colors ${linkColor}`}
                   >
                     {n.label}
                     <Chevron />
@@ -138,7 +160,7 @@ export function SiteHeader() {
                 <Link
                   key={n.href}
                   href={n.href}
-                  className="flex items-baseline justify-center rounded-[3px] px-5 py-3 text-[15px] leading-[21px] text-[var(--ink)] transition-colors hover:text-[var(--blue)]"
+                  className={`flex items-baseline justify-center rounded-[3px] px-5 py-3 text-[15px] leading-[21px] transition-colors ${linkColor}`}
                 >
                   {n.label}
                 </Link>
@@ -156,7 +178,7 @@ export function SiteHeader() {
           <button
             aria-label="Toggle menu"
             aria-expanded={open}
-            className="text-[var(--ink)] md:hidden"
+            className={`md:hidden ${overlay ? "text-white" : "text-[var(--ink)]"}`}
             onClick={() => setOpen(!open)}
           >
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">

@@ -84,24 +84,50 @@ function PhotoTile({
   );
 }
 
-/** "Our services" bento — Figma node 1:964. */
-export function Services() {
-  const [lungs, cardio, wellness, ...rest] = serviceTiles;
+type Tile = {
+  n: string;
+  title: string;
+  blurb: string;
+  href: string;
+  image?: string;
+};
+
+/**
+ * "Our services" bento — Figma node 1:964 (homepage) and 74:22082
+ * ("All services"), which share the grid but differ in heading and last tile.
+ */
+export function Services({
+  eyebrow = "Our services",
+  title = "Where every piece matters.",
+  body = "True wellness comes from balancing body, mind, emotions, and spirit—every piece counts.",
+  cta = { href: "/contact", label: "Schedule a Consultation" },
+  tiles = serviceTiles,
+  lastTile = vipTile,
+}: {
+  eyebrow?: string;
+  title?: React.ReactNode;
+  body?: React.ReactNode;
+  cta?: { href: string; label: string } | null;
+  tiles?: Tile[];
+  lastTile?: Tile;
+} = {}) {
+  const [lungs, cardio, wellness, ...rest] = tiles;
 
   return (
     <section className="flex w-full flex-col items-center gap-12 overflow-clip bg-[linear-gradient(180deg,#ffffff_0%,var(--cream)_13.444%)] px-6 py-16 sm:px-14 sm:py-[104px] lg:gap-20">
       <header className="flex flex-col items-center gap-6">
         <div className="flex flex-col items-center gap-4 text-center">
           <div className="flex flex-col items-center gap-2 text-[var(--ink)]">
-            <Kicker>Our services</Kicker>
-            <Display>Where every piece matters.</Display>
+            <Kicker>{eyebrow}</Kicker>
+            <Display>{title}</Display>
           </div>
-          <p className="max-w-[640px] text-base leading-6 text-[var(--ink-80)]">
-            True wellness comes from balancing body, mind, emotions, and
-            spirit—every piece counts.
-          </p>
+          {body && (
+            <p className="max-w-[640px] text-base leading-6 text-[var(--ink-80)]">
+              {body}
+            </p>
+          )}
         </div>
-        <BlueButton href="/contact">Schedule a Consultation</BlueButton>
+        {cta && <BlueButton href={cta.href}>{cta.label}</BlueButton>}
       </header>
 
       <div
@@ -133,17 +159,17 @@ export function Services() {
 
         {/* Row 3 — full-width VIP tile */}
         <Link
-          href={vipTile.href}
+          href={lastTile.href}
           className="group flex w-full flex-col items-start justify-between gap-6 overflow-clip p-8 transition-colors hover:bg-white sm:flex-row sm:items-end"
         >
           <span className="flex w-full flex-col gap-4 text-[var(--ink)] sm:w-[400px]">
-            <span className="eyebrow">Service · {vipTile.n}</span>
+            <span className="eyebrow">Service · {lastTile.n}</span>
             <span className="font-kalice text-[34px] leading-[44px] tracking-[1px] group-hover:text-[var(--blue)]">
-              {vipTile.title}
+              {lastTile.title}
             </span>
           </span>
           <span className="flex-1 text-base leading-6 text-[var(--ink-80)] sm:text-right">
-            {vipTile.blurb}
+            {lastTile.blurb}
           </span>
         </Link>
       </div>
