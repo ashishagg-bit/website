@@ -1,4 +1,6 @@
 import { Metadata } from "next";
+import { PageHero } from "@/components/page-hero";
+import { ClosingCta } from "@/components/closing-cta";
 import { Eyebrow } from "@/components/ui";
 import { ContactForm } from "@/components/contact-form";
 
@@ -11,18 +13,18 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      <section className="gradient-bg">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8 pt-14 pb-12 sm:pt-20 sm:pb-16">
-          <Eyebrow>Contact</Eyebrow>
-          <h1 className="font-display text-4xl sm:text-5xl text-[var(--navy)] mt-4 tracking-tight max-w-3xl text-balance">
-            Our friendly team would love to hear from you.
-          </h1>
-          <p className="mt-5 text-lg text-[var(--navy-soft)]/85 max-w-2xl">
-            Send a message below or reach us by phone, text, or email. We
-            typically respond within one business day.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Contact"
+        title={
+          <>
+            Schedule a
+            <br />
+            Consultation
+          </>
+        }
+        cta={null}
+        image="/images/scraped/Ok6cd4z826F0Gks9sFfcGFjFzY.jpg"
+      />
 
       <section className="py-16">
         <div className="mx-auto max-w-7xl px-5 sm:px-8 grid lg:grid-cols-12 gap-10">
@@ -43,16 +45,16 @@ export default function ContactPage() {
               eyebrow="Appointments"
               title="Call or Text to Schedule"
               lines={[
-                <a key="call" href="tel:+13239541788" className="hover:text-[var(--teal-deep)]">
+                <a key="call" href="tel:+13239541788" className="hover:text-[var(--blue)]">
                   Call: (323) 954-1788
                 </a>,
-                <a key="text" href="sms:+13239184258" className="hover:text-[var(--teal-deep)]">
+                <a key="text" href="sms:+13239184258" className="hover:text-[var(--blue)]">
                   Text: (323) 918-4258
                 </a>,
                 <a
                   key="email"
                   href="mailto:info@aviishaaya.com"
-                  className="hover:text-[var(--teal-deep)]"
+                  className="hover:text-[var(--blue)]"
                 >
                   Email: info@aviishaaya.com
                 </a>,
@@ -69,6 +71,7 @@ export default function ContactPage() {
           </aside>
         </div>
       </section>
+      <ClosingCta />
     </>
   );
 }
@@ -83,10 +86,10 @@ function InfoCard({
   lines: React.ReactNode[];
 }) {
   return (
-    <div className="rounded-2xl border border-[var(--line)] bg-white p-6">
-      <div className="text-xs uppercase tracking-[0.2em] text-[var(--teal-deep)]">{eyebrow}</div>
-      <h3 className="mt-2 font-display text-lg text-[var(--navy)]">{title}</h3>
-      <ul className="mt-3 space-y-1 text-sm text-[var(--navy-soft)]/85">
+    <div className="rounded-2xl border border-[var(--hairline)] bg-white p-6">
+      <div className="text-xs uppercase tracking-[0.2em] text-[var(--blue)]">{eyebrow}</div>
+      <h3 className="mt-2 font-kalice text-lg text-[var(--ink)]">{title}</h3>
+      <ul className="mt-3 space-y-1 text-sm text-[var(--ink)]/85">
         {lines.map((l, i) => (
           <li key={i}>{l}</li>
         ))}

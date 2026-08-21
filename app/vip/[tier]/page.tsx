@@ -37,21 +37,21 @@ export default async function VipTierPage({
     <>
       <section className="gradient-bg">
         <div className="mx-auto max-w-7xl px-5 sm:px-8 pt-14 pb-16 sm:pt-20 sm:pb-24">
-          <nav className="text-sm text-[var(--muted)] mb-6">
-            <Link href="/vip" className="hover:text-[var(--teal-deep)]">
+          <nav className="text-sm text-[var(--ink-60)] mb-6">
+            <Link href="/vip" className="hover:text-[var(--blue)]">
               VIP Health Plans
             </Link>{" "}
             <span className="mx-2">/</span>
-            <span className="text-[var(--navy)]">{t.name} Package</span>
+            <span className="text-[var(--ink)]">{t.name} Package</span>
           </nav>
           <Eyebrow>{t.tag}</Eyebrow>
-          <h1 className="font-display text-4xl sm:text-5xl text-[var(--navy)] mt-4 tracking-tight max-w-3xl text-balance">
+          <h1 className="font-kalice text-4xl sm:text-5xl text-[var(--ink)] mt-4 tracking-tight max-w-3xl text-balance">
             {t.name} Package
           </h1>
-          <p className="mt-5 text-lg text-[var(--navy-soft)]/85 max-w-2xl">
+          <p className="mt-5 text-lg text-[var(--ink)]/85 max-w-2xl">
             {t.blurb}
           </p>
-          <p className="mt-3 text-[var(--muted)] max-w-2xl">{t.description}</p>
+          <p className="mt-3 text-[var(--ink-60)] max-w-2xl">{t.description}</p>
           <div className="mt-7 flex flex-wrap gap-3">
             <PrimaryButton href="/contact">Call to Book</PrimaryButton>
             <SecondaryButton href="/vip">Compare All Tiers</SecondaryButton>
@@ -59,12 +59,12 @@ export default async function VipTierPage({
         </div>
       </section>
 
-      <section className="py-16 bg-white border-y border-[var(--line)]">
+      <section className="py-16 bg-white border-y border-[var(--hairline)]">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <div className="grid lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-5">
               <Eyebrow>Foundations</Eyebrow>
-              <h2 className="font-display text-2xl sm:text-3xl text-[var(--navy)] mt-4 tracking-tight">
+              <h2 className="font-kalice text-2xl sm:text-3xl text-[var(--ink)] mt-4 tracking-tight">
                 Every {t.name} visit begins with a complete baseline.
               </h2>
             </div>
@@ -72,9 +72,9 @@ export default async function VipTierPage({
               {baseAssessments.map((b) => (
                 <li
                   key={b}
-                  className="rounded-2xl bg-[var(--background)]/40 border border-[var(--line)] p-5 text-sm text-[var(--navy)]"
+                  className="rounded-2xl bg-[var(--cream)]/40 border border-[var(--hairline)] p-5 text-sm text-[var(--ink)]"
                 >
-                  <div className="text-xs uppercase tracking-[0.18em] text-[var(--teal-deep)] mb-2">
+                  <div className="text-xs uppercase tracking-[0.18em] text-[var(--blue)] mb-2">
                     Included
                   </div>
                   {b}
@@ -88,17 +88,17 @@ export default async function VipTierPage({
       <section className="py-20">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <Eyebrow>What&apos;s included</Eyebrow>
-          <h2 className="font-display text-3xl sm:text-4xl text-[var(--navy)] mt-4 tracking-tight max-w-3xl">
+          <h2 className="font-kalice text-3xl sm:text-4xl text-[var(--ink)] mt-4 tracking-tight max-w-3xl">
             The full {t.name} experience.
           </h2>
           <div className="mt-12 grid md:grid-cols-2 gap-5">
             {t.detailedInclusions.map((d) => (
               <div
                 key={d.title}
-                className={`rounded-2xl border ${t.border} bg-white p-7 hover:shadow-lg hover:shadow-[var(--navy)]/5 transition-shadow`}
+                className={`rounded-2xl border ${t.border} bg-white p-7 hover:shadow-lg hover:shadow-[var(--ink)]/5 transition-shadow`}
               >
                 <div className="flex items-start gap-3">
-                  <span className="mt-1 text-[var(--teal-deep)]">
+                  <span className="mt-1 text-[var(--blue)]">
                     <svg
                       width="20"
                       height="20"
@@ -111,10 +111,10 @@ export default async function VipTierPage({
                     </svg>
                   </span>
                   <div>
-                    <h3 className="font-display text-lg text-[var(--navy)]">
+                    <h3 className="font-kalice text-lg text-[var(--ink)]">
                       {d.title}
                     </h3>
-                    <p className="mt-2 text-sm text-[var(--navy-soft)]/85 leading-relaxed">
+                    <p className="mt-2 text-sm text-[var(--ink)]/85 leading-relaxed">
                       {d.body}
                     </p>
                   </div>
@@ -125,13 +125,13 @@ export default async function VipTierPage({
         </div>
       </section>
 
-      <section className="py-20 bg-[var(--warm-soft)]/40">
+      <section className="py-20 bg-[var(--sky)]/40">
         <div className="mx-auto max-w-5xl px-5 sm:px-8 text-center">
           <Eyebrow>À la carte</Eyebrow>
-          <h2 className="font-display text-3xl sm:text-4xl text-[var(--navy)] mt-4 tracking-tight">
+          <h2 className="font-kalice text-3xl sm:text-4xl text-[var(--ink)] mt-4 tracking-tight">
             Customize Your Care
           </h2>
-          <p className="mt-4 text-[var(--navy-soft)]/85 max-w-2xl mx-auto">
+          <p className="mt-4 text-[var(--ink)]/85 max-w-2xl mx-auto">
             Make your {t.name} package uniquely yours by adding services from
             our à la carte menu — our team will help you design a wellness plan
             that aligns perfectly with your health goals.

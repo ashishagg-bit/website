@@ -18,7 +18,7 @@ const logos = [
 export function NewsScroller() {
   const doubled = [...logos, ...logos];
   return (
-    <section className="bg-[var(--teal-deep)] py-8 overflow-hidden">
+    <section className="bg-[var(--blue)] py-8 overflow-hidden">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <div className="text-center text-xs uppercase tracking-[0.25em] text-white/70 mb-5">
           Featured by top news stations

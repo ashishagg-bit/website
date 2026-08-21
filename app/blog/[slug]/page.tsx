@@ -53,21 +53,21 @@ export default async function BlogPostPage(props: PageProps<"/blog/[slug]">) {
       <article>
         <header className="gradient-bg">
           <div className="mx-auto max-w-3xl px-5 sm:px-8 pt-14 pb-12 sm:pt-20 sm:pb-16">
-            <nav className="text-xs uppercase tracking-[0.18em] text-[var(--muted)] mb-6">
-              <Link href="/blog" className="hover:text-[var(--navy)]">Blog</Link>
+            <nav className="text-xs uppercase tracking-[0.18em] text-[var(--ink-60)] mb-6">
+              <Link href="/blog" className="hover:text-[var(--ink)]">Blog</Link>
               <span className="mx-2">/</span>
               <span>Article</span>
             </nav>
             <Eyebrow>Article</Eyebrow>
-            <h1 className="font-display text-3xl sm:text-5xl text-[var(--navy)] mt-4 tracking-tight text-balance">
+            <h1 className="font-kalice text-3xl sm:text-5xl text-[var(--ink)] mt-4 tracking-tight text-balance">
               {post.title}
             </h1>
-            <div className="mt-6 flex items-center gap-3 text-sm text-[var(--muted)]">
-              <span className="inline-block w-9 h-9 rounded-full bg-gradient-to-br from-[var(--teal)] to-[var(--navy)] grid place-items-center text-white font-display">
+            <div className="mt-6 flex items-center gap-3 text-sm text-[var(--ink-60)]">
+              <span className="inline-block w-9 h-9 rounded-full bg-gradient-to-br from-[var(--blue)] to-[var(--ink)] grid place-items-center text-white font-kalice">
                 A
               </span>
               <span>
-                <span className="text-[var(--navy)] font-medium">Dr. Avi Ishaaya</span>
+                <span className="text-[var(--ink)] font-medium">Dr. Avi Ishaaya</span>
                 <span className="mx-2">·</span>
                 {post.date}
               </span>
@@ -85,12 +85,12 @@ export default async function BlogPostPage(props: PageProps<"/blog/[slug]">) {
             dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }}
           />
 
-          <div className="mt-14 rounded-2xl border border-[var(--line)] bg-white p-7">
-            <div className="text-xs uppercase tracking-[0.22em] text-[var(--teal-deep)]">Next steps</div>
-            <h3 className="mt-2 font-display text-2xl text-[var(--navy)]">
+          <div className="mt-14 rounded-2xl border border-[var(--hairline)] bg-white p-7">
+            <div className="text-xs uppercase tracking-[0.22em] text-[var(--blue)]">Next steps</div>
+            <h3 className="mt-2 font-kalice text-2xl text-[var(--ink)]">
               Have questions about your health?
             </h3>
-            <p className="mt-2 text-[var(--navy-soft)]/85">
+            <p className="mt-2 text-[var(--ink)]/85">
               Our team would be honored to help you build a personalized plan.
             </p>
             <div className="mt-5">
@@ -101,10 +101,10 @@ export default async function BlogPostPage(props: PageProps<"/blog/[slug]">) {
       </article>
 
       {others.length > 0 && (
-        <section className="py-20 bg-white border-t border-[var(--line)]">
+        <section className="py-20 bg-white border-t border-[var(--hairline)]">
           <div className="mx-auto max-w-7xl px-5 sm:px-8">
             <Eyebrow>Articles</Eyebrow>
-            <h2 className="font-display text-3xl text-[var(--navy)] mt-4 tracking-tight">
+            <h2 className="font-kalice text-3xl text-[var(--ink)] mt-4 tracking-tight">
               Discover our other articles
             </h2>
             <div className="mt-10 grid md:grid-cols-3 gap-6">
@@ -112,14 +112,14 @@ export default async function BlogPostPage(props: PageProps<"/blog/[slug]">) {
                 <Link
                   key={p.slug}
                   href={`/blog/${p.slug}`}
-                  className="group block h-full rounded-2xl border border-[var(--line)] overflow-hidden hover:shadow-xl hover:shadow-[var(--navy)]/5 transition-all"
+                  className="group block h-full rounded-2xl border border-[var(--hairline)] overflow-hidden hover:shadow-xl hover:shadow-[var(--ink)]/5 transition-all"
                 >
                   <div className={`aspect-[16/10] bg-gradient-to-br ${p.gradient}`} />
                   <div className="p-6">
-                    <div className="text-xs text-[var(--muted)]">
+                    <div className="text-xs text-[var(--ink-60)]">
                       Avi Ishaaya · {p.date}
                     </div>
-                    <h3 className="mt-2 font-display text-lg text-[var(--navy)] group-hover:text-[var(--teal-deep)] transition-colors">
+                    <h3 className="mt-2 font-kalice text-lg text-[var(--ink)] group-hover:text-[var(--blue)] transition-colors">
                       {p.title}
                     </h3>
                   </div>

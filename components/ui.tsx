@@ -21,8 +21,8 @@ export function Reveal({
 
 export function Eyebrow({ children }: { children: React.ReactNode }) {
   return (
-    <div className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-[var(--teal-deep)]">
-      <span className="block w-6 h-px bg-[var(--teal)]" />
+    <div className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-[var(--blue)]">
+      <span className="block w-6 h-px bg-[var(--blue)]" />
       {children}
     </div>
   );
@@ -40,7 +40,7 @@ export function PrimaryButton({
   return (
     <Link
       href={href}
-      className={`inline-flex items-center justify-center gap-2 rounded-full bg-[var(--navy)] px-6 py-3 text-sm font-medium text-white transition-all hover:bg-[var(--teal-deep)] hover:scale-[1.02] shadow-sm ${className}`}
+      className={`inline-flex items-center justify-center gap-2 rounded-lg bg-[var(--blue)] px-5 py-2.5 text-sm font-medium text-white transition-all hover:bg-[var(--blue)] hover:scale-[1.02] shadow-sm ${className}`}
     >
       {children}
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -62,7 +62,7 @@ export function SecondaryButton({
   return (
     <Link
       href={href}
-      className={`inline-flex items-center justify-center gap-2 rounded-full border border-[var(--navy)]/15 bg-white/60 px-6 py-3 text-sm font-medium text-[var(--navy)] transition-colors hover:bg-white ${className}`}
+      className={`inline-flex items-center justify-center gap-2 rounded-full border border-[var(--ink)]/15 bg-white/60 px-6 py-3 text-sm font-medium text-[var(--ink)] transition-colors hover:bg-white ${className}`}
     >
       {children}
     </Link>

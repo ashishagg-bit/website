@@ -13,15 +13,15 @@ export default function PrivacyPolicyPage() {
       <section className="gradient-bg">
         <div className="mx-auto max-w-7xl px-5 sm:px-8 pt-14 pb-16 sm:pt-20 sm:pb-24">
           <Eyebrow>Legal</Eyebrow>
-          <h1 className="font-display text-4xl sm:text-5xl text-[var(--navy)] mt-4 tracking-tight max-w-3xl">
+          <h1 className="font-kalice text-4xl sm:text-5xl text-[var(--ink)] mt-4 tracking-tight max-w-3xl">
             Privacy Policy
           </h1>
         </div>
       </section>
 
       <section className="py-16 sm:py-24">
-        <div className="mx-auto max-w-3xl px-5 sm:px-8 prose prose-lg text-[var(--navy-soft)]/85">
-          <h2 className="font-display text-2xl text-[var(--navy)] tracking-tight">
+        <div className="mx-auto max-w-3xl px-5 sm:px-8 prose prose-lg text-[var(--ink)]/85">
+          <h2 className="font-kalice text-2xl text-[var(--ink)] tracking-tight">
             Your Privacy Matters
           </h2>
           <p>
@@ -32,7 +32,7 @@ export default function PrivacyPolicyPage() {
             provide through our website and services.
           </p>
 
-          <h2 className="font-display text-2xl text-[var(--navy)] tracking-tight mt-10">
+          <h2 className="font-kalice text-2xl text-[var(--ink)] tracking-tight mt-10">
             Information We Collect
           </h2>
           <p>
@@ -42,7 +42,7 @@ export default function PrivacyPolicyPage() {
             office.
           </p>
 
-          <h2 className="font-display text-2xl text-[var(--navy)] tracking-tight mt-10">
+          <h2 className="font-kalice text-2xl text-[var(--ink)] tracking-tight mt-10">
             How We Use Your Information
           </h2>
           <p>
@@ -52,7 +52,7 @@ export default function PrivacyPolicyPage() {
             to third parties.
           </p>
 
-          <h2 className="font-display text-2xl text-[var(--navy)] tracking-tight mt-10">
+          <h2 className="font-kalice text-2xl text-[var(--ink)] tracking-tight mt-10">
             HIPAA Compliance
           </h2>
           <p>
@@ -62,7 +62,7 @@ export default function PrivacyPolicyPage() {
             federal and state regulations.
           </p>
 
-          <h2 className="font-display text-2xl text-[var(--navy)] tracking-tight mt-10">
+          <h2 className="font-kalice text-2xl text-[var(--ink)] tracking-tight mt-10">
             Contact Us
           </h2>
           <p>
@@ -70,14 +70,14 @@ export default function PrivacyPolicyPage() {
             at{" "}
             <a
               href="mailto:info@aviishaaya.com"
-              className="text-[var(--teal-deep)] hover:underline"
+              className="text-[var(--blue)] hover:underline"
             >
               info@aviishaaya.com
             </a>{" "}
             or call{" "}
             <a
               href="tel:+13239541788"
-              className="text-[var(--teal-deep)] hover:underline"
+              className="text-[var(--blue)] hover:underline"
             >
               (323) 954-1788
             </a>

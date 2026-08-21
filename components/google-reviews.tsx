@@ -62,15 +62,15 @@ function Stars({ count }: { count: number }) {
 
 export function GoogleReviews() {
   return (
-    <section className="py-20 sm:py-28 bg-[var(--warm-soft)]/40">
+    <section className="py-20 sm:py-28 bg-[var(--sky)]/40">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
           <div>
             <Eyebrow>What our patients say</Eyebrow>
-            <h2 className="font-display text-3xl sm:text-4xl text-[var(--navy)] mt-4 tracking-tight">
+            <h2 className="font-kalice text-3xl sm:text-4xl text-[var(--ink)] mt-4 tracking-tight">
               5.0 on Google — and still listening.
             </h2>
-            <div className="mt-4 flex items-center gap-3 text-sm text-[var(--navy-soft)]/80">
+            <div className="mt-4 flex items-center gap-3 text-sm text-[var(--ink)]/80">
               <span className="inline-flex items-center gap-2">
                 <svg width="20" height="20" viewBox="0 0 48 48">
                   <path fill="#4285f4" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z" />
@@ -81,14 +81,14 @@ export function GoogleReviews() {
                 Google Reviews
               </span>
               <Stars count={5} />
-              <span className="font-medium text-[var(--navy)]">5.0</span>
+              <span className="font-medium text-[var(--ink)]">5.0</span>
             </div>
           </div>
           <a
             href="https://share.google/1zb7j9Hu8niONel7h"
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 text-sm font-medium text-[var(--teal-deep)] hover:text-[var(--navy)]"
+            className="inline-flex items-center gap-2 text-sm font-medium text-[var(--blue)] hover:text-[var(--ink)]"
           >
             Read all reviews on Google →
           </a>
@@ -98,19 +98,19 @@ export function GoogleReviews() {
           {reviews.map((r) => (
             <div
               key={r.name}
-              className="rounded-2xl bg-white border border-[var(--line)] p-6 hover:shadow-xl hover:shadow-[var(--navy)]/5 transition-shadow"
+              className="rounded-2xl bg-white border border-[var(--hairline)] p-6 hover:shadow-xl hover:shadow-[var(--ink)]/5 transition-shadow"
             >
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[var(--teal)] to-[var(--navy)] grid place-items-center text-white font-display text-sm">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[var(--blue)] to-[var(--ink)] grid place-items-center text-white font-kalice text-sm">
                   {r.initials}
                 </div>
                 <div>
-                  <div className="text-sm font-medium text-[var(--navy)]">{r.name}</div>
-                  <div className="text-xs text-[var(--muted)]">{r.date}</div>
+                  <div className="text-sm font-medium text-[var(--ink)]">{r.name}</div>
+                  <div className="text-xs text-[var(--ink-60)]">{r.date}</div>
                 </div>
               </div>
               <div className="mt-3"><Stars count={r.rating} /></div>
-              <p className="mt-3 text-sm text-[var(--navy-soft)]/85 leading-relaxed">{r.body}</p>
+              <p className="mt-3 text-sm text-[var(--ink)]/85 leading-relaxed">{r.body}</p>
             </div>
           ))}
         </div>

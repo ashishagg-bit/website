@@ -30,6 +30,10 @@ const OVERLAY_ROUTES = [
   "/service/sleep",
   "/service/allergy-sensitivity",
   "/service/wellness-preventive-medicine",
+  "/about",
+  "/vip",
+  "/blog",
+  "/contact",
 ];
 
 /** 4px dot flanking the announcement copy (Figma I64:10192;57:9479 / 9481). */

@@ -33,14 +33,14 @@ export function ContactForm() {
 
   if (status === "success") {
     return (
-      <div className="rounded-2xl border border-[var(--teal)]/30 bg-white p-8 text-center">
-        <div className="mx-auto w-12 h-12 rounded-full bg-[var(--teal)]/15 grid place-items-center text-[var(--teal-deep)]">
+      <div className="rounded-2xl border border-[var(--blue)]/30 bg-white p-8 text-center">
+        <div className="mx-auto w-12 h-12 rounded-full bg-[var(--blue)]/15 grid place-items-center text-[var(--blue)]">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h3 className="mt-4 font-display text-2xl text-[var(--navy)]">Thank you!</h3>
-        <p className="mt-2 text-[var(--navy-soft)]/80">
+        <h3 className="mt-4 font-kalice text-2xl text-[var(--ink)]">Thank you!</h3>
+        <p className="mt-2 text-[var(--ink)]/80">
           Your message has been sent. Our team will be in touch within one business day.
         </p>
       </div>
@@ -48,13 +48,13 @@ export function ContactForm() {
   }
 
   const inputCls =
-    "mt-2 w-full rounded-xl border border-[var(--line)] bg-white px-4 py-3 text-sm text-[var(--navy)] placeholder:text-[var(--muted)] focus:border-[var(--teal)] focus:outline-none focus:ring-2 focus:ring-[var(--teal)]/20 transition";
-  const labelCls = "block text-xs uppercase tracking-[0.18em] text-[var(--navy-soft)]";
+    "mt-2 w-full rounded-xl border border-[var(--hairline)] bg-white px-4 py-3 text-sm text-[var(--ink)] placeholder:text-[var(--ink-60)] focus:border-[var(--blue)] focus:outline-none focus:ring-2 focus:ring-[var(--blue)]/20 transition";
+  const labelCls = "block text-xs uppercase tracking-[0.18em] text-[var(--ink)]";
 
   return (
     <form
       onSubmit={onSubmit}
-      className="rounded-3xl border border-[var(--line)] bg-white p-6 sm:p-8 shadow-sm space-y-5"
+      className="rounded-3xl border border-[var(--hairline)] bg-white p-6 sm:p-8 shadow-sm space-y-5"
     >
       <div className="grid sm:grid-cols-2 gap-5">
         <label className="block">
@@ -114,7 +114,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--navy)] px-7 py-3 text-sm font-medium text-white transition-all hover:bg-[var(--teal-deep)] disabled:opacity-60"
+        className="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--ink)] px-7 py-3 text-sm font-medium text-white transition-all hover:bg-[var(--blue)] disabled:opacity-60"
       >
         {status === "submitting" ? "Submitting…" : "Submit"}
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
