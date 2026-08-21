@@ -38,12 +38,14 @@ export const serviceTiles = [
     title: "Lungs and Breathing",
     blurb: "Your lungs are essential to delivering vital oxygen to every cell in your body.",
     href: "/service/lungs",
+    image: "/images/scraped/Ok6cd4z826F0Gks9sFfcGFjFzY.jpg",
   },
   {
     n: "02",
     title: "Cardiovascular",
     blurb: "Your cardiovascular health is fundamental to your overall wellbeing.",
     href: "/service/cardiovascular",
+    image: "/images/scraped/cy54QKfQ0BjEhBzh7ZCniujdDU.png",
   },
   {
     n: "03",
@@ -58,24 +60,28 @@ export const serviceTiles = [
     title: "Allergy and Sensitivity",
     blurb: "Identifying allergens helps eliminate triggers for allergy symptoms.",
     href: "/service/allergy-sensitivity",
+    image: "/images/scraped/mRvoVlTLqZI08Kd9gqKbgHptpQ.png",
   },
   {
     n: "05",
     title: "Sleep",
     blurb: "Good sleep is vital for well-being. It helps your brain process information.",
     href: "/service/sleep",
+    image: "/images/scraped/lUTBzERr53jnyvWA0CLFiJn62c.png",
   },
   {
     n: "06",
     title: "Thermography",
     blurb: "Thermography is essential for wellness and prevention for optimal health.",
     href: "/services",
+    image: "/images/scraped/4FVQUutQWdB7NtLwRY17tioTIY0.jpg",
   },
   {
     n: "07",
     title: "Oligoscan",
     blurb: "OligoScan helps identify allergens, allowing you to avoid allergy triggers.",
     href: "/services",
+    image: "/images/scraped/VfRH12CL491NDPBxF2q2K2kyP1w.jpg",
   },
 ];
 
