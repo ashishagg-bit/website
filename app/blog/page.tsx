@@ -2,7 +2,6 @@ import { Metadata } from "next";
 import { PageHero } from "@/components/page-hero";
 import { ClosingCta } from "@/components/closing-cta";
 import Link from "next/link";
-import { Eyebrow } from "@/components/ui";
 import { getAllPosts } from "@/lib/posts";
 
 export const metadata: Metadata = {

@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import { PageHero } from "@/components/page-hero";
 import { ClosingCta } from "@/components/closing-cta";
-import { Eyebrow } from "@/components/ui";
 import { ContactForm } from "@/components/contact-form";
 
 export const metadata: Metadata = {
