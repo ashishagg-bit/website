@@ -1,5 +1,3 @@
-"use client";
-import { useState } from "react";
 import Link from "next/link";
 import { BlueButton, Display, Kicker } from "@/components/ui";
 
@@ -41,10 +39,6 @@ export function Approach({
   cta?: { href: string; label: string };
 }) {
   const hasList = Boolean(bullets && bullets.length > 0);
-  // Same interaction as the services bento: the frame's single gradient row is
-  // a hover state, not a fixed style. It follows the cursor and rests on
-  // `highlight` when the pointer leaves.
-  const [lit, setLit] = useState(highlight);
   return (
     <section className="flex w-full flex-col items-center justify-center gap-12 overflow-clip bg-white px-6 py-16 sm:px-14 lg:flex-row lg:gap-[120px] lg:px-20 lg:py-[104px]">
       <div className="flex w-full flex-col items-center gap-10 lg:flex-1 lg:gap-16">
@@ -63,21 +57,14 @@ export function Approach({
 
       {hasList && (
       <div className="w-full lg:flex-1">
-        <ul
-          className={`overflow-clip rounded-2xl border ${HAIRLINE}`}
-          onMouseLeave={() => setLit(highlight)}
-        >
+        {/* Gradient row follows the cursor — see `.checkrow` in globals.css */}
+        <ul className={`checkrow overflow-clip rounded-2xl border ${HAIRLINE}`}>
           {bullets!.map((b, i) => (
             <li
               key={b}
-              onMouseEnter={() => setLit(i)}
-              className={`flex items-center gap-3 p-8 transition-[background-position,padding] duration-500 ease-out ${
+              {...(i === highlight ? { "data-open": "" } : {})}
+              className={`checkitem flex items-center gap-3 p-8 text-[var(--ink)] ${
                 i < bullets!.length - 1 ? `border-b ${HAIRLINE}` : ""
-              } ${
-                i === lit
-                  ? // Copy sits at the cream end of the gradient, so it stays ink.
-                    "bg-[linear-gradient(90deg,var(--cream)_0%,#b8d2ff_50%,#75a4f5_75%,var(--blue)_100%)] text-[var(--ink)] lg:pl-10"
-                  : "text-[var(--ink)]"
               }`}
             >
               <Check />

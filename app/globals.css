@@ -159,3 +159,83 @@ body {
 
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* --- Hover-expanding tabs ---------------------------------------------
+   The services bento, the five promises and the service-page checklist all
+   use one interaction: a row of collapsed tabs where the hovered one opens.
+   Implemented in CSS rather than React state so it works with no JavaScript
+   — which also means the exported static site is fully interactive.
+
+   `data-open` marks the tab a row rests on when nothing is hovered. */
+
+.tabrow > .tab {
+  flex: 1 1 0;
+  min-width: 0;
+  transition: flex-grow 0.5s ease, background-color 0.5s ease;
+}
+
+@media (min-width: 1024px) {
+  .tabrow > .tab[data-open] { flex-grow: 2; }
+  .tabrow:hover > .tab[data-open] { flex-grow: 1; }
+  .tabrow > .tab:hover { flex-grow: 2; }
+}
+
+/* Revealed only while a tab is open: photograph, action pill, body copy. */
+.tab .on-open {
+  opacity: 0;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.tab .on-open.slide { transform: translateY(-0.5rem); }
+.tabrow > .tab[data-open] .on-open { opacity: 1; }
+.tabrow > .tab[data-open] .on-open.slide { transform: none; }
+.tabrow:hover > .tab[data-open] .on-open { opacity: 0; }
+.tabrow:hover > .tab[data-open] .on-open.slide { transform: translateY(-0.5rem); }
+.tabrow > .tab:hover .on-open { opacity: 1; }
+.tabrow > .tab:hover .on-open.slide { transform: none; }
+
+/* Copy turns white once the photograph is behind it. */
+.tab .on-open-text { transition: color 0.5s ease; }
+.tabrow > .tab[data-open] .on-open-text { color: #fff; }
+.tabrow:hover > .tab[data-open] .on-open-text { color: var(--ink); }
+.tabrow:hover > .tab[data-open] .on-open-text.muted { color: var(--ink-80); }
+.tabrow > .tab:hover .on-open-text { color: #fff; }
+
+/* Collapsed: title top, blurb bottom. Open: both group at the bottom. */
+.tab .tab-title { margin-top: 0; }
+.tab .tab-blurb { margin-top: auto; }
+.tabrow > .tab[data-open] .tab-title { margin-top: auto; }
+.tabrow > .tab[data-open] .tab-blurb { margin-top: 0; }
+.tabrow:hover > .tab[data-open] .tab-title { margin-top: 0; }
+.tabrow:hover > .tab[data-open] .tab-blurb { margin-top: auto; }
+.tabrow > .tab:hover .tab-title { margin-top: auto; }
+.tabrow > .tab:hover .tab-blurb { margin-top: 0; }
+
+/* Promises: the open card turns blue and its heading grows. */
+.tabrow > .tab[data-open].promise { background-color: var(--blue); }
+.tabrow:hover > .tab[data-open].promise { background-color: transparent; }
+.tabrow > .tab.promise:hover { background-color: var(--blue); }
+.tab.promise .promise-title { font-size: 1.5rem; line-height: 2rem; transition: font-size 0.5s ease, line-height 0.5s ease; }
+.tabrow > .tab[data-open].promise .promise-title { font-size: clamp(1.75rem, 1.2rem + 1.4vw, 40px); line-height: 1.2; }
+.tabrow:hover > .tab[data-open].promise .promise-title { font-size: 1.5rem; line-height: 2rem; }
+.tabrow > .tab.promise:hover .promise-title { font-size: clamp(1.75rem, 1.2rem + 1.4vw, 40px); line-height: 1.2; }
+.tab.promise .promise-num { color: rgba(255, 255, 255, 0.4); transition: color 0.5s ease; }
+.tabrow > .tab[data-open].promise .promise-num { color: rgba(255, 255, 255, 0.7); }
+.tabrow:hover > .tab[data-open].promise .promise-num { color: rgba(255, 255, 255, 0.4); }
+.tabrow > .tab.promise:hover .promise-num { color: rgba(255, 255, 255, 0.7); }
+.tab.promise .promise-body { max-height: 0; overflow: hidden; opacity: 0; transition: max-height 0.5s ease, opacity 0.5s ease; }
+.tabrow > .tab[data-open].promise .promise-body { max-height: 12rem; opacity: 1; }
+.tabrow:hover > .tab[data-open].promise .promise-body { max-height: 0; opacity: 0; }
+.tabrow > .tab.promise:hover .promise-body { max-height: 12rem; opacity: 1; }
+
+/* Service-page checklist: the gradient row follows the cursor. */
+.checkrow > .checkitem { transition: background 0.4s ease, padding 0.4s ease; }
+.checkrow > .checkitem[data-open],
+.checkrow > .checkitem:hover {
+  background: linear-gradient(90deg, var(--cream) 0%, #b8d2ff 50%, #75a4f5 75%, var(--blue) 100%);
+}
+.checkrow:hover > .checkitem[data-open] { background: none; }
+@media (min-width: 1024px) {
+  .checkrow > .checkitem[data-open] { padding-left: 2.5rem; }
+  .checkrow:hover > .checkitem[data-open] { padding-left: 2rem; }
+  .checkrow > .checkitem:hover { padding-left: 2.5rem; }
+}

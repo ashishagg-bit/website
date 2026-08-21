@@ -1,6 +1,4 @@
-"use client";
 import Link from "next/link";
-import { useState } from "react";
 import { BlueButton, Display, Kicker } from "@/components/ui";
 import { serviceTiles, vipTile } from "@/lib/home-content";
 
@@ -15,42 +13,31 @@ export type Tile = {
 };
 
 /**
- * One service tab. Collapsed it is plain cream with the number and title;
- * open it doubles in width and reveals the photograph, the blurb and the
- * "Learn more" action — the state the Figma frame captured on the Wellness
- * card. Open follows the cursor; with no cursor the row's default tile is
- * open, so the section still reads as designed at rest.
+ * One service tab. Collapsed it is plain cream with the number, title and
+ * blurb; open it doubles in width and reveals the photograph and "Learn more"
+ * — the state the Figma frame captured on the Wellness card.
+ *
+ * The open/closed states are driven entirely by the `.tabrow` / `.tab` CSS in
+ * globals.css, so this is a server component and the interaction survives with
+ * JavaScript disabled.
  */
 function ServiceTab({
   tile,
-  open,
-  onOpen,
+  open = false,
   className = "",
 }: {
   tile: Tile;
-  open: boolean;
-  onOpen: () => void;
+  open?: boolean;
   className?: string;
 }) {
-  const lit = open && Boolean(tile.image);
-
   return (
     <Link
       href={tile.href}
-      onMouseEnter={onOpen}
-      onFocus={onOpen}
-      className={`group relative flex h-[400px] min-w-0 flex-col items-start justify-between overflow-clip p-8 transition-[flex-grow,background-color] duration-500 ease-out ${
-        open ? "lg:grow-[2]" : "lg:grow"
-      } ${className}`}
-      style={{ flexBasis: 0 }}
+      {...(open ? { "data-open": "" } : {})}
+      className={`tab group relative flex h-[400px] flex-col items-start justify-between overflow-clip p-8 ${className}`}
     >
       {tile.image && (
-        <span
-          aria-hidden
-          className={`absolute inset-0 transition-opacity duration-500 ${
-            open ? "opacity-100" : "opacity-0"
-          }`}
-        >
+        <span aria-hidden className="on-open absolute inset-0">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={tile.image}
@@ -62,64 +49,41 @@ function ServiceTab({
         </span>
       )}
 
-      {/* Open only: sits out of flow so the collapsed tab keeps its spacing */}
-      <span
-        className={`absolute inset-x-8 top-8 flex items-center justify-center rounded-lg bg-[rgba(252,250,246,0.32)] px-5 py-3 text-[15px] leading-[21px] text-white backdrop-blur-sm transition-all duration-500 ${
-          lit ? "translate-y-0 opacity-100" : "pointer-events-none -translate-y-2 opacity-0"
-        }`}
-      >
+      <span className="on-open slide pointer-events-none absolute inset-x-8 top-8 flex items-center justify-center rounded-lg bg-[rgba(252,250,246,0.32)] px-5 py-3 text-[15px] leading-[21px] text-white backdrop-blur-sm">
         Learn more
       </span>
 
-      {/* Collapsed: title at the top, blurb pinned to the bottom.
-          Open: both regroup at the bottom, under "Learn more". */}
-      <span
-        className={`relative flex w-full flex-col gap-3 transition-colors duration-500 ${
-          open ? "mt-auto" : ""
-        } ${lit ? "text-white" : "text-[var(--ink)]"}`}
-      >
-        <span className={`eyebrow ${lit ? "!text-white" : ""}`}>
-          Service · {tile.n}
-        </span>
+      <span className="tab-title on-open-text relative flex w-full flex-col gap-3 text-[var(--ink)]">
+        <span className="eyebrow on-open-text">Service · {tile.n}</span>
         <span className="font-kalice text-[clamp(1.5rem,1.1rem+1vw,34px)] leading-[1.29] tracking-[1px]">
           {tile.title}
         </span>
       </span>
 
-      <span
-        className={`relative text-base leading-[22px] transition-colors duration-500 ${
-          open ? "" : "mt-auto"
-        } ${lit ? "text-white" : "text-[var(--ink-80)]"}`}
-      >
+      <span className="tab-blurb on-open-text muted relative text-base leading-[22px] text-[var(--ink-80)]">
         {tile.blurb}
       </span>
     </Link>
   );
 }
 
-/** A row of tabs that share one open slot. */
+/** A row of tabs sharing one open slot. */
 function TabRow({
   tiles,
-  defaultOpen = 0,
+  defaultOpen = -1,
   className = "",
 }: {
   tiles: Tile[];
   defaultOpen?: number;
   className?: string;
 }) {
-  const [open, setOpen] = useState(defaultOpen);
-
   return (
-    <div
-      className={`flex flex-col lg:flex-row ${className}`}
-      onMouseLeave={() => setOpen(defaultOpen)}
-    >
+    <div className={`tabrow flex flex-col lg:flex-row ${className}`}>
       {tiles.map((t, i) => (
         <ServiceTab
           key={t.title}
           tile={t}
-          open={open === i}
-          onOpen={() => setOpen(i)}
+          open={i === defaultOpen}
           className={`border-b ${HAIRLINE} lg:border-b-0 ${
             i < tiles.length - 1 ? `lg:border-r ${HAIRLINE}` : ""
           }`}
@@ -175,7 +139,7 @@ export function Services({
         <TabRow tiles={rowOne} defaultOpen={2} className={`border-b ${HAIRLINE}`} />
 
         {/* Row 2 — all collapsed at rest */}
-        <TabRow tiles={rowTwo} defaultOpen={-1} className={`border-b ${HAIRLINE}`} />
+        <TabRow tiles={rowTwo} className={`border-b ${HAIRLINE}`} />
 
         {/* Row 3 — full-width closing tile */}
         <Link
