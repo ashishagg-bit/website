@@ -129,7 +129,7 @@ export function Conditions({
             </div>
 
             {c.details && c.details.length > 0 && (
-              <dl className="cond-detail flex flex-col gap-2 px-2 pb-2">
+              <dl className="cond-detail flex flex-col gap-2 px-4 pb-4 pt-1">
                 {c.details.map((d) => (
                   <div key={d.label} className="flex flex-col gap-0.5">
                     <dt className="eyebrow !text-[10px] !text-white/50">
