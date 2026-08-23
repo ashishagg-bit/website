@@ -320,3 +320,25 @@ body {
   opacity: 0;
   margin-top: 0;
 }
+
+/* Diagnostics tiles — the frame shows one tile filled with a blue gradient and
+   white type while the rest stay plain (Figma 96:28973). Same
+   open-follows-cursor rule; here it changes colour rather than width. */
+.tilegrid > .tile-card {
+  transition: background 0.45s ease, color 0.45s ease;
+  color: var(--ink);
+}
+.tilegrid > .tile-card[data-open],
+.tilegrid > .tile-card:hover {
+  background: radial-gradient(120% 110% at 72% 12%, #e2ebfc 0%, #93b2ef 42%, #3376eb 100%);
+  color: #ffffff;
+}
+.tilegrid:hover > .tile-card[data-open]:not(:hover) {
+  background: none;
+  color: var(--ink);
+}
+/* eyebrow and blurb ride the card's colour */
+.tile-card .tile-eyebrow,
+.tile-card .tile-blurb { color: inherit; transition: color 0.45s ease; }
+.tile-card:not([data-open]):not(:hover) .tile-blurb,
+.tilegrid:hover > .tile-card[data-open]:not(:hover) .tile-blurb { color: var(--ink-80); }

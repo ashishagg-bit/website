@@ -173,29 +173,31 @@ export function TileGrid({
       </header>
 
       <div
-        className={`grid w-full max-w-[1328px] overflow-clip rounded-2xl border sm:grid-cols-2 lg:grid-cols-4 ${HAIRLINE}`}
+        className={`tilegrid grid w-full max-w-[1328px] overflow-clip rounded-2xl border sm:grid-cols-2 lg:grid-cols-4 ${HAIRLINE}`}
       >
         {tiles.map((t, i) => {
-          const cls = `group flex h-[400px] flex-col items-start justify-between overflow-clip border-b p-8 transition-colors hover:bg-[var(--cream)] lg:border-r lg:[&:nth-child(4n)]:border-r-0 ${HAIRLINE} ${
+          // The frame rests with tile 03 filled; open then follows the cursor.
+          const cls = `tile-card flex h-[400px] flex-col items-start justify-between overflow-clip border-b p-8 lg:border-r lg:[&:nth-child(4n)]:border-r-0 ${HAIRLINE} ${
             i >= tiles.length - (tiles.length % 4 || 4) ? "lg:border-b-0" : ""
           }`;
           const inner = (
             <>
-              <div className="flex w-full flex-col gap-4 text-[var(--ink)]">
-                <p className="eyebrow">Service · {t.n}</p>
+              <div className="flex w-full flex-col gap-4">
+                <p className="eyebrow tile-eyebrow">Service · {t.n}</p>
                 <h3 className="font-kalice text-[34px] leading-[44px] tracking-[1px]">
                   {t.title}
                 </h3>
               </div>
-              <p className="text-base leading-6 text-[var(--ink-80)]">{t.blurb}</p>
+              <p className="tile-blurb text-base leading-6">{t.blurb}</p>
             </>
           );
+          const openAttr = i === 2 ? { "data-open": "" } : {};
           return t.href ? (
-            <Link key={t.title} href={t.href} className={cls}>
+            <Link key={t.title} href={t.href} className={cls} {...openAttr}>
               {inner}
             </Link>
           ) : (
-            <div key={t.title} className={cls}>
+            <div key={t.title} className={cls} {...openAttr}>
               {inner}
             </div>
           );

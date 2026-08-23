@@ -35,6 +35,14 @@ export function SplitBand({
           aria-hidden
           className="absolute inset-0 bg-[rgba(254,181,91,0.2)] mix-blend-soft-light"
         />
+        {/* A 170px disc sits centred on the seam, reading as a notch bitten out
+            of the photograph's inner edge — Figma 96:28715. */}
+        <div
+          aria-hidden
+          className={`absolute right-0 top-1/2 hidden size-[170px] -translate-y-1/2 translate-x-1/2 rounded-full md:block ${
+            dark ? "bg-[var(--ink)]" : "bg-[var(--cream)]"
+          }`}
+        />
       </div>
 
       <div className="flex min-w-0 flex-1 flex-col items-start justify-center px-6 py-16 sm:px-14 md:h-[740px] md:py-20 lg:pl-24 lg:pr-20">
