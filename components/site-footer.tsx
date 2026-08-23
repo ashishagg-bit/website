@@ -41,7 +41,8 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="grid w-full flex-1 grid-cols-2 items-start gap-8 sm:grid-cols-4 lg:gap-12">
+        {/* Three columns, not four: Visit and Open Hours stack together */}
+        <div className="grid w-full flex-1 grid-cols-2 items-start gap-8 sm:grid-cols-3 lg:gap-12">
           <Column title="Explore">
             <ul className="flex flex-col items-start justify-center gap-[7px] text-white/60">
               {explore.map((e) => (
@@ -54,21 +55,22 @@ export function SiteFooter() {
             </ul>
           </Column>
 
-          <Column title="Visit">
-            <address className="not-italic leading-[21px] text-white/60">
-              9230 West Olympic Boulevard, Second Floor
-              <br />
-              Beverly Hills, CA 90212
-            </address>
-          </Column>
-
-          <Column title="Open Hours">
-            <p className="leading-[21px] text-white/60">
-              Mon / Tue / Thu / Fri · 8:00 AM – 5:00 PM
-              <br />
-              Wed · 10:00 AM – 5:00 PM
-            </p>
-          </Column>
+          <div className="flex min-w-0 flex-col items-start gap-6 text-sm">
+            <Column title="Visit">
+              <address className="not-italic leading-[21px] text-white/60">
+                9230 West Olympic Boulevard, Second Floor
+                <br />
+                Beverly Hills, CA 90212
+              </address>
+            </Column>
+            <Column title="Open Hours">
+              <p className="leading-[21px] text-white/60">
+                Mon / Tue / Thu / Fri · 8:00 AM – 5:00 PM
+                <br />
+                Wed · 10:00 AM – 5:00 PM
+              </p>
+            </Column>
+          </div>
 
           <Column title="Reach Us">
             <ul className="flex flex-col gap-[7px] leading-[21px] text-white/60">
