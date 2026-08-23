@@ -278,13 +278,17 @@ body {
 
    `data-open` marks the tab a row rests on when nothing is hovered. */
 
+/* Below lg the tabs stack, and they must keep their own height. `flex:1 1 0`
+   sets the basis on the *block* axis in a column flex container, which
+   collapsed every card to its content and dropped "Learn more" onto the
+   title. So the flex sizing is confined to the horizontal layout. */
 .tabrow > .tab {
-  flex: 1 1 0;
   min-width: 0;
   transition: flex-grow 0.5s ease, background-color 0.5s ease;
 }
 
 @media (min-width: 1024px) {
+  .tabrow > .tab { flex: 1 1 0; }
   .tabrow > .tab[data-open] { flex-grow: 2; }
   .tabrow:hover > .tab[data-open]:not(:hover) { flex-grow: 1; }
   .tabrow > .tab:hover { flex-grow: 2; }
