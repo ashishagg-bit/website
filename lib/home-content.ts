@@ -207,14 +207,13 @@ export const space = {
 };
 
 /**
- * Press row under the hero — Figma I64:10192;64:10509. The frame shows five
- * wordmarks; each is set here in the weight/style closest to the real
- * masthead until the logo SVGs can be exported.
+ * Press row under the hero — Figma I64:10192;64:10509. These are the real
+ * logo vectors, exported from the file itself.
  */
 export const featuredIn = [
-  { name: "WWD", className: "font-sans text-2xl font-extrabold tracking-tight" },
-  { name: "healthline", className: "font-sans text-2xl font-bold tracking-tight" },
-  { name: "Forbes", className: "font-kalice text-2xl font-semibold tracking-tight" },
-  { name: "THE WALL STREET JOURNAL", className: "font-kalice text-sm tracking-[0.02em]" },
-  { name: "Esquire", className: "font-kalice text-2xl italic tracking-tight" },
+  { name: "WWD", src: "/images/figma/press/wwd.svg", w: 61, h: 18 },
+  { name: "Healthline", src: "/images/figma/press/healthline.svg", w: 108, h: 16 },
+  { name: "Forbes", src: "/images/figma/press/forbes.svg", w: 81, h: 21 },
+  { name: "The Wall Street Journal", src: "/images/figma/press/wsj.svg", w: 149, h: 14 },
+  { name: "Esquire", src: "/images/figma/press/esquire.svg", w: 95, h: 14 },
 ];

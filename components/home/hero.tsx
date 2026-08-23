@@ -88,8 +88,16 @@ export function Hero() {
         <p className="eyebrow">FEATURED IN</p>
         <ul className="flex w-full max-w-[1330px] flex-wrap items-center justify-between gap-x-10 gap-y-6">
           {featuredIn.map((p) => (
-            <li key={p.name} className={`flex-1 whitespace-nowrap text-center text-[var(--ink)] ${p.className}`}>
-              {p.name}
+            <li key={p.name} className="flex flex-1 items-center justify-center">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={p.src}
+                alt={p.name}
+                width={p.w}
+                height={p.h}
+                style={{ width: p.w, height: p.h }}
+                className="max-w-full object-contain"
+              />
             </li>
           ))}
         </ul>
