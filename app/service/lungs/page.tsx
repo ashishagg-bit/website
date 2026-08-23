@@ -7,7 +7,6 @@ export const metadata: Metadata = {
   description: lungs.metaDescription,
 };
 
-/** Lungs and Breathing — Figma frame 81:23686. */
-export default function LungsPage() {
+export default function Page() {
   return <ServicePage data={lungs} />;
 }

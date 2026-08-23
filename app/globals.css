@@ -239,3 +239,32 @@ body {
   .checkrow:hover > .checkitem[data-open] { padding-left: 2rem; }
   .checkrow > .checkitem:hover { padding-left: 2.5rem; }
 }
+
+/* Conditions cards — same open-follows-cursor pattern; the open card reveals
+   its Symptoms / Risk / Testing detail (Figma 92:27676 on the service frames). */
+.condrow > .cond {
+  background: rgba(255, 255, 255, 0.08);
+  transition: background-color 0.4s ease;
+}
+.condrow > .cond[data-open],
+.condrow > .cond:hover { background: rgba(255, 255, 255, 0.16); }
+.condrow:hover > .cond[data-open] { background: rgba(255, 255, 255, 0.08); }
+
+.cond .cond-detail {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.45s ease, opacity 0.45s ease, margin-top 0.45s ease;
+  margin-top: 0;
+}
+.condrow > .cond[data-open] .cond-detail,
+.condrow > .cond:hover .cond-detail {
+  max-height: 14rem;
+  opacity: 1;
+  margin-top: 0.75rem;
+}
+.condrow:hover > .cond[data-open] .cond-detail {
+  max-height: 0;
+  opacity: 0;
+  margin-top: 0;
+}

@@ -30,6 +30,16 @@ export function Hero() {
                   alt=""
                   className="absolute inset-0 size-full object-cover opacity-80"
                 />
+                {/* Two 60px discs straddling the left and right edges, centred
+                    on the photo — Figma I64:10192;57:9786 / 57:9787. */}
+                <span
+                  aria-hidden
+                  className="absolute left-[-30px] top-1/2 size-[60px] -translate-y-1/2 rounded-full bg-[var(--cream)]"
+                />
+                <span
+                  aria-hidden
+                  className="absolute left-[270px] top-1/2 size-[60px] -translate-y-1/2 rounded-full bg-[var(--cream)]"
+                />
                 <span className="relative">
                   <PlayCircle />
                 </span>

@@ -78,14 +78,26 @@ export function Approach({
   );
 }
 
-/** "Conditions we treat." — Figma node 92:27676: ink panel, pill cards. */
+export type Condition = {
+  name: string;
+  details?: { label: string; value: string }[];
+};
+
+/**
+ * "Conditions we treat." — Figma node 92:27676: ink panel, pill cards, one of
+ * them open showing its Symptoms / Risk / Testing detail. Open follows the
+ * cursor (see `.condrow` in globals.css) and rests on the first card carrying
+ * detail, which is the state the frames captured.
+ */
 export function Conditions({
   title = "Conditions we treat.",
   items,
 }: {
   title?: React.ReactNode;
-  items: string[];
+  items: Condition[];
 }) {
+  const restsOn = items.findIndex((c) => c.details && c.details.length > 0);
+
   return (
     <section className="flex w-full flex-col items-center gap-10 overflow-clip bg-[var(--ink)] px-6 py-16 sm:px-14 lg:gap-14 lg:py-24">
       <header className="flex w-full max-w-[700px] flex-col items-center gap-4 text-center text-white">
@@ -93,16 +105,34 @@ export function Conditions({
         <Display>{title}</Display>
       </header>
 
-      <ul className="grid w-full max-w-[1328px] gap-2 sm:grid-cols-2 lg:grid-cols-3">
-        {items.map((c) => (
+      <ul className="condrow grid w-full max-w-[1328px] items-start gap-2 sm:grid-cols-2 lg:grid-cols-3">
+        {items.map((c, i) => (
           <li
-            key={c}
-            className="flex items-center gap-3 rounded-2xl bg-white/10 p-2"
+            key={c.name}
+            {...(i === restsOn ? { "data-open": "" } : {})}
+            className="cond flex flex-col rounded-2xl p-2"
           >
-            <span className="flex size-[55px] shrink-0 items-center justify-center rounded-lg bg-[linear-gradient(135deg,rgba(255,255,255,0.22),rgba(51,118,235,0.5))] font-kalice text-xl text-white">
-              {c.charAt(0)}
-            </span>
-            <span className="pr-2 text-base leading-[22px] text-white">{c}</span>
+            <div className="flex items-center gap-3">
+              <span className="flex size-[55px] shrink-0 items-center justify-center rounded-lg bg-[linear-gradient(135deg,rgba(255,255,255,0.22),rgba(51,118,235,0.5))] font-kalice text-xl text-white">
+                {c.name.charAt(0)}
+              </span>
+              <span className="pr-2 text-base leading-[22px] text-white">
+                {c.name}
+              </span>
+            </div>
+
+            {c.details && c.details.length > 0 && (
+              <dl className="cond-detail flex flex-col gap-2 px-2 pb-2">
+                {c.details.map((d) => (
+                  <div key={d.label} className="flex flex-col gap-0.5">
+                    <dt className="eyebrow !text-[10px] !text-white/50">
+                      {d.label}
+                    </dt>
+                    <dd className="text-sm leading-5 text-white/80">{d.value}</dd>
+                  </div>
+                ))}
+              </dl>
+            )}
           </li>
         ))}
       </ul>
