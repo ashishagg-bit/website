@@ -105,7 +105,7 @@ export function SiteHeader() {
       <div className="relative -mb-6 flex items-center justify-center gap-4 overflow-clip bg-[var(--lilac)] px-12 pb-9 pt-3">
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(120%_180%_at_50%_120%,#8b5cf6_0%,#a78bfa_35%,transparent_70%)] opacity-70"
+          className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,#c6d5f7_0%,#dcd6f7_38%,#d9def9_62%,#c6d5f7_100%)]"
         />
         <Dot />
         <p className="relative text-center font-[var(--font-manrope)] text-sm font-medium leading-[1.2] tracking-[-0.14px] text-white">

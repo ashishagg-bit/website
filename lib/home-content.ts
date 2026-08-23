@@ -53,7 +53,7 @@ export const serviceTiles = [
     blurb:
       "Wellness and prevention are where each piece connects to form the complete picture of how you can attain your optimal wellbeing.",
     href: "/service/wellness-preventive-medicine",
-    image: "/images/scraped/z40GSxCTx1p8Yl8dajpSuGt52I.jpeg",
+    image: "/images/scraped/V2qDs1D0pO2ja4K49KWNNzfDHe0.png",
   },
   {
     n: "04",
@@ -197,11 +197,15 @@ export const space = {
   ],
 };
 
-/** Press row under the hero — node I64:10192;64:10509. */
+/**
+ * Press row under the hero — Figma I64:10192;64:10509. The frame shows five
+ * wordmarks; each is set here in the weight/style closest to the real
+ * masthead until the logo SVGs can be exported.
+ */
 export const featuredIn = [
-  "CBS News",
-  "Los Angeles Times",
-  "NBC",
-  "The Wall Street Journal",
-  "ABC",
+  { name: "WWD", className: "font-sans text-2xl font-extrabold tracking-tight" },
+  { name: "healthline", className: "font-sans text-2xl font-bold tracking-tight" },
+  { name: "Forbes", className: "font-kalice text-2xl font-semibold tracking-tight" },
+  { name: "THE WALL STREET JOURNAL", className: "font-kalice text-sm tracking-[0.02em]" },
+  { name: "Esquire", className: "font-kalice text-2xl italic tracking-tight" },
 ];
