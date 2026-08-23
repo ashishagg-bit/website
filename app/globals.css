@@ -1,5 +1,106 @@
 @import "tailwindcss";
 
+/* --- Real brand faces: Kalice Trial (display) + Apercu Pro (text).
+   Licensed files supplied by the client; converted to woff2. --- */
+@font-face {
+  font-family: "Apercu";
+  src: url("/fonts/ApercuPro-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Apercu";
+  src: url("/fonts/ApercuPro-Italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Apercu";
+  src: url("/fonts/ApercuPro-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Apercu";
+  src: url("/fonts/ApercuPro-BoldItalic.woff2") format("woff2");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Kalice";
+  src: url("/fonts/Kalice-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Kalice";
+  src: url("/fonts/Kalice-Italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Kalice";
+  src: url("/fonts/Kalice-MediumItalic.woff2") format("woff2");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Kalice";
+  src: url("/fonts/Kalice-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Kalice";
+  src: url("/fonts/Kalice-BoldItalic.woff2") format("woff2");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Kalice";
+  src: url("/fonts/Kalice-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Kalice";
+  src: url("/fonts/Kalice-ExtraBoldItalic.woff2") format("woff2");
+  font-weight: 800;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Kalice";
+  src: url("/fonts/Kalice-ExtraBold.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Kalice";
+  src: url("/fonts/Kalice-BlackItalic.woff2") format("woff2");
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Kalice";
+  src: url("/fonts/Kalice-Black.woff2") format("woff2");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --background: #fafaf7;
   --foreground: #0d2436;
@@ -55,13 +156,13 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-inter), system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-family: "Apercu", system-ui, -apple-system, "Segoe UI", sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
 .font-display {
-  font-family: var(--font-display), "DM Sans", "Inter", system-ui, sans-serif;
+  font-family: "Kalice", Georgia, serif;
   letter-spacing: -0.01em;
 }
 
@@ -88,7 +189,7 @@ body {
   font-size: 1.0625rem;
 }
 .prose-article h2 {
-  font-family: var(--font-display), "DM Sans", system-ui, sans-serif;
+  font-family: "Kalice", Georgia, serif;
   font-size: 1.75rem;
   margin-top: 2.25rem;
   margin-bottom: 0.75rem;
@@ -96,7 +197,7 @@ body {
   letter-spacing: -0.01em;
 }
 .prose-article h3 {
-  font-family: var(--font-display), "DM Sans", system-ui, sans-serif;
+  font-family: "Kalice", Georgia, serif;
   font-size: 1.35rem;
   margin-top: 1.75rem;
   margin-bottom: 0.5rem;
@@ -121,13 +222,12 @@ body {
 /* Display face stands in for Kalice Trial (licensed); Fraunces is the closest
    free serif at the 56px/68px headline size the design uses. */
 .font-kalice {
-  font-family: var(--font-display), "Fraunces", Georgia, serif;
-  font-optical-sizing: auto;
+  font-family: "Kalice", Georgia, "Times New Roman", serif;
 }
 
 /* Kalice headline: 56px / 68px / +1px tracking */
 .h-display {
-  font-family: var(--font-display), "Fraunces", Georgia, serif;
+  font-family: "Kalice", Georgia, "Times New Roman", serif;
   font-size: 56px;
   line-height: 68px;
   letter-spacing: 1px;

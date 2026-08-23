@@ -1,22 +1,8 @@
 import type { Metadata } from "next";
-import { Inter, Fraunces, Manrope } from "next/font/google";
+import { Manrope } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-// Stands in for Kalice Trial (licensed) as the display serif.
-const fraunces = Fraunces({
-  variable: "--font-display",
-  subsets: ["latin"],
-  display: "swap",
-  axes: ["SOFT", "WONK", "opsz"],
-});
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -113,7 +99,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${fraunces.variable} ${manrope.variable} h-full`}
+      className={`${manrope.variable} h-full`}
     >
       <body className="min-h-full flex flex-col bg-[var(--cream)] text-[var(--ink)]">
         <script
