@@ -24,7 +24,7 @@ export function SplitBand({
 
   return (
     <section
-      className={`flex w-full items-start justify-center overflow-clip ${
+      className={`flex w-full flex-col items-start justify-center overflow-clip md:flex-row ${
         dark ? "bg-[var(--ink)]" : "bg-[var(--cream)]"
       }`}
     >

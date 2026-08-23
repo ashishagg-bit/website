@@ -184,7 +184,7 @@ export function TileGrid({
             <>
               <div className="flex w-full flex-col gap-4">
                 <p className="eyebrow tile-eyebrow">Service · {t.n}</p>
-                <h3 className="font-kalice text-[34px] leading-[44px] tracking-[1px]">
+                <h3 className="font-kalice hyphens-auto break-words text-[clamp(1.75rem,1.3rem+0.9vw,34px)] leading-[1.29] tracking-[1px]">
                   {t.title}
                 </h3>
               </div>
