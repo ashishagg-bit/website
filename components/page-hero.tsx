@@ -26,7 +26,10 @@ export function PageHero({
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={image} alt="" className="absolute inset-0 size-full object-cover" />
         <div className="absolute inset-0 bg-[rgba(254,181,91,0.2)] mix-blend-soft-light" />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(21,32,50,0.1)_31%,rgba(21,32,50,0.85)_100%)]" />
+        {/* The frame keeps the photograph bright: a light vertical fall-off plus a
+            soft wash from the left, which is where the copy sits. */}
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(21,32,50,0)_18%,rgba(21,32,50,0.55)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(21,32,50,0.5)_0%,rgba(21,32,50,0.12)_45%,transparent_70%)]" />
       </div>
 
       <div className="relative flex w-full max-w-[725px] flex-col items-start justify-end gap-6">
