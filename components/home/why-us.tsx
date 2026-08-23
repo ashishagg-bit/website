@@ -10,17 +10,17 @@ export function WhyUs() {
       <div aria-hidden className="pointer-events-none absolute inset-0">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/images/scraped/Ok6cd4z826F0Gks9sFfcGFjFzY.jpg"
+          src="/images/scraped/1VMNJeKjBpsJmP9YWwhXyzKSvA.jpg"
           alt=""
           className="absolute inset-0 size-full scale-110 object-cover"
         />
         <div className="absolute inset-0 bg-[rgba(254,181,91,0.2)] mix-blend-soft-light" />
-        {/* Design uses a multiply gradient; a plain scrim is used here so the
-            white copy keeps contrast over the lighter stand-in photograph. */}
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(21,32,50,0.3)_0%,rgba(21,32,50,0.62)_50%,rgba(21,32,50,0.3)_100%)]" />
+        {/* The frame keeps the photograph warm and bright, so the scrim stays
+            light; legibility comes from a soft shadow on the copy instead. */}
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(21,32,50,0.18)_0%,rgba(21,32,50,0.46)_50%,rgba(21,32,50,0.18)_100%)]" />
       </div>
 
-      <div className="relative flex flex-col items-center justify-center gap-4">
+      <div className="relative flex flex-col items-center justify-center gap-4 [text-shadow:0_1px_18px_rgba(21,32,50,0.55)]">
         <div className="flex flex-col items-center justify-center gap-3 text-center text-white">
           <p className="eyebrow !text-white">OUR PROMISE</p>
           <h2 className="font-kalice text-[clamp(2rem,1.2rem+2.6vw,3.5rem)] leading-[1.21] tracking-[1px]">
