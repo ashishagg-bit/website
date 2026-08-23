@@ -1,6 +1,18 @@
 import { Display, OutlineButton } from "@/components/ui";
 import { testimonials } from "@/lib/home-content";
 
+/** Google mark — Figma node 1:78. */
+function GoogleMark() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 48 48" aria-hidden className="shrink-0">
+      <path fill="#4285F4" d="M45.1 24.5c0-1.6-.1-2.8-.4-4H24v7.3h12.1c-.2 1.9-1.6 4.9-4.5 6.8l6.9 5.4c4.1-3.8 6.6-9.4 6.6-15.5z" />
+      <path fill="#34A853" d="M24 46c5.9 0 10.9-2 14.5-5.3l-6.9-5.4c-1.9 1.3-4.4 2.2-7.6 2.2-5.8 0-10.7-3.8-12.5-9.700L4.4 32.5C8 39.6 15.4 46 24 46z" />
+      <path fill="#FBBC05" d="M11.5 27.8c-.5-1.4-.8-2.8-.8-4.3s.3-3 .7-4.3l-7.1-5.5C2.8 16.6 2 20.2 2 23.5s.8 6.9 2.3 9.8l7.2-5.5z" />
+      <path fill="#EA4335" d="M24 10.2c4.1 0 6.9 1.8 8.5 3.3l6.2-6C34.9 4 29.9 2 24 2 15.4 2 8 8.4 4.4 14.5l7.1 5.5C13.3 14 18.2 10.2 24 10.2z" />
+    </svg>
+  );
+}
+
 function Stars({ className = "" }: { className?: string }) {
   return (
     <div className={`flex gap-0.5 text-[15px] text-[#ffcf82] ${className}`} aria-label="5 out of 5 stars">
@@ -13,11 +25,13 @@ function Stars({ className = "" }: { className?: string }) {
   );
 }
 
-/** Initial-avatar stand-in — the design uses photo avatars we can't export. */
-function Avatar({ name }: { name: string }) {
+/** Reviewer photo. The frame uses portrait avatars; these are the nearest
+    available images until the design's own are exported. */
+function Avatar({ src, name }: { src: string; name: string }) {
   return (
-    <span className="flex size-14 shrink-0 items-center justify-center rounded-full bg-[var(--sky)] font-kalice text-lg text-[var(--ink)]">
-      {name.charAt(0)}
+    <span className="size-14 shrink-0 overflow-hidden rounded-full bg-[var(--sky)]">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={src} alt={name} className="size-full object-cover" />
     </span>
   );
 }
@@ -27,11 +41,13 @@ function Card({
   name,
   when,
   image,
+  avatar,
 }: {
   quote: string;
   name: string;
   when: string;
   image?: string;
+  avatar: string;
 }) {
   return (
     <figure className="flex w-full break-inside-avoid flex-col overflow-clip rounded-2xl bg-white">
@@ -52,12 +68,12 @@ function Card({
             {quote}
           </blockquote>
         </div>
-        <figcaption className="flex items-center gap-1.5">
-          <Avatar name={name} />
-          <div className="flex flex-1 flex-col gap-1.5 pl-2 text-lg">
+        <figcaption className="flex items-center gap-3">
+          <div className="flex flex-1 flex-col gap-1 text-lg">
             <span className="text-[var(--ink)]">{name}</span>
             <span className="text-sm text-[var(--ink-60)]">{when}</span>
           </div>
+          <Avatar src={avatar} name={name} />
         </figcaption>
       </div>
     </figure>
@@ -78,6 +94,7 @@ export function Testimonials({ items = testimonials }: { items?: typeof testimon
           </Display>
         </div>
         <div className="flex items-center justify-center gap-3">
+          <GoogleMark />
           <span className="text-base text-[var(--ink-80)]">Google Reviews</span>
           <Stars />
           <span className="font-kalice text-lg text-[var(--ink)]">5.0</span>

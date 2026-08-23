@@ -25,8 +25,8 @@ export function ClosingCta({
       <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-[671px]">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={image} alt="" className="absolute inset-0 size-full object-cover" />
-        <div className="absolute inset-0 bg-[rgba(254,181,91,0.6)] mix-blend-soft-light" />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(17,24,34,0.35)_0%,rgba(17,24,34,0.75)_50%,var(--dark)_100%)]" />
+        <div className="absolute inset-0 bg-[rgba(254,181,91,0.45)] mix-blend-soft-light" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(17,24,34,0.08)_0%,rgba(17,24,34,0.55)_46%,var(--dark)_100%)]" />
       </div>
 
       <div className="relative flex w-full flex-col items-center justify-center gap-12 px-6 sm:px-14 lg:gap-[50px]">

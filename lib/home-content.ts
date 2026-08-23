@@ -150,37 +150,43 @@ export const testimonials = [
     quote:
       "Dr. Ishaaya is the most thorough, attentive physician I've ever seen. He takes the time to listen and explain — I finally feel heard. The office is beautiful and the staff treat you like family.",
     name: "Sandra M.",
+    avatar: "/images/scraped/1VMNJeKjBpsJmP9YWwhXyzKSvA.jpg",
     when: "2 months ago",
   },
   {
     quote:
       "From the sleep study to follow-up care, every step was handled with care and clear communication. The team here is top-tier.",
     name: "David A.",
+    avatar: "/images/scraped/V2qDs1D0pO2ja4K49KWNNzfDHe0.png",
     when: "5 months ago",
   },
   {
     quote:
       "A truly personalized approach to wellness. Dr. Ishaaya caught something three other doctors missed. Forever grateful.",
     name: "Rachel T.",
+    avatar: "/images/scraped/NNYb6EQUA1mNgpJztWHgD74Qa5Q.jpg",
     when: "1 month ago",
-    image: "/images/scraped/2mlNIbjadwhQWpJGw7OmBIMeTBQ.jpg",
+    image: "/images/scraped/qpI5vBIDT7Q6ptU0HElINibug.webp",
   },
   {
     quote:
       "Concierge-level service with real medicine behind it. Dr. Ishaaya is exceptionally knowledgeable and genuinely kind.",
     name: "Priya R.",
+    avatar: "/images/scraped/Rf04pBe6rnVQfH4IqhWEgHbAP4.webp",
     when: "4 months ago",
   },
   {
     quote:
       "Best pulmonologist in Los Angeles, hands down. Helped me manage a long-standing breathing issue with real answers rather than quick fixes. Highly recommend the VIP program.",
     name: "Jonathan K.",
+    avatar: "/images/scraped/O5Yo4TB5KdO02Lqh2k4DgSSq0.webp",
     when: "3 months ago",
   },
   {
     quote:
       "The Platinum VIP plan is worth every penny. Rapid appointments, advanced diagnostics, and a doctor who treats you as a whole person.",
     name: "Mark E.",
+    avatar: "/images/scraped/piPOUcGww89HYaJTpCR7kEFYeLk.webp",
     when: "6 months ago",
   },
 ];
@@ -190,10 +196,13 @@ export const space = {
   eyebrow: "OUr space",
   title: "A New Era of Care",
   body: "Relocated in 2024 after 30+ years as an independent practice, our spacious, calming, and beautifully designed space redefines the medical experience—where comfort meets cutting-edge care.",
+  /** Reception desk behind the copy — the frame's header-static image. */
+  backdrop: "/images/scraped/4FVQUutQWdB7NtLwRY17tioTIY0.jpg",
+  /** Waiting area · hallway · treatment room. The middle one runs wider. */
   images: [
-    "/images/scraped/Ok6cd4z826F0Gks9sFfcGFjFzY.jpg",
-    "/images/scraped/48cUzxZLj1fsBF3sPX6ycI0y0jc.jpg",
     "/images/scraped/41W4msn8A5xW2nbNOonFypPQ.jpg",
+    "/images/scraped/vJcCoQOaSPFFb1mZKUNODZviiw.jpg",
+    "/images/scraped/48cUzxZLj1fsBF3sPX6ycI0y0jc.jpg",
   ],
 };
 

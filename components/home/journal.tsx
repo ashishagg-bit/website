@@ -18,10 +18,14 @@ export function Journal({ posts }: { posts: Post[] }) {
         <OutlineButton href="/blog">Read all articles →</OutlineButton>
       </header>
 
-      <div className="grid w-full max-w-[1328px] gap-8 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid w-full max-w-[1328px] md:grid-cols-2 lg:grid-cols-3">
         {posts.map((post) => (
-          <Link key={post.slug} href={`/blog/${post.slug}`} className="group flex flex-col gap-6">
-            <div className="relative h-[360px] overflow-clip rounded-2xl lg:h-[500px]">
+          <Link
+            key={post.slug}
+            href={`/blog/${post.slug}`}
+            className="group flex flex-col gap-6 border-[rgba(21,32,50,0.12)] px-0 md:px-8 md:first:pl-0 lg:[&:not(:last-child)]:border-r"
+          >
+            <div className="relative aspect-[4/5] overflow-clip rounded-lg">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={post.image}
@@ -33,9 +37,9 @@ export function Journal({ posts }: { posts: Post[] }) {
                 className="absolute inset-0 bg-[rgba(254,181,91,0.2)] mix-blend-soft-light"
               />
             </div>
-            <div className="flex flex-col gap-3 pr-10">
-              <p className="text-sm text-[var(--ink-60)]">
-                Avi Ishaaya · {post.date}
+            <div className="flex flex-col gap-3">
+              <p className="eyebrow !text-[11px] !tracking-[0.14em] text-[var(--ink-60)]">
+                {post.author} · {post.date}
               </p>
               <h3 className="font-kalice text-2xl leading-8 tracking-[1px] text-[var(--ink)] group-hover:text-[var(--blue)]">
                 {post.title}

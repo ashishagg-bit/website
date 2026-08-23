@@ -11,7 +11,7 @@ export function Space() {
       <div aria-hidden className="absolute inset-x-0 top-0 h-[671px]">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={space.images[0]}
+          src={space.backdrop}
           alt=""
           className="absolute inset-0 size-full object-cover"
         />
@@ -32,14 +32,14 @@ export function Space() {
         <BlueButton href="/contact">Schedule a Consultation</BlueButton>
       </div>
 
-      {/* locations row — fill / 590 / fill */}
-      <div className="relative mt-12 flex w-full items-center justify-center gap-2.5 overflow-clip px-6 pb-16 sm:px-14 sm:pb-20">
-        <div className="grid w-full max-w-[1328px] gap-2.5 md:grid-cols-3">
+      {/* locations row — the middle frame is 590px wide, the outer two fill */}
+      <div className="relative mt-12 flex w-full items-center justify-center overflow-clip px-6 pb-16 sm:px-14 sm:pb-20">
+        <div className="flex w-full max-w-[1328px] flex-col gap-2.5 md:flex-row">
           {[wide, tall, third].map((src, i) => (
             <div
               key={src}
-              className={`relative h-[260px] overflow-clip rounded-2xl lg:h-[400px] ${
-                i === 1 ? "md:col-span-1" : ""
+              className={`relative h-[260px] overflow-clip rounded-lg lg:h-[400px] ${
+                i === 1 ? "md:w-[590px] md:shrink-0" : "md:flex-1 md:min-w-0"
               }`}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}

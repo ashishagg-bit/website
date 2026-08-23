@@ -8,12 +8,19 @@ export type Post = {
   date: string;
   rawDate: Date;
   excerpt: string;
+  author: string;
   body: string;
   gradient: string;
   image: string;
 };
 
 const POSTS_DIR = path.join(process.cwd(), "content/blog");
+
+/** Bylines as shown in the Figma blog row (node 1:2382). */
+const AUTHORS: Record<string, string> = {
+  "micronutrients-the-essential-building-blocks-of-optimal-health": "the healing dawn",
+};
+const DEFAULT_AUTHOR = "Avi Ishaaya";
 
 const GRADIENTS = [
   "from-rose-100 via-amber-50 to-emerald-100",
@@ -73,6 +80,7 @@ export function getAllPosts(): Post[] {
       date: fmtDate(rawDate),
       rawDate,
       excerpt: data.excerpt as string,
+      author: AUTHORS[slug] ?? DEFAULT_AUTHOR,
       body: content,
       gradient: GRADIENTS[i % GRADIENTS.length],
       image: SLUG_IMAGE_MAP[slug] || IMAGES_FALLBACK[i % IMAGES_FALLBACK.length],
