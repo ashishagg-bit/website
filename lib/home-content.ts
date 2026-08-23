@@ -12,22 +12,22 @@ export const methodItems = [
   {
     title: "Piecing Together Your Health",
     body: "We understand that optimal health emerges when each aspect of your wellbeing is functioning at its best - like pieces of a puzzle coming together to create a complete picture of health.",
-    image: "/images/scraped/piPOUcGww89HYaJTpCR7kEFYeLk.webp",
+    image: "/images/scraped/Rf04pBe6rnVQfH4IqhWEgHbAP4.webp",
   },
   {
     title: "Dimensions of Wholeness",
     body: "As spiritual beings in a physical world, true wellness thrives when we nurture every aspect of our existence — body, mind, and spirit. Each element is vital to your unique wellness journey.",
-    image: "/images/scraped/4FVQUutQWdB7NtLwRY17tioTIY0.jpg",
+    image: "/images/scraped/O5Yo4TB5KdO02Lqh2k4DgSSq0.webp",
   },
   {
     title: "Your Unique Health Puzzle",
     body: "Your health journey is uniquely yours. We develop personalized care plans that cater to your specific needs, as standardized methods can't address the complexity of individual wellness.",
-    image: "/images/scraped/vJcCoQOaSPFFb1mZKUNODZviiw.jpg",
+    image: "/images/scraped/NNYb6EQUA1mNgpJztWHgD74Qa5Q.jpg",
   },
   {
     title: "Partnership in Transformation",
     body: "At Dr. Avi Ishaaya Centers, we support you on your journey to lasting health transformation, offering the expertise and guidance needed to connect all pieces of your wellness puzzle.",
-    image: "/images/scraped/VfRH12CL491NDPBxF2q2K2kyP1w.jpg",
+    image: "/images/scraped/1VMNJeKjBpsJmP9YWwhXyzKSvA.jpg",
   },
 ];
 

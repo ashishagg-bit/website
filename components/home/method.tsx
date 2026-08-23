@@ -21,14 +21,14 @@ export function Method() {
             key={item.title}
             className="flex w-[320px] shrink-0 snap-start flex-col gap-6 sm:w-[400px]"
           >
-            <div className="relative h-[420px] overflow-clip rounded-3xl sm:h-[500px]">
+            <div className="relative h-[420px] overflow-clip rounded-lg sm:h-[500px]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={item.image}
                 alt=""
                 className="absolute inset-0 size-full object-cover"
               />
-              <div aria-hidden className="puzzle-wash absolute inset-0" />
+              <div aria-hidden className="puzzle-lines absolute inset-0" />
             </div>
             <div className="flex flex-col gap-2 pr-10">
               <h3 className="text-lg leading-6 text-[var(--ink)]">{item.title}</h3>
