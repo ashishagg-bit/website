@@ -132,7 +132,7 @@ export const physician = {
   title: "Meet Dr. Abraham “Avi” Ishaaya",
   blurb:
     "Dr. Ishaaya is a distinguished board-certified physician specializing in pulmonary, sleep, internal, and geriatric medicine.",
-  image: "/images/scraped/H7UrHayerIUtTsCZGEBgPaXM.png",
+  image: "/images/scraped/piPOUcGww89HYaJTpCR7kEFYeLk.webp",
   points: [
     {
       title: "Our Expertise",

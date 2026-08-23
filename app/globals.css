@@ -278,3 +278,45 @@ body {
   opacity: 0;
   margin-top: 0;
 }
+
+/* Promise card 01 in the frame is a blue field with fine grain and a soft
+   light fall-off, not a geometric pattern. */
+.promise-grain {
+  background-image:
+    radial-gradient(120% 90% at 78% 12%, rgba(255, 255, 255, 0.42) 0%, transparent 58%),
+    radial-gradient(90% 80% at 15% 95%, rgba(12, 42, 110, 0.38) 0%, transparent 60%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  background-size: 100% 100%, 100% 100%, 180px 180px;
+  mix-blend-mode: soft-light;
+}
+
+/* Open promise: number and title sit together at the top, body drops to the
+   bottom. Collapsed: number top, title bottom. */
+.tab.promise .promise-title { margin-top: auto; }
+.tabrow > .tab[data-open].promise .promise-title { margin-top: 0; }
+.tabrow:hover > .tab[data-open]:not(:hover).promise .promise-title { margin-top: auto; }
+.tabrow > .tab.promise:hover .promise-title { margin-top: 0; }
+.tab.promise .promise-body { margin-top: auto; }
+
+/* "Meet your physician" points — an accordion separated by hairlines, with the
+   open row showing its body (Figma 1:1776). Same open-follows-cursor rule. */
+.acc > .acc-row { border-top: 1px solid rgba(21, 32, 50, 0.12); }
+.acc > .acc-row:first-child { border-top: 0; }
+.acc .acc-body {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.45s ease, opacity 0.45s ease, margin-top 0.45s ease;
+  margin-top: 0;
+}
+.acc > .acc-row[data-open] .acc-body,
+.acc > .acc-row:hover .acc-body {
+  max-height: 16rem;
+  opacity: 1;
+  margin-top: 0.5rem;
+}
+.acc:hover > .acc-row[data-open]:not(:hover) .acc-body {
+  max-height: 0;
+  opacity: 0;
+  margin-top: 0;
+}

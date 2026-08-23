@@ -31,7 +31,7 @@ export function Hero() {
               <div className="relative flex h-[170px] items-center justify-center overflow-clip bg-[var(--ink)]/90">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/images/scraped/piPOUcGww89HYaJTpCR7kEFYeLk.webp"
+                  src="/images/scraped/H7UrHayerIUtTsCZGEBgPaXM.png"
                   alt=""
                   className="absolute inset-0 size-full object-cover opacity-80"
                 />

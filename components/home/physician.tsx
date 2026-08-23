@@ -6,7 +6,7 @@ export function Physician() {
   return (
     <section className="relative z-[1] -mt-6 flex w-full justify-center overflow-clip rounded-t-3xl bg-white px-6 pb-16 pt-16 sm:px-14 sm:pb-20 sm:pt-[120px]">
       <div className="flex w-full max-w-[1328px] flex-col items-start gap-12 lg:flex-row lg:gap-20">
-        <div className="relative h-[420px] w-full shrink-0 overflow-clip rounded-2xl lg:h-[700px] lg:flex-1">
+        <div className="relative h-[420px] w-full shrink-0 overflow-clip rounded-lg lg:h-[700px] lg:flex-1">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={physician.image}
@@ -35,12 +35,16 @@ export function Physician() {
             <BlueButton href="/contact">Schedule a Consultation</BlueButton>
           </div>
 
-          <div className="flex w-full flex-col gap-6">
-            {physician.points.map((p) => (
-              <div key={p.title} className="flex w-full flex-col gap-2">
+          <div className="acc flex w-full flex-col">
+            {physician.points.map((p, i) => (
+              <div
+                key={p.title}
+                {...(i === 0 ? { "data-open": "" } : {})}
+                className="acc-row flex w-full flex-col py-5"
+              >
                 <h3 className="text-lg leading-6 text-[var(--ink)]">{p.title}</h3>
                 {p.body && (
-                  <p className="text-base leading-[22px] text-[var(--ink-60)]">
+                  <p className="acc-body text-base leading-[22px] text-[var(--ink-60)]">
                     {p.body}
                   </p>
                 )}

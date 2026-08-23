@@ -38,27 +38,26 @@ export function Promises() {
           >
             <div
               aria-hidden
-              className="puzzle-wash on-open pointer-events-none absolute inset-0 !opacity-30"
+              className="promise-grain on-open pointer-events-none absolute inset-0"
             />
 
             <p className="promise-num relative font-kalice text-2xl leading-8 tracking-[1px]">
               {p.n}
             </p>
 
-            <div className="relative flex w-full flex-col gap-4">
-              <h3 className="promise-title font-kalice tracking-[1px] text-white">
-                {p.title.map((line) => (
-                  <span key={line} className="block">
-                    {line}
-                  </span>
-                ))}
-              </h3>
-              {p.body && (
-                <p className="promise-body max-w-[420px] text-base leading-6 text-white/80">
-                  {p.body}
-                </p>
-              )}
-            </div>
+            <h3 className="promise-title relative w-full pt-4 font-kalice tracking-[1px] text-white">
+              {p.title.map((line) => (
+                <span key={line} className="block">
+                  {line}
+                </span>
+              ))}
+            </h3>
+
+            {p.body && (
+              <p className="promise-body relative max-w-[420px] text-base leading-6 text-white/80">
+                {p.body}
+              </p>
+            )}
           </div>
         ))}
       </div>
