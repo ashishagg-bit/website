@@ -5,7 +5,14 @@ const HAIRLINE = "border-[rgba(21,32,50,0.1)]";
 
 function Check() {
   return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden className="shrink-0">
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      aria-hidden
+      className="shrink-0 text-[var(--blue)]"
+    >
       <path
         d="M5 12.5l4.5 4.5L19 7"
         stroke="currentColor"
@@ -110,15 +117,15 @@ export function Conditions({
           <li
             key={c.name}
             {...(i === restsOn ? { "data-open": "" } : {})}
-            className="cond flex flex-col rounded-2xl p-2"
+            className="cond flex flex-col rounded-lg p-2"
           >
             <div className="flex items-center gap-3">
-              <span className="flex size-[55px] shrink-0 items-center justify-center rounded-lg bg-[linear-gradient(135deg,rgba(255,255,255,0.22),rgba(51,118,235,0.5))] font-kalice text-xl text-white">
+              {/* The frame uses a small illustrated tile here; this gradient
+                  chip stands in until those icons can be exported. */}
+              <span className="flex size-12 shrink-0 items-center justify-center rounded-md bg-[linear-gradient(135deg,rgba(255,255,255,0.22),rgba(51,118,235,0.55))] font-kalice text-base text-white">
                 {c.name.charAt(0)}
               </span>
-              <span className="pr-2 text-base leading-[22px] text-white">
-                {c.name}
-              </span>
+              <span className="pr-2 text-sm leading-5 text-white">{c.name}</span>
             </div>
 
             {c.details && c.details.length > 0 && (
