@@ -2,16 +2,6 @@ import { BlueButton, OutlineButton } from "@/components/ui";
 import { featuredIn } from "@/lib/home-content";
 import { PuzzleHead } from "@/components/puzzle-head";
 
-/** Play glyph standing in for the SF Symbol `play.circle.fill` (I64:10192;57:9783). */
-function PlayCircle() {
-  return (
-    <svg width="34" height="34" viewBox="0 0 24 24" fill="none" aria-hidden>
-      <circle cx="12" cy="12" r="11" fill="white" fillOpacity="0.92" />
-      <path d="M10 8.5v7l6-3.5-6-3.5z" fill="var(--ink)" />
-    </svg>
-  );
-}
-
 /**
  * Hero — Figma node 64:10192. The nav and announcement bar live in SiteHeader,
  * which shares this frame in the design.
@@ -28,12 +18,16 @@ export function Hero() {
           {/* Left column: card at the top, copy pinned toward the bottom */}
           <div className="flex flex-col lg:h-full">
             <div className="relative w-[300px] max-w-full overflow-clip rounded-2xl">
-              <div className="relative flex h-[170px] items-center justify-center overflow-clip bg-[var(--ink)]/90">
+              <div className="relative flex h-[170px] items-center justify-center overflow-clip">
+                {/* Flattened export of Figma I64:10192;57:9755 — the two-man
+                    video still with grain texture and play glyph baked in. */}
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/images/scraped/H7UrHayerIUtTsCZGEBgPaXM.png"
+                  src="/images/figma/video-thumb.jpg"
                   alt=""
-                  className="absolute inset-0 size-full object-cover opacity-80"
+                  width={600}
+                  height={340}
+                  className="absolute inset-0 size-full object-cover"
                 />
                 {/* Two 60px discs straddling the left and right edges, centred
                     on the photo — Figma I64:10192;57:9786 / 57:9787. */}
@@ -45,9 +39,6 @@ export function Hero() {
                   aria-hidden
                   className="absolute left-[270px] top-1/2 size-[60px] -translate-y-1/2 rounded-full bg-[var(--cream)]"
                 />
-                <span className="relative">
-                  <PlayCircle />
-                </span>
               </div>
               <div className="flex w-full items-center justify-center bg-[var(--sky)] px-4 py-3.5">
                 <p className="font-kalice flex-1 text-[15px] leading-[1.32] tracking-[0.3px] text-[var(--ink)]">
