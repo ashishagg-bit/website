@@ -23,10 +23,21 @@ export async function POST(req: NextRequest) {
 
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
-    // Allow build/dev without crashing — log and accept the submission.
-    console.warn("[contact] RESEND_API_KEY not configured; logging submission only.");
-    console.log({ name, email, phone, reason, existing, message });
-    return NextResponse.json({ ok: true, queued: true });
+    // In development, log the submission and accept it so the form can be
+    // exercised without credentials.
+    if (process.env.NODE_ENV !== "production") {
+      console.warn("[contact] RESEND_API_KEY not set; logging submission only.");
+      console.log({ name, email, phone, reason, existing, message });
+      return NextResponse.json({ ok: true, queued: true });
+    }
+    // In production, never report success we cannot deliver on: answering
+    // "ok" here would show the patient a confirmation while the enquiry went
+    // nowhere. Fail loudly so the misconfiguration surfaces instead.
+    console.error("[contact] RESEND_API_KEY missing in production; rejecting.");
+    return NextResponse.json(
+      { error: "The form is temporarily unavailable. Please call (323) 954-1788." },
+      { status: 503 },
+    );
   }
 
   const to = process.env.CONTACT_TO_EMAIL || "info@aviishaaya.com";

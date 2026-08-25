@@ -14,7 +14,9 @@ export function ContactForm() {
     const fd = new FormData(e.currentTarget);
     const payload = Object.fromEntries(fd.entries());
     try {
-      const r = await fetch("/api/contact", {
+      const r = await fetch("/api/contact/", {
+        // Trailing slash matches `trailingSlash: true`; without it the POST
+        // takes a 308 hop before reaching the handler.
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

@@ -1,11 +1,14 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // The site is deployed as plain static files (drag-and-drop to any host),
-  // so every route is prerendered into `out/` at build time.
-  output: "export",
-  // Emit `about/index.html` rather than `about.html` so the export works on
-  // hosts that do not rewrite extensionless URLs.
+  // Pages are still prerendered at build time — the difference from
+  // `output: "export"` is that route handlers survive the build. The contact
+  // form posts to /api/contact, and a static export drops that route on the
+  // floor, so every submission 404s and the form reports "Submission failed".
+  //
+  // If this ever needs to go back to a portable folder of static files, add
+  // `output: "export"` here and move the form to a hosted form endpoint —
+  // the two cannot both be true.
   trailingSlash: true,
   images: { unoptimized: true },
 };
