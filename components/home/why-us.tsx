@@ -14,7 +14,7 @@ export function WhyUs() {
           decoding="async"
           src="/images/figma/why-us-bg.jpg"
           alt=""
-          className="absolute inset-0 size-full scale-110 object-cover"
+          className="absolute inset-0 size-full object-cover"
         />
         <div className="absolute inset-0 bg-[rgba(254,181,91,0.2)] mix-blend-soft-light" />
         {/* The frame keeps the photograph warm and bright, so the scrim stays
