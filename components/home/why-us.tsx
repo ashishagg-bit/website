@@ -70,6 +70,17 @@ export function WhyUs() {
       className="relative flex h-[560px] w-full flex-col items-center justify-center gap-20 overflow-clip bg-white px-6 py-20 sm:px-14 lg:h-[800px] lg:py-[120px]"
     >
       <div aria-hidden className="pointer-events-none absolute inset-0">
+        {/* Base layer. The sequence frames sit on top of it, so if any of them
+            fail to load the section still shows the resolved photograph rather
+            than an empty scrim. */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/figma/why-us-bg.jpg"
+          alt=""
+          loading="eager"
+          decoding="async"
+          className="absolute inset-0 size-full object-cover"
+        />
         {whyUsStates.map((s, i) => (
           /* eslint-disable-next-line @next/next/no-img-element */
           <img
