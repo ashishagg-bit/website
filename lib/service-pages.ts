@@ -165,7 +165,9 @@ export const cardiovascular: ServicePageData = {
             ],
           },
           {
+            // Node 103:30987 — the card the frame captures open.
             name: "Congestive Heart Failure",
+            open: true,
             details: [
               { label: "Symptoms", value: "Shortness of breath, fatigue, swelling in legs/ankles" },
               { label: "Risk", value: "Previous heart attack, hypertension, diabetes" },
@@ -287,7 +289,9 @@ export const sleep: ServicePageData = {
   approach: {
     title: APPROACH_TITLE,
     paragraphs: [
-      "Dr. Avi Ishaaya, a board-certified sleep specialist, brings over 30 years of experience in treating sleep disorders. Our center offers expert diagnosis and treatment across the full range of sleep conditions.",
+      "Quality sleep isn\u2019t just a luxury \u2013 it\u2019s essential for your emotional, mental, physical, and spiritual wellbeing. When sleep problems arise, they can affect every aspect of your life, from your daily performance to your long-term health.",
+      "At the Dr. Avi Ishaaya Centers in Beverly Hills, we understand that each patient\u2019s sleep challenges are unique, which is why we provide comprehensive, personalized care to help you achieve the restful sleep you deserve.",
+      "Dr. Avi Ishaaya, a board-certified sleep specialist, brings over 30 years of experience in treating sleep disorders. Our center offers expert evaluation and treatment for patients experiencing:",
     ],
     // The frame lists the symptoms worth getting evaluated, not differentiators.
     bullets: [
@@ -305,6 +309,7 @@ export const sleep: ServicePageData = {
   conditions: [
     { name: "Obstructive Sleep Apnea (OSA)" },
     { name: "Insomnia" },
+    { name: "Narcolepsy" },
     { name: "Restless Leg Syndrome" },
   ],
   diagnostics: {
@@ -345,7 +350,7 @@ export const allergy: ServicePageData = {
   approach: {
     title: APPROACH_TITLE,
     paragraphs: [
-      "Comprehensive Testing Services. Why Get Tested? Our Testing Process — from identifying the trigger to building a plan that removes it, every step happens in one place.",
+      "Identifying allergens will allow you to eliminate potential triggers that may cause your allergy related symptoms. Likewise, identifying various sensitivities can potentially eliminate inflammation; weight issues; respiratory, skin, and gastrointestinal disorders; and more.",
     ],
     bullets: [
       "Board-certified physician",
@@ -394,7 +399,8 @@ export const wellness: ServicePageData = {
   approach: {
     title: APPROACH_TITLE,
     paragraphs: [
-      "From foundational annual exams to advanced longevity diagnostics like full-body MRI and telomere testing, our preventive program is designed around the picture of health you want to build.",
+      "Wellness and prevention are where each piece connects to form the complete picture of how you can attain your optimal wellbeing. By working holistically, we can consider the full picture of your physical, mental, emotional, and spiritual health, and provide patient-centered care that identifies the root causes of illnesses.",
+      "From foundational annual exams to advanced longevity diagnostics like full-body MRI and telomere testing, our preventive program is designed for patients who want more than reactive medicine.",
     ],
     bullets: [],
   },
@@ -419,8 +425,8 @@ export const wellness: ServicePageData = {
       },
       {
         n: "04",
-        title: "Microbiome Analysis",
-        blurb: "The Hidden Key to Optimal Health.",
+        title: "Telomere Testing",
+        blurb: "Understanding Your Biological Age & Longevity Potential.",
       },
       {
         n: "05",
@@ -429,8 +435,8 @@ export const wellness: ServicePageData = {
       },
       {
         n: "06",
-        title: "Telomere Testing",
-        blurb: "Understanding Your Biological Age & Longevity Potential.",
+        title: "Microbiome Analysis",
+        blurb: "The Hidden Key to Optimal Health.",
       },
       {
         n: "07",

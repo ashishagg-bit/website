@@ -1,9 +1,7 @@
 import { Metadata } from "next";
-import { PageHero } from "@/components/page-hero";
 import { ClosingCta } from "@/components/closing-cta";
-import Link from "next/link";
-import { Eyebrow, PrimaryButton, Reveal } from "@/components/ui";
-import { services, promises } from "@/lib/site-data";
+import { Testimonials } from "@/components/home/testimonials";
+import { featuredIn, homePromises, testimonials } from "@/lib/home-content";
 
 export const metadata: Metadata = {
   title: "About Dr. Avi Ishaaya",
@@ -12,54 +10,120 @@ export const metadata: Metadata = {
   alternates: { canonical: "/about/" },
 };
 
-const credentials = {
-  education: [
-    "Bachelor of Science (cum laude) — University of California, Los Angeles (UCLA)",
-    "Doctor of Medicine — University of Maryland, Baltimore",
-    "Internal Medicine Residency — Cedars-Sinai Medical Center, Beverly Hills",
-    "Pulmonary, Critical Care and Sleep Fellowship — Cedars-Sinai Medical Center",
-  ],
-  certifications: [
-    "American Board of Internal Medicine",
-    "American Board of Pulmonary Medicine",
-    "American Board of Sleep Medicine",
-    "American Board of Geriatrics",
-  ],
-};
+/** Figma 2147:4900 — the education list read as one block of copy. */
+const education = [
+  ["Bachelor of Science, cum laude", "University of California, Los Angeles (UCLA)"],
+  ["Doctor of Medicine", "University of Maryland, Baltimore"],
+  ["Internal Medicine Residency", "Cedars-Sinai Medical Center, Beverly Hills"],
+  ["Pulmonary, Critical Care and Sleep Fellowship", "Cedars-Sinai Medical Center"],
+];
 
+/** Figma 2147:5159 — a 2×2 hairline grid of board certifications. */
+const certifications = [
+  "American Board of Internal Medicine",
+  "American Board of Pulmonary Medicine",
+  "American Board of Sleep Medicine",
+  "American Board of Geriatrics",
+];
+
+const EDGE = "border-[rgba(255,255,255,0.06)]";
+
+function Check() {
+  return (
+    <svg
+      width="19"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.2"
+      aria-hidden
+      className="mt-0.5 shrink-0 text-[var(--blue)]"
+    >
+      <path d="M5 13l4 4L19 7" />
+    </svg>
+  );
+}
+
+/**
+ * About — Figma node 2147:3799.
+ *
+ * Cream hero with centred copy over a 1080×600 photograph, the press band, the
+ * "Meet Dr. Abraham 'Avi' Ishaaya" measure, the education split, board
+ * certifications, the five promises row and the reviews block.
+ */
 export default function AboutPage() {
   return (
     <>
-      <PageHero
-        eyebrow="About"
-        title={
-          <>
-            A practice built
+      {/* Hero — Figma 2147:4086 */}
+      <section className="w-full bg-[var(--cream)] px-6 pt-10 sm:px-14 lg:pt-[68px]">
+        <div className="mx-auto flex w-full max-w-[1328px] flex-col items-center gap-3 text-center">
+          <p className="eyebrow">Dr. Avi Ishaaya Center</p>
+          <h1 className="font-kalice text-[clamp(2.25rem,1.3rem+3vw,3.5rem)] leading-[1.21] tracking-[1px] text-[var(--ink)]">
+            Medicine rooted in experience.
             <br />
-            around you.
-          </>
-        }
-        image="/images/scraped/piPOUcGww89HYaJTpCR7kEFYeLk.webp"
-      />
+            Care built around you.
+          </h1>
+        </div>
+        <div className="relative mx-auto mt-12 aspect-[1080/600] w-full max-w-[1080px] overflow-clip rounded-2xl lg:mt-[72px]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/figma/why-us-bg.jpg"
+            alt=""
+            className="absolute inset-0 size-full object-cover"
+          />
+          <div
+            aria-hidden
+            className="absolute inset-0 bg-[rgba(254,181,91,0.2)] mix-blend-soft-light"
+          />
+        </div>
+      </section>
 
-      <section className="py-20 sm:py-28 bg-white border-y border-[var(--hairline)]">
-        <div className="mx-auto max-w-4xl px-5 sm:px-8">
-          <Eyebrow>About Dr. Ishaaya</Eyebrow>
-          <h2 className="font-kalice text-3xl text-[var(--ink)] mt-4 tracking-tight">
+      {/* Press band — Figma 2147:4118 */}
+      <section className="w-full bg-[var(--cream)] px-6 pb-12 pt-10 sm:px-14">
+        <div className="mx-auto flex w-full max-w-[1440px] flex-col items-center gap-6">
+          <p className="eyebrow text-[var(--ink-60)]">
+            Featured by top news stations
+          </p>
+          <ul className="flex w-full flex-wrap items-center justify-between gap-x-10 gap-y-6">
+            {featuredIn.map((p) => (
+              <li key={p.name} className="flex flex-1 items-center justify-center">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  loading="lazy"
+                  decoding="async"
+                  src={p.src}
+                  alt={p.name}
+                  width={p.w}
+                  height={p.h}
+                  style={{ width: p.w, height: p.h }}
+                  className="max-w-full object-contain"
+                />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* Meet Dr. Abraham "Avi" Ishaaya — Figma 2147:4637 */}
+      <section className="w-full bg-[var(--cream)] px-6 py-16 sm:px-14 lg:py-[120px]">
+        <div className="mx-auto flex w-full max-w-[868px] flex-col items-center text-center">
+          <p className="eyebrow">Meet Dr. Abraham &ldquo;Avi&rdquo; Ishaaya</p>
+          <h2 className="mt-[26px] font-kalice text-[clamp(2rem,1.2rem+2.6vw,3.5rem)] leading-[1.21] tracking-[1px] text-[var(--ink)]">
             Three decades of comprehensive, preventive care.
           </h2>
-          <div className="mt-8 space-y-5 text-[var(--ink)]/85 text-lg leading-relaxed">
+          <div className="mt-12 flex flex-col gap-6 text-left text-base leading-6 text-[var(--ink-80)] lg:mt-20">
             <p>
               Dr. Avi Ishaaya is a board-certified physician specializing in
-              pulmonary, sleep, internal, and geriatric medicine. As the
-              founder of Dr. Avi Ishaaya Centers in Beverly Hills, he has been
-              providing comprehensive and preventive healthcare since 1996.
+              pulmonary, sleep, internal, and geriatric medicine. As the founder
+              of Dr. Avi Ishaaya Centers in Beverly Hills, he has been providing
+              comprehensive and preventive healthcare since 1996.
             </p>
             <p>
               A respected assistant clinical professor at UCLA School of
               Medicine, Dr. Ishaaya is also a speaker, author, researcher, and
-              medical-legal expert, with appearances on television programs
-              like <em>The Doctors</em>.
+              medical-legal expert, with appearances on television programs like{" "}
+              <em>The Doctors</em>.
             </p>
             <p>
               His holistic approach integrates conventional and functional
@@ -72,153 +136,126 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-20 sm:py-28">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8 grid lg:grid-cols-2 gap-10">
-          <div>
-            <Eyebrow>Education</Eyebrow>
-            <h2 className="font-kalice text-3xl text-[var(--ink)] mt-4 tracking-tight">
-              Education &amp; Credentials
+      {/* Education split — Figma 2147:4652 */}
+      <section className="flex w-full flex-col overflow-clip bg-[var(--cream)] lg:flex-row">
+        <div className="flex w-full flex-col items-start px-6 py-16 sm:px-14 lg:h-[827px] lg:w-1/2 lg:justify-start lg:py-[120px] lg:pl-24 lg:pr-12">
+          <div className="flex w-full max-w-[528px] flex-col items-start">
+            <p className="eyebrow">Education and Credentials</p>
+            <h2 className="mt-7 font-kalice text-[clamp(2rem,1.2rem+2.6vw,3.5rem)] leading-[1.21] tracking-[1px] text-[var(--ink)]">
+              Dr. Ishaaya&rsquo;s medical training includes
             </h2>
-            <ul className="mt-8 space-y-4">
-              {credentials.education.map((e) => (
-                <li
-                  key={e}
-                  className="rounded-2xl border border-[var(--hairline)] bg-white p-5 text-[var(--ink)]"
-                >
-                  {e}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <Eyebrow>Certifications</Eyebrow>
-            <h2 className="font-kalice text-3xl text-[var(--ink)] mt-4 tracking-tight">
-              Board Certifications
-            </h2>
-            <ul className="mt-8 space-y-4">
-              {credentials.certifications.map((c) => (
-                <li
-                  key={c}
-                  className="rounded-2xl border border-[var(--hairline)] bg-white p-5 text-[var(--ink)] flex items-start gap-3"
-                >
-                  <span className="mt-0.5 text-[var(--blue)]">
-                    <svg
-                      width="18"
-                      height="18"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2.2"
-                    >
-                      <path d="M5 13l4 4L19 7" />
-                    </svg>
-                  </span>
-                  {c}
+            <ul className="mt-12 flex flex-col gap-7 lg:mt-20">
+              {education.map(([degree, school]) => (
+                <li key={degree} className="text-base leading-6">
+                  <span className="block text-[var(--ink)]">{degree}</span>
+                  <span className="block text-[var(--ink-60)]">{school}</span>
                 </li>
               ))}
             </ul>
           </div>
         </div>
+        <div className="relative h-[420px] w-full shrink-0 overflow-clip lg:h-[827px] lg:w-1/2">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            loading="lazy"
+            decoding="async"
+            src="/images/scraped/piPOUcGww89HYaJTpCR7kEFYeLk.webp"
+            alt="Dr. Avi Ishaaya"
+            className="absolute inset-0 size-full object-cover object-top"
+          />
+          <div
+            aria-hidden
+            className="absolute inset-0 bg-[rgba(254,181,91,0.2)] mix-blend-soft-light"
+          />
+        </div>
       </section>
 
-      <section className="py-20 sm:py-28 bg-[var(--ink)] text-white">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-[var(--sky)]">
-              <span className="block w-6 h-px bg-[var(--sky)]" />
-              Our Commitment to You
-            </div>
-            <h2 className="font-kalice text-3xl sm:text-4xl mt-4 tracking-tight">
-              Our Five Fundamental Promises
+      {/* Board certifications — Figma 2147:4906 */}
+      <section className="w-full bg-white px-6 py-16 sm:px-14 lg:py-[104px]">
+        <div className="mx-auto flex w-full max-w-[1280px] flex-col items-center text-center">
+          <p className="eyebrow">Board Certifications</p>
+          <h2 className="mt-3 font-kalice text-[clamp(2rem,1.2rem+2.6vw,3.5rem)] leading-[1.21] tracking-[1px] text-[var(--ink)]">
+            Dr. Ishaaya is board-certified by
+          </h2>
+          <ul className="mt-12 grid w-full max-w-[1000px] overflow-clip rounded-2xl border border-[var(--hairline)] sm:grid-cols-2">
+            {certifications.map((c, i) => (
+              <li
+                key={c}
+                className={`flex items-center gap-3 px-10 py-10 text-left text-base leading-6 text-[var(--ink)] ${
+                  i % 2 === 0 ? "sm:border-r" : ""
+                } ${i < 2 ? "border-b" : ""} border-[var(--hairline)]`}
+              >
+                <Check />
+                {c}
+              </li>
+            ))}
+          </ul>
+          <p className="mt-12 text-base leading-6 text-[var(--ink-60)]">
+            M.D., FCCP, FAASM, FACGS, MACGS
+          </p>
+        </div>
+      </section>
+
+      {/* Five promises — Figma 2147:5175 */}
+      <section className="flex w-full flex-col items-center gap-12 overflow-clip bg-[var(--ink)] px-6 py-16 sm:px-14 lg:gap-20 lg:py-[104px]">
+        <header className="flex w-full max-w-[700px] flex-col items-center gap-4 text-center text-white">
+          <div className="flex flex-col items-center gap-3">
+            <p className="eyebrow !text-white">Our Commitment to You</p>
+            <h2 className="font-kalice text-[clamp(2rem,1.2rem+2.6vw,3.5rem)] leading-[1.21] tracking-[1px]">
+              Five promises at the
+              <br />
+              heart of our care
             </h2>
           </div>
-          <div className="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {promises.map((p) => (
+          <p className="text-base leading-[22px] text-white/80">
+            Great healthcare isn&rsquo;t only about having the right expertise.
+            It&rsquo;s about how you&rsquo;re treated throughout — the time you
+            are given, the answers you get, and the respect you are shown.
+          </p>
+        </header>
+
+        <div
+          className={`tabrow flex w-full max-w-[1328px] flex-col overflow-clip rounded-2xl border lg:flex-row ${EDGE}`}
+        >
+          {homePromises.map((p, i) => (
+            <div
+              key={p.n}
+              {...(i === 0 ? { "data-open": "" } : {})}
+              className={`tab promise relative flex flex-col items-start justify-between overflow-clip p-8 lg:h-[440px] ${
+                i < homePromises.length - 1
+                  ? `border-b lg:border-b-0 lg:border-r ${EDGE}`
+                  : ""
+              }`}
+            >
               <div
-                key={p.n}
-                className="h-full rounded-2xl bg-white/5 border border-white/10 p-7 hover:bg-white/10 transition-colors"
-              >
-                <div className="font-kalice text-3xl text-[var(--sky)]">
-                  {p.n}
-                </div>
-                <h3 className="font-kalice text-xl mt-3">{p.title}</h3>
-                <p className="mt-3 text-sm text-white/70 leading-relaxed">
+                aria-hidden
+                className="promise-grain on-open pointer-events-none absolute inset-0"
+              />
+              <p className="promise-num relative font-kalice text-2xl leading-8 tracking-[1px]">
+                {p.n}
+              </p>
+              <h3 className="promise-title relative w-full pt-4 font-kalice tracking-[1px] text-white">
+                {p.title.map((line) => (
+                  <span key={line} className="block">
+                    {line}
+                  </span>
+                ))}
+              </h3>
+              {p.body && (
+                <p className="promise-body relative max-w-[420px] text-base leading-6 text-white/80">
                   {p.body}
                 </p>
-              </div>
-            ))}
-          </div>
+              )}
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* Services — matches live about page */}
-      <section className="py-20 sm:py-28">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          <div className="max-w-xl">
-            <Eyebrow>Our services</Eyebrow>
-            <h2 className="font-kalice text-3xl sm:text-4xl text-[var(--ink)] mt-4 tracking-tight">
-              Where Every Piece Matters
-            </h2>
-            <p className="mt-4 text-[var(--ink)]/80">
-              True wellness comes from balancing body, mind, emotions, and
-              spirit—every piece counts.
-            </p>
-          </div>
-          <div className="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {services.map((s, i) => (
-              <Reveal key={s.slug} delay={i * 60}>
-                <Link
-                  href={`/service/${s.slug}`}
-                  className="group block h-full rounded-2xl bg-white p-7 border border-[var(--hairline)] hover:shadow-xl hover:shadow-[var(--ink)]/5 hover:-translate-y-1 transition-all"
-                >
-                  <div className={`h-32 rounded-xl bg-gradient-to-br ${s.accent} flex items-end p-4 relative overflow-hidden`}>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      loading="lazy"
-                      decoding="async"
-                      src={s.image}
-                      alt=""
-                      className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-                    <div className="relative text-xs uppercase tracking-[0.2em] text-white/90">
-                      Service · {String(i + 1).padStart(2, "0")}
-                    </div>
-                  </div>
-                  <h3 className="mt-5 font-kalice text-xl text-[var(--ink)] group-hover:text-[var(--blue)] transition-colors">
-                    {s.title}
-                  </h3>
-                  <p className="mt-2 text-sm text-[var(--ink)]/80 line-clamp-3">
-                    {s.blurb}
-                  </p>
-                  <div className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-[var(--blue)]">
-                    See more
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="group-hover:translate-x-1 transition-transform">
-                      <path d="M5 12h14M13 5l7 7-7 7" />
-                    </svg>
-                  </div>
-                </Link>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Reviews — Figma 2147:6511 */}
+      <Testimonials
+        items={[testimonials[0], testimonials[1], testimonials[4]]}
+      />
 
-      {/* VIP Teaser — matches live about page */}
-      <section className="py-20 sm:py-28 bg-[var(--sky)]/40">
-        <div className="mx-auto max-w-5xl px-5 sm:px-8 text-center">
-          <Eyebrow>VIP Plans</Eyebrow>
-          <h2 className="font-kalice text-3xl sm:text-4xl text-[var(--ink)] mt-4 tracking-tight">
-            Exclusive VIP Health Plans
-          </h2>
-          <p className="mt-4 text-[var(--ink)]/85 max-w-2xl mx-auto">
-            Discover the transformative power of yoga: Strengthen your body &amp; calm your mind.
-          </p>
-          <div className="mt-7">
-            <PrimaryButton href="/vip">Learn More</PrimaryButton>
-          </div>
-        </div>
-      </section>
       <ClosingCta />
     </>
   );

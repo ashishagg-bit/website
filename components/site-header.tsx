@@ -30,9 +30,7 @@ const OVERLAY_ROUTES = [
   "/service/sleep",
   "/service/allergy-sensitivity",
   "/service/wellness-preventive-medicine",
-  "/about",
   "/vip",
-  "/blog",
   "/contact",
 ];
 
@@ -94,7 +92,10 @@ function Dropdown({
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
-  const overlay = OVERLAY_ROUTES.includes(pathname);
+  // `trailingSlash: true` means usePathname() returns "/vip/", which never
+  // matched the unslashed entries above — the overlay had silently never
+  // applied on any route. Compare without the trailing slash.
+  const overlay = OVERLAY_ROUTES.includes(pathname.replace(/\/+$/, "") || "/");
 
   const linkColor = overlay
     ? "text-white hover:text-white/70"
