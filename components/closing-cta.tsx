@@ -24,7 +24,7 @@ export function ClosingCta({
     <section className="relative flex w-full flex-col items-center overflow-clip rounded-t-3xl bg-[var(--dark)] py-20 lg:py-[120px]">
       <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-[671px]">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={image} alt="" className="absolute inset-0 size-full object-cover" />
+        <img loading="lazy" decoding="async" src={image} alt="" className="absolute inset-0 size-full object-cover" />
         <div className="absolute inset-0 bg-[rgba(254,181,91,0.45)] mix-blend-soft-light" />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(17,24,34,0.08)_0%,rgba(17,24,34,0.55)_46%,var(--dark)_100%)]" />
       </div>

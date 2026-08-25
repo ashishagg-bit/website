@@ -36,6 +36,8 @@ export function NewsScroller() {
             {doubled.map((src, i) => (
               // eslint-disable-next-line @next/next/no-img-element
               <img
+                loading="lazy"
+                decoding="async"
                 key={i}
                 src={src}
                 alt=""
@@ -58,6 +60,11 @@ export function NewsScroller() {
         :global(.animate-scroll) {
           animation: scroll 35s linear infinite;
           width: max-content;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          :global(.animate-scroll) {
+            animation: none;
+          }
         }
       `}</style>
     </section>

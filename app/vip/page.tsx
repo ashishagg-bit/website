@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: "VIP Health Plans",
   description:
     "Four comprehensive wellness packages designed to match your individual health goals — Bronze, Silver, Gold, and Platinum.",
+  alternates: { canonical: "/vip/" },
 };
 
 export default function VipPage() {

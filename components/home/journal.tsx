@@ -18,16 +18,18 @@ export function Journal({ posts }: { posts: Post[] }) {
         <OutlineButton href="/blog">Read all articles →</OutlineButton>
       </header>
 
-      <div className="grid w-full max-w-[1328px] md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid w-full max-w-[1328px] gap-x-16 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
         {posts.map((post) => (
           <Link
             key={post.slug}
             href={`/blog/${post.slug}`}
-            className="group flex flex-col gap-6 border-[rgba(21,32,50,0.12)] px-0 md:px-8 md:first:pl-0 lg:[&:not(:last-child)]:border-r"
+            className="group flex flex-col gap-6"
           >
             <div className="relative aspect-[4/5] overflow-clip rounded-lg">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
+                loading="lazy"
+                decoding="async"
                 src={post.image}
                 alt=""
                 className="absolute inset-0 size-full object-cover transition-transform duration-500 group-hover:scale-105"

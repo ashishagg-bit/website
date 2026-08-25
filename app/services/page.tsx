@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   title: "Our Services",
   description:
     "Comprehensive care to optimize every aspect of your health — pulmonary, cardiovascular, sleep, allergy, thermography, and preventive medicine.",
+  alternates: { canonical: "/services/" },
 };
 
 /**

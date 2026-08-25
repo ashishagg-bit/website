@@ -30,7 +30,7 @@ export function SplitBand({
     >
       <div className="relative h-[280px] w-full shrink-0 md:h-[740px] md:w-1/2 md:max-w-[720px]">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={image} alt="" className="absolute inset-0 size-full object-cover" />
+        <img loading="lazy" decoding="async" src={image} alt="" className="absolute inset-0 size-full object-cover" />
         <div
           aria-hidden
           className="absolute inset-0 bg-[rgba(254,181,91,0.2)] mix-blend-soft-light"

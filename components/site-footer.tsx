@@ -26,6 +26,8 @@ export function SiteFooter() {
         <div className="flex w-full shrink-0 flex-col items-start justify-between gap-8 pt-[5px] lg:h-full lg:w-[421px]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
+            loading="lazy"
+            decoding="async"
             src="/images/logo-wordmark.svg"
             alt="Dr. Avi Ishaaya Centers"
             width={332}

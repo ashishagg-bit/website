@@ -29,6 +29,7 @@ export const metadata: Metadata = {
     "concierge medicine",
     "wellness center",
   ],
+  alternates: { canonical: "/" },
   openGraph: {
     title: "Dr. Avi Ishaaya Wellness Centers",
     description:
@@ -37,12 +38,14 @@ export const metadata: Metadata = {
     siteName: "Dr. Avi Ishaaya Wellness Centers",
     locale: "en_US",
     type: "website",
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "Dr. Avi Ishaaya Wellness Centers" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Dr. Avi Ishaaya Wellness Centers",
     description:
       "Beverly Hills concierge medical practice led by Dr. Avi Ishaaya, M.D.",
+    images: ["/og.png"],
   },
   icons: { icon: "/favicon.ico" },
 };

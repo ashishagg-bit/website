@@ -10,7 +10,9 @@ export function WhyUs() {
       <div aria-hidden className="pointer-events-none absolute inset-0">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/images/scraped/1VMNJeKjBpsJmP9YWwhXyzKSvA.jpg"
+          loading="lazy"
+          decoding="async"
+          src="/images/figma/why-us-bg.jpg"
           alt=""
           className="absolute inset-0 size-full scale-110 object-cover"
         />

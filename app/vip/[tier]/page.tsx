@@ -21,6 +21,7 @@ export async function generateMetadata({
   return {
     title: `${t.name} VIP Package`,
     description: t.blurb,
+    alternates: { canonical: `/vip/${t.slug}/` },
   };
 }
 

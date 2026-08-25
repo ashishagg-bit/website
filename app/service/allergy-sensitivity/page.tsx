@@ -5,6 +5,7 @@ import { allergy } from "@/lib/service-pages";
 export const metadata: Metadata = {
   title: allergy.metaTitle,
   description: allergy.metaDescription,
+  alternates: { canonical: "/service/allergy-sensitivity/" },
 };
 
 export default function Page() {

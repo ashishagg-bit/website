@@ -9,6 +9,8 @@ export function Physician() {
         <div className="relative h-[420px] w-full shrink-0 overflow-clip rounded-lg lg:h-[700px] lg:flex-1">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
+            loading="lazy"
+            decoding="async"
             src={physician.image}
             alt={physician.title}
             className="absolute inset-0 size-full object-cover object-top"

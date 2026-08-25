@@ -82,6 +82,8 @@ export function Hero() {
             <li key={p.name} className="flex flex-1 items-center justify-center">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
+                loading="lazy"
+                decoding="async"
                 src={p.src}
                 alt={p.name}
                 width={p.w}

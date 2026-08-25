@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: "About Dr. Avi Ishaaya",
   description:
     "Dr. Avi Ishaaya is a board-certified physician specializing in pulmonary, sleep, internal, and geriatric medicine — founder of Dr. Avi Ishaaya Centers in Beverly Hills.",
+  alternates: { canonical: "/about/" },
 };
 
 const credentials = {
@@ -173,6 +174,8 @@ export default function AboutPage() {
                   <div className={`h-32 rounded-xl bg-gradient-to-br ${s.accent} flex items-end p-4 relative overflow-hidden`}>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
+                      loading="lazy"
+                      decoding="async"
                       src={s.image}
                       alt=""
                       className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-500"

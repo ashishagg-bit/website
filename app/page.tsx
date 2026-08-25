@@ -14,7 +14,15 @@ import { Space } from "@/components/home/space";
  * Sections follow the frame's vertical order.
  */
 export default function HomePage() {
-  const posts = getAllPosts().slice(0, 3);
+  // Homepage journal thumbnails are exported straight from Figma (nodes 1:2635/2644/2653).
+  const journalImages = [
+    "/images/figma/journal-1.jpg",
+    "/images/figma/journal-2.jpg",
+    "/images/figma/journal-3.jpg",
+  ];
+  const posts = getAllPosts()
+    .slice(0, 3)
+    .map((post, i) => ({ ...post, image: journalImages[i] }));
 
   return (
     <>

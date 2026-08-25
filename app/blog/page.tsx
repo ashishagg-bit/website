@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: "Blog",
   description:
     "Articles, insights, and guides from Dr. Avi Ishaaya Wellness Centers — your guide to better health.",
+  alternates: { canonical: "/blog/" },
 };
 
 export default function BlogIndex() {
@@ -38,7 +39,7 @@ export default function BlogIndex() {
             >
               <div className={`relative lg:col-span-6 aspect-[16/10] lg:aspect-auto bg-gradient-to-br ${hero.gradient} overflow-hidden`}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={hero.image} alt="" className="absolute inset-0 w-full h-full object-cover" />
+                <img loading="lazy" decoding="async" src={hero.image} alt="" className="absolute inset-0 w-full h-full object-cover" />
               </div>
               <div className="lg:col-span-6 p-8 sm:p-10 flex flex-col justify-center">
                 <div className="text-xs uppercase tracking-[0.2em] text-[var(--blue)]">Featured</div>
@@ -75,7 +76,7 @@ export default function BlogIndex() {
               >
                 <div className={`relative aspect-[16/10] bg-gradient-to-br ${post.gradient} overflow-hidden`}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={post.image} alt="" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <img loading="lazy" decoding="async" src={post.image} alt="" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 </div>
                 <div className="p-6">
                   <div className="text-xs text-[var(--ink-60)]">

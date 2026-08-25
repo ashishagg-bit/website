@@ -65,7 +65,9 @@ function Dropdown({
   footer: { href: string; label: string };
 }) {
   return (
-    <div className="invisible absolute left-1/2 top-full z-40 w-72 -translate-x-1/2 pt-3 opacity-0 transition-all group-hover:visible group-hover:opacity-100">
+    // `group-focus-within` mirrors the hover state so the submenu is reachable
+    // by keyboard — `invisible` alone takes these links out of the tab order.
+    <div className="invisible absolute left-1/2 top-full z-40 w-72 -translate-x-1/2 pt-3 opacity-0 transition-all group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
       <div className="rounded-2xl border border-[var(--hairline)] bg-white p-3 shadow-xl shadow-[var(--ink)]/10">
         {items.map((i) => (
           <Link
@@ -108,7 +110,7 @@ export function SiteHeader() {
           className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,#c6d5f7_0%,#dcd6f7_38%,#d9def9_62%,#c6d5f7_100%)]"
         />
         <Dot />
-        <p className="relative text-center font-[var(--font-manrope)] text-sm font-medium leading-[1.2] tracking-[-0.14px] text-white">
+        <p className="relative text-center font-[family-name:var(--font-manrope)] text-sm font-medium leading-[1.2] tracking-[-0.14px] text-white">
           Health is something you participate in, choose, and cultivate. The
           healing has always been possible. We help you find the path at The
           Healing Dawn.
@@ -138,7 +140,7 @@ export function SiteHeader() {
             />
           </Link>
 
-          <nav className="hidden items-end md:flex">
+          <nav aria-label="Main" className="hidden items-end lg:flex">
             {nav.map((n) =>
               n.hasDropdown ? (
                 <div key={n.href} className="group relative">
@@ -181,7 +183,7 @@ export function SiteHeader() {
 
           <Link
             href="/contact"
-            className="hidden shrink-0 items-center justify-center rounded-lg bg-[var(--blue)] px-5 py-2.5 text-[15px] leading-[21px] text-white transition-colors hover:bg-[var(--blue-hover)] md:flex"
+            className="hidden shrink-0 items-center justify-center rounded-lg bg-[var(--blue)] px-5 py-2.5 text-[15px] leading-[21px] text-white transition-colors hover:bg-[var(--blue-hover)] lg:flex"
           >
             Schedule a Consultation
           </Link>
@@ -189,7 +191,7 @@ export function SiteHeader() {
           <button
             aria-label="Toggle menu"
             aria-expanded={open}
-            className={`md:hidden ${overlay ? "text-white" : "text-[var(--ink)]"}`}
+            className={`-m-2 p-2 lg:hidden ${overlay ? "text-white" : "text-[var(--ink)]"}`}
             onClick={() => setOpen(!open)}
           >
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
@@ -207,7 +209,7 @@ export function SiteHeader() {
         </div>
 
         {open && (
-          <div className="border-t border-[var(--hairline)] bg-[var(--cream)] md:hidden">
+          <div className="border-t border-[var(--hairline)] bg-[var(--cream)] lg:hidden">
             <div className="flex flex-col gap-4 px-6 py-5">
               {nav.map((n) => (
                 <Link

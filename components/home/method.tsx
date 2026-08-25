@@ -15,7 +15,7 @@ export function Method() {
         </Display>
       </header>
 
-      <ul className="no-scrollbar -mx-6 flex w-[calc(100%+3rem)] snap-x snap-mandatory items-start gap-2 overflow-x-auto px-6 sm:-mx-14 sm:w-[calc(100%+7rem)] sm:px-14">
+      <ul className="no-scrollbar -mx-6 flex w-[calc(100%+3rem)] snap-x snap-mandatory scroll-px-6 sm:scroll-px-14 items-start gap-2 overflow-x-auto px-6 sm:-mx-14 sm:w-[calc(100%+7rem)] sm:px-14">
         {methodItems.map((item) => (
           <li
             key={item.title}
@@ -24,6 +24,8 @@ export function Method() {
             <div className="relative h-[420px] overflow-clip rounded-lg sm:h-[500px]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
+                loading="lazy"
+                decoding="async"
                 src={item.image}
                 alt=""
                 className="absolute inset-0 size-full object-cover"

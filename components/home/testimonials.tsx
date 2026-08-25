@@ -31,7 +31,7 @@ function Avatar({ src, name }: { src: string; name: string }) {
   return (
     <span className="size-14 shrink-0 overflow-hidden rounded-full bg-[var(--sky)]">
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={src} alt={name} className="size-full object-cover" />
+      <img loading="lazy" decoding="async" src={src} alt={name} className="size-full object-cover" />
     </span>
   );
 }
@@ -54,7 +54,7 @@ function Card({
       {image && (
         <div className="relative h-[300px] w-full overflow-clip rounded-t-3xl">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={image} alt="" className="absolute inset-0 size-full object-cover" />
+          <img loading="lazy" decoding="async" src={image} alt="" className="absolute inset-0 size-full object-cover" />
           <div
             aria-hidden
             className="absolute inset-0 bg-[rgba(254,181,91,0.2)] mix-blend-soft-light"

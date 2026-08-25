@@ -15,12 +15,17 @@ export async function generateMetadata(props: PageProps<"/blog/[slug]">): Promis
   return {
     title: post.title,
     description: post.excerpt,
+    alternates: { canonical: `/blog/${post.slug}/` },
     openGraph: {
       title: post.title,
       description: post.excerpt,
+      url: `/blog/${post.slug}/`,
+      siteName: "Dr. Avi Ishaaya Wellness Centers",
+      locale: "en_US",
       type: "article",
       publishedTime: post.rawDate.toISOString(),
       authors: ["Dr. Avi Ishaaya"],
+      images: [{ url: post.image }],
     },
   };
 }

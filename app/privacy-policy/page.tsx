@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
     "Privacy policy for Dr. Avi Ishaaya Wellness Centers in Beverly Hills, CA.",
+  alternates: { canonical: "/privacy-policy/" },
 };
 
 export default function PrivacyPolicyPage() {

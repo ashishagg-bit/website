@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: "Contact",
   description:
     "Reach out to Dr. Avi Ishaaya Wellness Centers — request an appointment, ask a question, or stop by our Beverly Hills office.",
+  alternates: { canonical: "/contact/" },
 };
 
 export default function ContactPage() {
@@ -87,7 +88,7 @@ function InfoCard({
   return (
     <div className="rounded-2xl border border-[var(--hairline)] bg-white p-6">
       <div className="text-xs uppercase tracking-[0.2em] text-[var(--blue)]">{eyebrow}</div>
-      <h3 className="mt-2 font-kalice text-lg text-[var(--ink)]">{title}</h3>
+      <h2 className="mt-2 font-kalice text-lg text-[var(--ink)]">{title}</h2>
       <ul className="mt-3 space-y-1 text-sm text-[var(--ink)]/85">
         {lines.map((l, i) => (
           <li key={i}>{l}</li>

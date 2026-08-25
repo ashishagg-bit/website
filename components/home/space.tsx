@@ -11,6 +11,8 @@ export function Space() {
       <div aria-hidden className="absolute inset-x-0 top-0 h-[671px]">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
+          loading="lazy"
+          decoding="async"
           src={space.backdrop}
           alt=""
           className="absolute inset-0 size-full object-cover"
@@ -43,7 +45,7 @@ export function Space() {
               }`}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={src} alt="" className="absolute inset-0 size-full object-cover" />
+              <img loading="lazy" decoding="async" src={src} alt="" className="absolute inset-0 size-full object-cover" />
               <div
                 aria-hidden
                 className="absolute inset-0 bg-[rgba(254,181,91,0.6)] mix-blend-soft-light"

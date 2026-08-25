@@ -12,22 +12,22 @@ export const methodItems = [
   {
     title: "Piecing Together Your Health",
     body: "We understand that optimal health emerges when each aspect of your wellbeing is functioning at its best - like pieces of a puzzle coming together to create a complete picture of health.",
-    image: "/images/scraped/Rf04pBe6rnVQfH4IqhWEgHbAP4.webp",
+    image: "/images/figma/method-1.jpg",
   },
   {
     title: "Dimensions of Wholeness",
     body: "As spiritual beings in a physical world, true wellness thrives when we nurture every aspect of our existence — body, mind, and spirit. Each element is vital to your unique wellness journey.",
-    image: "/images/scraped/O5Yo4TB5KdO02Lqh2k4DgSSq0.webp",
+    image: "/images/figma/method-2.jpg",
   },
   {
     title: "Your Unique Health Puzzle",
     body: "Your health journey is uniquely yours. We develop personalized care plans that cater to your specific needs, as standardized methods can't address the complexity of individual wellness.",
-    image: "/images/scraped/NNYb6EQUA1mNgpJztWHgD74Qa5Q.jpg",
+    image: "/images/figma/method-3.jpg",
   },
   {
     title: "Partnership in Transformation",
     body: "At Dr. Avi Ishaaya Centers, we support you on your journey to lasting health transformation, offering the expertise and guidance needed to connect all pieces of your wellness puzzle.",
-    image: "/images/scraped/1VMNJeKjBpsJmP9YWwhXyzKSvA.jpg",
+    image: "/images/figma/method-4.jpg",
   },
 ];
 
@@ -53,7 +53,7 @@ export const serviceTiles = [
     blurb:
       "Wellness and prevention are where each piece connects to form the complete picture of how you can attain your optimal wellbeing.",
     href: "/service/wellness-preventive-medicine",
-    image: "/images/scraped/V2qDs1D0pO2ja4K49KWNNzfDHe0.png",
+    image: "/images/figma/services-03.jpg",
   },
   {
     n: "04",
@@ -182,7 +182,7 @@ export const testimonials = [
     name: "Rachel T.",
     avatar: "/images/scraped/NNYb6EQUA1mNgpJztWHgD74Qa5Q.jpg",
     when: "1 month ago",
-    image: "/images/scraped/qpI5vBIDT7Q6ptU0HElINibug.webp",
+    image: "/images/figma/reviews-photo.jpg",
   },
   {
     quote:

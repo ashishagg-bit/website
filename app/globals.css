@@ -153,6 +153,23 @@ html {
   scroll-behavior: smooth;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+/* Keyboard focus ring. Tailwind's preflight strips the UA outline on several
+   elements, so state it once here — `:focus-visible` keeps it off mouse
+   clicks, which leaves the design untouched for pointer users. */
+:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+/* On the dark footer band the blue ring disappears into the ground. */
+footer :focus-visible {
+  outline-color: #ffffff;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
@@ -289,9 +306,9 @@ body {
 
 @media (min-width: 1024px) {
   .tabrow > .tab { flex: 1 1 0; }
-  .tabrow > .tab[data-open] { flex-grow: 2; }
-  .tabrow:hover > .tab[data-open]:not(:hover) { flex-grow: 1; }
-  .tabrow > .tab:hover { flex-grow: 2; }
+  .tabrow > .tab[data-open] { flex-grow: 2; }.tabrow:hover > .tab[data-open]:not(:hover),
+.tabrow:focus-within > .tab[data-open]:not(:focus-within){ flex-grow: 1; }.tabrow > .tab:hover,
+.tabrow > .tab:focus-within{ flex-grow: 2; }
 }
 
 /* Revealed only while a tab is open: photograph, action pill, body copy. */
@@ -301,45 +318,45 @@ body {
 }
 .tab .on-open.slide { transform: translateY(-0.5rem); }
 .tabrow > .tab[data-open] .on-open { opacity: 1; }
-.tabrow > .tab[data-open] .on-open.slide { transform: none; }
-.tabrow:hover > .tab[data-open]:not(:hover) .on-open { opacity: 0; }
-.tabrow:hover > .tab[data-open]:not(:hover) .on-open.slide { transform: translateY(-0.5rem); }
-.tabrow > .tab:hover .on-open { opacity: 1; }
-.tabrow > .tab:hover .on-open.slide { transform: none; }
+.tabrow > .tab[data-open] .on-open.slide { transform: none; }.tabrow:hover > .tab[data-open]:not(:hover) .on-open,
+.tabrow:focus-within > .tab[data-open]:not(:focus-within) .on-open{ opacity: 0; }.tabrow:hover > .tab[data-open]:not(:hover) .on-open.slide,
+.tabrow:focus-within > .tab[data-open]:not(:focus-within) .on-open.slide{ transform: translateY(-0.5rem); }.tabrow > .tab:hover .on-open,
+.tabrow > .tab:focus-within .on-open{ opacity: 1; }.tabrow > .tab:hover .on-open.slide,
+.tabrow > .tab:focus-within .on-open.slide{ transform: none; }
 
 /* Copy turns white once the photograph is behind it. */
 .tab .on-open-text { transition: color 0.5s ease; }
-.tabrow > .tab[data-open] .on-open-text { color: #fff; }
-.tabrow:hover > .tab[data-open]:not(:hover) .on-open-text { color: var(--ink); }
-.tabrow:hover > .tab[data-open]:not(:hover) .on-open-text.muted { color: var(--ink-80); }
-.tabrow > .tab:hover .on-open-text { color: #fff; }
+.tabrow > .tab[data-open] .on-open-text { color: #fff; }.tabrow:hover > .tab[data-open]:not(:hover) .on-open-text,
+.tabrow:focus-within > .tab[data-open]:not(:focus-within) .on-open-text{ color: var(--ink); }.tabrow:hover > .tab[data-open]:not(:hover) .on-open-text.muted,
+.tabrow:focus-within > .tab[data-open]:not(:focus-within) .on-open-text.muted{ color: var(--ink-80); }.tabrow > .tab:hover .on-open-text,
+.tabrow > .tab:focus-within .on-open-text{ color: #fff; }
 
 /* Collapsed: title top, blurb bottom. Open: both group at the bottom. */
 .tab .tab-title { margin-top: 0; }
 .tab .tab-blurb { margin-top: auto; }
 .tabrow > .tab[data-open] .tab-title { margin-top: auto; }
-.tabrow > .tab[data-open] .tab-blurb { margin-top: 0; }
-.tabrow:hover > .tab[data-open]:not(:hover) .tab-title { margin-top: 0; }
-.tabrow:hover > .tab[data-open]:not(:hover) .tab-blurb { margin-top: auto; }
-.tabrow > .tab:hover .tab-title { margin-top: auto; }
-.tabrow > .tab:hover .tab-blurb { margin-top: 0; }
+.tabrow > .tab[data-open] .tab-blurb { margin-top: 0; }.tabrow:hover > .tab[data-open]:not(:hover) .tab-title,
+.tabrow:focus-within > .tab[data-open]:not(:focus-within) .tab-title{ margin-top: 0; }.tabrow:hover > .tab[data-open]:not(:hover) .tab-blurb,
+.tabrow:focus-within > .tab[data-open]:not(:focus-within) .tab-blurb{ margin-top: auto; }.tabrow > .tab:hover .tab-title,
+.tabrow > .tab:focus-within .tab-title{ margin-top: auto; }.tabrow > .tab:hover .tab-blurb,
+.tabrow > .tab:focus-within .tab-blurb{ margin-top: 0; }
 
 /* Promises: the open card turns blue and its heading grows. */
-.tabrow > .tab[data-open].promise { background-color: var(--blue); }
-.tabrow:hover > .tab[data-open]:not(:hover).promise { background-color: transparent; }
-.tabrow > .tab.promise:hover { background-color: var(--blue); }
+.tabrow > .tab[data-open].promise { background-color: var(--blue); }.tabrow:hover > .tab[data-open]:not(:hover).promise,
+.tabrow:focus-within > .tab[data-open]:not(:focus-within).promise{ background-color: transparent; }.tabrow > .tab.promise:hover,
+.tabrow > .tab.promise:focus-within{ background-color: var(--blue); }
 .tab.promise .promise-title { font-size: 1.5rem; line-height: 2rem; transition: font-size 0.5s ease, line-height 0.5s ease; }
-.tabrow > .tab[data-open].promise .promise-title { font-size: clamp(1.75rem, 1.2rem + 1.4vw, 40px); line-height: 1.2; }
-.tabrow:hover > .tab[data-open]:not(:hover).promise .promise-title { font-size: 1.5rem; line-height: 2rem; }
-.tabrow > .tab.promise:hover .promise-title { font-size: clamp(1.75rem, 1.2rem + 1.4vw, 40px); line-height: 1.2; }
+.tabrow > .tab[data-open].promise .promise-title { font-size: clamp(1.75rem, 1.2rem + 1.4vw, 40px); line-height: 1.2; }.tabrow:hover > .tab[data-open]:not(:hover).promise .promise-title,
+.tabrow:focus-within > .tab[data-open]:not(:focus-within).promise .promise-title{ font-size: 1.5rem; line-height: 2rem; }.tabrow > .tab.promise:hover .promise-title,
+.tabrow > .tab.promise:focus-within .promise-title{ font-size: clamp(1.75rem, 1.2rem + 1.4vw, 40px); line-height: 1.2; }
 .tab.promise .promise-num { color: rgba(255, 255, 255, 0.4); transition: color 0.5s ease; }
-.tabrow > .tab[data-open].promise .promise-num { color: rgba(255, 255, 255, 0.7); }
-.tabrow:hover > .tab[data-open]:not(:hover).promise .promise-num { color: rgba(255, 255, 255, 0.4); }
-.tabrow > .tab.promise:hover .promise-num { color: rgba(255, 255, 255, 0.7); }
+.tabrow > .tab[data-open].promise .promise-num { color: rgba(255, 255, 255, 0.7); }.tabrow:hover > .tab[data-open]:not(:hover).promise .promise-num,
+.tabrow:focus-within > .tab[data-open]:not(:focus-within).promise .promise-num{ color: rgba(255, 255, 255, 0.4); }.tabrow > .tab.promise:hover .promise-num,
+.tabrow > .tab.promise:focus-within .promise-num{ color: rgba(255, 255, 255, 0.7); }
 .tab.promise .promise-body { max-height: 0; overflow: hidden; opacity: 0; transition: max-height 0.5s ease, opacity 0.5s ease; }
-.tabrow > .tab[data-open].promise .promise-body { max-height: 12rem; opacity: 1; }
-.tabrow:hover > .tab[data-open]:not(:hover).promise .promise-body { max-height: 0; opacity: 0; }
-.tabrow > .tab.promise:hover .promise-body { max-height: 12rem; opacity: 1; }
+.tabrow > .tab[data-open].promise .promise-body { max-height: 12rem; opacity: 1; }.tabrow:hover > .tab[data-open]:not(:hover).promise .promise-body,
+.tabrow:focus-within > .tab[data-open]:not(:focus-within).promise .promise-body{ max-height: 0; opacity: 0; }.tabrow > .tab.promise:hover .promise-body,
+.tabrow > .tab.promise:focus-within .promise-body{ max-height: 12rem; opacity: 1; }
 
 /* Service-page checklist: the gradient row follows the cursor. */
 .checkrow > .checkitem { transition: background 0.4s ease, padding 0.4s ease; }
@@ -359,16 +376,16 @@ body {
 .condrow > .cond {
   background: rgba(255, 255, 255, 0.08);
   transition: background-color 0.4s ease;
-}
-.condrow > .cond[data-open],
-.condrow > .cond:hover { background: rgba(255, 255, 255, 0.16); }
-.condrow:hover > .cond[data-open]:not(:hover) { background: rgba(255, 255, 255, 0.08); }
+}.condrow > .cond[data-open],
+.condrow > .cond:hover,
+.condrow > .cond:focus-within{ background: rgba(255, 255, 255, 0.16); }.condrow:hover > .cond[data-open]:not(:hover),
+.condrow:focus-within > .cond[data-open]:not(:focus-within){ background: rgba(255, 255, 255, 0.08); }
 
 /* The detail drops out over the cards below rather than growing the row —
    otherwise every hover reflows the whole section downwards. */
-.condrow > .cond { position: relative; }
-.condrow > .cond[data-open],
-.condrow > .cond:hover { z-index: 5; }
+.condrow > .cond { position: relative; }.condrow > .cond[data-open],
+.condrow > .cond:hover,
+.condrow > .cond:focus-within{ z-index: 5; }
 .cond .cond-detail {
   position: absolute;
   top: 100%;
@@ -379,15 +396,15 @@ body {
   overflow: hidden;
   border-radius: 0 0 0.5rem 0.5rem;
   transition: max-height 0.45s ease, opacity 0.3s ease;
-}
-.condrow > .cond[data-open] .cond-detail,
-.condrow > .cond:hover .cond-detail {
+}.condrow > .cond[data-open] .cond-detail,
+.condrow > .cond:hover .cond-detail,
+.condrow > .cond:focus-within .cond-detail{
   max-height: 14rem;
   opacity: 1;
   background: #223046;
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
-}
-.condrow:hover > .cond[data-open]:not(:hover) .cond-detail {
+}.condrow:hover > .cond[data-open]:not(:hover) .cond-detail,
+.condrow:focus-within > .cond[data-open]:not(:focus-within) .cond-detail{
   max-height: 0;
   opacity: 0;
 }
@@ -408,13 +425,13 @@ body {
 /* Collapsed: number top, title bottom. Open: number and title together at the
    top with the body pinned below — `margin-bottom:auto` is what pins the title
    up, since justify-between alone would drop it to the bottom again. */
-.tab.promise .promise-title { margin-top: auto; margin-bottom: 0; }
-.tabrow > .tab[data-open].promise .promise-title,
-.tabrow > .tab.promise:hover .promise-title {
+.tab.promise .promise-title { margin-top: auto; margin-bottom: 0; }.tabrow > .tab[data-open].promise .promise-title,
+.tabrow > .tab.promise:hover .promise-title,
+.tabrow > .tab.promise:focus-within .promise-title{
   margin-top: 0.5rem;
   margin-bottom: auto;
-}
-.tabrow:hover > .tab[data-open]:not(:hover).promise .promise-title {
+}.tabrow:hover > .tab[data-open]:not(:hover).promise .promise-title,
+.tabrow:focus-within > .tab[data-open]:not(:focus-within).promise .promise-title{
   margin-top: auto;
   margin-bottom: 0;
 }
@@ -430,14 +447,14 @@ body {
   overflow: hidden;
   transition: max-height 0.45s ease, opacity 0.45s ease, margin-top 0.45s ease;
   margin-top: 0;
-}
-.acc > .acc-row[data-open] .acc-body,
-.acc > .acc-row:hover .acc-body {
+}.acc > .acc-row[data-open] .acc-body,
+.acc > .acc-row:hover .acc-body,
+.acc > .acc-row:focus-within .acc-body{
   max-height: 16rem;
   opacity: 1;
   margin-top: 0.5rem;
-}
-.acc:hover > .acc-row[data-open]:not(:hover) .acc-body {
+}.acc:hover > .acc-row[data-open]:not(:hover) .acc-body,
+.acc:focus-within > .acc-row[data-open]:not(:focus-within) .acc-body{
   max-height: 0;
   opacity: 0;
   margin-top: 0;
@@ -464,3 +481,23 @@ body {
 .tile-card .tile-blurb { color: inherit; transition: color 0.45s ease; }
 .tile-card:not([data-open]):not(:hover) .tile-blurb,
 .tilegrid:hover > .tile-card[data-open]:not(:hover) .tile-blurb { color: var(--ink-80); }
+
+/* Below the desktop breakpoint the open-follows-cursor accordions have no
+   affordance — there is no pointer to hover and the rows are not focusable —
+   so their bodies would be permanently collapsed and their copy unreachable.
+   On touch widths every panel is simply shown. */
+@media (max-width: 1023px) {
+  .acc .acc-body,
+  .acc:hover > .acc-row[data-open]:not(:hover) .acc-body,
+  .acc:focus-within > .acc-row[data-open]:not(:focus-within) .acc-body {
+    max-height: none;
+    opacity: 1;
+    margin-top: 0.5rem;
+  }
+  .cond .cond-detail,
+  .condrow:hover > .cond[data-open]:not(:hover) .cond-detail,
+  .condrow:focus-within > .cond[data-open]:not(:focus-within) .cond-detail {
+    max-height: none;
+    opacity: 1;
+  }
+}

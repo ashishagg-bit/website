@@ -34,12 +34,14 @@ function ServiceTab({
     <Link
       href={tile.href}
       {...(open ? { "data-open": "" } : {})}
-      className={`tab group relative flex h-[400px] flex-col items-start justify-between overflow-clip p-8 ${className}`}
+      className={`tab group relative flex h-auto min-h-[220px] flex-col lg:h-[400px] items-start justify-between overflow-clip p-8 ${className}`}
     >
       {tile.image && (
         <span aria-hidden className="on-open absolute inset-0">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
+            loading="lazy"
+            decoding="async"
             src={tile.image}
             alt=""
             className="absolute inset-0 size-full object-cover"
