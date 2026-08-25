@@ -13,6 +13,11 @@ export const metadata: Metadata = {
   alternates: { canonical: "/services/" },
 };
 
+const SERVICES_REVIEWS = ["Sandra M.", "David A.", "Jonathan K."];
+const servicesReviews = testimonials.filter((t) =>
+  SERVICES_REVIEWS.includes(t.name)
+);
+
 /**
  * All services — Figma "Aviishaaya Dev" (TdifdqKlRJcGSLC8Kpz1Sz), frame 64:15012.
  * Sections follow the frame's vertical order.
@@ -40,18 +45,25 @@ export default function ServicesPage() {
         image="/images/scraped/Pqq2TKWlgMDe9nT6krgeFQ6euj0.jpg"
       />
 
+      {/*
+        Node 74:22082 lays the bento out as two rows of four equal tiles — the
+        eighth ("The Healing Dawn") is an ordinary tile in the second row, not
+        the wide closing strip the homepage frame uses.
+      */}
       <Services
         eyebrow="our method"
         title="Honoring every dimension of your health puzzle."
         body={null}
         cta={null}
-        tiles={servicesPageTiles}
-        lastTile={healingDawnTile}
+        tiles={[...servicesPageTiles, healingDawnTile]}
+        rows={[4, 4]}
+        lastTile={null}
       />
 
       <VipBand />
 
-      <Testimonials items={testimonials.slice(0, 3)} />
+      {/* Node 103:29785/29798/29841 — Sandra M., David A. and Jonathan K. */}
+      <Testimonials items={servicesReviews} />
 
       <ClosingCta />
     </>

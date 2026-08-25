@@ -106,16 +106,26 @@ export function Services({
   cta = { href: "/contact", label: "Schedule a Consultation" },
   tiles = serviceTiles,
   lastTile = vipTile,
+  rows,
 }: {
   eyebrow?: string;
   title?: React.ReactNode;
   body?: React.ReactNode;
   cta?: { href: string; label: string } | null;
   tiles?: Tile[];
-  lastTile?: Tile;
+  /** Pass null on frames whose bento has no wide closing strip (74:22082). */
+  lastTile?: Tile | null;
+  /** Tiles per row. Defaults to the homepage frame's 3 + rest. */
+  rows?: number[];
 } = {}) {
-  const rowOne = tiles.slice(0, 3);
-  const rowTwo = tiles.slice(3);
+  const sizes = rows ?? [3, Math.max(tiles.length - 3, 0)];
+  const bands: Tile[][] = [];
+  let cursor = 0;
+  for (const size of sizes) {
+    bands.push(tiles.slice(cursor, cursor + size));
+    cursor += size;
+  }
+  if (cursor < tiles.length) bands.push(tiles.slice(cursor));
 
   return (
     <section className="flex w-full flex-col items-center gap-12 overflow-clip bg-[linear-gradient(180deg,#ffffff_0%,var(--cream)_13.444%)] px-6 py-16 sm:px-14 sm:py-[104px] lg:gap-20">
@@ -137,13 +147,20 @@ export function Services({
       <div
         className={`w-full max-w-[1328px] overflow-clip rounded-2xl border bg-[var(--cream)] ${HAIRLINE}`}
       >
-        {/* Row 1 — the frame captures tile 03 open, so it is the row's default */}
-        <TabRow tiles={rowOne} defaultOpen={2} className={`border-b ${HAIRLINE}`} />
+        {/* The frame captures tile 03 open, so it is the first row's default */}
+        {bands.map((band, i) => (
+          <TabRow
+            key={i}
+            tiles={band}
+            defaultOpen={i === 0 ? 2 : -1}
+            className={
+              i < bands.length - 1 || lastTile ? `border-b ${HAIRLINE}` : ""
+            }
+          />
+        ))}
 
-        {/* Row 2 — all collapsed at rest */}
-        <TabRow tiles={rowTwo} className={`border-b ${HAIRLINE}`} />
-
-        {/* Row 3 — full-width closing tile */}
+        {/* Full-width closing tile — homepage frame only */}
+        {lastTile && (
         <Link
           href={lastTile.href}
           className="group flex w-full flex-col items-start justify-between gap-6 overflow-clip p-8 transition-colors hover:bg-white sm:flex-row sm:items-end"
@@ -158,6 +175,7 @@ export function Services({
             {lastTile.blurb}
           </span>
         </Link>
+        )}
       </div>
     </section>
   );

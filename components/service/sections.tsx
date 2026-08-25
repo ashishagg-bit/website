@@ -70,7 +70,7 @@ export function Approach({
             <li
               key={b}
               {...(i === highlight ? { "data-open": "" } : {})}
-              className={`checkitem flex items-center gap-3 p-8 text-[var(--ink)] ${
+              className={`checkitem flex items-center gap-3 p-8 text-[var(--ink-80)] ${
                 i < bullets!.length - 1 ? `border-b ${HAIRLINE}` : ""
               }`}
             >
@@ -88,6 +88,8 @@ export function Approach({
 export type Condition = {
   name: string;
   details?: { label: string; value: string }[];
+  /** Marks the card the frame captured open. Falls back to the first with detail. */
+  open?: boolean;
 };
 
 /**
@@ -103,7 +105,11 @@ export function Conditions({
   title?: React.ReactNode;
   items: Condition[];
 }) {
-  const restsOn = items.findIndex((c) => c.details && c.details.length > 0);
+  const marked = items.findIndex((c) => c.open);
+  const restsOn =
+    marked >= 0
+      ? marked
+      : items.findIndex((c) => c.details && c.details.length > 0);
 
   return (
     <section className="flex w-full flex-col items-center gap-10 overflow-clip bg-[var(--ink)] px-6 py-16 sm:px-14 lg:gap-14 lg:py-24">
@@ -117,21 +123,33 @@ export function Conditions({
           <li
             key={c.name}
             {...(i === restsOn ? { "data-open": "" } : {})}
-            className="cond flex flex-col rounded-lg p-2"
+            className="cond flex flex-col rounded-2xl p-2"
           >
             <div className="flex items-center gap-3">
-              {/* The frame uses a small illustrated tile here; this gradient
-                  chip stands in until those icons can be exported. */}
-              <span className="flex size-12 shrink-0 items-center justify-center rounded-md bg-[linear-gradient(135deg,rgba(255,255,255,0.22),rgba(51,118,235,0.55))] font-kalice text-base text-white">
+              {/* The frame uses a small illustrated tile here (55px, 8px radius,
+                  hairline border); this gradient chip stands in until those
+                  icons can be exported. */}
+              <span className="flex size-[55px] shrink-0 items-center justify-center rounded-lg border border-white/15 bg-[linear-gradient(135deg,rgba(255,255,255,0.22),rgba(51,118,235,0.55))] font-kalice text-base text-white">
                 {c.name.charAt(0)}
               </span>
-              <span className="pr-2 text-sm leading-5 text-white">{c.name}</span>
+              <span className="pr-3 text-sm leading-[21px] text-white">
+                {c.name}
+              </span>
             </div>
 
+            {/* `.cond-detail` in globals.css is an absolutely positioned
+                drop-down, and below 1024px it also unhides every panel — which
+                would stack all nine on top of the cards. Below that breakpoint
+                the panel goes back in flow, so the card grows the way the frame
+                draws it. `rounded-b-2xl!` beats the 8px radius the same rule
+                carries, so the panel meets the 16px card. */}
             {c.details && c.details.length > 0 && (
-              <dl className="cond-detail flex flex-col gap-2 px-4 pb-4 pt-1">
+              <dl className="cond-detail flex flex-col gap-2 rounded-b-2xl! p-2 max-lg:relative! max-lg:top-0! lg:flex-row">
                 {c.details.map((d) => (
-                  <div key={d.label} className="flex flex-col gap-0.5">
+                  <div
+                    key={d.label}
+                    className="flex flex-1 flex-col gap-0.5 rounded-xl bg-white/10 p-3"
+                  >
                     <dt className="eyebrow !text-[10px] !text-white/50">
                       {d.label}
                     </dt>

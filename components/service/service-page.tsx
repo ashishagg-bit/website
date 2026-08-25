@@ -7,6 +7,16 @@ import { testimonials } from "@/lib/home-content";
 import type { ServicePageData } from "@/lib/service-pages";
 
 /**
+ * The service frames quote three specific reviews — Sandra M., Priya R. and
+ * Jonathan K. (Lungs 81:25893/81:25934/81:25947, Cardiovascular
+ * 103:32764/103:32805/103:32818) — not the first three of the homepage list.
+ */
+const SERVICE_REVIEWS = ["Sandra M.", "Priya R.", "Jonathan K."];
+const serviceTestimonials = testimonials.filter((t) =>
+  SERVICE_REVIEWS.includes(t.name)
+);
+
+/**
  * Shared layout for every service detail frame in the Figma file
  * (e.g. "Lungs and Breathing" 81:23686). Section order follows the frame.
  */
@@ -41,7 +51,7 @@ export function ServicePage({ data }: { data: ServicePageData }) {
         tone="cream"
       />
 
-      <Testimonials items={testimonials.slice(0, 3)} />
+      <Testimonials items={serviceTestimonials} />
 
       <ClosingCta />
     </>
