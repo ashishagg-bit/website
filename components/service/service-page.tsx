@@ -38,7 +38,10 @@ export function ServicePage({ data }: { data: ServicePageData }) {
         highlight={data.approach.highlight}
       />
 
-      <Conditions items={data.conditions} />
+      {/* Allergy and Wellness have no Conditions section in their frames
+          (2031:3776, 2031:6398). Rendering it regardless left a full-height
+          ink band carrying a heading and nothing beneath it. */}
+      {data.conditions.length > 0 && <Conditions items={data.conditions} />}
 
       <TileGrid title={data.diagnostics.title} tiles={data.diagnostics.tiles} />
 

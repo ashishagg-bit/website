@@ -180,6 +180,10 @@ export function TileGrid({
   cta?: { href: string; label: string } | null;
   tiles: { n: string; title: string; blurb: string; href?: string }[];
 }) {
+  // The Sleep and Allergy frames lay their three tiles out as one full-width
+  // row of equals at 320px tall; the four-up grid left a visible empty cell.
+  const cols = tiles.length === 3 ? 3 : 4;
+
   return (
     <section className="flex w-full flex-col items-center gap-12 overflow-clip bg-white px-6 py-16 sm:px-14 sm:py-[104px] lg:gap-20">
       <header className="flex flex-col items-center gap-6">
@@ -191,12 +195,18 @@ export function TileGrid({
       </header>
 
       <div
-        className={`tilegrid grid w-full max-w-[1328px] overflow-clip rounded-2xl border sm:grid-cols-2 lg:grid-cols-4 ${HAIRLINE}`}
+        className={`tilegrid grid w-full max-w-[1328px] overflow-clip rounded-2xl border sm:grid-cols-2 ${cols === 3 ? "lg:grid-cols-3" : "lg:grid-cols-4"} ${HAIRLINE}`}
       >
         {tiles.map((t, i) => {
           // The frame rests with tile 03 filled; open then follows the cursor.
-          const cls = `tile-card flex h-[400px] flex-col items-start justify-between overflow-clip border-b p-8 lg:border-r lg:[&:nth-child(4n)]:border-r-0 ${HAIRLINE} ${
-            i >= tiles.length - (tiles.length % 4 || 4) ? "lg:border-b-0" : ""
+          const cls = `tile-card flex ${
+            cols === 3 ? "min-h-[220px] lg:h-[320px]" : "min-h-[220px] lg:h-[400px]"
+          } flex-col items-start justify-between overflow-clip border-b p-8 lg:border-r ${
+            cols === 3
+              ? "lg:[&:nth-child(3n)]:border-r-0"
+              : "lg:[&:nth-child(4n)]:border-r-0"
+          } ${HAIRLINE} ${
+            i >= tiles.length - (tiles.length % cols || cols) ? "lg:border-b-0" : ""
           }`;
           const inner = (
             <>
