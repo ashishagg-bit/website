@@ -284,7 +284,7 @@ export const sleep: ServicePageData = {
   hero: {
     title: "Make sleep part of your health.",
     body: "Good sleep is essential for both your physical and mental well-being. During sleep, your brain processes the day\u2019s information and consolidates memories.",
-    image: "/images/scraped/lUTBzERr53jnyvWA0CLFiJn62c.png",
+    image: "/images/figma/sleep-hero.jpg",
   },
   approach: {
     title: APPROACH_TITLE,
