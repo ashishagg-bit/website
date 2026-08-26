@@ -102,9 +102,20 @@ export function SiteHeader() {
     : "text-[var(--ink)] hover:text-[var(--blue)]";
 
   return (
-    <header className="relative z-50">
+    <>
       {/* Announcement bar — Figma I64:10192;57:9476 (#e5cdf8, 48px inline pad,
-          12px top / 36px bottom with the hero pulling 24px back over it). */}
+          12px top / 36px bottom with the hero pulling 24px back over it).
+          Figma 2256:6333 is 1440x65 and the hero below it starts at y=41, so
+          the hero overlaps the bar's bottom 24px and its 24px top corners cut
+          two lilac notches out of the bar.
+
+          This sits OUTSIDE <header> on purpose. The header is `z-50`, which
+          makes it a stacking context that paints as one unit above all page
+          content — so while the bar lived inside it, the opaque lilac covered
+          exactly the 24px where the hero's rounded corners are, and every
+          overlay route (services, the five service pages, VIP, contact)
+          rendered a hard square edge under a too-tall bar. Out here the bar is
+          `z-auto`, so the hero paints over it while the nav still sits on top. */}
       <div className="relative -mb-6 flex items-center justify-center gap-4 overflow-clip bg-[var(--lilac)] px-12 pb-9 pt-3">
         <div
           aria-hidden
@@ -119,8 +130,9 @@ export function SiteHeader() {
         <Dot />
       </div>
 
-      {/* Nav — Figma I64:10192;57:9726 */}
-      <div
+      <header className="relative z-50">
+        {/* Nav — Figma I64:10192;57:9726 */}
+        <div
         className={
           overlay
             ? "relative z-[2] -mb-[92px] h-[92px] bg-transparent"
@@ -232,7 +244,8 @@ export function SiteHeader() {
             </div>
           </div>
         )}
-      </div>
-    </header>
+        </div>
+      </header>
+    </>
   );
 }
