@@ -32,15 +32,19 @@ export function PageHero({
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(21,32,50,0.5)_0%,rgba(21,32,50,0.12)_45%,transparent_70%)]" />
       </div>
 
+      {/* Measured off the Figma hero (2256:6332): the copy column is 725 wide
+          at x=56, the eyebrow, headline and body are separated by 12px each,
+          and the button sits 24px under the body with 48px to the frame's
+          bottom edge. The inner column has to be w-full — left to shrink-wrap
+          it collapses to the body's own width, so longer copy on another
+          service page would wrap differently from the design. */}
       <div className="relative flex w-full max-w-[725px] flex-col items-start justify-end gap-6">
-        <div className="flex flex-col gap-5">
+        <div className="flex w-full flex-col gap-3">
           <p className="eyebrow !text-white">{eyebrow}</p>
           <h1 className="font-kalice text-[clamp(2.25rem,1.3rem+3vw,3.5rem)] leading-[1.21] tracking-[1px] text-white">
             {title}
           </h1>
-          {body && (
-            <p className="max-w-[640px] text-base leading-6 text-white/80">{body}</p>
-          )}
+          {body && <p className="text-base leading-6 text-white/80">{body}</p>}
         </div>
         {cta && <BlueButton href={cta.href}>{cta.label}</BlueButton>}
       </div>

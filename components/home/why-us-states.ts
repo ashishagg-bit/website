@@ -56,7 +56,3 @@ export const whyUsStates: WhyUsState[] = [
   },
 ];
 
-/** Milliseconds each state holds before the halves slide to the next stop. */
-export const STATE_MS = 2600;
-/** The wordless beat before the reveal is shorter than a state with copy. */
-export const BEAT_MS = 1400;
