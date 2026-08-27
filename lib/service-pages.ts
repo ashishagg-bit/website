@@ -14,8 +14,9 @@ import type { Condition } from "@/components/service/sections";
  * — a copy-paste slip in the design. Each page uses its own service name here;
  * flagged for the designer rather than reproduced.
  *
- * Photography points at images already scraped from the live site; the Figma
- * artwork is not exportable from this environment.
+ * Hero photography is the Figma artwork, exported from the file and committed
+ * under public/images/figma. The closing bands are still stand-ins from the
+ * scraped library — see the note above CLOSING.
  */
 
 export type ServicePageData = {
@@ -67,7 +68,7 @@ export const lungs: ServicePageData = {
   hero: {
     title: "Breathe easier. Live fully.",
     body: "Personalized care to help you breathe better and support your long-term respiratory health.",
-    image: "/images/scraped/Ok6cd4z826F0Gks9sFfcGFjFzY.jpg",
+    image: "/images/figma/lungs-hero.jpg",
   },
   approach: {
     title: APPROACH_TITLE,
@@ -149,7 +150,7 @@ export const cardiovascular: ServicePageData = {
   hero: {
     title: "A healthier heart starts here.",
     body: "Comprehensive care focused on understanding your heart and supporting your long-term health.",
-    image: "/images/scraped/IppKL0cvGoYnkzaVfgS112yoo.jpg",
+    image: "/images/figma/cardio-hero.jpg",
   },
   approach: {
     title: APPROACH_TITLE,
@@ -358,7 +359,7 @@ export const allergy: ServicePageData = {
   hero: {
     title: "When your body reacts, we listen.",
     body: "Identifying allergens will allow you to eliminate potential triggers that may cause your allergy related symptoms.",
-    image: "/images/scraped/mRvoVlTLqZI08Kd9gqKbgHptpQ.png",
+    image: "/images/figma/allergy-hero.jpg",
   },
   approach: {
     title: APPROACH_TITLE,
@@ -407,7 +408,7 @@ export const wellness: ServicePageData = {
   hero: {
     title: "Invest in the health you want for tomorrow.",
     body: "Wellness and prevention are where each piece connects to form the complete picture of how you can attain your optimal wellbeing.",
-    image: "/images/scraped/z40GSxCTx1p8Yl8dajpSuGt52I.jpeg",
+    image: "/images/figma/wellness-hero.jpg",
   },
   approach: {
     title: APPROACH_TITLE,

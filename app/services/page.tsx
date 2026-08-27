@@ -42,7 +42,7 @@ export default function ServicesPage() {
             every piece counts. Explore our specialties.
           </>
         }
-        image="/images/scraped/Pqq2TKWlgMDe9nT6krgeFQ6euj0.jpg"
+        image="/images/figma/services-hero.jpg"
       />
 
       {/*

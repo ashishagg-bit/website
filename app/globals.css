@@ -409,27 +409,21 @@ body {
   opacity: 0;
 }
 
-/* Open promise card — Figma 2256:2828. The frame is #3376EB carrying a
-   "Puzzle Illustration Design" raster at 30% opacity (image hash 4c8ef387,
-   the same asset the why-us section uses), over a soft light fall-off and
-   fine grain.
+/* Open promise card — Figma 2256:2828: #3376EB carrying a "Puzzle Illustration
+   Design" raster at 30% opacity, over a soft light fall-off and fine grain.
 
-   This note used to say the card was "not a geometric pattern", which is
-   what the raster actually is: large puzzle outlines embossed into the blue.
-   Until that asset is in the repo the outlines are drawn here instead — same
-   pieces as .puzzle-lines, scaled up and dropped to a soft-light whisper so
-   they read as pressed into the field rather than printed on it. Swap this
-   first layer for the real image when it lands. */
+   That raster is now in the repository (exported from the file as 1k+.png, the
+   frame's own name, and recompressed to JPEG — 403KB to 46KB with no alpha to
+   lose, it was fully opaque). It replaces the CSS approximation that stood in
+   for it: three puzzle outlines, two radial gradients and a turbulence filter
+   standing in for one 500x440 image. The blend mode goes with it — the export
+   already carries the blue, the light and the grain baked together, so
+   soft-lighting it over the card's own #3376EB only muddied both. */
 .promise-grain {
-  background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='620' height='620' viewBox='0 0 620 620'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='1.5' stroke-opacity='0.16'%3E%3Cg transform='translate(18 42) rotate(-9) scale(2.05)'%3E%3Cpath d='M28 44h52a10 10 0 0 1 10-10 10 10 0 0 1 10 10h52v52a10 10 0 0 0-10 10 10 10 0 0 0 10 10v52h-52a10 10 0 0 0-10-10 10 10 0 0 0-10 10H28v-52a10 10 0 0 1 10-10 10 10 0 0 1-10-10z'/%3E%3C/g%3E%3Cg transform='translate(292 286) rotate(11) scale(1.75)'%3E%3Cpath d='M28 44h52a10 10 0 0 1 10-10 10 10 0 0 1 10 10h52v52a10 10 0 0 0-10 10 10 10 0 0 0 10 10v52h-52a10 10 0 0 0-10-10 10 10 0 0 0-10 10H28v-52a10 10 0 0 1 10-10 10 10 0 0 1-10-10z'/%3E%3C/g%3E%3Cg transform='translate(404 -46) rotate(24) scale(1.5)'%3E%3Cpath d='M28 44h52a10 10 0 0 1 10-10 10 10 0 0 1 10 10h52v52a10 10 0 0 0-10 10 10 10 0 0 0 10 10v52h-52a10 10 0 0 0-10-10 10 10 0 0 0-10 10H28v-52a10 10 0 0 1 10-10 10 10 0 0 1-10-10z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"),
-    radial-gradient(130% 100% at 82% 6%, rgba(255, 255, 255, 0.5) 0%, transparent 62%),
-    radial-gradient(90% 80% at 12% 98%, rgba(12, 42, 110, 0.42) 0%, transparent 64%),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
-  background-size: cover, 100% 100%, 100% 100%, 180px 180px;
-  background-position: center, 0 0, 0 0, 0 0;
-  background-repeat: no-repeat, no-repeat, no-repeat, repeat;
-  mix-blend-mode: soft-light;
+  background-image: url("/images/figma/promise-texture.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 /* Open promise: number and title sit together at the top, body drops to the
