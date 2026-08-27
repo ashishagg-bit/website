@@ -2,8 +2,16 @@ import { Display, Kicker } from "@/components/ui";
 import { methodItems } from "@/lib/home-content";
 
 /**
- * "our method" — Figma node 1:674. Four 400px cards on an 8px gutter; the row
- * overflows the 1328px content box in the design, so it scrolls horizontally.
+ * "our method" — Figma 2256:1421. Four cards on an 8px gutter, running off the
+ * right edge of the frame: at the design width they sit at x=56, 464, 872 and
+ * 1280, so the last one reaches 1680 against a 1440 frame and the row is meant
+ * to bleed past the viewport and scroll.
+ *
+ * The cards were a fixed 400px, which only bleeds up to about 1650px of
+ * viewport. Past that the whole row fits on screen and the design's run-off
+ * turns into dead space — roughly 240px of it at 1920. Width is now the
+ * frame's own proportion (400/1440 = 27.78vw), so the row always overruns the
+ * screen and the cards keep their scale relative to it.
  */
 export function Method() {
   return (
@@ -19,9 +27,11 @@ export function Method() {
         {methodItems.map((item) => (
           <li
             key={item.title}
-            className="flex w-[320px] shrink-0 snap-start flex-col gap-6 sm:w-[400px]"
+            className="flex w-[320px] min-w-[320px] shrink-0 snap-start flex-col gap-6 sm:w-[27.78vw]"
           >
-            <div className="relative h-[420px] overflow-clip rounded-lg sm:h-[500px]">
+            {/* 400x524 in the frame, so the image scales with the card rather
+                than sitting at a fixed height beside a fluid width. */}
+            <div className="relative aspect-[400/524] overflow-clip rounded-lg">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 loading="lazy"

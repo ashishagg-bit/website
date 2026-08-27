@@ -409,14 +409,26 @@ body {
   opacity: 0;
 }
 
-/* Promise card 01 in the frame is a blue field with fine grain and a soft
-   light fall-off, not a geometric pattern. */
+/* Open promise card — Figma 2256:2828. The frame is #3376EB carrying a
+   "Puzzle Illustration Design" raster at 30% opacity (image hash 4c8ef387,
+   the same asset the why-us section uses), over a soft light fall-off and
+   fine grain.
+
+   This note used to say the card was "not a geometric pattern", which is
+   what the raster actually is: large puzzle outlines embossed into the blue.
+   Until that asset is in the repo the outlines are drawn here instead — same
+   pieces as .puzzle-lines, scaled up and dropped to a soft-light whisper so
+   they read as pressed into the field rather than printed on it. Swap this
+   first layer for the real image when it lands. */
 .promise-grain {
   background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320' viewBox='0 0 320 320'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='2' stroke-opacity='0.30'%3E%3Cpath d='M28 44h52a10 10 0 0 1 10-10 10 10 0 0 1 10 10h52v52a10 10 0 0 0-10 10 10 10 0 0 0 10 10v52h-52a10 10 0 0 0-10-10 10 10 0 0 0-10 10H28v-52a10 10 0 0 1 10-10 10 10 0 0 1-10-10z'/%3E%3Cpath d='M196 190h46a9 9 0 0 1 9-9 9 9 0 0 1 9 9h46v46a9 9 0 0 0-9 9 9 9 0 0 0 9 9v46h-46a9 9 0 0 0-9-9 9 9 0 0 0-9 9h-46v-46a9 9 0 0 1 9-9 9 9 0 0 1-9-9z'/%3E%3C/g%3E%3C/svg%3E"),
     radial-gradient(120% 90% at 78% 12%, rgba(255, 255, 255, 0.42) 0%, transparent 58%),
     radial-gradient(90% 80% at 15% 95%, rgba(12, 42, 110, 0.38) 0%, transparent 60%),
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
-  background-size: 100% 100%, 100% 100%, 180px 180px;
+  background-size: 440px 440px, 100% 100%, 100% 100%, 180px 180px;
+  background-position: 62% 28%, 0 0, 0 0, 0 0;
+  background-repeat: no-repeat, no-repeat, no-repeat, repeat;
   mix-blend-mode: soft-light;
 }
 
