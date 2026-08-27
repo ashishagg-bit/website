@@ -38,6 +38,19 @@ export type ServicePageData = {
   closing: { title: string; body: string; image: string };
 };
 
+/**
+ * Closing-band photography.
+ *
+ * Every service used the same photograph here, which is the defect this set
+ * exists to clear: five pages arguing for five different specialities behind
+ * one identical picture. These are the closest fit available in the scraped
+ * library, chosen per speciality and all distinct.
+ *
+ * They are NOT the Figma photographs. The frames specify their own images
+ * (2256:12811 and its siblings, one per page) and those files are not in the
+ * repository — this session cannot reach figma.com, so they have to arrive by
+ * hand. Replace these the moment they do; that is a one-line edit each.
+ */
 const APPROACH_TITLE = "Comprehensive, calm, and rooted in evidence.";
 const CLOSING = {
   title: "Schedule Your Evaluation",
@@ -123,7 +136,7 @@ export const lungs: ServicePageData = {
       },
     ],
   },
-  closing: { ...CLOSING, image: "/images/scraped/41W4msn8A5xW2nbNOonFypPQ.jpg" },
+  closing: { ...CLOSING, image: "/images/scraped/1xImPKfaVIwVWRaj2OXuBmLUT2E.jpg" },
 };
 
 /** Cardiovascular — frame 103:29892. */
@@ -271,7 +284,7 @@ export const cardiovascular: ServicePageData = {
       },
     ],
   },
-  closing: { ...CLOSING, image: "/images/scraped/41W4msn8A5xW2nbNOonFypPQ.jpg" },
+  closing: { ...CLOSING, image: "/images/scraped/AC2cC1c4vV9tRfYLtq2lf4Xc.jpg" },
 };
 
 /** Sleep — frame 2109:886. */
@@ -332,7 +345,7 @@ export const sleep: ServicePageData = {
       },
     ],
   },
-  closing: { ...CLOSING, image: "/images/scraped/41W4msn8A5xW2nbNOonFypPQ.jpg" },
+  closing: { ...CLOSING, image: "/images/scraped/4OSBaHObMlbjYP7NUCUgbVAQ.jpg" },
 };
 
 /** Allergy & Sensitivity — frame 2031:3776. */
@@ -381,7 +394,7 @@ export const allergy: ServicePageData = {
       },
     ],
   },
-  closing: { ...CLOSING, image: "/images/scraped/41W4msn8A5xW2nbNOonFypPQ.jpg" },
+  closing: { ...CLOSING, image: "/images/scraped/0HUPsipnJwiW8Wacf4kCltNs96o.jpg" },
 };
 
 /** Wellness & Preventive Medicine — frame 2031:6398. */
@@ -495,7 +508,7 @@ export const wellness: ServicePageData = {
       },
     ],
   },
-  closing: { ...CLOSING, image: "/images/scraped/41W4msn8A5xW2nbNOonFypPQ.jpg" },
+  closing: { ...CLOSING, image: "/images/scraped/793ONR8hKKyrrxWSaatYJDLTY.jpg" },
 };
 
 export const servicePages: Record<string, ServicePageData> = {

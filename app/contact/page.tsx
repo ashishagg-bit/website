@@ -34,7 +34,12 @@ export default function ContactPage() {
         }
         body="Send a message below or reach us by phone, text, or email. We typically respond within one business day."
         cta={null}
-        image="/images/scraped/Ok6cd4z826F0Gks9sFfcGFjFzY.jpg"
+        /* Contact used the Lungs hero, so the two pages opened on the same
+           photograph. This is a consultation shot from the scraped library —
+           closer in subject and, more to the point, not a duplicate. The Figma
+           frame (2256:8643) has its own image, which is not in the repository
+           yet; swap it here when it arrives. */
+        image="/images/scraped/Rf04pBe6rnVQfH4IqhWEgHbAP4.webp"
       />
 
       <section className="flex w-full flex-col items-center bg-white px-6 py-16 sm:px-14 sm:py-[104px]">
