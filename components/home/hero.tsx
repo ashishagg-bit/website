@@ -74,26 +74,51 @@ export function Hero() {
         </div>
       </div>
 
-      {/* FEATURED IN — Figma I64:10192;64:10507 */}
-      <div className="relative z-[1] flex w-full flex-col items-center gap-6 overflow-clip bg-[var(--cream)] px-6 pb-12 pt-10 sm:px-14">
+      {/* FEATURED IN — Figma 2256:895. The five mastheads run as a marquee
+          rather than a static row: laid out flat they only fill the frame at
+          the design width, and on anything wider they strand in the middle of
+          a very wide band.
+
+          The track carries the list twice and slides exactly half its width,
+          so the second copy lands where the first began and the loop has no
+          visible seam. The edges are masked so logos fade in and out instead
+          of being cut at the viewport. `aria-hidden` on the duplicate keeps a
+          screen reader from reading all five mastheads a second time. */}
+      <div className="relative z-[1] flex w-full flex-col items-center gap-6 overflow-clip bg-[var(--cream)] px-0 pb-12 pt-10">
         <p className="eyebrow">FEATURED IN</p>
-        <ul className="flex w-full max-w-[1330px] flex-wrap items-center justify-between gap-x-10 gap-y-6">
-          {featuredIn.map((p) => (
-            <li key={p.name} className="flex flex-1 items-center justify-center">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                loading="lazy"
-                decoding="async"
-                src={p.src}
-                alt={p.name}
-                width={p.w}
-                height={p.h}
-                style={{ width: p.w, height: p.h }}
-                className="max-w-full object-contain"
-              />
-            </li>
-          ))}
-        </ul>
+        <div
+          className="relative w-full overflow-hidden"
+          style={{
+            maskImage:
+              "linear-gradient(90deg, transparent, black 8%, black 92%, transparent)",
+            WebkitMaskImage:
+              "linear-gradient(90deg, transparent, black 8%, black 92%, transparent)",
+          }}
+        >
+          <ul className="press-marquee flex w-max items-center">
+            {[0, 1].map((copy) =>
+              featuredIn.map((p) => (
+                <li
+                  key={`${copy}-${p.name}`}
+                  aria-hidden={copy === 1 || undefined}
+                  className="flex w-[220px] shrink-0 items-center justify-center sm:w-[288px]"
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    loading="lazy"
+                    decoding="async"
+                    src={p.src}
+                    alt={copy === 0 ? p.name : ""}
+                    width={p.w}
+                    height={p.h}
+                    style={{ width: p.w, height: p.h }}
+                    className="max-w-full object-contain"
+                  />
+                </li>
+              )),
+            )}
+          </ul>
+        </div>
       </div>
     </section>
   );

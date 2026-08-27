@@ -513,3 +513,30 @@ body {
     opacity: 1;
   }
 }
+
+/* "FEATURED IN" press ticker — Figma 2256:895 lays the five mastheads across a
+   1440 row in equal 288px cells. The row is wider than any viewport once it
+   repeats, so it marquees: the track holds the logos twice and slides exactly
+   half its width, which puts the second copy where the first began and makes
+   the loop seamless with no jump at the wrap.
+
+   Paused on hover so a masthead can be read, and stilled entirely under
+   reduced motion — the logos are the content, the movement is decoration. */
+@keyframes press-marquee {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
+
+.press-marquee {
+  animation: press-marquee 40s linear infinite;
+  will-change: transform;
+}
+
+.press-marquee:hover,
+.press-marquee:focus-within {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .press-marquee { animation: none; }
+}
