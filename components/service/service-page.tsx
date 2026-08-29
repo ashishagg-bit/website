@@ -36,6 +36,7 @@ export function ServicePage({ data }: { data: ServicePageData }) {
         paragraphs={data.approach.paragraphs}
         bullets={data.approach.bullets}
         highlight={data.approach.highlight}
+        cards={data.approach.cards}
       />
 
       {/* Allergy and Wellness have no Conditions section in their frames

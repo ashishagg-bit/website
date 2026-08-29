@@ -62,6 +62,7 @@ export default function ServicesPage() {
            open tile takes the photograph and the "Learn more" pill but keeps
            its column, because widening one of four reflows the whole row. */
         evenWidths
+        measure="max-w-[700px]"
       />
 
       <VipBand />

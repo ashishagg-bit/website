@@ -116,6 +116,7 @@ export function Services({
   lastTile = vipTile,
   rows,
   evenWidths = false,
+  measure = "",
 }: {
   eyebrow?: string;
   title?: React.ReactNode;
@@ -129,6 +130,11 @@ export function Services({
   /** Keep every tile the same width — "All services" (2256:6331) is an even
       4x2 grid, and widening one of four columns reflows the whole row. */
   evenWidths?: boolean;
+  /** Cap on the header measure. "All services" (2256:6897) sets 700, which
+      wraps its long headline to the two lines the frame draws; the homepage
+      frame leaves its shorter headline on one line, and capping it there would
+      break it in two — our Kalice runs wider than the file's metrics. */
+  measure?: string;
 } = {}) {
   const sizes = rows ?? [3, Math.max(tiles.length - 3, 0)];
   const bands: Tile[][] = [];
@@ -141,7 +147,7 @@ export function Services({
 
   return (
     <section className="flex w-full flex-col items-center gap-12 overflow-clip bg-[linear-gradient(180deg,#ffffff_0%,var(--cream)_13.444%)] px-6 py-16 sm:px-14 sm:py-[104px] lg:gap-20">
-      <header className="flex flex-col items-center gap-6">
+      <header className={`flex w-full flex-col items-center gap-6 ${measure}`}>
         <div className="flex flex-col items-center gap-4 text-center">
           <div className="flex flex-col items-center gap-2 text-[var(--ink)]">
             <Kicker>{eyebrow}</Kicker>

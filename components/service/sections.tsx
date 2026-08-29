@@ -34,6 +34,7 @@ export function Approach({
   body,
   bullets,
   highlight = 1,
+  cards,
   cta = { href: "/contact", label: "Request Appointment" },
 }: {
   title: React.ReactNode;
@@ -43,9 +44,12 @@ export function Approach({
   body?: React.ReactNode;
   bullets?: string[];
   highlight?: number;
+  /** Allergy's explainer cards — see the Approach doc comment. */
+  cards?: { title: string; body: string }[];
   cta?: { href: string; label: string };
 }) {
-  const hasList = Boolean(bullets && bullets.length > 0);
+  const hasCards = Boolean(cards && cards.length > 0);
+  const hasList = Boolean(bullets && bullets.length > 0) && !hasCards;
   return (
     <section className="flex w-full flex-col items-center justify-center gap-12 overflow-clip bg-white px-6 py-16 sm:px-14 lg:flex-row lg:items-stretch lg:gap-[120px] lg:px-20 lg:py-[104px]">
       <div className="flex w-full flex-col items-center gap-10 lg:flex-1 lg:gap-16">
@@ -65,9 +69,49 @@ export function Approach({
           <div className="flex flex-col gap-4 text-base leading-6 text-black/60 lg:mt-auto lg:pt-10 [&>p]:mb-0">
             {paragraphs?.map((t) => <p key={t.slice(0, 24)}>{t}</p>)}
             {body}
+            {/* On the allergy frame the checks are chips under the copy — a
+                wrapping row of 48-tall pills, two to a line — rather than the
+                bordered column the other services put on the right. */}
+            {hasCards && bullets && bullets.length > 0 && (
+              <ul className="mt-2 flex flex-wrap gap-2">
+                {bullets.map((b) => (
+                  <li
+                    key={b}
+                    className={`flex items-center gap-3 rounded-xl border px-3 py-3 ${HAIRLINE}`}
+                  >
+                    <Check />
+                    <span className="text-base leading-6 text-[var(--ink-80)]">
+                      {b}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         </div>
       </div>
+
+      {hasCards && (
+        <div className="flex w-full flex-col lg:flex-1">
+          <ul
+            className={`flex flex-col overflow-clip rounded-2xl border ${HAIRLINE}`}
+          >
+            {cards!.map((c, i) => (
+              <li
+                key={c.title}
+                className={`flex flex-col gap-3 p-8 ${
+                  i < cards!.length - 1 ? `border-b ${HAIRLINE}` : ""
+                }`}
+              >
+                <h3 className="text-base leading-6 text-[var(--ink)]">
+                  {c.title}
+                </h3>
+                <p className="text-base leading-6 text-black/60">{c.body}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
 
       {hasList && (
       <div className="w-full lg:flex-1">

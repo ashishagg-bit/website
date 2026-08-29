@@ -30,6 +30,9 @@ export type ServicePageData = {
     paragraphs: string[];
     bullets: string[];
     highlight?: number;
+    /** Allergy's frame (2256:21015) puts three explainer cards where the other
+        pages put the checklist, and moves the checks into the copy column. */
+    cards?: { title: string; body: string }[];
   };
   conditions: Condition[];
   diagnostics: {
@@ -373,6 +376,22 @@ export const allergy: ServicePageData = {
       "Evidence-based approaches",
     ],
     highlight: 1,
+    // Verbatim from 2256:21015, which puts these three where the other service
+    // frames put the checklist.
+    cards: [
+      {
+        title: "Comprehensive Testing Services",
+        body: "We offer thorough testing for both food and environmental allergies to identify substances causing your immune system to react. Our testing helps pinpoint specific triggers in foods, pollen, pet dander, dust mites, mold, and insect venom.",
+      },
+      {
+        title: "Why Get Tested?",
+        body: "Allergy testing can identify the exact allergens causing your symptoms, prevent dangerous reactions like anaphylaxis, and improve quality of life by reducing sneezing, itchy eyes, hives, breathing difficulties, sinus infections, sleep disruption, and migraine headaches.",
+      },
+      {
+        title: "Our Testing Process",
+        body: "Under the expert guidance of our board-certified physician, we conduct comprehensive scratch allergy testing as well as RAST allergy testing to detect IgE antibodies in the blood. This allows us to develop targeted treatment plans that go beyond simply managing symptoms.",
+      },
+    ],
   },
   conditions: [],
   diagnostics: {
