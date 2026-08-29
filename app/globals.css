@@ -390,38 +390,16 @@ body {
    its Symptoms / Risk / Testing detail (Figma 92:27676 on the service frames). */
 .condrow > .cond {
   background: rgba(255, 255, 255, 0.08);
-  transition: background-color 0.4s ease;
-}.condrow > .cond[data-open],
-.condrow > .cond:hover,
-.condrow > .cond:focus-within{ background: rgba(255, 255, 255, 0.16); }.condrow:hover > .cond[data-open]:not(:hover),
-.condrow:focus-within > .cond[data-open]:not(:focus-within){ background: rgba(255, 255, 255, 0.08); }
+}
 
-/* The detail drops out over the cards below rather than growing the row —
-   otherwise every hover reflows the whole section downwards. */
-.condrow > .cond { position: relative; }.condrow > .cond[data-open],
-.condrow > .cond:hover,
-.condrow > .cond:focus-within{ z-index: 5; }
+/* The detail panel stays in flow and stays open. It used to be absolutely
+   positioned at top:100% with max-height 0, revealed on hover — which meant
+   eight of the nine conditions were unreadable at any moment and the one you
+   opened dropped over its neighbours. Figma 2256:19984 draws every card
+   expanded, so there is nothing to reveal and nothing to overlap. */
 .cond .cond-detail {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  max-height: 0;
-  opacity: 0;
-  overflow: hidden;
-  border-radius: 0 0 0.5rem 0.5rem;
-  transition: max-height 0.45s ease, opacity 0.3s ease;
-}.condrow > .cond[data-open] .cond-detail,
-.condrow > .cond:hover .cond-detail,
-.condrow > .cond:focus-within .cond-detail{
-  max-height: 14rem;
-  opacity: 1;
   background: #223046;
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
-}.condrow:hover > .cond[data-open]:not(:hover) .cond-detail,
-.condrow:focus-within > .cond[data-open]:not(:focus-within) .cond-detail{
-  max-height: 0;
-  opacity: 0;
+  border-radius: 0 0 0.5rem 0.5rem;
 }
 
 /* Open promise card — Figma 2256:2828: #3376EB carrying a "Puzzle Illustration

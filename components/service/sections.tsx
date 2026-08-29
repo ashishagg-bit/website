@@ -88,14 +88,13 @@ export function Approach({
 export type Condition = {
   name: string;
   details?: { label: string; value: string }[];
-  /** Marks the card the frame captured open. Falls back to the first with detail. */
-  open?: boolean;
 };
 
 /**
- * "Conditions we treat." — Figma node 92:27676: ink panel, pill cards, one of
- * them open showing its Symptoms / Risk / Testing detail. Open follows the
- * cursor (see `.condrow` in globals.css) and rests on the first card carrying
+ * "Conditions we treat." — Figma 2256:19984: an ink panel of cards, every one
+ * of them open on its Symptoms / Risk / Testing detail, flowing three to a row
+ * with each column packing to its own height. Nothing to open, so nothing
+ * hidden — the earlier version rested open on the first card carrying
  * detail, which is the state the frames captured.
  */
 export function Conditions({
@@ -105,12 +104,6 @@ export function Conditions({
   title?: React.ReactNode;
   items: Condition[];
 }) {
-  const marked = items.findIndex((c) => c.open);
-  const restsOn =
-    marked >= 0
-      ? marked
-      : items.findIndex((c) => c.details && c.details.length > 0);
-
   return (
     <section className="flex w-full flex-col items-center gap-10 overflow-clip bg-[var(--ink)] px-6 py-16 sm:px-14 lg:gap-14 lg:py-24">
       <header className="flex w-full max-w-[700px] flex-col items-center gap-4 text-center text-white">
@@ -118,11 +111,20 @@ export function Conditions({
         <Display>{title}</Display>
       </header>
 
+      {/* Every card is open, and its panel sits in flow. The frame
+          (2256:19984) draws all nine expanded at once — symptoms, risk and
+          testing readable side by side — so a reader can compare conditions
+          without hunting. This used to collapse them and drop a single panel
+          over the cards below on hover, which hid eight of the nine and made
+          the one you opened cover its neighbours.
+
+          `items-start` lets each column pack to its own height rather than
+          stretching every card to match the tallest, which is what gives the
+          grid the staggered look the frame has. */}
       <ul className="condrow grid w-full max-w-[1328px] items-start gap-2 sm:grid-cols-2 lg:grid-cols-3">
-        {items.map((c, i) => (
+        {items.map((c) => (
           <li
             key={c.name}
-            {...(i === restsOn ? { "data-open": "" } : {})}
             className="cond flex flex-col rounded-2xl p-2"
           >
             <div className="flex items-center gap-3">
@@ -137,14 +139,8 @@ export function Conditions({
               </span>
             </div>
 
-            {/* `.cond-detail` in globals.css is an absolutely positioned
-                drop-down, and below 1024px it also unhides every panel — which
-                would stack all nine on top of the cards. Below that breakpoint
-                the panel goes back in flow, so the card grows the way the frame
-                draws it. `rounded-b-2xl!` beats the 8px radius the same rule
-                carries, so the panel meets the 16px card. */}
             {c.details && c.details.length > 0 && (
-              <dl className="cond-detail flex flex-col gap-2 rounded-b-2xl! p-2 max-lg:relative! max-lg:top-0! lg:flex-row">
+              <dl className="cond-detail flex flex-col gap-2 rounded-b-2xl p-2 lg:flex-row">
                 {c.details.map((d) => (
                   <div
                     key={d.label}

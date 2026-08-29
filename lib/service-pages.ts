@@ -181,7 +181,7 @@ export const cardiovascular: ServicePageData = {
           {
             // Node 103:30987 — the card the frame captures open.
             name: "Congestive Heart Failure",
-            open: true,
+
             details: [
               { label: "Symptoms", value: "Shortness of breath, fatigue, swelling in legs/ankles" },
               { label: "Risk", value: "Previous heart attack, hypertension, diabetes" },
