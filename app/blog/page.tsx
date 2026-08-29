@@ -1,7 +1,8 @@
 import { Metadata } from "next";
 import { ClosingCta } from "@/components/closing-cta";
 import Link from "next/link";
-import { getAllPosts, type Post } from "@/lib/posts";
+import { getAllPosts } from "@/lib/posts";
+import { ArchiveCard, FeaturedCard } from "@/components/blog-card";
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -16,66 +17,6 @@ export const metadata: Metadata = {
  * Cream hero with centred copy (no photograph), a two-up featured pair split by
  * a hairline rule, then the "All Blogs" 3-column grid.
  */
-
-/** Featured pair card — Figma 2147:10362 (632 wide, 500px image). */
-function FeaturedCard({ post }: { post: Post }) {
-  return (
-    <Link href={`/blog/${post.slug}`} className="group flex flex-col">
-      <div className="relative aspect-[632/500] w-full overflow-clip rounded-lg">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={post.image}
-          alt=""
-          className="absolute inset-0 size-full object-cover transition-transform duration-500 group-hover:scale-105"
-        />
-        <div
-          aria-hidden
-          className="absolute inset-0 bg-[rgba(254,181,91,0.2)] mix-blend-soft-light"
-        />
-      </div>
-      <p className="eyebrow mt-6 text-[var(--ink-60)]">
-        {post.author} · {post.date}
-      </p>
-      <h2 className="mt-4 font-kalice text-[26px] leading-8 tracking-[1px] text-[var(--ink)] group-hover:text-[var(--blue)]">
-        {post.title}
-      </h2>
-      <p className="mt-3 text-base leading-[22px] text-[var(--ink-60)]">
-        {post.excerpt}
-      </p>
-    </Link>
-  );
-}
-
-/** Archive card — Figma 2147:10394 (421 wide, 300px image). */
-function ArchiveCard({ post }: { post: Post }) {
-  return (
-    <Link href={`/blog/${post.slug}`} className="group flex flex-col">
-      <div className="relative aspect-[421/300] w-full overflow-clip rounded-lg">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          loading="lazy"
-          decoding="async"
-          src={post.image}
-          alt=""
-          className="absolute inset-0 size-full object-cover transition-transform duration-500 group-hover:scale-105"
-        />
-        <div
-          aria-hidden
-          className="absolute inset-0 bg-[rgba(254,181,91,0.2)] mix-blend-soft-light"
-        />
-      </div>
-      <p className="eyebrow mt-6 text-[var(--ink-60)]">
-        {post.author} · {post.date}
-      </p>
-      <h3 className="mt-4 font-kalice text-lg leading-[22px] tracking-[1px] text-[var(--ink)] group-hover:text-[var(--blue)]">
-        {post.title}
-      </h3>
-      <p className="mt-3 text-[15px] leading-[22px] text-[var(--ink-60)]">
-        {post.excerpt}
-      </p>
-    </Link>
-  );
-}
 
 export default function BlogIndex() {
   const posts = getAllPosts();
@@ -119,10 +60,20 @@ export default function BlogIndex() {
       {/* All Blogs — Figma 2147:10388. */}
       <section className="w-full bg-[var(--cream)] px-6 pb-16 pt-16 sm:px-14 lg:pb-[104px] lg:pt-20">
         <div className="mx-auto w-full max-w-[1328px]">
-          <h2 className="font-kalice text-[clamp(1.75rem,1.2rem+1.4vw,36px)] leading-[44px] tracking-[1px] text-[var(--ink)]">
-            All Blogs
-          </h2>
-          <div className="mt-12 grid gap-x-8 gap-y-12 md:grid-cols-2 lg:mt-[84px] lg:grid-cols-3 lg:gap-y-20">
+          {/* The frame calls this "All Articles" and sets it at 34/44 with the
+              running count beside it, 40 above the grid — not "All Blogs" at
+              36 with 84 under it. The count is the real number of posts, so it
+              stays true as the client publishes; the frame's "23 articles" is
+              mock copy. */}
+          <div className="flex flex-wrap items-baseline gap-x-10 gap-y-2">
+            <h2 className="font-kalice text-[34px] leading-[44px] tracking-[1px] text-[var(--ink)]">
+              All Articles
+            </h2>
+            <p className="eyebrow text-[var(--ink-60)]">
+              {posts.length} {posts.length === 1 ? "article" : "articles"}
+            </p>
+          </div>
+          <div className="mt-10 grid gap-x-8 gap-y-12 md:grid-cols-2 lg:grid-cols-3 lg:gap-y-20">
             {rest.map((post) => (
               <ArchiveCard key={post.slug} post={post} />
             ))}

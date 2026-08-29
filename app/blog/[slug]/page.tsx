@@ -2,7 +2,9 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Eyebrow, PrimaryButton } from "@/components/ui";
-import { getAllPosts, getPost, renderMarkdown } from "@/lib/posts";
+import { ArchiveCard } from "@/components/blog-card";
+import { ClosingCta } from "@/components/closing-cta";
+import { getAllPosts, getHeadings, getPost, renderMarkdown } from "@/lib/posts";
 
 export function generateStaticParams() {
   return getAllPosts().map((p) => ({ slug: p.slug }));
@@ -35,6 +37,9 @@ export default async function BlogPostPage(props: PageProps<"/blog/[slug]">) {
   const post = getPost(slug);
   if (!post) notFound();
   const html = renderMarkdown(post.body);
+  const headings = getHeadings(post.body);
+  const shareUrl = encodeURIComponent(`https://aviishaaya.com/blog/${post.slug}/`);
+  const shareTitle = encodeURIComponent(post.title);
   const others = getAllPosts().filter((p) => p.slug !== slug).slice(0, 3);
 
   const ldJson = {
@@ -55,85 +60,145 @@ export default async function BlogPostPage(props: PageProps<"/blog/[slug]">) {
 
   return (
     <>
-      <article>
-        <header className="gradient-bg">
-          <div className="mx-auto max-w-3xl px-5 sm:px-8 pt-14 pb-12 sm:pt-20 sm:pb-16">
-            <nav className="text-xs uppercase tracking-[0.18em] text-[var(--ink-60)] mb-6">
-              <Link href="/blog" className="hover:text-[var(--ink)]">Blog</Link>
-              <span className="mx-2">/</span>
-              <span>Article</span>
-            </nav>
-            <Eyebrow>Article</Eyebrow>
-            <h1 className="font-kalice text-3xl sm:text-5xl text-[var(--ink)] mt-4 tracking-tight text-balance">
-              {post.title}
-            </h1>
-            <div className="mt-6 flex items-center gap-3 text-sm text-[var(--ink-60)]">
-              <span className="inline-block w-9 h-9 rounded-full bg-gradient-to-br from-[var(--blue)] to-[var(--ink)] grid place-items-center text-white font-kalice">
-                A
-              </span>
-              <span>
-                <span className="text-[var(--ink)] font-medium">Dr. Avi Ishaaya</span>
-                <span className="mx-2">·</span>
-                {post.date}
-              </span>
-            </div>
+      {/* Hero — Figma 2256:33853: 160 under the nav, an 880 measure, and the
+          byline 32 above the title. The breadcrumb, the "Article" eyebrow and
+          the avatar disc that stood here are not in the frame. */}
+      <header className="w-full bg-[var(--cream)] px-6 pt-12 sm:px-14 lg:pt-[67px]">
+        <div className="mx-auto flex w-full max-w-[880px] flex-col gap-8">
+          <p className="eyebrow text-[var(--ink-60)]">
+            {post.author} · {post.date}
+          </p>
+          <h1 className="font-kalice text-[clamp(2rem,1.3rem+2.6vw,3.5rem)] leading-[1.21] tracking-[1px] text-[var(--ink)]">
+            {post.title}
+          </h1>
+        </div>
+      </header>
+
+      <article className="w-full bg-[var(--cream)] px-6 py-16 sm:px-14 lg:py-20">
+        <div className="mx-auto w-full max-w-[1328px]">
+          {/* The frame opens the article on the post's own photograph at
+              1328x500. The page showed no image at all. */}
+          <div className="relative aspect-[1328/500] w-full overflow-clip rounded-lg">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={post.image}
+              alt=""
+              className="absolute inset-0 size-full object-cover"
+            />
+            <div
+              aria-hidden
+              className="absolute inset-0 bg-[rgba(254,181,91,0.2)] mix-blend-soft-light"
+            />
           </div>
-        </header>
 
-        <div className="mx-auto max-w-3xl px-5 sm:px-8 py-14">
-          <div
-            className="prose-article"
-            dangerouslySetInnerHTML={{ __html: html }}
-          />
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }}
-          />
+          {/* 360 contents rail beside an 848 measure, 120 apart. */}
+          <div className="mt-16 flex flex-col gap-12 lg:mt-20 lg:flex-row lg:gap-[120px]">
+            <aside className="w-full shrink-0 lg:sticky lg:top-24 lg:h-fit lg:w-[360px]">
+              {headings.length > 0 && (
+                <nav aria-label="On this page">
+                  <ul className="flex flex-col">
+                    {headings.map((h) => (
+                      <li key={h.id}>
+                        <a
+                          href={`#${h.id}`}
+                          className="block py-2 text-base leading-6 text-[var(--ink-60)] transition-colors hover:text-[var(--blue)]"
+                        >
+                          {h.text}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </nav>
+              )}
+              <div className="mt-10 flex flex-col gap-5">
+                <p className="eyebrow text-[var(--ink-60)]">share</p>
+                <div className="flex flex-wrap items-center gap-4 text-base leading-6">
+                  <a
+                    className="text-[var(--blue)] transition-colors hover:text-[var(--ink)]"
+                    href={`https://x.com/intent/tweet?url=${shareUrl}&text=${shareTitle}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    X
+                  </a>
+                  <a
+                    className="text-[var(--blue)] transition-colors hover:text-[var(--ink)]"
+                    href={`https://www.linkedin.com/sharing/share-offsite/?url=${shareUrl}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    LinkedIn
+                  </a>
+                  <a
+                    className="text-[var(--blue)] transition-colors hover:text-[var(--ink)]"
+                    href={`mailto:?subject=${shareTitle}&body=${shareUrl}`}
+                  >
+                    Email
+                  </a>
+                </div>
+              </div>
+            </aside>
 
-          <div className="mt-14 rounded-2xl border border-[var(--hairline)] bg-white p-7">
-            <div className="text-xs uppercase tracking-[0.22em] text-[var(--blue)]">Next steps</div>
-            <h3 className="mt-2 font-kalice text-2xl text-[var(--ink)]">
-              Have questions about your health?
-            </h3>
-            <p className="mt-2 text-[var(--ink)]/85">
-              Our team would be honored to help you build a personalized plan.
-            </p>
-            <div className="mt-5">
-              <PrimaryButton href="/contact">Request Appointment</PrimaryButton>
+            <div className="min-w-0 flex-1">
+              <div
+                className="prose-article"
+                dangerouslySetInnerHTML={{ __html: html }}
+              />
+              <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }}
+              />
+
+              <div className="mt-14 rounded-2xl border border-[var(--hairline)] bg-white p-7">
+                <div className="text-xs uppercase tracking-[0.22em] text-[var(--blue)]">
+                  Next steps
+                </div>
+                <h3 className="mt-2 font-kalice text-2xl text-[var(--ink)]">
+                  Have questions about your health?
+                </h3>
+                <p className="mt-2 text-[var(--ink)]/85">
+                  Our team would be honored to help you build a personalized plan.
+                </p>
+                <div className="mt-5">
+                  <PrimaryButton href="/contact">Request Appointment</PrimaryButton>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </article>
 
+      {/* "Discover our other articles" — Figma 2256:34461. The band is 80
+          over and 120 under, a 48/60 heading beside the "View All Articles"
+          link, then 40 down to the same 421-wide cards the archive uses. What
+          stood here was a bordered card with a gradient block where the
+          photograph goes, and no excerpt. */}
       {others.length > 0 && (
-        <section className="py-20 bg-white border-t border-[var(--hairline)]">
-          <div className="mx-auto max-w-7xl px-5 sm:px-8">
-            <Eyebrow>Articles</Eyebrow>
-            <h2 className="font-kalice text-3xl text-[var(--ink)] mt-4 tracking-tight">
-              Discover our other articles
-            </h2>
-            <div className="mt-10 grid md:grid-cols-3 gap-6">
-              {others.map((p) => (
-                <Link
-                  key={p.slug}
-                  href={`/blog/${p.slug}`}
-                  className="group block h-full rounded-2xl border border-[var(--hairline)] overflow-hidden hover:shadow-xl hover:shadow-[var(--ink)]/5 transition-all"
-                >
-                  <div className={`aspect-[16/10] bg-gradient-to-br ${p.gradient}`} />
-                  <div className="p-6">
-                    <div className="text-xs text-[var(--ink-60)]">
-                      Avi Ishaaya · {p.date}
-                    </div>
-                    <h3 className="mt-2 font-kalice text-lg text-[var(--ink)] group-hover:text-[var(--blue)] transition-colors">
-                      {p.title}
-                    </h3>
-                  </div>
-                </Link>
+        <section className="w-full bg-white px-6 pb-20 pt-12 sm:px-14 lg:pb-[120px] lg:pt-20">
+          <div className="mx-auto w-full max-w-[1328px]">
+            <div className="flex flex-wrap items-baseline gap-x-10 gap-y-3">
+              <h2 className="font-kalice text-[clamp(2rem,1.4rem+2vw,48px)] leading-[1.25] tracking-[1px] text-[var(--ink)]">
+                Discover our other articles
+              </h2>
+              <Link
+                href="/blog"
+                className="text-base leading-[22px] text-[var(--blue)] transition-colors hover:text-[var(--ink)]"
+              >
+                View All Articles →
+              </Link>
+            </div>
+            <div className="mt-10 grid gap-x-8 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
+              {others.slice(0, 3).map((p) => (
+                <ArchiveCard key={p.slug} post={p} />
               ))}
             </div>
           </div>
         </section>
       )}
+
+      {/* The frame closes the post on the standard call to action (2256:35797);
+          the page ended on the related articles instead. */}
+      <ClosingCta />
     </>
   );
 }
