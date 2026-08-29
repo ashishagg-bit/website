@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { ClosingCta } from "@/components/closing-cta";
+import { Space } from "@/components/home/space";
 import { Testimonials } from "@/components/home/testimonials";
 import { featuredIn, homePromises, testimonials } from "@/lib/home-content";
 
@@ -85,7 +85,7 @@ export default function AboutPage() {
           <p className="eyebrow text-[var(--ink-60)]">
             Featured by top news stations
           </p>
-          <ul className="flex w-full flex-wrap items-center justify-between gap-x-10 gap-y-6">
+          <ul className="flex w-full flex-wrap items-center justify-between gap-x-10 gap-y-6 lg:h-10 lg:flex-nowrap">
             {featuredIn.map((p) => (
               <li key={p.name} className="flex flex-1 items-center justify-center">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -108,29 +108,47 @@ export default function AboutPage() {
       {/* Meet Dr. Abraham "Avi" Ishaaya — Figma 2147:4637 */}
       <section className="w-full bg-[var(--cream)] px-6 py-16 sm:px-14 lg:py-[120px]">
         <div className="mx-auto flex w-full max-w-[868px] flex-col items-center text-center">
-          <p className="eyebrow">Meet Dr. Abraham &ldquo;Avi&rdquo; Ishaaya</p>
-          <h2 className="mt-[26px] font-kalice text-[clamp(2rem,1.2rem+2.6vw,3.5rem)] leading-[1.21] tracking-[1px] text-[var(--ink)]">
-            Three decades of comprehensive, preventive care.
+          {/* 14px here, not the 12px eyebrow used elsewhere — 2256:29562 sets
+              this one larger and puts 24 under it. */}
+          <p className="eyebrow !text-sm">
+            Meet Dr. Abraham &ldquo;Avi&rdquo; Ishaaya
+          </p>
+          <h2 className="mt-6 font-kalice text-[clamp(2rem,1.2rem+2.6vw,3.5rem)] leading-[1.21] tracking-[1px] text-[var(--ink)]">
+            Three decades of
+            <br />
+            comprehensive, preventive care.
           </h2>
-          <div className="mt-12 flex flex-col gap-6 text-left text-base leading-6 text-[var(--ink-80)] lg:mt-20">
+          {/* The frame sets this measure at 20px, and its four paragraphs
+              read differently from what stood here — "Wellness Centers" rather
+              than "Centers", "has provided" rather than "has been providing",
+              and a fourth paragraph on the diagnostics that was missing
+              altogether. At 16px the block came out 135 short of the frame. */}
+          <div className="mt-12 flex flex-col gap-6 text-left text-xl leading-[1.24] text-[var(--ink-80)] lg:mt-20">
             <p>
               Dr. Avi Ishaaya is a board-certified physician specializing in
               pulmonary, sleep, internal, and geriatric medicine. As the founder
-              of Dr. Avi Ishaaya Centers in Beverly Hills, he has been providing
-              comprehensive and preventive healthcare since 1996.
+              of Dr. Avi Ishaaya Wellness Centers in Beverly Hills, he has
+              provided comprehensive and preventive healthcare since 1996.
             </p>
             <p>
-              A respected assistant clinical professor at UCLA School of
-              Medicine, Dr. Ishaaya is also a speaker, author, researcher, and
-              medical-legal expert, with appearances on television programs like{" "}
+              Alongside his clinical practice, Dr. Ishaaya has served as an
+              assistant clinical professor at the UCLA School of Medicine. He is
+              also a speaker, author, researcher, and medical-legal expert, and
+              has appeared on television programs including{" "}
               <em>The Doctors</em>.
             </p>
             <p>
-              His holistic approach integrates conventional and functional
-              medicine, focusing on treating root causes rather than just
-              symptoms. His state-of-the-art center offers advanced diagnostics
-              and treatments in cardiovascular wellness, respiratory health,
-              sleep medicine, allergy management, and preventive care.
+              His approach to medicine is holistic and rooted in understanding
+              the whole patient. By bringing conventional and functional
+              medicine together, Dr. Ishaaya looks beyond treating symptoms
+              alone to identify and address the underlying factors affecting
+              your health.
+            </p>
+            <p>
+              At the Wellness Centers, this philosophy comes to life through
+              advanced diagnostics and personalized care across cardiovascular
+              wellness, respiratory health, sleep medicine, allergy management,
+              and preventive medicine.
             </p>
           </div>
         </div>
@@ -146,7 +164,7 @@ export default function AboutPage() {
             </h2>
             <ul className="mt-12 flex flex-col gap-7 lg:mt-20">
               {education.map(([degree, school]) => (
-                <li key={degree} className="text-base leading-6">
+                <li key={degree} className="text-xl leading-[1.24]">
                   <span className="block text-[var(--ink)]">{degree}</span>
                   <span className="block text-[var(--ink-60)]">{school}</span>
                 </li>
@@ -175,13 +193,15 @@ export default function AboutPage() {
         <div className="mx-auto flex w-full max-w-[1280px] flex-col items-center text-center">
           <p className="eyebrow">Board Certifications</p>
           <h2 className="mt-3 font-kalice text-[clamp(2rem,1.2rem+2.6vw,3.5rem)] leading-[1.21] tracking-[1px] text-[var(--ink)]">
-            Dr. Ishaaya is board-certified by
+            Dr. Ishaaya is
+            <br />
+            board-certified by
           </h2>
           <ul className="mt-12 grid w-full max-w-[1000px] overflow-clip rounded-2xl border border-[var(--hairline)] sm:grid-cols-2">
             {certifications.map((c, i) => (
               <li
                 key={c}
-                className={`flex items-center gap-3 px-10 py-10 text-left text-base leading-6 text-[var(--ink)] ${
+                className={`flex items-center gap-3 px-10 py-10 text-left text-lg leading-6 text-[var(--ink)] ${
                   i % 2 === 0 ? "sm:border-r" : ""
                 } ${i < 2 ? "border-b" : ""} border-[var(--hairline)]`}
               >
@@ -190,7 +210,7 @@ export default function AboutPage() {
               </li>
             ))}
           </ul>
-          <p className="mt-12 text-base leading-6 text-[var(--ink-60)]">
+          <p className="mt-12 text-lg leading-6 text-[var(--ink-60)]">
             M.D., FCCP, FAASM, FACGS, MACGS
           </p>
         </div>
@@ -198,19 +218,20 @@ export default function AboutPage() {
 
       {/* Five promises — Figma 2147:5175 */}
       <section className="flex w-full flex-col items-center gap-12 overflow-clip bg-[var(--ink)] px-6 py-16 sm:px-14 lg:gap-20 lg:py-[104px]">
-        <header className="flex w-full max-w-[700px] flex-col items-center gap-4 text-center text-white">
+        <header className="flex w-full max-w-[700px] flex-col items-center gap-6 text-center text-white">
           <div className="flex flex-col items-center gap-3">
             <p className="eyebrow !text-white">Our Commitment to You</p>
             <h2 className="font-kalice text-[clamp(2rem,1.2rem+2.6vw,3.5rem)] leading-[1.21] tracking-[1px]">
-              Five promises at the
+              Five promises at
               <br />
-              heart of our care
+              the heart of our care
             </h2>
           </div>
-          <p className="text-base leading-[22px] text-white/80">
+          <p className="text-lg leading-[1.24] text-white/80">
             Great healthcare isn&rsquo;t only about having the right expertise.
-            It&rsquo;s about how you&rsquo;re treated throughout — the time you
-            are given, the answers you get, and the respect you are shown.
+            It&rsquo;s about how you&rsquo;re treated throughout the entire
+            experience. At Dr. Avi Ishaaya Wellness Centers, these five
+            principles guide the way we care for every patient.
           </p>
         </header>
 
@@ -256,7 +277,11 @@ export default function AboutPage() {
         items={[testimonials[0], testimonials[1], testimonials[4]]}
       />
 
-      <ClosingCta />
+      {/* About closes on "OUr space" (2256:31992), not the generic call to
+          action — the frame is byte-for-byte the homepage's own 1083 band,
+          down to the 671px photo header and the locations row. The closing
+          CTA that stood here is 453 and appears nowhere on this page's frame. */}
+      <Space />
     </>
   );
 }
