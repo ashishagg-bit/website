@@ -388,17 +388,52 @@ body {
    its Symptoms / Risk / Testing detail (Figma 92:27676 on the service frames). */
 .condrow > .cond {
   background: rgba(255, 255, 255, 0.08);
+  transition: background-color 0.4s ease;
+}
+.condrow > .cond[data-open],
+.condrow > .cond:hover,
+.condrow > .cond:focus-within { background: rgba(255, 255, 255, 0.16); }
+.condrow:hover > .cond[data-open]:not(:hover),
+.condrow:focus-within > .cond[data-open]:not(:focus-within) { background: rgba(255, 255, 255, 0.08); }
+
+/* The detail grows the card in flow rather than dropping over the cards below.
+   The list is masonry, so it pushes down only its own column — in Figma
+   2256:17773 the open card shifts the two cards under it while the outer
+   columns stay where they are. An absolutely positioned panel covered its
+   neighbours instead, and expanding every card at once (the state the
+   977-tall spec board shows) buried the section under nine open panels.
+
+   Collapsed with max-height rather than grid-template-rows: the panel holds
+   three cells, and 0fr only flattens the first row, so the other two dropped
+   into implicit auto rows and stayed open. */
+.cond .cond-detail {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  padding-top: 0;
+  transition: max-height 0.45s ease, opacity 0.3s ease, padding-top 0.45s ease;
+}
+.condrow > .cond[data-open] .cond-detail,
+.condrow > .cond:hover .cond-detail,
+.condrow > .cond:focus-within .cond-detail {
+  max-height: 22rem;
+  opacity: 1;
+  padding-top: 0.5rem;
+}
+.condrow:hover > .cond[data-open]:not(:hover) .cond-detail,
+.condrow:focus-within > .cond[data-open]:not(:focus-within) .cond-detail {
+  max-height: 0;
+  opacity: 0;
+  padding-top: 0;
 }
 
-/* The detail panel stays in flow and stays open. It used to be absolutely
-   positioned at top:100% with max-height 0, revealed on hover — which meant
-   eight of the nine conditions were unreadable at any moment and the one you
-   opened dropped over its neighbours. Figma 2256:19984 draws every card
-   expanded, so there is nothing to reveal and nothing to overlap. */
-.cond .cond-detail {
-  background: #223046;
-  border-radius: 0 0 0.5rem 0.5rem;
-}
+/* The chevron points down when closed and flips when the card opens. */
+.cond .cond-chevron { transition: transform 0.4s ease; }
+.condrow > .cond[data-open] .cond-chevron,
+.condrow > .cond:hover .cond-chevron,
+.condrow > .cond:focus-within .cond-chevron { transform: rotate(180deg); }
+.condrow:hover > .cond[data-open]:not(:hover) .cond-chevron,
+.condrow:focus-within > .cond[data-open]:not(:focus-within) .cond-chevron { transform: none; }
 
 /* Open promise card — Figma 2256:2828: #3376EB carrying a "Puzzle Illustration
    Design" raster at 30% opacity, over a soft light fall-off and fine grain.
