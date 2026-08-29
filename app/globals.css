@@ -386,15 +386,15 @@ body {
 
 /* Conditions cards — same open-follows-cursor pattern; the open card reveals
    its Symptoms / Risk / Testing detail (Figma 92:27676 on the service frames). */
-.condrow > .cond {
+.condrow .cond {
   background: rgba(255, 255, 255, 0.08);
   transition: background-color 0.4s ease;
 }
-.condrow > .cond[data-open],
-.condrow > .cond:hover,
-.condrow > .cond:focus-within { background: rgba(255, 255, 255, 0.16); }
-.condrow:hover > .cond[data-open]:not(:hover),
-.condrow:focus-within > .cond[data-open]:not(:focus-within) { background: rgba(255, 255, 255, 0.08); }
+.condrow .cond[data-open],
+.condrow .cond:hover,
+.condrow .cond:focus-within { background: rgba(255, 255, 255, 0.16); }
+.condrow:hover .cond[data-open]:not(:hover),
+.condrow:focus-within .cond[data-open]:not(:focus-within) { background: rgba(255, 255, 255, 0.08); }
 
 /* The detail grows the card in flow rather than dropping over the cards below.
    The list is masonry, so it pushes down only its own column — in Figma
@@ -413,15 +413,15 @@ body {
   padding-top: 0;
   transition: max-height 0.45s ease, opacity 0.3s ease, padding-top 0.45s ease;
 }
-.condrow > .cond[data-open] .cond-detail,
-.condrow > .cond:hover .cond-detail,
-.condrow > .cond:focus-within .cond-detail {
+.condrow .cond[data-open] .cond-detail,
+.condrow .cond:hover .cond-detail,
+.condrow .cond:focus-within .cond-detail {
   max-height: 22rem;
   opacity: 1;
-  padding-top: 0.5rem;
+  padding-top: 0.75rem;
 }
-.condrow:hover > .cond[data-open]:not(:hover) .cond-detail,
-.condrow:focus-within > .cond[data-open]:not(:focus-within) .cond-detail {
+.condrow:hover .cond[data-open]:not(:hover) .cond-detail,
+.condrow:focus-within .cond[data-open]:not(:focus-within) .cond-detail {
   max-height: 0;
   opacity: 0;
   padding-top: 0;
@@ -429,11 +429,11 @@ body {
 
 /* The chevron points down when closed and flips when the card opens. */
 .cond .cond-chevron { transition: transform 0.4s ease; }
-.condrow > .cond[data-open] .cond-chevron,
-.condrow > .cond:hover .cond-chevron,
-.condrow > .cond:focus-within .cond-chevron { transform: rotate(180deg); }
-.condrow:hover > .cond[data-open]:not(:hover) .cond-chevron,
-.condrow:focus-within > .cond[data-open]:not(:focus-within) .cond-chevron { transform: none; }
+.condrow .cond[data-open] .cond-chevron,
+.condrow .cond:hover .cond-chevron,
+.condrow .cond:focus-within .cond-chevron { transform: rotate(180deg); }
+.condrow:hover .cond[data-open]:not(:hover) .cond-chevron,
+.condrow:focus-within .cond[data-open]:not(:focus-within) .cond-chevron { transform: none; }
 
 /* Open promise card — Figma 2256:2828: #3376EB carrying a "Puzzle Illustration
    Design" raster at 30% opacity, over a soft light fall-off and fine grain.
@@ -527,8 +527,8 @@ body {
     margin-top: 0.5rem;
   }
   .cond .cond-detail,
-  .condrow:hover > .cond[data-open]:not(:hover) .cond-detail,
-  .condrow:focus-within > .cond[data-open]:not(:focus-within) .cond-detail {
+  .condrow:hover .cond[data-open]:not(:hover) .cond-detail,
+  .condrow:focus-within .cond[data-open]:not(:focus-within) .cond-detail {
     max-height: none;
     opacity: 1;
   }
