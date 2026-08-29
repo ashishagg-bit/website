@@ -52,7 +52,7 @@ export type ServicePageData = {
  * repository — this session cannot reach figma.com, so they have to arrive by
  * hand. Replace these the moment they do; that is a one-line edit each.
  */
-const APPROACH_TITLE = "Comprehensive, calm, and rooted in evidence.";
+const APPROACH_TITLE = "Comprehensive, holistic, and rooted in evidence.";
 const CLOSING = {
   title: "Schedule Your Evaluation",
   body: "Reach out to Dr. Avi Ishaaya Center to schedule a comprehensive evaluation. Early intervention can make a significant difference.",
@@ -74,7 +74,7 @@ export const lungs: ServicePageData = {
     title: APPROACH_TITLE,
     paragraphs: [
       "Maintaining healthy lung function is a crucial piece for attaining overall wellbeing and longevity, especially as respiratory health has become increasingly important in our modern world.",
-      "At the Dr. Avi Ishaaya Center, we understand that breathing difficulties can significantly impact your quality of life. Our state-of-the-art center offers comprehensive diagnosis, treatment, and management of respiratory conditions using advanced technology and personalized care approaches.",
+      "At the Dr. Avi Ishaaya Center, we understand that breathing difficulties can significantly impact your quality of life. Our state-of-the-art center offers comprehensive diagnosis, treatment, and management of respiratory conditions using advanced technology and personalized care approaches. Meet with our holistic pulmonologist and discover the root-cause of your breathing issues.",
     ],
     bullets: [
       "Same-day testing availability",
