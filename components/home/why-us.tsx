@@ -137,8 +137,15 @@ export function WhyUs() {
       className="relative"
       style={{ height: reduced ? undefined : `${VH_PER_STATE * last + 100}vh` }}
     >
-      <div className="sticky top-0 flex h-screen w-full items-center justify-center overflow-clip">
-        <section className="relative flex h-[560px] w-full flex-col items-center justify-center overflow-clip bg-white px-6 py-20 sm:px-14 lg:h-[800px] lg:py-[120px]">
+      {/* The pinned stage fills the viewport and the section fills the stage.
+          Holding the section at its 800px design height inside an h-screen
+          wrapper left the difference as transparent slack — 100px on a 900px
+          viewport, 280px on a 1080px one — which read as a white band above and
+          below the photograph, right where the section meets the dark panel
+          under it. The artwork is `slice`, so it covers whatever height it is
+          given without distorting. */}
+      <div className="sticky top-0 flex h-screen w-full items-center justify-center overflow-clip bg-white">
+        <section className="relative flex h-full w-full flex-col items-center justify-center overflow-clip bg-white px-6 py-20 sm:px-14 lg:py-[120px]">
           <svg
             aria-hidden
             viewBox={`0 0 ${PUZZLE_W} ${PUZZLE_H}`}
