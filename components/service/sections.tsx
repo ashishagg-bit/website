@@ -47,15 +47,22 @@ export function Approach({
 }) {
   const hasList = Boolean(bullets && bullets.length > 0);
   return (
-    <section className="flex w-full flex-col items-center justify-center gap-12 overflow-clip bg-white px-6 py-16 sm:px-14 lg:flex-row lg:items-start lg:gap-[120px] lg:px-20 lg:py-[104px]">
+    <section className="flex w-full flex-col items-center justify-center gap-12 overflow-clip bg-white px-6 py-16 sm:px-14 lg:flex-row lg:items-stretch lg:gap-[120px] lg:px-20 lg:py-[104px]">
       <div className="flex w-full flex-col items-center gap-10 lg:flex-1 lg:gap-16">
-        <div className="flex w-full flex-col items-start justify-center gap-6">
+        {/* Eyebrow, headline and button sit at the top; the body sinks to the
+            bottom. The frames stack them 12 / 24 / 64 apart and land the body's
+            last line level with the checklist card, so whichever column is
+            naturally taller sets the section height and the gap above the body
+            absorbs the rest — 64px on Lungs, where the copy is the taller
+            column, and 147px on Sleep, where eight checklist rows are. Fixing
+            that gap at one number gets one page right and skews every other. */}
+        <div className="flex w-full flex-col items-start justify-center gap-6 lg:h-full">
           <div className="flex w-full flex-col gap-3 text-[var(--ink)]">
             <Kicker>Our Approach</Kicker>
             <Display>{title}</Display>
           </div>
           <BlueButton href={cta.href}>{cta.label}</BlueButton>
-          <div className="flex flex-col gap-4 text-base leading-6 text-black/60 [&>p]:mb-0">
+          <div className="flex flex-col gap-4 text-base leading-6 text-black/60 lg:mt-auto lg:pt-10 [&>p]:mb-0">
             {paragraphs?.map((t) => <p key={t.slice(0, 24)}>{t}</p>)}
             {body}
           </div>
@@ -64,13 +71,19 @@ export function Approach({
 
       {hasList && (
       <div className="w-full lg:flex-1">
-        {/* Gradient row follows the cursor — see `.checkrow` in globals.css */}
-        <ul className={`checkrow overflow-clip rounded-2xl border ${HAIRLINE}`}>
+        {/* The card matches the copy column's height and the rows divide it
+            equally — that is the rule the frames follow, not a fixed row
+            height. Lungs has five rows in a 573 card (114.6 each), Sleep eight
+            in a 704 card (88 each). Pinning rows to one number gets one page
+            right and stretches or squashes every other. 88 is the natural
+            height of a row — 32px padding either side of a 24px line — so it
+            is the floor when the copy column is shorter than the list. */}
+        <ul className={`checkrow flex h-full flex-col overflow-clip rounded-2xl border ${HAIRLINE}`}>
           {bullets!.map((b, i) => (
             <li
               key={b}
               {...(i === highlight ? { "data-open": "" } : {})}
-              className={`checkitem flex min-h-[115px] items-center gap-3 p-8 text-[var(--ink-80)] ${
+              className={`checkitem flex min-h-[88px] flex-1 items-center gap-3 p-8 text-[var(--ink-80)] ${
                 i < bullets!.length - 1 ? `border-b ${HAIRLINE}` : ""
               }`}
             >
