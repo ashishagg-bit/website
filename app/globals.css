@@ -311,6 +311,21 @@ body {
 .tabrow > .tab:focus-within{ flex-grow: 2; }
 }
 
+/* "All services" (Figma 2256:6331) lays its eight tiles on an even 4x2 grid and
+   keeps them there: the open tile takes the photograph and the action pill but
+   not the extra width, because widening one of four columns reflows the whole
+   row and the grid stops reading as a grid. The homepage bento is the variant
+   that grows — three tiles across, with room to give. Everything else about the
+   open state is shared, so this only pins the track. */
+.tabrow.tabrow-even > .tab,
+.tabrow.tabrow-even > .tab[data-open],
+.tabrow.tabrow-even:hover > .tab[data-open]:not(:hover),
+.tabrow.tabrow-even:focus-within > .tab[data-open]:not(:focus-within),
+.tabrow.tabrow-even > .tab:hover,
+.tabrow.tabrow-even > .tab:focus-within {
+  flex-grow: 1;
+}
+
 /* Revealed only while a tab is open: photograph, action pill, body copy. */
 .tab .on-open {
   opacity: 0;

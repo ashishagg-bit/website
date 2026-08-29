@@ -58,6 +58,10 @@ export default function ServicesPage() {
         tiles={[...servicesPageTiles, healingDawnTile]}
         rows={[4, 4]}
         lastTile={null}
+        /* Even 4x2 grid here, unlike the homepage's three-across bento: the
+           open tile takes the photograph and the "Learn more" pill but keeps
+           its column, because widening one of four reflows the whole row. */
+        evenWidths
       />
 
       <VipBand />

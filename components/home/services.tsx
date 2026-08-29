@@ -74,13 +74,21 @@ function TabRow({
   tiles,
   defaultOpen = -1,
   className = "",
+  evenWidths = false,
 }: {
   tiles: Tile[];
   defaultOpen?: number;
   className?: string;
+  /** Hold every tile at the same width; the open one still takes the
+      photograph and the pill, it just does not widen. */
+  evenWidths?: boolean;
 }) {
   return (
-    <div className={`tabrow flex flex-col lg:flex-row ${className}`}>
+    <div
+      className={`tabrow flex flex-col lg:flex-row ${
+        evenWidths ? "tabrow-even" : ""
+      } ${className}`}
+    >
       {tiles.map((t, i) => (
         <ServiceTab
           key={t.title}
@@ -107,6 +115,7 @@ export function Services({
   tiles = serviceTiles,
   lastTile = vipTile,
   rows,
+  evenWidths = false,
 }: {
   eyebrow?: string;
   title?: React.ReactNode;
@@ -117,6 +126,9 @@ export function Services({
   lastTile?: Tile | null;
   /** Tiles per row. Defaults to the homepage frame's 3 + rest. */
   rows?: number[];
+  /** Keep every tile the same width — "All services" (2256:6331) is an even
+      4x2 grid, and widening one of four columns reflows the whole row. */
+  evenWidths?: boolean;
 } = {}) {
   const sizes = rows ?? [3, Math.max(tiles.length - 3, 0)];
   const bands: Tile[][] = [];
@@ -153,6 +165,7 @@ export function Services({
             key={i}
             tiles={band}
             defaultOpen={i === 0 ? 2 : -1}
+            evenWidths={evenWidths}
             className={
               i < bands.length - 1 || lastTile ? `border-b ${HAIRLINE}` : ""
             }
