@@ -154,9 +154,21 @@ export const physician = {
       title: "Our Expertise",
       body: "Dr. Ishaaya uses cutting-edge diagnostics and innovative treatments to provide personalized, data-driven solutions for long-term wellness. His expertise spans pulmonary, cardiovascular, allergy, and sleep medicine—ensuring precise, science-backed care.",
     },
-    // The design shows these two as headings only — no body copy in Figma.
-    { title: "Our Approach" },
-    { title: "Your Wellness" },
+    // 2256:2864 carries a heading for these two and no body text at all —
+    // not hidden, simply absent — so the rows revealed nothing on hover and
+    // read as unfinished. This copy is drafted, not transcribed: it is built
+    // from the practice's own words on the About page ("His approach to
+    // medicine is holistic and rooted in understanding the whole patient…")
+    // so it makes no claim the site does not already make. Replace it with
+    // the client's wording when they have it.
+    {
+      title: "Our Approach",
+      body: "Holistic, and rooted in understanding the whole patient. By bringing conventional and functional medicine together, Dr. Ishaaya looks beyond treating symptoms alone to identify and address the underlying factors affecting your health.",
+    },
+    {
+      title: "Your Wellness",
+      body: "Care built around you — advanced diagnostics, answers explained in plain terms, and a plan you help shape. Every piece of the puzzle is considered, from cardiovascular and respiratory health to sleep, allergy, and preventive medicine.",
+    },
   ] as { title: string; body?: string }[],
 };
 
