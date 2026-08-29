@@ -12,13 +12,19 @@ export function SplitBand({
   cta,
   image,
   tone = "ink",
+  children,
 }: {
   eyebrow: string;
   title: React.ReactNode;
   body: React.ReactNode;
-  cta: { href: string; label: string };
+  /** Null on bands whose frame hides the button — Contact's "visit us"
+      (2256:9578) carries three, all switched off. */
+  cta?: { href: string; label: string } | null;
   image: string;
   tone?: "ink" | "cream";
+  /** Extra copy under the body, for bands that stack a second block there
+      rather than ending on a button. */
+  children?: React.ReactNode;
 }) {
   const dark = tone === "ink";
 
@@ -74,15 +80,18 @@ export function SplitBand({
                 {title}
               </h2>
             </div>
-            <p
-              className={`text-base leading-6 ${
-                dark ? "text-white/80" : "text-[var(--ink-80)]"
-              }`}
-            >
-              {body}
-            </p>
+            {body && (
+              <div
+                className={`text-base leading-6 ${
+                  dark ? "text-white/80" : "text-[var(--ink-80)]"
+                }`}
+              >
+                {body}
+              </div>
+            )}
           </div>
-          <BlueButton href={cta.href}>{cta.label}</BlueButton>
+          {children}
+          {cta && <BlueButton href={cta.href}>{cta.label}</BlueButton>}
         </div>
       </div>
     </section>

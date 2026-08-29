@@ -52,6 +52,8 @@ export function ContactForm() {
   const inputCls =
     "mt-2 w-full rounded-xl border border-[var(--hairline)] bg-white px-4 py-3 text-sm text-[var(--ink)] placeholder:text-[var(--ink-60)] focus:border-[var(--blue)] focus:outline-none focus:ring-2 focus:ring-[var(--blue)]/20 transition";
   const labelCls = "block text-xs uppercase tracking-[0.18em] text-[var(--ink)]";
+  const checkboxCls =
+    "mt-0.5 size-4 shrink-0 rounded border-[var(--hairline)] text-[var(--blue)] focus:ring-2 focus:ring-[var(--blue)]/20";
 
   return (
     <form
@@ -60,29 +62,29 @@ export function ContactForm() {
     >
       <div className="grid sm:grid-cols-2 gap-5">
         <label className="block">
-          <span className={labelCls}>Name</span>
-          <input name="name" required className={inputCls} placeholder="Jane Doe" />
+          <span className={labelCls}>Full Name</span>
+          <input name="name" required className={inputCls} placeholder="Your full name" />
         </label>
         <label className="block">
-          <span className={labelCls}>Email</span>
+          <span className={labelCls}>Email address</span>
           <input
             type="email"
             name="email"
             required
             className={inputCls}
-            placeholder="jane@example.com"
+            placeholder="you@example.com"
           />
         </label>
       </div>
       <label className="block">
-        <span className={labelCls}>Phone Number</span>
-        <input name="phone" className={inputCls} placeholder="(323) 555-0100" />
+        <span className={labelCls}>Phone number</span>
+        <input name="phone" className={inputCls} placeholder="(555) 123-4567" />
       </label>
       <div className="grid sm:grid-cols-2 gap-5">
         <label className="block">
           <span className={labelCls}>Why are you reaching out?</span>
           <select name="reason" required className={inputCls + " appearance-none"}>
-            <option value="">Select…</option>
+            <option value="">Select an option</option>
             <option>Request Appointment</option>
             <option>Request Refill</option>
             <option>Billing Question</option>
@@ -90,9 +92,9 @@ export function ContactForm() {
           </select>
         </label>
         <label className="block">
-          <span className={labelCls}>Are you an existing patient?</span>
+          <span className={labelCls}>Are you an existing patient of Dr. Ishaaya?</span>
           <select name="existing" required className={inputCls + " appearance-none"}>
-            <option value="">Select…</option>
+            <option value="">Select an option</option>
             <option>Yes</option>
             <option>No</option>
           </select>
@@ -105,9 +107,42 @@ export function ContactForm() {
           required
           rows={5}
           className={inputCls + " resize-y"}
-          placeholder="How can we help?"
+          placeholder="Please share anything you’d like us to know"
         />
       </label>
+      {/* Both consent lines come straight from 2256:9208, which carries them
+          between the message box and Submit. The form had neither, so the
+          marketing opt-in and the express written consent for calls and texts
+          were being collected nowhere — the second is the one that has to be
+          on the page for the practice to text a patient at all. Opt-in, so
+          neither is `required` and neither is checked by default. */}
+      <div className="flex flex-col gap-3 pt-1">
+        <label className="flex items-start gap-3">
+          <input
+            type="checkbox"
+            name="newsletter"
+            value="yes"
+            className={checkboxCls}
+          />
+          <span className="text-sm leading-5 text-[var(--ink-80)]">
+            Yes, I&apos;d like to stay connected with Avi Ishaaya and be the
+            first to hear about upcoming events, and blogs.
+          </span>
+        </label>
+        <label className="flex items-start gap-3">
+          <input
+            type="checkbox"
+            name="smsConsent"
+            value="yes"
+            className={checkboxCls}
+          />
+          <span className="text-sm leading-5 text-[var(--ink-80)]">
+            I also give express written consent to receive text messages and
+            phone calls from Avi Ishaaya. Message and data rates may apply. I
+            understand I can opt out at any time by replying STOP.
+          </span>
+        </label>
+      </div>
       {status === "error" && (
         <div className="text-sm text-red-700 bg-red-50 border border-red-200 px-4 py-3 rounded-xl">
           {error}

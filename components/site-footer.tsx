@@ -99,7 +99,7 @@ export function SiteFooter() {
         </div>
       </div>
 
-      <div className="flex w-full max-w-[1320px] flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 text-sm text-white/60 sm:flex-row">
+      <div className="flex w-full max-w-[1320px] flex-col items-center justify-between gap-3 border-t border-white/10 pt-[29px] text-xs leading-[18px] text-white/60 sm:flex-row">
         <p>© {new Date().getFullYear()} Dr. Avi Ishaaya Centers. All rights reserved.</p>
         <div className="flex items-center gap-6">
           <Link href="/privacy-policy" className="transition-colors hover:text-white">

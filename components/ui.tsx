@@ -104,7 +104,7 @@ export function OutlineButton({
   return (
     <Link
       href={href}
-      className={`inline-flex w-fit shrink-0 items-center justify-center rounded-lg border border-[var(--hairline)] px-5 py-2.5 text-[15px] leading-[21px] text-[var(--ink)] transition-colors hover:bg-white ${className}`}
+      className={`inline-flex w-fit shrink-0 items-center justify-center rounded-lg border border-[var(--hairline)] px-5 py-[9px] text-[15px] leading-[21px] text-[var(--ink)] transition-colors hover:bg-white ${className}`}
     >
       {children}
     </Link>
