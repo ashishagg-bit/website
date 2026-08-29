@@ -374,17 +374,15 @@ body {
 .tabrow > .tab.promise:focus-within .promise-body{ max-height: 12rem; opacity: 1; }
 
 /* Service-page checklist: the gradient row follows the cursor. */
-.checkrow > .checkitem { transition: background 0.4s ease, padding 0.4s ease; }
+.checkrow > .checkitem { transition: background 0.4s ease; }
 .checkrow > .checkitem[data-open],
 .checkrow > .checkitem:hover {
   background: linear-gradient(90deg, var(--cream) 0%, #b8d2ff 50%, #75a4f5 75%, var(--blue) 100%);
 }
 .checkrow:hover > .checkitem[data-open]:not(:hover) { background: none; }
-@media (min-width: 1024px) {
-  .checkrow > .checkitem[data-open] { padding-left: 2.5rem; }
-  .checkrow:hover > .checkitem[data-open]:not(:hover) { padding-left: 2rem; }
-  .checkrow > .checkitem:hover { padding-left: 2.5rem; }
-}
+/* No padding shift on the open row: every row in the frame carries the same
+   32px, highlighted or not, and nudging the text right on hover made the list
+   jitter as the cursor moved down it. */
 
 /* Conditions cards — same open-follows-cursor pattern; the open card reveals
    its Symptoms / Risk / Testing detail (Figma 92:27676 on the service frames). */

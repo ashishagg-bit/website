@@ -47,7 +47,7 @@ export function Approach({
 }) {
   const hasList = Boolean(bullets && bullets.length > 0);
   return (
-    <section className="flex w-full flex-col items-center justify-center gap-12 overflow-clip bg-white px-6 py-16 sm:px-14 lg:flex-row lg:gap-[120px] lg:px-20 lg:py-[104px]">
+    <section className="flex w-full flex-col items-center justify-center gap-12 overflow-clip bg-white px-6 py-16 sm:px-14 lg:flex-row lg:items-start lg:gap-[120px] lg:px-20 lg:py-[104px]">
       <div className="flex w-full flex-col items-center gap-10 lg:flex-1 lg:gap-16">
         <div className="flex w-full flex-col items-start justify-center gap-6">
           <div className="flex w-full flex-col gap-3 text-[var(--ink)]">
@@ -70,7 +70,7 @@ export function Approach({
             <li
               key={b}
               {...(i === highlight ? { "data-open": "" } : {})}
-              className={`checkitem flex items-center gap-3 p-8 text-[var(--ink-80)] ${
+              className={`checkitem flex min-h-[115px] items-center gap-3 p-8 text-[var(--ink-80)] ${
                 i < bullets!.length - 1 ? `border-b ${HAIRLINE}` : ""
               }`}
             >
