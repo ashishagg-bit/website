@@ -9,10 +9,14 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
   }
 
-  const { name, email, phone, reason, existing, message } = body as Record<
-    string,
-    string
-  >;
+  const { name, email, phone, reason, existing, message, newsletter, smsConsent } =
+    body as Record<string, string>;
+
+  // An unchecked box is absent from FormData, so these arrive undefined rather
+  // than "no". Recorded either way: the SMS line is the practice's express
+  // written consent to call or text this patient, and it is only worth
+  // collecting if it reaches the inbox with the enquiry.
+  const consent = (v: string | undefined) => (v ? "Yes" : "No");
 
   if (!name || !email || !reason || !message) {
     return NextResponse.json(
@@ -23,10 +27,21 @@ export async function POST(req: NextRequest) {
 
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
-    // Allow build/dev without crashing — log and accept the submission.
-    console.warn("[contact] RESEND_API_KEY not configured; logging submission only.");
-    console.log({ name, email, phone, reason, existing, message });
-    return NextResponse.json({ ok: true, queued: true });
+    // In development, log the submission and accept it so the form can be
+    // exercised without credentials.
+    if (process.env.NODE_ENV !== "production") {
+      console.warn("[contact] RESEND_API_KEY not set; logging submission only.");
+      console.log({ name, email, phone, reason, existing, message, newsletter, smsConsent });
+      return NextResponse.json({ ok: true, queued: true });
+    }
+    // In production, never report success we cannot deliver on: answering
+    // "ok" here would show the patient a confirmation while the enquiry went
+    // nowhere. Fail loudly so the misconfiguration surfaces instead.
+    console.error("[contact] RESEND_API_KEY missing in production; rejecting.");
+    return NextResponse.json(
+      { error: "The form is temporarily unavailable. Please call (323) 954-1788." },
+      { status: 503 },
+    );
   }
 
   const to = process.env.CONTACT_TO_EMAIL || "info@aviishaaya.com";
@@ -42,6 +57,8 @@ export async function POST(req: NextRequest) {
       <tr><td style="padding:6px 12px;color:#6b7c8a">Phone</td><td style="padding:6px 12px">${escape(phone || "")}</td></tr>
       <tr><td style="padding:6px 12px;color:#6b7c8a">Reason</td><td style="padding:6px 12px">${escape(reason)}</td></tr>
       <tr><td style="padding:6px 12px;color:#6b7c8a">Existing patient</td><td style="padding:6px 12px">${escape(existing || "")}</td></tr>
+      <tr><td style="padding:6px 12px;color:#6b7c8a">Newsletter opt-in</td><td style="padding:6px 12px">${consent(newsletter)}</td></tr>
+      <tr><td style="padding:6px 12px;color:#6b7c8a">Consent to calls/texts</td><td style="padding:6px 12px">${consent(smsConsent)}</td></tr>
     </table>
     <h3 style="font-family:Georgia,serif;color:#0d2436;margin-top:24px">Message</h3>
     <p style="font-family:Inter,Arial,sans-serif;font-size:14px;color:#1f2d3a;white-space:pre-wrap">${escape(message)}</p>

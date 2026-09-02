@@ -18,7 +18,7 @@ const logos = [
 export function NewsScroller() {
   const doubled = [...logos, ...logos];
   return (
-    <section className="bg-[var(--teal-deep)] py-8 overflow-hidden">
+    <section className="bg-[var(--blue)] py-8 overflow-hidden">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <div className="text-center text-xs uppercase tracking-[0.25em] text-white/70 mb-5">
           Featured by top news stations
@@ -36,6 +36,8 @@ export function NewsScroller() {
             {doubled.map((src, i) => (
               // eslint-disable-next-line @next/next/no-img-element
               <img
+                loading="lazy"
+                decoding="async"
                 key={i}
                 src={src}
                 alt=""
@@ -58,6 +60,11 @@ export function NewsScroller() {
         :global(.animate-scroll) {
           animation: scroll 35s linear infinite;
           width: max-content;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          :global(.animate-scroll) {
+            animation: none;
+          }
         }
       `}</style>
     </section>

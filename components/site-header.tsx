@@ -1,12 +1,13 @@
 "use client";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { services } from "@/lib/site-data";
 
 const nav = [
   { href: "/about", label: "About" },
   { href: "/services", label: "Our Services", hasDropdown: true },
-  { href: "/vip", label: "VIP" },
+  { href: "/vip", label: "VIP", hasDropdown: true },
   { href: "/blog", label: "Blog" },
 ];
 
@@ -17,172 +18,234 @@ const vipTiers = [
   { slug: "platinum", name: "Platinum" },
 ];
 
+/**
+ * Routes whose hero is the dark photographic PageHero — there the nav sits on
+ * top of the image in white. Everything else keeps the cream bar.
+ * Add routes here as their Figma pages get built.
+ */
+const OVERLAY_ROUTES = [
+  "/services",
+  "/service/lungs",
+  "/service/cardiovascular",
+  "/service/sleep",
+  "/service/allergy-sensitivity",
+  "/service/wellness-preventive-medicine",
+  "/vip",
+  "/contact",
+];
+
+/** 4px dot flanking the announcement copy (Figma I64:10192;57:9479 / 9481). */
+function Dot() {
+  return <span className="size-1 shrink-0 rounded-full bg-white/70" />;
+}
+
+function Chevron() {
+  return (
+    <svg
+      width="10"
+      height="10"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.4"
+      className="transition-transform group-hover:rotate-180"
+    >
+      <path d="M6 9l6 6 6-6" />
+    </svg>
+  );
+}
+
+function Dropdown({
+  items,
+  footer,
+}: {
+  items: { href: string; label: string }[];
+  footer: { href: string; label: string };
+}) {
+  return (
+    // `group-focus-within` mirrors the hover state so the submenu is reachable
+    // by keyboard — `invisible` alone takes these links out of the tab order.
+    <div className="invisible absolute left-1/2 top-full z-40 w-72 -translate-x-1/2 pt-3 opacity-0 transition-all group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+      <div className="rounded-2xl border border-[var(--hairline)] bg-white p-3 shadow-xl shadow-[var(--ink)]/10">
+        {items.map((i) => (
+          <Link
+            key={i.href}
+            href={i.href}
+            className="block rounded-lg px-3 py-2 text-[15px] leading-[21px] text-[var(--ink)] transition-colors hover:bg-[var(--cream)] hover:text-[var(--blue)]"
+          >
+            {i.label}
+          </Link>
+        ))}
+        <div className="mt-1 border-t border-[var(--hairline)] pt-2">
+          <Link
+            href={footer.href}
+            className="eyebrow block rounded-lg px-3 py-2 !text-[11px] text-[var(--blue)] transition-colors hover:bg-[var(--cream)]"
+          >
+            {footer.label}
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  // `trailingSlash: true` means usePathname() returns "/vip/", which never
+  // matched the unslashed entries above — the overlay had silently never
+  // applied on any route. Compare without the trailing slash.
+  const overlay = OVERLAY_ROUTES.includes(pathname.replace(/\/+$/, "") || "/");
+
+  const linkColor = overlay
+    ? "text-white hover:text-white/70"
+    : "text-[var(--ink)] hover:text-[var(--blue)]";
+
   return (
-    <header className="sticky top-0 z-50 backdrop-blur-md bg-[var(--background)]/85 border-b border-[var(--line)]">
-      <div className="mx-auto max-w-7xl px-5 sm:px-8 h-16 sm:h-20 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-3 group">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/images/scraped/XWBP80T3z4iK83VN5FqdFyDdSxE.svg"
-            alt="Dr. Avi Ishaaya Center"
-            width={40}
-            height={40}
-            className="w-10 h-10"
-          />
-          <span className="font-display text-base sm:text-lg leading-tight text-[var(--navy)]">
-            <span className="block tracking-tight">Dr. Avi Ishaaya</span>
-            <span className="block text-[10px] uppercase tracking-[0.2em] text-[var(--muted)]">
-              Wellness Centers
-            </span>
-          </span>
-        </Link>
+    <>
+      {/* Announcement bar — Figma I64:10192;57:9476 (#e5cdf8, 48px inline pad,
+          12px top / 36px bottom with the hero pulling 24px back over it).
+          Figma 2256:6333 is 1440x65 and the hero below it starts at y=41, so
+          the hero overlaps the bar's bottom 24px and its 24px top corners cut
+          two lilac notches out of the bar.
 
-        <nav className="hidden md:flex items-center gap-8">
-          {nav.map((n) =>
-            n.hasDropdown ? (
-              <div key={n.href} className="relative group">
-                <Link
-                  href={n.href}
-                  className="text-sm text-[var(--navy-soft)] hover:text-[var(--teal-deep)] transition-colors inline-flex items-center gap-1"
-                >
-                  {n.label}
-                  <svg
-                    width="10"
-                    height="10"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.4"
-                    className="group-hover:rotate-180 transition-transform"
-                  >
-                    <path d="M6 9l6 6 6-6" />
-                  </svg>
-                </Link>
-                <div className="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all absolute left-1/2 -translate-x-1/2 top-full pt-3 w-72 z-40">
-                  <div className="rounded-2xl bg-white shadow-xl shadow-[var(--navy)]/10 border border-[var(--line)] p-3">
-                    {services.map((s) => (
-                      <Link
-                        key={s.slug}
-                        href={`/service/${s.slug}`}
-                        className="block px-3 py-2 rounded-lg text-sm text-[var(--navy)] hover:bg-[var(--warm-soft)]/50 hover:text-[var(--teal-deep)] transition-colors"
-                      >
-                        {s.title}
-                      </Link>
-                    ))}
-                    <div className="mt-1 border-t border-[var(--line)] pt-2">
-                      <Link
-                        href="/services"
-                        className="block px-3 py-2 rounded-lg text-xs uppercase tracking-[0.18em] text-[var(--teal-deep)] hover:bg-[var(--warm-soft)]/50 transition-colors"
-                      >
-                        View all services →
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ) : n.href === "/vip" ? (
-              <div key={n.href} className="relative group">
-                <Link
-                  href={n.href}
-                  className="text-sm text-[var(--navy-soft)] hover:text-[var(--teal-deep)] transition-colors inline-flex items-center gap-1"
-                >
-                  {n.label}
-                  <svg
-                    width="10"
-                    height="10"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.4"
-                    className="group-hover:rotate-180 transition-transform"
-                  >
-                    <path d="M6 9l6 6 6-6" />
-                  </svg>
-                </Link>
-                <div className="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all absolute left-1/2 -translate-x-1/2 top-full pt-3 w-56 z-40">
-                  <div className="rounded-2xl bg-white shadow-xl shadow-[var(--navy)]/10 border border-[var(--line)] p-3">
-                    {vipTiers.map((t) => (
-                      <Link
-                        key={t.slug}
-                        href={`/vip/${t.slug}`}
-                        className="block px-3 py-2 rounded-lg text-sm text-[var(--navy)] hover:bg-[var(--warm-soft)]/50 hover:text-[var(--teal-deep)] transition-colors"
-                      >
-                        {t.name} Package
-                      </Link>
-                    ))}
-                    <div className="mt-1 border-t border-[var(--line)] pt-2">
-                      <Link
-                        href="/vip"
-                        className="block px-3 py-2 rounded-lg text-xs uppercase tracking-[0.18em] text-[var(--teal-deep)] hover:bg-[var(--warm-soft)]/50 transition-colors"
-                      >
-                        Compare all tiers →
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ) : (
-              <Link
-                key={n.href}
-                href={n.href}
-                className="text-sm text-[var(--navy-soft)] hover:text-[var(--teal-deep)] transition-colors"
-              >
-                {n.label}
-              </Link>
-            )
-          )}
-          <Link
-            href="/contact"
-            className="text-sm font-medium px-4 py-2 rounded-full bg-[var(--navy)] text-white hover:bg-[var(--teal-deep)] transition-colors"
-          >
-            Contact Us
-          </Link>
-        </nav>
-
-        <button
-          aria-label="Toggle menu"
-          className="md:hidden text-[var(--navy)]"
-          onClick={() => setOpen(!open)}
-        >
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-            {open ? (
-              <path d="M6 6L18 18M6 18L18 6" />
-            ) : (
-              <>
-                <path d="M4 7h16" />
-                <path d="M4 12h16" />
-                <path d="M4 17h16" />
-              </>
-            )}
-          </svg>
-        </button>
+          This sits OUTSIDE <header> on purpose. The header is `z-50`, which
+          makes it a stacking context that paints as one unit above all page
+          content — so while the bar lived inside it, the opaque lilac covered
+          exactly the 24px where the hero's rounded corners are, and every
+          overlay route (services, the five service pages, VIP, contact)
+          rendered a hard square edge under a too-tall bar. Out here the bar is
+          `z-auto`, so the hero paints over it while the nav still sits on top. */}
+      <div className="relative -mb-6 flex items-center justify-center gap-4 overflow-clip bg-[var(--lilac)] px-12 pb-9 pt-3">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,#c6d5f7_0%,#dcd6f7_38%,#d9def9_62%,#c6d5f7_100%)]"
+        />
+        <Dot />
+        <p className="relative text-center font-[family-name:var(--font-manrope)] text-sm font-medium leading-[1.2] tracking-[-0.14px] text-white">
+          Health is something you participate in, choose, and cultivate. The
+          healing has always been possible. We help you find the path at The
+          Healing Dawn.
+        </p>
+        <Dot />
       </div>
 
-      {open && (
-        <div className="md:hidden border-t border-[var(--line)] bg-[var(--background)]">
-          <div className="px-6 py-5 flex flex-col gap-4">
-            {nav.map((n) => (
+      <header className="relative z-50">
+        {/* Nav — Figma I64:10192;57:9726 */}
+        <div
+        className={
+          overlay
+            ? "relative z-[2] -mb-[92px] h-[92px] bg-transparent"
+            : "relative z-[2] rounded-t-3xl bg-[var(--cream)]"
+        }
+      >
+        <div className="mx-auto flex w-full max-w-[1440px] items-center justify-between px-6 py-6 sm:px-14">
+          <Link href="/" className="flex w-[190px] shrink-0 items-start">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/logo-wordmark.svg"
+              alt="Dr. Avi Ishaaya Center"
+              width={155}
+              height={28}
+              className={`h-7 w-[155px] object-contain object-left ${
+                overlay ? "brightness-0 invert" : ""
+              }`}
+            />
+          </Link>
+
+          <nav aria-label="Main" className="hidden items-end lg:flex">
+            {nav.map((n) =>
+              n.hasDropdown ? (
+                <div key={n.href} className="group relative">
+                  <Link
+                    href={n.href}
+                    className={`flex items-baseline justify-center gap-2 rounded-[3px] px-5 py-3 text-[15px] leading-[21px] transition-colors ${linkColor}`}
+                  >
+                    {n.label}
+                    <Chevron />
+                  </Link>
+                  {n.href === "/services" ? (
+                    <Dropdown
+                      items={services.map((s) => ({
+                        href: `/service/${s.slug}`,
+                        label: s.title,
+                      }))}
+                      footer={{ href: "/services", label: "View all services →" }}
+                    />
+                  ) : (
+                    <Dropdown
+                      items={vipTiers.map((t) => ({
+                        href: `/vip/${t.slug}`,
+                        label: `${t.name} Package`,
+                      }))}
+                      footer={{ href: "/vip", label: "Compare all tiers →" }}
+                    />
+                  )}
+                </div>
+              ) : (
+                <Link
+                  key={n.href}
+                  href={n.href}
+                  className={`flex items-baseline justify-center rounded-[3px] px-5 py-3 text-[15px] leading-[21px] transition-colors ${linkColor}`}
+                >
+                  {n.label}
+                </Link>
+              )
+            )}
+          </nav>
+
+          <Link
+            href="/contact"
+            className="hidden shrink-0 items-center justify-center rounded-lg bg-[var(--blue)] px-5 py-2.5 text-[15px] leading-[21px] text-white transition-colors hover:bg-[var(--blue-hover)] lg:flex"
+          >
+            Schedule a Consultation
+          </Link>
+
+          <button
+            aria-label="Toggle menu"
+            aria-expanded={open}
+            className={`-m-2 p-2 lg:hidden ${overlay ? "text-white" : "text-[var(--ink)]"}`}
+            onClick={() => setOpen(!open)}
+          >
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+              {open ? (
+                <path d="M6 6L18 18M6 18L18 6" />
+              ) : (
+                <>
+                  <path d="M4 7h16" />
+                  <path d="M4 12h16" />
+                  <path d="M4 17h16" />
+                </>
+              )}
+            </svg>
+          </button>
+        </div>
+
+        {open && (
+          <div className="border-t border-[var(--hairline)] bg-[var(--cream)] lg:hidden">
+            <div className="flex flex-col gap-4 px-6 py-5">
+              {nav.map((n) => (
+                <Link
+                  key={n.href}
+                  href={n.href}
+                  className="text-base text-[var(--ink)]"
+                  onClick={() => setOpen(false)}
+                >
+                  {n.label}
+                </Link>
+              ))}
               <Link
-                key={n.href}
-                href={n.href}
-                className="text-base text-[var(--navy)]"
+                href="/contact"
+                className="mt-2 rounded-lg bg-[var(--blue)] px-4 py-3 text-center text-[15px] text-white"
                 onClick={() => setOpen(false)}
               >
-                {n.label}
+                Schedule a Consultation
               </Link>
-            ))}
-            <Link
-              href="/contact"
-              className="text-center mt-2 text-sm font-medium px-4 py-3 rounded-full bg-[var(--navy)] text-white"
-              onClick={() => setOpen(false)}
-            >
-              Contact Us
-            </Link>
+            </div>
           </div>
+        )}
         </div>
-      )}
-    </header>
+      </header>
+    </>
   );
 }

@@ -1,20 +1,13 @@
 import type { Metadata } from "next";
-import { Inter, DM_Sans } from "next/font/google";
+import { Manrope } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 
-const inter = Inter({
-  variable: "--font-inter",
+const manrope = Manrope({
+  variable: "--font-manrope",
   subsets: ["latin"],
   display: "swap",
-});
-
-const dmSans = DM_Sans({
-  variable: "--font-display",
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["400", "500", "600", "700"],
 });
 
 const SITE_URL = "https://aviishaaya.com";
@@ -36,6 +29,7 @@ export const metadata: Metadata = {
     "concierge medicine",
     "wellness center",
   ],
+  alternates: { canonical: "/" },
   openGraph: {
     title: "Dr. Avi Ishaaya Wellness Centers",
     description:
@@ -44,12 +38,14 @@ export const metadata: Metadata = {
     siteName: "Dr. Avi Ishaaya Wellness Centers",
     locale: "en_US",
     type: "website",
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "Dr. Avi Ishaaya Wellness Centers" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Dr. Avi Ishaaya Wellness Centers",
     description:
       "Beverly Hills concierge medical practice led by Dr. Avi Ishaaya, M.D.",
+    images: ["/og.png"],
   },
   icons: { icon: "/favicon.ico" },
 };
@@ -106,9 +102,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${dmSans.variable} h-full`}
+      className={`${manrope.variable} h-full`}
     >
-      <body className="min-h-full flex flex-col bg-[var(--background)] text-[var(--foreground)]">
+      <body className="min-h-full flex flex-col bg-[var(--cream)] text-[var(--ink)]">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }}

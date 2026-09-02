@@ -43,3 +43,6 @@ next-env.d.ts
 # scrape (raw HTML cache)
 /scrape/
 
+
+# Screenshots captured by inspection runs, not source.
+reference/audit/

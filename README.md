@@ -1,35 +1,106 @@
+# Dr. Avi Ishaaya Wellness Centers
 
-## Getting Started
+Marketing site for the Dr. Avi Ishaaya Wellness Centers practice in Beverly
+Hills. Built with Next.js and deployed continuously to Vercel.
 
-First, run the development server:
+The design source is the `Aviishaaya Dev` Figma file
+(`TdifdqKlRJcGSLC8Kpz1Sz`). Page copy, section order, and photography are
+transcribed from that file — when the site and the Figma frames disagree, the
+Figma frames are correct.
+
+## Stack
+
+| | |
+|---|---|
+| Framework | Next.js 16 (App Router, React 19) |
+| Styling | Tailwind CSS v4 |
+| Animation | Framer Motion |
+| Blog content | Markdown files + `gray-matter` |
+| Contact email | Resend |
+| Hosting | Vercel, auto-deploying from `main` |
+
+## Running locally
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The site runs at http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build   # production build — run before pushing
+npm run lint    # eslint
+npm start       # serve the production build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Environment variables
 
-## Learn More
+Only the contact form needs configuration. Without `RESEND_API_KEY` the form
+still works in development — submissions are logged to the console instead of
+emailed — but in production a missing key means enquiries are not delivered.
 
-To learn more about Next.js, take a look at the following resources:
+| Variable | Required | Default |
+|---|---|---|
+| `RESEND_API_KEY` | Production | — (dev logs to console) |
+| `CONTACT_TO_EMAIL` | No | `info@aviishaaya.com` |
+| `CONTACT_FROM_EMAIL` | No | `Avi Ishaaya Centers <noreply@aviishaaya.com>` |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Set these in the Vercel project under Settings → Environment Variables.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Project layout
 
-## Deploy on Vercel
+```
+app/                    Routes (App Router)
+  page.tsx              Homepage
+  about/                About the practice
+  services/             Service index
+  service/[…]/          Five service pages, generated from lib/service-pages.ts
+  blog/                 Blog index and posts
+  vip/                  VIP membership tiers
+  contact/              Contact page
+  privacy-policy/
+  api/contact/          Form handler — the only dynamic route
+components/             Shared UI (header, footer, hero, bands, forms)
+  home/                 Homepage-only sections
+  service/              Service-page sections
+lib/                    Page content as typed data
+  service-pages.ts      All five service pages
+  home-content.ts       Homepage copy
+  vip-tiers.ts          VIP tier definitions
+  site-data.ts          Nav, footer, practice details
+  posts.ts              Blog loader
+content/blog/           Blog posts as Markdown
+public/images/
+  figma/                Artwork exported from the Figma file
+  scraped/              Photography carried over from the previous site
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Most copy changes are data edits, not component edits. A service page's
+headings, body text, conditions list, and photography all live in
+`lib/service-pages.ts` — the components render whatever that file describes.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Routes
+
+All pages are prerendered at build time except `/api/contact`.
+
+`/` · `/about` · `/services` · `/service/lungs` · `/service/cardiovascular` ·
+`/service/sleep` · `/service/allergy-sensitivity` ·
+`/service/wellness-preventive-medicine` · `/blog` · `/blog/[slug]` · `/vip` ·
+`/vip/[tier]` · `/contact` · `/privacy-policy`
+
+Plus generated `sitemap.xml` and `robots.txt`.
+
+## Deployment
+
+Pushing to `main` triggers a production deploy on Vercel. There is no staging
+branch — `main` is what the public sees, so build locally before pushing.
+
+`next.config.ts` deliberately does **not** set `output: "export"`. A static
+export drops route handlers from the build, which silently breaks the contact
+form. See the note in that file before changing it.
+
+## Changelog
+
+`CHANGELOG.md` records what shipped, why, and how it was verified, newest
+first. `IMPROVEMENT.md` tracks known gaps and planned work.

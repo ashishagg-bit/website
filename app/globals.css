@@ -1,5 +1,106 @@
 @import "tailwindcss";
 
+/* --- Real brand faces: Kalice Trial (display) + Apercu Pro (text).
+   Licensed files supplied by the client; converted to woff2. --- */
+@font-face {
+  font-family: "Apercu";
+  src: url("/fonts/ApercuPro-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Apercu";
+  src: url("/fonts/ApercuPro-Italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Apercu";
+  src: url("/fonts/ApercuPro-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Apercu";
+  src: url("/fonts/ApercuPro-BoldItalic.woff2") format("woff2");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Kalice";
+  src: url("/fonts/Kalice-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Kalice";
+  src: url("/fonts/Kalice-Italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Kalice";
+  src: url("/fonts/Kalice-MediumItalic.woff2") format("woff2");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Kalice";
+  src: url("/fonts/Kalice-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Kalice";
+  src: url("/fonts/Kalice-BoldItalic.woff2") format("woff2");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Kalice";
+  src: url("/fonts/Kalice-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Kalice";
+  src: url("/fonts/Kalice-ExtraBoldItalic.woff2") format("woff2");
+  font-weight: 800;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Kalice";
+  src: url("/fonts/Kalice-ExtraBold.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Kalice";
+  src: url("/fonts/Kalice-BlackItalic.woff2") format("woff2");
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Kalice";
+  src: url("/fonts/Kalice-Black.woff2") format("woff2");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --background: #fafaf7;
   --foreground: #0d2436;
@@ -11,6 +112,19 @@
   --warm-soft: #f1e4cf;
   --muted: #6b7c8a;
   --line: #e7e2d8;
+
+  /* Figma "Aviishaaya Dev" palette (file TdifdqKlRJcGSLC8Kpz1Sz) */
+  --cream: #fcfaf6;
+  --ink: #152032;
+  --ink-80: rgba(21, 32, 50, 0.8);
+  --ink-60: rgba(21, 32, 50, 0.6);
+  --ink-40: rgba(21, 32, 50, 0.4);
+  --blue: #3376eb;
+  --blue-hover: #2a63c8;
+  --lilac: #e5cdf8;
+  --sky: #c7dafa;
+  --dark: #111822;
+  --hairline: rgba(21, 114, 148, 0.2);
 }
 
 @theme inline {
@@ -24,24 +138,48 @@
   --color-warm-soft: var(--warm-soft);
   --color-muted: var(--muted);
   --color-line: var(--line);
+  --color-cream: var(--cream);
+  --color-ink: var(--ink);
+  --color-blue: var(--blue);
+  --color-lilac: var(--lilac);
+  --color-sky: var(--sky);
+  --color-dark: var(--dark);
   --font-sans: var(--font-inter);
   --font-display: var(--font-display);
+  --font-accent: var(--font-manrope);
 }
 
 html {
   scroll-behavior: smooth;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+/* Keyboard focus ring. Tailwind's preflight strips the UA outline on several
+   elements, so state it once here — `:focus-visible` keeps it off mouse
+   clicks, which leaves the design untouched for pointer users. */
+:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+/* On the dark footer band the blue ring disappears into the ground. */
+footer :focus-visible {
+  outline-color: #ffffff;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-inter), system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-family: "Apercu", system-ui, -apple-system, "Segoe UI", sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
 .font-display {
-  font-family: var(--font-display), "DM Sans", "Inter", system-ui, sans-serif;
+  font-family: "Kalice", Georgia, serif;
   letter-spacing: -0.01em;
 }
 
@@ -68,7 +206,7 @@ body {
   font-size: 1.0625rem;
 }
 .prose-article h2 {
-  font-family: var(--font-display), "DM Sans", system-ui, sans-serif;
+  font-family: "Kalice", Georgia, serif;
   font-size: 1.75rem;
   margin-top: 2.25rem;
   margin-bottom: 0.75rem;
@@ -76,7 +214,7 @@ body {
   letter-spacing: -0.01em;
 }
 .prose-article h3 {
-  font-family: var(--font-display), "DM Sans", system-ui, sans-serif;
+  font-family: "Kalice", Georgia, serif;
   font-size: 1.35rem;
   margin-top: 1.75rem;
   margin-bottom: 0.5rem;
@@ -94,4 +232,331 @@ body {
   font-style: italic;
   color: #2c3e50;
   margin: 1.25rem 0;
+}
+
+/* --- Figma homepage primitives --- */
+
+/* Display face stands in for Kalice Trial (licensed); Fraunces is the closest
+   free serif at the 56px/68px headline size the design uses. */
+.font-kalice {
+  font-family: "Kalice", Georgia, "Times New Roman", serif;
+}
+
+/* Kalice headline: 56px / 68px / +1px tracking */
+.h-display {
+  font-family: "Kalice", Georgia, "Times New Roman", serif;
+  font-size: 56px;
+  line-height: 68px;
+  letter-spacing: 1px;
+  color: var(--ink);
+}
+
+/* Apercu Pro eyebrow: 12px / uppercase / 3px tracking */
+.eyebrow {
+  font-size: 12px;
+  line-height: normal;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+/* Line-art puzzle outlines drawn over the photography — the frames overlay
+   large, thin white puzzle-piece contours, not a solid pattern. Stands in for
+   the exported artwork; the geometry is authored here as an SVG data URI. */
+.puzzle-lines {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320' viewBox='0 0 320 320'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='1.6' stroke-opacity='0.55'%3E%3Cpath d='M28 44h52a10 10 0 0 1 10-10 10 10 0 0 1 10 10h52v52a10 10 0 0 0-10 10 10 10 0 0 0 10 10v52h-52a10 10 0 0 0-10-10 10 10 0 0 0-10 10H28v-52a10 10 0 0 1 10-10 10 10 0 0 1-10-10z'/%3E%3Cpath d='M196 190h46a9 9 0 0 1 9-9 9 9 0 0 1 9 9h46v46a9 9 0 0 0-9 9 9 9 0 0 0 9 9v46h-46a9 9 0 0 0-9-9 9 9 0 0 0-9 9h-46v-46a9 9 0 0 1 9-9 9 9 0 0 1-9-9z'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 320px 320px;
+  background-repeat: repeat;
+  opacity: 0.9;
+  mix-blend-mode: screen;
+}
+
+/* Kept for the dark promise cards, where the frame uses a soft-light wash. */
+.puzzle-wash {
+  background-image:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.28) 25%, transparent 25%),
+    linear-gradient(225deg, rgba(255, 255, 255, 0.28) 25%, transparent 25%),
+    linear-gradient(45deg, rgba(21, 32, 50, 0.18) 25%, transparent 25%),
+    linear-gradient(315deg, rgba(21, 32, 50, 0.18) 25%, transparent 25%);
+  background-position: 0 0, 55px 0, 55px -55px, 0 55px;
+  background-size: 110px 110px;
+  mix-blend-mode: soft-light;
+  opacity: 0.35;
+}
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* --- Hover-expanding tabs ---------------------------------------------
+   The services bento, the five promises and the service-page checklist all
+   use one interaction: a row of collapsed tabs where the hovered one opens.
+   Implemented in CSS rather than React state so it works with no JavaScript
+   — which also means the exported static site is fully interactive.
+
+   `data-open` marks the tab a row rests on when nothing is hovered. */
+
+/* Below lg the tabs stack, and they must keep their own height. `flex:1 1 0`
+   sets the basis on the *block* axis in a column flex container, which
+   collapsed every card to its content and dropped "Learn more" onto the
+   title. So the flex sizing is confined to the horizontal layout. */
+.tabrow > .tab {
+  min-width: 0;
+  transition: flex-grow 0.5s ease, background-color 0.5s ease;
+}
+
+@media (min-width: 1024px) {
+  .tabrow > .tab { flex: 1 1 0; }
+  .tabrow > .tab[data-open] { flex-grow: 2; }.tabrow:hover > .tab[data-open]:not(:hover),
+.tabrow:focus-within > .tab[data-open]:not(:focus-within){ flex-grow: 1; }.tabrow > .tab:hover,
+.tabrow > .tab:focus-within{ flex-grow: 2; }
+}
+
+/* "All services" (Figma 2256:6331) lays its eight tiles on an even 4x2 grid and
+   keeps them there: the open tile takes the photograph and the action pill but
+   not the extra width, because widening one of four columns reflows the whole
+   row and the grid stops reading as a grid. The homepage bento is the variant
+   that grows — three tiles across, with room to give. Everything else about the
+   open state is shared, so this only pins the track. */
+.tabrow.tabrow-even > .tab,
+.tabrow.tabrow-even > .tab[data-open],
+.tabrow.tabrow-even:hover > .tab[data-open]:not(:hover),
+.tabrow.tabrow-even:focus-within > .tab[data-open]:not(:focus-within),
+.tabrow.tabrow-even > .tab:hover,
+.tabrow.tabrow-even > .tab:focus-within {
+  flex-grow: 1;
+}
+
+/* Revealed only while a tab is open: photograph, action pill, body copy. */
+.tab .on-open {
+  opacity: 0;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.tab .on-open.slide { transform: translateY(-0.5rem); }
+.tabrow > .tab[data-open] .on-open { opacity: 1; }
+.tabrow > .tab[data-open] .on-open.slide { transform: none; }.tabrow:hover > .tab[data-open]:not(:hover) .on-open,
+.tabrow:focus-within > .tab[data-open]:not(:focus-within) .on-open{ opacity: 0; }.tabrow:hover > .tab[data-open]:not(:hover) .on-open.slide,
+.tabrow:focus-within > .tab[data-open]:not(:focus-within) .on-open.slide{ transform: translateY(-0.5rem); }.tabrow > .tab:hover .on-open,
+.tabrow > .tab:focus-within .on-open{ opacity: 1; }.tabrow > .tab:hover .on-open.slide,
+.tabrow > .tab:focus-within .on-open.slide{ transform: none; }
+
+/* Copy turns white once the photograph is behind it. */
+.tab .on-open-text { transition: color 0.5s ease; }
+.tabrow > .tab[data-open] .on-open-text { color: #fff; }.tabrow:hover > .tab[data-open]:not(:hover) .on-open-text,
+.tabrow:focus-within > .tab[data-open]:not(:focus-within) .on-open-text{ color: var(--ink); }.tabrow:hover > .tab[data-open]:not(:hover) .on-open-text.muted,
+.tabrow:focus-within > .tab[data-open]:not(:focus-within) .on-open-text.muted{ color: var(--ink-80); }.tabrow > .tab:hover .on-open-text,
+.tabrow > .tab:focus-within .on-open-text{ color: #fff; }
+
+/* Collapsed: title top, blurb bottom. Open: both group at the bottom. */
+.tab .tab-title { margin-top: 0; }
+.tab .tab-blurb { margin-top: auto; }
+.tabrow > .tab[data-open] .tab-title { margin-top: auto; }
+.tabrow > .tab[data-open] .tab-blurb { margin-top: 0; }.tabrow:hover > .tab[data-open]:not(:hover) .tab-title,
+.tabrow:focus-within > .tab[data-open]:not(:focus-within) .tab-title{ margin-top: 0; }.tabrow:hover > .tab[data-open]:not(:hover) .tab-blurb,
+.tabrow:focus-within > .tab[data-open]:not(:focus-within) .tab-blurb{ margin-top: auto; }.tabrow > .tab:hover .tab-title,
+.tabrow > .tab:focus-within .tab-title{ margin-top: auto; }.tabrow > .tab:hover .tab-blurb,
+.tabrow > .tab:focus-within .tab-blurb{ margin-top: 0; }
+
+/* Promises: the open card turns blue and its heading grows. */
+.tabrow > .tab[data-open].promise { background-color: var(--blue); }.tabrow:hover > .tab[data-open]:not(:hover).promise,
+.tabrow:focus-within > .tab[data-open]:not(:focus-within).promise{ background-color: transparent; }.tabrow > .tab.promise:hover,
+.tabrow > .tab.promise:focus-within{ background-color: var(--blue); }
+.tab.promise .promise-title { font-size: 1.5rem; line-height: 2rem; transition: font-size 0.5s ease, line-height 0.5s ease; }
+.tabrow > .tab[data-open].promise .promise-title { font-size: clamp(1.75rem, 1.2rem + 1.4vw, 40px); line-height: 1.2; }.tabrow:hover > .tab[data-open]:not(:hover).promise .promise-title,
+.tabrow:focus-within > .tab[data-open]:not(:focus-within).promise .promise-title{ font-size: 1.5rem; line-height: 2rem; }.tabrow > .tab.promise:hover .promise-title,
+.tabrow > .tab.promise:focus-within .promise-title{ font-size: clamp(1.75rem, 1.2rem + 1.4vw, 40px); line-height: 1.2; }
+.tab.promise .promise-num { color: rgba(255, 255, 255, 0.4); transition: color 0.5s ease; }
+.tabrow > .tab[data-open].promise .promise-num { color: rgba(255, 255, 255, 0.7); }.tabrow:hover > .tab[data-open]:not(:hover).promise .promise-num,
+.tabrow:focus-within > .tab[data-open]:not(:focus-within).promise .promise-num{ color: rgba(255, 255, 255, 0.4); }.tabrow > .tab.promise:hover .promise-num,
+.tabrow > .tab.promise:focus-within .promise-num{ color: rgba(255, 255, 255, 0.7); }
+.tab.promise .promise-body { max-height: 0; overflow: hidden; opacity: 0; transition: max-height 0.5s ease, opacity 0.5s ease; }
+.tabrow > .tab[data-open].promise .promise-body { max-height: 12rem; opacity: 1; }.tabrow:hover > .tab[data-open]:not(:hover).promise .promise-body,
+.tabrow:focus-within > .tab[data-open]:not(:focus-within).promise .promise-body{ max-height: 0; opacity: 0; }.tabrow > .tab.promise:hover .promise-body,
+.tabrow > .tab.promise:focus-within .promise-body{ max-height: 12rem; opacity: 1; }
+
+/* Service-page checklist: the gradient row follows the cursor. */
+.checkrow > .checkitem { transition: background 0.4s ease; }
+.checkrow > .checkitem[data-open],
+.checkrow > .checkitem:hover {
+  background: linear-gradient(90deg, var(--cream) 0%, #b8d2ff 50%, #75a4f5 75%, var(--blue) 100%);
+}
+.checkrow:hover > .checkitem[data-open]:not(:hover) { background: none; }
+/* No padding shift on the open row: every row in the frame carries the same
+   32px, highlighted or not, and nudging the text right on hover made the list
+   jitter as the cursor moved down it. */
+
+/* Conditions cards — same open-follows-cursor pattern; the open card reveals
+   its Symptoms / Risk / Testing detail (Figma 92:27676 on the service frames). */
+.condrow .cond {
+  background: rgba(255, 255, 255, 0.08);
+  transition: background-color 0.4s ease;
+}
+.condrow .cond[data-open],
+.condrow .cond:hover,
+.condrow .cond:focus-within { background: rgba(255, 255, 255, 0.16); }
+.condrow:hover .cond[data-open]:not(:hover),
+.condrow:focus-within .cond[data-open]:not(:focus-within) { background: rgba(255, 255, 255, 0.08); }
+
+/* The detail grows the card in flow rather than dropping over the cards below.
+   The list is masonry, so it pushes down only its own column — in Figma
+   2256:17773 the open card shifts the two cards under it while the outer
+   columns stay where they are. An absolutely positioned panel covered its
+   neighbours instead, and expanding every card at once (the state the
+   977-tall spec board shows) buried the section under nine open panels.
+
+   Collapsed with max-height rather than grid-template-rows: the panel holds
+   three cells, and 0fr only flattens the first row, so the other two dropped
+   into implicit auto rows and stayed open. */
+.cond .cond-detail {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  padding-top: 0;
+  transition: max-height 0.45s ease, opacity 0.3s ease, padding-top 0.45s ease;
+}
+.condrow .cond[data-open] .cond-detail,
+.condrow .cond:hover .cond-detail,
+.condrow .cond:focus-within .cond-detail {
+  max-height: 22rem;
+  opacity: 1;
+  padding-top: 0.75rem;
+}
+.condrow:hover .cond[data-open]:not(:hover) .cond-detail,
+.condrow:focus-within .cond[data-open]:not(:focus-within) .cond-detail {
+  max-height: 0;
+  opacity: 0;
+  padding-top: 0;
+}
+
+/* The chevron points down when closed and flips when the card opens. */
+.cond .cond-chevron { transition: transform 0.4s ease; }
+.condrow .cond[data-open] .cond-chevron,
+.condrow .cond:hover .cond-chevron,
+.condrow .cond:focus-within .cond-chevron { transform: rotate(180deg); }
+.condrow:hover .cond[data-open]:not(:hover) .cond-chevron,
+.condrow:focus-within .cond[data-open]:not(:focus-within) .cond-chevron { transform: none; }
+
+/* Open promise card — Figma 2256:2828: #3376EB carrying a "Puzzle Illustration
+   Design" raster at 30% opacity, over a soft light fall-off and fine grain.
+
+   That raster is now in the repository (exported from the file as 1k+.png, the
+   frame's own name, and recompressed to JPEG — 403KB to 46KB with no alpha to
+   lose, it was fully opaque). It replaces the CSS approximation that stood in
+   for it: three puzzle outlines, two radial gradients and a turbulence filter
+   standing in for one 500x440 image. The blend mode goes with it — the export
+   already carries the blue, the light and the grain baked together, so
+   soft-lighting it over the card's own #3376EB only muddied both. */
+.promise-grain {
+  background-image: url("/images/figma/promise-texture.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Open promise: number and title sit together at the top, body drops to the
+   bottom. Collapsed: number top, title bottom. */
+/* Collapsed: number top, title bottom. Open: number and title together at the
+   top with the body pinned below — `margin-bottom:auto` is what pins the title
+   up, since justify-between alone would drop it to the bottom again. */
+.tab.promise .promise-title { margin-top: auto; margin-bottom: 0; }.tabrow > .tab[data-open].promise .promise-title,
+.tabrow > .tab.promise:hover .promise-title,
+.tabrow > .tab.promise:focus-within .promise-title{
+  margin-top: 0.5rem;
+  margin-bottom: auto;
+}.tabrow:hover > .tab[data-open]:not(:hover).promise .promise-title,
+.tabrow:focus-within > .tab[data-open]:not(:focus-within).promise .promise-title{
+  margin-top: auto;
+  margin-bottom: 0;
+}
+.tab.promise .promise-body { margin-top: auto; }
+
+/* "Meet your physician" points — an accordion separated by hairlines, with the
+   open row showing its body (Figma 1:1776). Same open-follows-cursor rule. */
+.acc > .acc-row { border-top: 1px solid rgba(21, 32, 50, 0.12); }
+.acc > .acc-row:first-child { border-top: 0; }
+.acc .acc-body {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.45s ease, opacity 0.45s ease, margin-top 0.45s ease;
+  margin-top: 0;
+}.acc > .acc-row[data-open] .acc-body,
+.acc > .acc-row:hover .acc-body,
+.acc > .acc-row:focus-within .acc-body{
+  max-height: 16rem;
+  opacity: 1;
+  margin-top: 0.5rem;
+}.acc:hover > .acc-row[data-open]:not(:hover) .acc-body,
+.acc:focus-within > .acc-row[data-open]:not(:focus-within) .acc-body{
+  max-height: 0;
+  opacity: 0;
+  margin-top: 0;
+}
+
+/* Diagnostics tiles — the frame shows one tile filled with a blue gradient and
+   white type while the rest stay plain (Figma 96:28973). Same
+   open-follows-cursor rule; here it changes colour rather than width. */
+.tilegrid > .tile-card {
+  transition: background 0.45s ease, color 0.45s ease;
+  color: var(--ink);
+}
+.tilegrid > .tile-card[data-open],
+.tilegrid > .tile-card:hover {
+  background: radial-gradient(120% 110% at 72% 12%, #e2ebfc 0%, #93b2ef 42%, #3376eb 100%);
+  color: #ffffff;
+}
+.tilegrid:hover > .tile-card[data-open]:not(:hover) {
+  background: none;
+  color: var(--ink);
+}
+/* eyebrow and blurb ride the card's colour */
+.tile-card .tile-eyebrow,
+.tile-card .tile-blurb { color: inherit; transition: color 0.45s ease; }
+.tile-card:not([data-open]):not(:hover) .tile-blurb,
+.tilegrid:hover > .tile-card[data-open]:not(:hover) .tile-blurb { color: var(--ink-80); }
+
+/* Below the desktop breakpoint the open-follows-cursor accordions have no
+   affordance — there is no pointer to hover and the rows are not focusable —
+   so their bodies would be permanently collapsed and their copy unreachable.
+   On touch widths every panel is simply shown. */
+@media (max-width: 1023px) {
+  .acc .acc-body,
+  .acc:hover > .acc-row[data-open]:not(:hover) .acc-body,
+  .acc:focus-within > .acc-row[data-open]:not(:focus-within) .acc-body {
+    max-height: none;
+    opacity: 1;
+    margin-top: 0.5rem;
+  }
+  .cond .cond-detail,
+  .condrow:hover .cond[data-open]:not(:hover) .cond-detail,
+  .condrow:focus-within .cond[data-open]:not(:focus-within) .cond-detail {
+    max-height: none;
+    opacity: 1;
+  }
+}
+
+/* "FEATURED IN" press ticker — Figma 2256:895 lays the five mastheads across a
+   1440 row in equal 288px cells. The row is wider than any viewport once it
+   repeats, so it marquees: the track holds the logos twice and slides exactly
+   half its width, which puts the second copy where the first began and makes
+   the loop seamless with no jump at the wrap.
+
+   Paused on hover so a masthead can be read, and stilled entirely under
+   reduced motion — the logos are the content, the movement is decoration. */
+@keyframes press-marquee {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
+
+.press-marquee {
+  animation: press-marquee 40s linear infinite;
+  will-change: transform;
+}
+
+.press-marquee:hover,
+.press-marquee:focus-within {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .press-marquee { animation: none; }
 }

@@ -8,12 +8,19 @@ export type Post = {
   date: string;
   rawDate: Date;
   excerpt: string;
+  author: string;
   body: string;
   gradient: string;
   image: string;
 };
 
 const POSTS_DIR = path.join(process.cwd(), "content/blog");
+
+/** Bylines as shown in the Figma blog row (node 1:2382). */
+const AUTHORS: Record<string, string> = {
+  "micronutrients-the-essential-building-blocks-of-optimal-health": "the healing dawn",
+};
+const DEFAULT_AUTHOR = "Avi Ishaaya";
 
 const GRADIENTS = [
   "from-rose-100 via-amber-50 to-emerald-100",
@@ -73,6 +80,7 @@ export function getAllPosts(): Post[] {
       date: fmtDate(rawDate),
       rawDate,
       excerpt: data.excerpt as string,
+      author: AUTHORS[slug] ?? DEFAULT_AUTHOR,
       body: content,
       gradient: GRADIENTS[i % GRADIENTS.length],
       image: SLUG_IMAGE_MAP[slug] || IMAGES_FALLBACK[i % IMAGES_FALLBACK.length],
@@ -89,6 +97,30 @@ export function getPost(slug: string): Post | undefined {
 
 // Tiny markdown renderer (subset). Supports headings, paragraphs, ul/ol, **bold**,
 // *italic*, blockquotes, and links.
+/** Anchor id for a heading, shared by the rendered HTML and the contents list
+    so the two always agree. */
+function slugify(s: string) {
+  return s
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, "")
+    .trim()
+    .replace(/\s+/g, "-");
+}
+
+/** Top-level headings, for the contents rail the post frame puts beside the
+    body (Figma 2256:34167). Read from the markdown rather than the rendered
+    HTML so the list exists before the body is parsed. */
+export function getHeadings(md: string): { id: string; text: string }[] {
+  return md
+    .replace(/\r\n/g, "\n")
+    .split("\n")
+    .filter((l) => /^#{1,2} /.test(l))
+    .map((l) => {
+      const text = l.replace(/^#{1,2} /, "").replace(/\*\*/g, "").trim();
+      return { id: slugify(text), text };
+    });
+}
+
 export function renderMarkdown(md: string): string {
   const lines = md.replace(/\r\n/g, "\n").split("\n");
   const out: string[] = [];
@@ -115,12 +147,14 @@ export function renderMarkdown(md: string): string {
       continue;
     }
     if (line.startsWith("## ")) {
-      out.push(`<h2>${inline(line.slice(3))}</h2>`);
+      const t = line.slice(3);
+      out.push(`<h2 id="${slugify(t)}">${inline(t)}</h2>`);
       i++;
       continue;
     }
     if (line.startsWith("# ")) {
-      out.push(`<h2>${inline(line.slice(2))}</h2>`);
+      const t = line.slice(2);
+      out.push(`<h2 id="${slugify(t)}">${inline(t)}</h2>`);
       i++;
       continue;
     }
