@@ -28,15 +28,24 @@ type HoldProps = {
 export function useHoldOpen(initial: number) {
   const [openIndex, setOpenIndex] = useState(initial);
 
-  function hold(i: number, claimable = true): HoldProps {
+  function hold(
+    i: number,
+    {
+      claimable = true,
+      /** Set on items that are already focusable — a link or a button — so
+          they are not given a second, redundant tab stop. */
+      nativeFocus = false,
+    }: { claimable?: boolean; nativeFocus?: boolean } = {}
+  ): HoldProps {
     const open = i === openIndex ? { "data-open": "" } : {};
     if (!claimable) return open;
     return {
       onMouseEnter: () => setOpenIndex(i),
       onFocus: () => setOpenIndex(i),
-      // The item is the control, so it takes focus itself — the `:focus-within`
-      // rules these replaced never fired, as the items hold nothing focusable.
-      tabIndex: 0,
+      // Otherwise the item is the control and takes focus itself — the
+      // `:focus-within` rules these replaced never fired, as those items hold
+      // nothing focusable.
+      ...(nativeFocus ? {} : { tabIndex: 0 }),
       ...open,
     };
   }

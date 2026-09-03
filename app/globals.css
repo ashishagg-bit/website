@@ -306,9 +306,7 @@ body {
 
 @media (min-width: 1024px) {
   .tabrow > .tab { flex: 1 1 0; }
-  .tabrow > .tab[data-open] { flex-grow: 2; }.tabrow:hover > .tab[data-open]:not(:hover):not(.promise),
-.tabrow:focus-within > .tab[data-open]:not(:focus-within):not(.promise){ flex-grow: 1; }.tabrow > .tab:hover:not(.promise),
-.tabrow > .tab:focus-within:not(.promise){ flex-grow: 2; }
+    .tabrow > .tab[data-open] { flex-grow: 2; }
 }
 
 /* "All services" (Figma 2256:6331) lays its eight tiles on an even 4x2 grid and
@@ -318,11 +316,7 @@ body {
    that grows — three tiles across, with room to give. Everything else about the
    open state is shared, so this only pins the track. */
 .tabrow.tabrow-even > .tab,
-.tabrow.tabrow-even > .tab[data-open],
-.tabrow.tabrow-even:hover > .tab[data-open]:not(:hover),
-.tabrow.tabrow-even:focus-within > .tab[data-open]:not(:focus-within),
-.tabrow.tabrow-even > .tab:hover,
-.tabrow.tabrow-even > .tab:focus-within {
+.tabrow.tabrow-even > .tab[data-open] {
   flex-grow: 1;
 }
 
@@ -333,28 +327,17 @@ body {
 }
 .tab .on-open.slide { transform: translateY(-0.5rem); }
 .tabrow > .tab[data-open] .on-open { opacity: 1; }
-.tabrow > .tab[data-open] .on-open.slide { transform: none; }.tabrow:hover > .tab[data-open]:not(:hover):not(.promise) .on-open,
-.tabrow:focus-within > .tab[data-open]:not(:focus-within):not(.promise) .on-open{ opacity: 0; }.tabrow:hover > .tab[data-open]:not(:hover):not(.promise) .on-open.slide,
-.tabrow:focus-within > .tab[data-open]:not(:focus-within):not(.promise) .on-open.slide{ transform: translateY(-0.5rem); }.tabrow > .tab:hover:not(.promise) .on-open,
-.tabrow > .tab:focus-within:not(.promise) .on-open{ opacity: 1; }.tabrow > .tab:hover:not(.promise) .on-open.slide,
-.tabrow > .tab:focus-within:not(.promise) .on-open.slide{ transform: none; }
+.tabrow > .tab[data-open] .on-open.slide { transform: none; }
 
 /* Copy turns white once the photograph is behind it. */
 .tab .on-open-text { transition: color 0.5s ease; }
-.tabrow > .tab[data-open] .on-open-text { color: #fff; }.tabrow:hover > .tab[data-open]:not(:hover) .on-open-text,
-.tabrow:focus-within > .tab[data-open]:not(:focus-within) .on-open-text{ color: var(--ink); }.tabrow:hover > .tab[data-open]:not(:hover) .on-open-text.muted,
-.tabrow:focus-within > .tab[data-open]:not(:focus-within) .on-open-text.muted{ color: var(--ink-80); }.tabrow > .tab:hover .on-open-text,
-.tabrow > .tab:focus-within .on-open-text{ color: #fff; }
+.tabrow > .tab[data-open] .on-open-text { color: #fff; }
 
 /* Collapsed: title top, blurb bottom. Open: both group at the bottom. */
 .tab .tab-title { margin-top: 0; }
 .tab .tab-blurb { margin-top: auto; }
 .tabrow > .tab[data-open] .tab-title { margin-top: auto; }
-.tabrow > .tab[data-open] .tab-blurb { margin-top: 0; }.tabrow:hover > .tab[data-open]:not(:hover) .tab-title,
-.tabrow:focus-within > .tab[data-open]:not(:focus-within) .tab-title{ margin-top: 0; }.tabrow:hover > .tab[data-open]:not(:hover) .tab-blurb,
-.tabrow:focus-within > .tab[data-open]:not(:focus-within) .tab-blurb{ margin-top: auto; }.tabrow > .tab:hover .tab-title,
-.tabrow > .tab:focus-within .tab-title{ margin-top: auto; }.tabrow > .tab:hover .tab-blurb,
-.tabrow > .tab:focus-within .tab-blurb{ margin-top: 0; }
+.tabrow > .tab[data-open] .tab-blurb { margin-top: 0; }
 
 /* Promises: the open card turns blue and its heading grows. */
 .tabrow > .tab[data-open].promise { background-color: var(--blue); }

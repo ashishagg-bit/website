@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useHoldOpen } from "@/components/hold-open";
 import { Display, Kicker } from "@/components/ui";
 
 export type Condition = {
@@ -57,7 +57,7 @@ export function Conditions({
       : items.findIndex((c) => c.details && c.details.length > 0);
 
   // Server and first client render both open `restsOn`, so hydration matches.
-  const [openIndex, setOpenIndex] = useState(restsOn);
+  const { hold } = useHoldOpen(restsOn);
 
   // Card i belongs in column i % 3. The frame's three columns read
   // Coronary / Cardiomyopathy / Peripheral, then Congestive Heart Failure /
@@ -90,18 +90,10 @@ export function Conditions({
           <ul key={ci} className="flex min-w-0 flex-col gap-2 lg:flex-1">
             {col.map(({ card: c, i }) => {
               const hasDetail = Boolean(c.details && c.details.length > 0);
-              // A card with nothing to show never takes the open slot, so
-              // crossing the gaps between cards leaves the panel alone.
-              const claim = hasDetail ? () => setOpenIndex(i) : undefined;
               return (
                 <li
                   key={c.name}
-                  {...(i === openIndex ? { "data-open": "" } : {})}
-                  onMouseEnter={claim}
-                  onFocus={claim}
-                  // Keyboard reaches the same cards the pointer does; the
-                  // card is the control, so it takes the focus itself.
-                  tabIndex={hasDetail ? 0 : undefined}
+                  {...hold(i, { claimable: hasDetail })}
                   className="cond flex flex-col rounded-2xl p-2"
                 >
                   <div className="flex items-center gap-3">

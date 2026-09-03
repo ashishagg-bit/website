@@ -1,107 +1,11 @@
 import Link from "next/link";
+import { TabRow, type Tile } from "@/components/home/service-tabrow";
 import { BlueButton, Display, Kicker } from "@/components/ui";
 import { serviceTiles, vipTile } from "@/lib/home-content";
 
 const HAIRLINE = "border-[rgba(21,32,50,0.1)]";
 
-export type Tile = {
-  n: string;
-  title: string;
-  blurb: string;
-  href: string;
-  image?: string;
-};
-
-/**
- * One service tab. Collapsed it is plain cream with the number, title and
- * blurb; open it doubles in width and reveals the photograph and "Learn more"
- * — the state the Figma frame captured on the Wellness card.
- *
- * The open/closed states are driven entirely by the `.tabrow` / `.tab` CSS in
- * globals.css, so this is a server component and the interaction survives with
- * JavaScript disabled.
- */
-function ServiceTab({
-  tile,
-  open = false,
-  className = "",
-}: {
-  tile: Tile;
-  open?: boolean;
-  className?: string;
-}) {
-  return (
-    <Link
-      href={tile.href}
-      {...(open ? { "data-open": "" } : {})}
-      className={`tab group relative flex h-auto min-h-[220px] flex-col lg:h-[400px] items-start justify-between overflow-clip p-8 ${className}`}
-    >
-      {tile.image && (
-        <span aria-hidden className="on-open absolute inset-0">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            loading="lazy"
-            decoding="async"
-            src={tile.image}
-            alt=""
-            className="absolute inset-0 size-full object-cover"
-          />
-          <span className="absolute inset-0 bg-[linear-gradient(180deg,rgba(21,32,50,0)_40%,rgba(21,32,50,0.88)_100%)]" />
-          <span className="absolute inset-0 bg-[rgba(254,181,91,0.2)] mix-blend-soft-light" />
-        </span>
-      )}
-
-      <span className="on-open slide pointer-events-none absolute inset-x-8 top-8 flex items-center justify-center rounded-lg bg-[rgba(252,250,246,0.32)] px-5 py-3 text-[15px] leading-[21px] text-white backdrop-blur-sm">
-        Learn more
-      </span>
-
-      <span className="tab-title on-open-text relative flex w-full flex-col gap-3 text-[var(--ink)]">
-        <span className="eyebrow on-open-text">Service · {tile.n}</span>
-        <span className="font-kalice text-[clamp(1.5rem,1.1rem+1vw,34px)] leading-[1.29] tracking-[1px]">
-          {tile.title}
-        </span>
-      </span>
-
-      <span className="tab-blurb on-open-text muted relative text-base leading-[22px] text-[var(--ink-80)]">
-        {tile.blurb}
-      </span>
-    </Link>
-  );
-}
-
-/** A row of tabs sharing one open slot. */
-function TabRow({
-  tiles,
-  defaultOpen = -1,
-  className = "",
-  evenWidths = false,
-}: {
-  tiles: Tile[];
-  defaultOpen?: number;
-  className?: string;
-  /** Hold every tile at the same width; the open one still takes the
-      photograph and the pill, it just does not widen. */
-  evenWidths?: boolean;
-}) {
-  return (
-    <div
-      className={`tabrow flex flex-col lg:flex-row ${
-        evenWidths ? "tabrow-even" : ""
-      } ${className}`}
-    >
-      {tiles.map((t, i) => (
-        <ServiceTab
-          key={t.title}
-          tile={t}
-          open={i === defaultOpen}
-          className={`border-b ${HAIRLINE} lg:border-b-0 ${
-            i < tiles.length - 1 ? `lg:border-r ${HAIRLINE}` : ""
-          }`}
-        />
-      ))}
-    </div>
-  );
-}
+export type { Tile };
 
 /**
  * "Our services" bento — Figma node 1:964 (homepage) and 74:22082
