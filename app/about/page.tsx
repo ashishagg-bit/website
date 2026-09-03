@@ -1,7 +1,8 @@
 import { Metadata } from "next";
+import { PromiseRow } from "@/components/promise-row";
 import { Space } from "@/components/home/space";
 import { Testimonials } from "@/components/home/testimonials";
-import { featuredIn, homePromises, testimonials } from "@/lib/home-content";
+import { featuredIn, testimonials } from "@/lib/home-content";
 
 export const metadata: Metadata = {
   title: "About Dr. Avi Ishaaya",
@@ -26,7 +27,6 @@ const certifications = [
   "American Board of Geriatrics",
 ];
 
-const EDGE = "border-[rgba(255,255,255,0.06)]";
 
 function Check() {
   return (
@@ -235,41 +235,7 @@ export default function AboutPage() {
           </p>
         </header>
 
-        <div
-          className={`tabrow flex w-full max-w-[1328px] flex-col overflow-clip rounded-2xl border lg:flex-row ${EDGE}`}
-        >
-          {homePromises.map((p, i) => (
-            <div
-              key={p.n}
-              {...(i === 0 ? { "data-open": "" } : {})}
-              className={`tab promise relative flex flex-col items-start justify-between overflow-clip p-8 lg:h-[440px] ${
-                i < homePromises.length - 1
-                  ? `border-b lg:border-b-0 lg:border-r ${EDGE}`
-                  : ""
-              }`}
-            >
-              <div
-                aria-hidden
-                className="promise-grain on-open pointer-events-none absolute inset-0"
-              />
-              <p className="promise-num relative font-kalice text-2xl leading-8 tracking-[1px]">
-                {p.n}
-              </p>
-              <h3 className="promise-title relative w-full pt-4 font-kalice tracking-[1px] text-white">
-                {p.title.map((line) => (
-                  <span key={line} className="block">
-                    {line}
-                  </span>
-                ))}
-              </h3>
-              {p.body && (
-                <p className="promise-body relative max-w-[420px] text-base leading-6 text-white/80">
-                  {p.body}
-                </p>
-              )}
-            </div>
-          ))}
-        </div>
+        <PromiseRow />
       </section>
 
       {/* Reviews — Figma 2147:6511 */}

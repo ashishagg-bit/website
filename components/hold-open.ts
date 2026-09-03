@@ -1,0 +1,45 @@
+"use client";
+
+import { useState } from "react";
+
+/** Props a row item spreads to claim the open slot on hover or focus. */
+type HoldProps = {
+  onMouseEnter?: () => void;
+  onFocus?: () => void;
+  tabIndex?: number;
+  "data-open"?: string;
+};
+
+/**
+ * A row in which the item the cursor last entered stays open.
+ *
+ * These rows used to open on `:hover`, with a `:not(:hover)` rule closing the
+ * frame's default while any sibling was hovered. Leaving the row ran both
+ * backwards at once — the item under the cursor collapsed and the default
+ * sprang open again — so the row flickered between two items on the way out.
+ *
+ * Holding the last index entered fixes that: exactly one item is open at any
+ * moment, and it stays where the reader left it. `initial` is the item the
+ * frame captures open, so the server render and the first client render agree.
+ *
+ * Items that have nothing to reveal pass `claimable: false` — they never take
+ * the slot, so crossing a gap between items leaves the open one alone.
+ */
+export function useHoldOpen(initial: number) {
+  const [openIndex, setOpenIndex] = useState(initial);
+
+  function hold(i: number, claimable = true): HoldProps {
+    const open = i === openIndex ? { "data-open": "" } : {};
+    if (!claimable) return open;
+    return {
+      onMouseEnter: () => setOpenIndex(i),
+      onFocus: () => setOpenIndex(i),
+      // The item is the control, so it takes focus itself — the `:focus-within`
+      // rules these replaced never fired, as the items hold nothing focusable.
+      tabIndex: 0,
+      ...open,
+    };
+  }
+
+  return { openIndex, hold };
+}

@@ -306,9 +306,9 @@ body {
 
 @media (min-width: 1024px) {
   .tabrow > .tab { flex: 1 1 0; }
-  .tabrow > .tab[data-open] { flex-grow: 2; }.tabrow:hover > .tab[data-open]:not(:hover),
-.tabrow:focus-within > .tab[data-open]:not(:focus-within){ flex-grow: 1; }.tabrow > .tab:hover,
-.tabrow > .tab:focus-within{ flex-grow: 2; }
+  .tabrow > .tab[data-open] { flex-grow: 2; }.tabrow:hover > .tab[data-open]:not(:hover):not(.promise),
+.tabrow:focus-within > .tab[data-open]:not(:focus-within):not(.promise){ flex-grow: 1; }.tabrow > .tab:hover:not(.promise),
+.tabrow > .tab:focus-within:not(.promise){ flex-grow: 2; }
 }
 
 /* "All services" (Figma 2256:6331) lays its eight tiles on an even 4x2 grid and
@@ -333,11 +333,11 @@ body {
 }
 .tab .on-open.slide { transform: translateY(-0.5rem); }
 .tabrow > .tab[data-open] .on-open { opacity: 1; }
-.tabrow > .tab[data-open] .on-open.slide { transform: none; }.tabrow:hover > .tab[data-open]:not(:hover) .on-open,
-.tabrow:focus-within > .tab[data-open]:not(:focus-within) .on-open{ opacity: 0; }.tabrow:hover > .tab[data-open]:not(:hover) .on-open.slide,
-.tabrow:focus-within > .tab[data-open]:not(:focus-within) .on-open.slide{ transform: translateY(-0.5rem); }.tabrow > .tab:hover .on-open,
-.tabrow > .tab:focus-within .on-open{ opacity: 1; }.tabrow > .tab:hover .on-open.slide,
-.tabrow > .tab:focus-within .on-open.slide{ transform: none; }
+.tabrow > .tab[data-open] .on-open.slide { transform: none; }.tabrow:hover > .tab[data-open]:not(:hover):not(.promise) .on-open,
+.tabrow:focus-within > .tab[data-open]:not(:focus-within):not(.promise) .on-open{ opacity: 0; }.tabrow:hover > .tab[data-open]:not(:hover):not(.promise) .on-open.slide,
+.tabrow:focus-within > .tab[data-open]:not(:focus-within):not(.promise) .on-open.slide{ transform: translateY(-0.5rem); }.tabrow > .tab:hover:not(.promise) .on-open,
+.tabrow > .tab:focus-within:not(.promise) .on-open{ opacity: 1; }.tabrow > .tab:hover:not(.promise) .on-open.slide,
+.tabrow > .tab:focus-within:not(.promise) .on-open.slide{ transform: none; }
 
 /* Copy turns white once the photograph is behind it. */
 .tab .on-open-text { transition: color 0.5s ease; }
@@ -357,29 +357,21 @@ body {
 .tabrow > .tab:focus-within .tab-blurb{ margin-top: 0; }
 
 /* Promises: the open card turns blue and its heading grows. */
-.tabrow > .tab[data-open].promise { background-color: var(--blue); }.tabrow:hover > .tab[data-open]:not(:hover).promise,
-.tabrow:focus-within > .tab[data-open]:not(:focus-within).promise{ background-color: transparent; }.tabrow > .tab.promise:hover,
-.tabrow > .tab.promise:focus-within{ background-color: var(--blue); }
+.tabrow > .tab[data-open].promise { background-color: var(--blue); }
 .tab.promise .promise-title { font-size: 1.5rem; line-height: 2rem; transition: font-size 0.5s ease, line-height 0.5s ease; }
-.tabrow > .tab[data-open].promise .promise-title { font-size: clamp(1.75rem, 1.2rem + 1.4vw, 40px); line-height: 1.2; }.tabrow:hover > .tab[data-open]:not(:hover).promise .promise-title,
-.tabrow:focus-within > .tab[data-open]:not(:focus-within).promise .promise-title{ font-size: 1.5rem; line-height: 2rem; }.tabrow > .tab.promise:hover .promise-title,
-.tabrow > .tab.promise:focus-within .promise-title{ font-size: clamp(1.75rem, 1.2rem + 1.4vw, 40px); line-height: 1.2; }
+.tabrow > .tab[data-open].promise .promise-title { font-size: clamp(1.75rem, 1.2rem + 1.4vw, 40px); line-height: 1.2; }
 .tab.promise .promise-num { color: rgba(255, 255, 255, 0.4); transition: color 0.5s ease; }
-.tabrow > .tab[data-open].promise .promise-num { color: rgba(255, 255, 255, 0.7); }.tabrow:hover > .tab[data-open]:not(:hover).promise .promise-num,
-.tabrow:focus-within > .tab[data-open]:not(:focus-within).promise .promise-num{ color: rgba(255, 255, 255, 0.4); }.tabrow > .tab.promise:hover .promise-num,
-.tabrow > .tab.promise:focus-within .promise-num{ color: rgba(255, 255, 255, 0.7); }
+.tabrow > .tab[data-open].promise .promise-num { color: rgba(255, 255, 255, 0.7); }
 .tab.promise .promise-body { max-height: 0; overflow: hidden; opacity: 0; transition: max-height 0.5s ease, opacity 0.5s ease; }
-.tabrow > .tab[data-open].promise .promise-body { max-height: 12rem; opacity: 1; }.tabrow:hover > .tab[data-open]:not(:hover).promise .promise-body,
-.tabrow:focus-within > .tab[data-open]:not(:focus-within).promise .promise-body{ max-height: 0; opacity: 0; }.tabrow > .tab.promise:hover .promise-body,
-.tabrow > .tab.promise:focus-within .promise-body{ max-height: 12rem; opacity: 1; }
+.tabrow > .tab[data-open].promise .promise-body { max-height: 12rem; opacity: 1; }
 
-/* Service-page checklist: the gradient row follows the cursor. */
+/* Service-page checklist: the gradient row is the one the cursor last entered,
+   which Checklist holds in state — see components/hold-open.ts for why :hover
+   could not. */
 .checkrow > .checkitem { transition: background 0.4s ease; }
-.checkrow > .checkitem[data-open],
-.checkrow > .checkitem:hover {
+.checkrow > .checkitem[data-open] {
   background: linear-gradient(90deg, var(--cream) 0%, #b8d2ff 50%, #75a4f5 75%, var(--blue) 100%);
 }
-.checkrow:hover > .checkitem[data-open]:not(:hover) { background: none; }
 /* No padding shift on the open row: every row in the frame carries the same
    32px, highlighted or not, and nudging the text right on hover made the list
    jitter as the cursor moved down it. */
@@ -444,15 +436,10 @@ body {
 /* Collapsed: number top, title bottom. Open: number and title together at the
    top with the body pinned below — `margin-bottom:auto` is what pins the title
    up, since justify-between alone would drop it to the bottom again. */
-.tab.promise .promise-title { margin-top: auto; margin-bottom: 0; }.tabrow > .tab[data-open].promise .promise-title,
-.tabrow > .tab.promise:hover .promise-title,
-.tabrow > .tab.promise:focus-within .promise-title{
+.tab.promise .promise-title { margin-top: auto; margin-bottom: 0; }
+.tabrow > .tab[data-open].promise .promise-title {
   margin-top: 0.5rem;
   margin-bottom: auto;
-}.tabrow:hover > .tab[data-open]:not(:hover).promise .promise-title,
-.tabrow:focus-within > .tab[data-open]:not(:focus-within).promise .promise-title{
-  margin-top: auto;
-  margin-bottom: 0;
 }
 .tab.promise .promise-body { margin-top: auto; }
 
