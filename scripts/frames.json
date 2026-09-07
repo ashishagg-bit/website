@@ -1,0 +1,573 @@
+{
+ "fileKey": "TdifdqKlRJcGSLC8Kpz1Sz",
+ "pages": {
+  "/": {
+   "frame": "2256:893",
+   "sections": [
+    {
+     "id": "2256:894",
+     "name": "hero",
+     "y": 0,
+     "h": 1005
+    },
+    {
+     "id": "2256:1172",
+     "name": "hero",
+     "y": 1005,
+     "h": 1092
+    },
+    {
+     "id": "2256:1462",
+     "name": "hero",
+     "y": 2097,
+     "h": 1417
+    },
+    {
+     "id": "2256:2575",
+     "name": "why us",
+     "y": 3514,
+     "h": 800,
+     "ignore": true,
+     "note": "why-us pins and scrolls: the track is many viewports, the frame draws one state"
+    },
+    {
+     "id": "2256:2576",
+     "name": "hero",
+     "y": 4314,
+     "h": 888
+    },
+    {
+     "id": "2256:2864",
+     "name": "hero",
+     "y": 5202,
+     "h": 900
+    },
+    {
+     "id": "2256:3396",
+     "name": "hero",
+     "y": 6102,
+     "h": 1521
+    },
+    {
+     "id": "2256:3754",
+     "name": "hero",
+     "y": 7623,
+     "h": 1237
+    },
+    {
+     "id": "2256:4032",
+     "name": "Section - Desktop",
+     "y": 8860,
+     "h": 1083
+    },
+    {
+     "id": "2256:4052",
+     "name": "Footer - Desktop",
+     "y": 9943,
+     "h": 472
+    }
+   ]
+  },
+  "/about/": {
+   "frame": "2256:28966",
+   "sections": [
+    {
+     "id": "2256:29244",
+     "name": "Frame 1597881339",
+     "y": 0,
+     "h": 1197,
+     "span": 2,
+     "note": "frame's first child is the hero and the press band together"
+    },
+    {
+     "id": "2256:29562",
+     "name": "hero",
+     "y": 1197,
+     "h": 869
+    },
+    {
+     "id": "2256:29819",
+     "name": "hero",
+     "y": 2066,
+     "h": 827
+    },
+    {
+     "id": "2256:30073",
+     "name": "hero",
+     "y": 2893,
+     "h": 696
+    },
+    {
+     "id": "2256:30342",
+     "name": "hero",
+     "y": 3589,
+     "h": 978
+    },
+    {
+     "id": "2256:31678",
+     "name": "hero",
+     "y": 4567,
+     "h": 931
+    },
+    {
+     "id": "2256:31992",
+     "name": "Section - Desktop",
+     "y": 5498,
+     "h": 1083
+    },
+    {
+     "id": "2256:32012",
+     "name": "Footer - Desktop",
+     "y": 6581,
+     "h": 472
+    }
+   ]
+  },
+  "/services/": {
+   "frame": "2256:6331",
+   "sections": [
+    {
+     "id": "2256:6332",
+     "name": "hero",
+     "y": 0,
+     "h": 841
+    },
+    {
+     "id": "2256:6897",
+     "name": "hero",
+     "y": 841,
+     "h": 1248
+    },
+    {
+     "id": "2256:7229",
+     "name": "hero",
+     "y": 2089,
+     "h": 740
+    },
+    {
+     "id": "2256:8283",
+     "name": "hero",
+     "y": 2829,
+     "h": 931
+    },
+    {
+     "id": "2256:8581",
+     "name": "Section - Desktop",
+     "y": 3760,
+     "h": 453
+    },
+    {
+     "id": "2256:8601",
+     "name": "Footer - Desktop",
+     "y": 4213,
+     "h": 472
+    }
+   ]
+  },
+  "/contact/": {
+   "frame": "2256:8642",
+   "sections": [
+    {
+     "id": "2256:8643",
+     "name": "hero",
+     "y": 0,
+     "h": 841
+    },
+    {
+     "id": "2256:9208",
+     "name": "hero",
+     "y": 841,
+     "h": 1011
+    },
+    {
+     "id": "2256:9578",
+     "name": "hero",
+     "y": 1852,
+     "h": 740
+    },
+    {
+     "id": "2256:10643",
+     "name": "hero",
+     "y": 2592,
+     "h": 931
+    },
+    {
+     "id": "2256:10941",
+     "name": "Section - Desktop",
+     "y": 3523,
+     "h": 453
+    },
+    {
+     "id": "2256:10961",
+     "name": "Footer - Desktop",
+     "y": 3976,
+     "h": 472
+    }
+   ]
+  },
+  "/service/lungs/": {
+   "frame": "2256:11002",
+   "sections": [
+    {
+     "id": "2256:11003",
+     "name": "hero",
+     "y": 0,
+     "h": 841
+    },
+    {
+     "id": "2256:11568",
+     "name": "hero",
+     "y": 841,
+     "h": 781
+    },
+    {
+     "id": "2256:11839",
+     "name": "hero",
+     "y": 1622,
+     "h": 648
+    },
+    {
+     "id": "2256:12220",
+     "name": "hero",
+     "y": 2270,
+     "h": 1241
+    },
+    {
+     "id": "2256:12568",
+     "name": "hero",
+     "y": 3511,
+     "h": 740
+    },
+    {
+     "id": "2256:13622",
+     "name": "hero",
+     "y": 4251,
+     "h": 931
+    },
+    {
+     "id": "2256:13961",
+     "name": "Section - Desktop",
+     "y": 5182,
+     "h": 453
+    },
+    {
+     "id": "2256:13981",
+     "name": "Footer - Desktop",
+     "y": 5635,
+     "h": 472
+    }
+   ]
+  },
+  "/service/sleep/": {
+   "frame": "2256:14022",
+   "sections": [
+    {
+     "id": "2256:14023",
+     "name": "hero",
+     "y": 0,
+     "h": 841
+    },
+    {
+     "id": "2256:14588",
+     "name": "hero",
+     "y": 841,
+     "h": 912
+    },
+    {
+     "id": "2256:14868",
+     "name": "hero",
+     "y": 1753,
+     "h": 490
+    },
+    {
+     "id": "2256:15169",
+     "name": "hero",
+     "y": 2243,
+     "h": 761
+    },
+    {
+     "id": "2256:15476",
+     "name": "hero",
+     "y": 3004,
+     "h": 740
+    },
+    {
+     "id": "2256:16530",
+     "name": "hero",
+     "y": 3744,
+     "h": 931
+    },
+    {
+     "id": "2256:16869",
+     "name": "Section - Desktop",
+     "y": 4675,
+     "h": 453
+    },
+    {
+     "id": "2256:16889",
+     "name": "Footer - Desktop",
+     "y": 5128,
+     "h": 472
+    }
+   ]
+  },
+  "/service/cardiovascular/": {
+   "frame": "2256:16930",
+   "sections": [
+    {
+     "id": "2256:16931",
+     "name": "hero",
+     "y": 0,
+     "h": 841
+    },
+    {
+     "id": "2256:17496",
+     "name": "hero",
+     "y": 841,
+     "h": 824
+    },
+    {
+     "id": "2256:17773",
+     "name": "hero",
+     "y": 1665,
+     "h": 712
+    },
+    {
+     "id": "2256:18182",
+     "name": "hero",
+     "y": 2377,
+     "h": 1241
+    },
+    {
+     "id": "2256:18530",
+     "name": "hero",
+     "y": 3618,
+     "h": 740
+    },
+    {
+     "id": "2256:19584",
+     "name": "hero",
+     "y": 4358,
+     "h": 931
+    },
+    {
+     "id": "2256:19923",
+     "name": "Section - Desktop",
+     "y": 5289,
+     "h": 453
+    },
+    {
+     "id": "2256:19943",
+     "name": "Footer - Desktop",
+     "y": 5742,
+     "h": 472
+    }
+   ]
+  },
+  "/service/allergy-sensitivity/": {
+   "frame": "2256:20449",
+   "sections": [
+    {
+     "id": "2256:20450",
+     "name": "hero",
+     "y": 0,
+     "h": 841
+    },
+    {
+     "id": "2256:21015",
+     "name": "hero",
+     "y": 841,
+     "h": 800
+    },
+    {
+     "id": "2256:21310",
+     "name": "hero",
+     "y": 1641,
+     "h": 761
+    },
+    {
+     "id": "2256:21617",
+     "name": "hero",
+     "y": 2402,
+     "h": 740
+    },
+    {
+     "id": "2256:22671",
+     "name": "hero",
+     "y": 3142,
+     "h": 931
+    },
+    {
+     "id": "2256:23010",
+     "name": "Section - Desktop",
+     "y": 4073,
+     "h": 453
+    },
+    {
+     "id": "2256:23030",
+     "name": "Footer - Desktop",
+     "y": 4526,
+     "h": 472
+    }
+   ]
+  },
+  "/service/wellness-preventive-medicine/": {
+   "frame": "2256:23071",
+   "sections": [
+    {
+     "id": "2256:23072",
+     "name": "hero",
+     "y": 0,
+     "h": 841
+    },
+    {
+     "id": "2256:23637",
+     "name": "hero",
+     "y": 841,
+     "h": 501,
+     "ignore": true,
+     "note": "the frames carry no body copy in the Approach; the build has two real paragraphs"
+    },
+    {
+     "id": "2256:24302",
+     "name": "hero",
+     "y": 1342,
+     "h": 2441
+    },
+    {
+     "id": "2256:24766",
+     "name": "hero",
+     "y": 3783,
+     "h": 740
+    },
+    {
+     "id": "2256:25820",
+     "name": "hero",
+     "y": 4523,
+     "h": 931
+    },
+    {
+     "id": "2256:26159",
+     "name": "Section - Desktop",
+     "y": 5454,
+     "h": 453
+    },
+    {
+     "id": "2256:26179",
+     "name": "Footer - Desktop",
+     "y": 5907,
+     "h": 472
+    }
+   ]
+  },
+  "/service/mineral-heavy-metal-testing/": {
+   "frame": "2417:893",
+   "sections": [
+    {
+     "id": "2417:894",
+     "name": "hero",
+     "y": 0,
+     "h": 841
+    },
+    {
+     "id": "2417:1459",
+     "name": "hero",
+     "y": 841,
+     "h": 712
+    },
+    {
+     "id": "2417:1716",
+     "name": "hero",
+     "y": 1553,
+     "h": 1029
+    },
+    {
+     "id": "2417:2025",
+     "name": "hero",
+     "y": 2582,
+     "h": 830
+    },
+    {
+     "id": "2417:2282",
+     "name": "hero",
+     "y": 3412,
+     "h": 1105
+    },
+    {
+     "id": "2417:2706",
+     "name": "hero",
+     "y": 4517,
+     "h": 1018
+    },
+    {
+     "id": "2417:3005",
+     "name": "hero",
+     "y": 5535,
+     "h": 889
+    },
+    {
+     "id": "2417:3286",
+     "name": "hero",
+     "y": 6424,
+     "h": 914
+    },
+    {
+     "id": "2417:3556",
+     "name": "hero",
+     "y": 7338,
+     "h": 740
+    },
+    {
+     "id": "2417:3815",
+     "name": "TeXga Moodboard",
+     "y": 8078,
+     "h": 1016
+    },
+    {
+     "id": "2417:5009",
+     "name": "Section - Desktop",
+     "y": 9094,
+     "h": 453
+    },
+    {
+     "id": "2417:5029",
+     "name": "Footer - Desktop",
+     "y": 9547,
+     "h": 472
+    }
+   ]
+  },
+  "/blog/": {
+   "frame": "2256:32053",
+   "sections": [
+    {
+     "id": "2256:32054",
+     "name": "hero",
+     "y": 0,
+     "h": 421
+    },
+    {
+     "id": "2256:32368",
+     "name": "hero",
+     "y": 421,
+     "h": 2818,
+     "span": 2,
+     "ignore": true,
+     "note": "the frame mocks more articles than the client has published"
+    },
+    {
+     "id": "2256:33791",
+     "name": "Section - Desktop",
+     "y": 3239,
+     "h": 453
+    },
+    {
+     "id": "2256:33811",
+     "name": "Footer - Desktop",
+     "y": 3692,
+     "h": 472
+    }
+   ]
+  }
+ }
+}
