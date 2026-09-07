@@ -34,7 +34,12 @@ function ServiceTab({
     <Link
       href={tile.href}
       {...hold}
-      className={`tab group relative flex h-auto min-h-[220px] flex-col lg:h-[400px] items-start justify-between overflow-clip p-8 ${className}`}
+      // The padding lives on the inner block, not here. `flex: 1 1 0` sizes the
+      // border box, so padding on the tab itself is reserved before the ratio
+      // is applied: 1326 less 3x65 leaves 1131 to split 1:1:2, which came out
+      // 348 / 348 / 630 against the frame's 332 / 332 / 664. With the tab
+      // itself unpadded the basis really is 0 and the ratio lands exactly.
+      className={`tab group relative flex h-auto min-h-[220px] flex-col lg:h-[400px] overflow-clip ${className}`}
     >
       {tile.image && (
         <span aria-hidden className="on-open absolute inset-0">
@@ -55,15 +60,17 @@ function ServiceTab({
         Learn more
       </span>
 
-      <span className="tab-title on-open-text relative flex w-full flex-col gap-3 text-[var(--ink)]">
-        <span className="eyebrow on-open-text">Service · {tile.n}</span>
-        <span className="font-kalice text-[clamp(1.5rem,1.1rem+1vw,34px)] leading-[1.29] tracking-[1px]">
-          {tile.title}
+      <span className="relative flex h-full w-full flex-col items-start justify-between p-8">
+        <span className="tab-title on-open-text flex w-full flex-col gap-3 text-[var(--ink)]">
+          <span className="eyebrow on-open-text">Service · {tile.n}</span>
+          <span className="font-kalice text-[clamp(1.5rem,1.1rem+1vw,34px)] leading-[1.29] tracking-[1px]">
+            {tile.title}
+          </span>
         </span>
-      </span>
 
-      <span className="tab-blurb on-open-text muted relative text-base leading-[22px] text-[var(--ink-80)]">
-        {tile.blurb}
+        <span className="tab-blurb on-open-text muted text-base leading-[22px] text-[var(--ink-80)]">
+          {tile.blurb}
+        </span>
       </span>
     </Link>
   );
