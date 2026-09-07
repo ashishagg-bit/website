@@ -22,7 +22,12 @@ function Column({ title, children }: { title: string; children: React.ReactNode 
 export function SiteFooter() {
   return (
     <footer className="flex w-full flex-col items-center justify-center gap-14 overflow-clip bg-[var(--dark)] px-6 pb-10 pt-20 sm:px-[60px]">
-      <div className="flex w-full max-w-[1320px] flex-col items-start justify-between gap-12 lg:h-[248px] lg:flex-row lg:gap-12">
+      {/* No gap between the logo block and the columns at desktop: the frame
+         butts them, logo-fill 0..421 and col-wrapper 421..1320, so the three
+         columns get the full 899. The extra 48 here left them 252 apiece,
+         which is where "Second Floor" and "5:00 PM" broke onto their own
+         lines. */}
+      <div className="flex w-full max-w-[1320px] flex-col items-start justify-between gap-12 lg:h-[248px] lg:flex-row lg:gap-0">
         <div className="flex w-full shrink-0 flex-col items-start justify-between gap-8 pt-[5px] lg:h-full lg:w-[421px]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
@@ -44,7 +49,13 @@ export function SiteFooter() {
         </div>
 
         {/* Three columns, not four: Visit and Open Hours stack together */}
-        <div className="grid w-full flex-1 grid-cols-2 items-start gap-8 sm:grid-cols-3 lg:gap-12">
+        {/* At desktop the frame sizes these to their content and pushes them
+           to the right edge — 111 / 272 / 167 inside the 899, with the slack
+           ahead of them. Three equal thirds gave the middle column 268, four
+           short of the 272 "9230 West Olympic Boulevard, Second Floor" needs,
+           so it wrapped and the address ran to three lines. Below lg they
+           stay a grid. */}
+        <div className="grid w-full flex-1 grid-cols-2 items-start gap-8 sm:grid-cols-3 lg:flex lg:justify-end lg:gap-12">
           <Column title="Explore">
             <ul className="flex flex-col items-start justify-center gap-[7px] text-white/60">
               {explore.map((e) => (
