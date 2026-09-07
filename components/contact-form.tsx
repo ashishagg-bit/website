@@ -51,20 +51,30 @@ export function ContactForm() {
 
   const inputCls =
     "mt-2 w-full rounded-xl border border-[var(--hairline)] bg-white px-4 py-3 text-sm text-[var(--ink)] placeholder:text-[var(--ink-60)] focus:border-[var(--blue)] focus:outline-none focus:ring-2 focus:ring-[var(--blue)]/20 transition";
-  const labelCls = "block text-xs uppercase tracking-[0.18em] text-[var(--ink)]";
+  // The frame labels the fields in sentence case at the body size — "Full
+  // Name", not "FULL NAME". The uppercase eyebrow treatment belongs to the
+  // section kickers, and using it here made the form read as a different
+  // typeface to the one beside it.
+  const labelCls = "mb-2 block text-base leading-6 text-[var(--ink)]";
   const checkboxCls =
     "mt-0.5 size-4 shrink-0 rounded border-[var(--hairline)] text-[var(--blue)] focus:ring-2 focus:ring-[var(--blue)]/20";
 
   return (
     <form
       onSubmit={onSubmit}
-      className="rounded-3xl border border-[var(--hairline)] bg-white p-6 sm:p-8 shadow-sm space-y-5"
+      /* The frame sets the form straight on the page, divided from the
+         Appointments column by a rule; the bordered, shadowed card was an
+         invention and boxed the fields in a second frame. */
+      className="space-y-5"
     >
+      {/* The frame runs Full Name across the whole width, then pairs Email
+          with Phone beneath it. The pairing was Name+Email over a full-width
+          Phone, which reads as a different form. */}
+      <label className="block">
+        <span className={labelCls}>Full Name</span>
+        <input name="name" required className={inputCls} placeholder="Your full name" />
+      </label>
       <div className="grid sm:grid-cols-2 gap-5">
-        <label className="block">
-          <span className={labelCls}>Full Name</span>
-          <input name="name" required className={inputCls} placeholder="Your full name" />
-        </label>
         <label className="block">
           <span className={labelCls}>Email address</span>
           <input
@@ -75,11 +85,11 @@ export function ContactForm() {
             placeholder="you@example.com"
           />
         </label>
+        <label className="block">
+          <span className={labelCls}>Phone number</span>
+          <input name="phone" className={inputCls} placeholder="(555) 123-4567" />
+        </label>
       </div>
-      <label className="block">
-        <span className={labelCls}>Phone number</span>
-        <input name="phone" className={inputCls} placeholder="(555) 123-4567" />
-      </label>
       <div className="grid sm:grid-cols-2 gap-5">
         <label className="block">
           <span className={labelCls}>Why are you reaching out?</span>
@@ -151,7 +161,10 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--ink)] px-7 py-3 text-sm font-medium text-white transition-all hover:bg-[var(--blue)] disabled:opacity-60"
+        /* The frame draws Submit in --blue on an 8px radius, the same pill
+           the rest of the site uses for a primary action; this was --ink on a
+           full round, which read as a different button. */
+        className="inline-flex items-center justify-center gap-2 rounded-lg bg-[var(--blue)] px-7 py-3 text-sm font-medium text-white transition-all hover:bg-[var(--blue-hover)] disabled:opacity-60"
       >
         {status === "submitting" ? "Submitting…" : "Submit"}
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

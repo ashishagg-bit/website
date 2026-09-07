@@ -51,7 +51,11 @@ export default function ContactPage() {
 
       <section className="flex w-full flex-col items-center bg-white px-6 py-16 sm:px-14 sm:py-[104px]">
         <div className="grid w-full max-w-[1328px] gap-12 lg:grid-cols-12 lg:gap-16">
-          <div className="lg:col-span-7">
+          {/* The frame divides this band 5/7 with Appointments on the LEFT
+              and the form on the RIGHT (2256:9208). The form stays first in
+              the DOM — it is what the page is for — and takes its column
+              explicitly, so reading order and visual order can differ. */}
+          <div className="lg:col-start-6 lg:col-span-7">
             <div className="flex flex-col gap-3">
               <Kicker>contact us</Kicker>
               <Display className="text-[var(--ink)]">Send a Message</Display>
@@ -61,7 +65,7 @@ export default function ContactPage() {
             </div>
           </div>
 
-          <aside className="flex flex-col gap-8 lg:col-span-5">
+          <aside className="flex flex-col gap-8 lg:row-start-1 lg:col-start-1 lg:col-span-5 lg:border-r lg:border-[var(--hairline)] lg:pr-16">
             <div className="flex flex-col gap-3">
               <Kicker>Appointments</Kicker>
               <h2 className="font-kalice text-[clamp(1.5rem,1.2rem+1vw,2rem)] leading-[1.25] tracking-[1px] text-[var(--ink)]">
