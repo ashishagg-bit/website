@@ -69,9 +69,12 @@ export const serviceTiles = [
     image: "/images/scraped/mRvoVlTLqZI08Kd9gqKbgHptpQ.png",
   },
   {
+    // 2256:1753. The services frame words this tile differently (2256:7187),
+    // as it does tile 01, so servicesPageTiles holds its version.
     n: "05",
     title: "Sleep",
-    blurb: "Good sleep is vital for well-being. It helps your brain process information.",
+    blurb:
+      "Meet with our board certified Sleep doctor and understand the root cause of your sleep issues.",
     href: "/service/sleep",
     image: "/images/scraped/lUTBzERr53jnyvWA0CLFiJn62c.png",
   },
@@ -123,8 +126,9 @@ export const healingDawnTile = {
 /**
  * Where 2256:6331 words a tile differently from the home frame, the services
  * page follows its own: tile 01 keeps the plain "Lungs and Breathing" and the
- * lungs blurb there (2256:7151 / 7152), and tile 03 carries the shorter
- * Wellness blurb.
+ * lungs blurb there (2256:7151 / 7152), tile 03 carries the shorter Wellness
+ * blurb, and tile 05 keeps the sleep-and-well-being line (2256:7187) rather
+ * than the home frame's board-certified one.
  */
 export const servicesPageTiles = serviceTiles.map((t) => {
   if (t.n === "01")
@@ -138,6 +142,11 @@ export const servicesPageTiles = serviceTiles.map((t) => {
     return {
       ...t,
       blurb: "Wellness and prevention connect to form the picture of your wellbeing.",
+    };
+  if (t.n === "05")
+    return {
+      ...t,
+      blurb: "Good sleep is vital for well-being. It helps your brain process information.",
     };
   return t;
 });

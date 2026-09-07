@@ -14,7 +14,11 @@ export type { Tile };
 export function Services({
   eyebrow = "Our services",
   title = "Where every piece matters.",
-  body = "True wellness comes from balancing body, mind, emotions, and spirit—every piece counts.",
+  // 2256:1709, the line under "Where every piece matters." on the home frame.
+  // The default was previously 2256:1418, which is a hidden layer belonging to
+  // the "our method" band above this one. /services passes body={null} — its
+  // own frame draws no standfirst under the bento title.
+  body = "A holistic approach to your health in the heart of Beverly Hills.",
   cta = { href: "/contact", label: "Schedule a Consultation" },
   tiles = serviceTiles,
   lastTile = vipTile,
