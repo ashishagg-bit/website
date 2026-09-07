@@ -200,6 +200,27 @@ export const mineralBeyond = {
   ],
 };
 
+/**
+ * The split call to action before the FAQs — Figma 2417:3803.
+ *
+ * The build put the shared VIP band in this slot. The frame draws a band of
+ * this page's own here instead: nothing in 2417:893 carries the VIP band's
+ * copy, and the two only measured the same because both bands are 740 tall.
+ *
+ * Two buttons rather than one, at the frame's 143 and 190 — Book Your Scan
+ * filled, Questions? Contact Us outlined (2417:3810).
+ */
+export const mineralCta = {
+  eyebrow: "Mineral & Heavy Metal Testing",
+  title: "Find out what you're working with.",
+  body: "The scan takes less than a minute and gives you somewhere to start.",
+  primary: { href: "/contact", label: "Book Your Scan" },
+  secondary: { href: "/contact", label: "Questions? Contact Us" },
+  /** Interim, as elsewhere on this page: the frame's left half is the puzzle
+      illustration, which is not in the repository yet. */
+  image: "/images/scraped/AC2cC1c4vV9tRfYLtq2lf4Xc.jpg",
+};
+
 /** "Have Questions?" \u2014 2417:3815. The frame rests with the first one open. */
 export const mineralFaqs = {
   eyebrow: "FAQs",

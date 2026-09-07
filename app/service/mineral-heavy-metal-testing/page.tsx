@@ -10,13 +10,15 @@ import {
   WhoItsFor,
 } from "@/components/mineral/sections";
 import { Faqs } from "@/components/mineral/faq";
-import { VipBand } from "@/components/vip-band";
+import { SplitBand } from "@/components/split-band";
+import { BlueButton, OutlineButton } from "@/components/ui";
 import { ClosingCta } from "@/components/closing-cta";
 import {
   mineralAppointment,
   mineralApproach,
   mineralBeyond,
   mineralCells,
+  mineralCta,
   mineralFaqs,
   mineralHero,
   mineralHow,
@@ -103,7 +105,25 @@ export default function MineralTestingPage() {
         image={mineralBeyond.image}
       />
 
-      <VipBand />
+      <SplitBand
+        eyebrow={mineralCta.eyebrow}
+        title={mineralCta.title}
+        body={mineralCta.body}
+        image={mineralCta.image}
+        tone="cream"
+        /* Two buttons, so they go in the slot above rather than through `cta`,
+           which draws a single filled one. 12 between them is the frame's. */
+        cta={null}
+      >
+        <div className="flex flex-wrap items-center gap-3">
+          <BlueButton href={mineralCta.primary.href}>
+            {mineralCta.primary.label}
+          </BlueButton>
+          <OutlineButton href={mineralCta.secondary.href}>
+            {mineralCta.secondary.label}
+          </OutlineButton>
+        </div>
+      </SplitBand>
 
       <Faqs
         eyebrow={mineralFaqs.eyebrow}
