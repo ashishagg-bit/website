@@ -55,14 +55,21 @@ export function Hero() {
                   <br />
                   build a healthier you.
                 </h1>
-                <p className="max-w-[460px] text-base leading-6 text-[var(--ink-80)]">
+                {/* 540 to match the frame's copy column (I2256:894;2256:28056
+                    is 540 wide, as are the headline and the column above it).
+                    At 460 the line broke after "complete" and the paragraph
+                    ran to three lines where the frame draws two. */}
+                <p className="max-w-[540px] text-base leading-6 text-[var(--ink-80)]">
                   Together, we shall piece together your unique path to complete
                   wellbeing, honoring every dimension of your health puzzle.
                 </p>
               </div>
               <div className="flex flex-wrap gap-3">
                 <BlueButton href="/contact">Schedule a Consultation →</BlueButton>
-                <OutlineButton href="/about">Learn more</OutlineButton>
+                {/* The frame's second button is "Contact Us"
+                    (I2256:894;2256:28061), not the "Learn more" an earlier
+                    pass took from the old live site. */}
+                <OutlineButton href="/contact">Contact Us</OutlineButton>
               </div>
             </div>
           </div>

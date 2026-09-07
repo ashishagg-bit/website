@@ -29,9 +29,13 @@ export function Method() {
             key={item.title}
             className="flex w-[320px] min-w-[320px] shrink-0 snap-start flex-col gap-6 sm:w-[27.78vw]"
           >
-            {/* 400x524 in the frame, so the image scales with the card rather
-                than sitting at a fixed height beside a fluid width. */}
-            <div className="relative aspect-[400/524] overflow-clip rounded-lg">
+            {/* 400x500 in the frame (Rectangle 4838), so the image scales with
+                the card rather than sitting at a fixed height beside a fluid
+                width. 524 is where the frame starts the text, not where the
+                image ends — the 24 between them is the gap-6 below, and
+                folding it into the ratio counted it twice and ran every card
+                24px tall. */}
+            <div className="relative aspect-[400/500] overflow-clip rounded-lg">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 loading="lazy"
