@@ -2,6 +2,8 @@ import Link from "next/link";
 import { Checklist } from "@/components/service/checklist";
 import { BlueButton, Display, Kicker } from "@/components/ui";
 
+import { TileCards } from "@/components/service/tile-cards";
+
 const HAIRLINE = "border-[rgba(21,32,50,0.1)]";
 
 function Check() {
@@ -161,43 +163,7 @@ export function TileGrid({
         {cta && <BlueButton href={cta.href}>{cta.label}</BlueButton>}
       </header>
 
-      <div
-        className={`tilegrid grid w-full max-w-[1328px] overflow-clip rounded-2xl border sm:grid-cols-2 ${cols === 3 ? "lg:grid-cols-3" : "lg:grid-cols-4"} ${HAIRLINE}`}
-      >
-        {tiles.map((t, i) => {
-          // The frame rests with tile 03 filled; open then follows the cursor.
-          const cls = `tile-card flex ${
-            cols === 3 ? "min-h-[220px] lg:h-[320px]" : "min-h-[220px] lg:h-[400px]"
-          } flex-col items-start justify-between overflow-clip border-b p-8 lg:border-r ${
-            cols === 3
-              ? "lg:[&:nth-child(3n)]:border-r-0"
-              : "lg:[&:nth-child(4n)]:border-r-0"
-          } ${HAIRLINE} ${
-            i >= tiles.length - (tiles.length % cols || cols) ? "lg:border-b-0" : ""
-          }`;
-          const inner = (
-            <>
-              <div className="flex w-full flex-col gap-4">
-                <p className="eyebrow tile-eyebrow">Service · {t.n}</p>
-                <h3 className="font-kalice hyphens-auto break-words text-[clamp(1.75rem,1.3rem+0.9vw,34px)] leading-[1.29] tracking-[1px]">
-                  {t.title}
-                </h3>
-              </div>
-              <p className="tile-blurb text-base leading-6">{t.blurb}</p>
-            </>
-          );
-          const openAttr = i === 2 ? { "data-open": "" } : {};
-          return t.href ? (
-            <Link key={t.title} href={t.href} className={cls} {...openAttr}>
-              {inner}
-            </Link>
-          ) : (
-            <div key={t.title} className={cls} {...openAttr}>
-              {inner}
-            </div>
-          );
-        })}
-      </div>
+      <TileCards tiles={tiles} cols={cols} />
     </section>
   );
 }

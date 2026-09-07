@@ -427,7 +427,8 @@ body {
 .tab.promise .promise-body { margin-top: auto; }
 
 /* "Meet your physician" points — an accordion separated by hairlines, with the
-   open row showing its body (Figma 1:1776). Same open-follows-cursor rule. */
+   open row showing its body (Figma 1:1776). Which row is open is held in
+   state by components/home/physician-points.tsx — see the note there. */
 .acc > .acc-row { border-top: 1px solid rgba(21, 32, 50, 0.12); }
 .acc > .acc-row:first-child { border-top: 0; }
 .acc .acc-body {
@@ -436,56 +437,40 @@ body {
   overflow: hidden;
   transition: max-height 0.45s ease, opacity 0.45s ease, margin-top 0.45s ease;
   margin-top: 0;
-}.acc > .acc-row[data-open] .acc-body,
-.acc > .acc-row:hover .acc-body,
-.acc > .acc-row:focus-within .acc-body{
+}
+.acc > .acc-row[data-open] .acc-body {
   max-height: 16rem;
   opacity: 1;
   margin-top: 0.5rem;
-}.acc:hover > .acc-row[data-open]:not(:hover) .acc-body,
-.acc:focus-within > .acc-row[data-open]:not(:focus-within) .acc-body{
-  max-height: 0;
-  opacity: 0;
-  margin-top: 0;
 }
 
 /* Diagnostics tiles — the frame shows one tile filled with a blue gradient and
    white type while the rest stay plain (Figma 96:28973). Same
-   open-follows-cursor rule; here it changes colour rather than width. */
+   open row is held in state by components/service/tile-cards.tsx; here it
+   changes colour rather than width. */
 .tilegrid > .tile-card {
   transition: background 0.45s ease, color 0.45s ease;
   color: var(--ink);
 }
-.tilegrid > .tile-card[data-open],
-.tilegrid > .tile-card:hover {
+.tilegrid > .tile-card[data-open] {
   background: radial-gradient(120% 110% at 72% 12%, #e2ebfc 0%, #93b2ef 42%, #3376eb 100%);
   color: #ffffff;
-}
-.tilegrid:hover > .tile-card[data-open]:not(:hover) {
-  background: none;
-  color: var(--ink);
 }
 /* eyebrow and blurb ride the card's colour */
 .tile-card .tile-eyebrow,
 .tile-card .tile-blurb { color: inherit; transition: color 0.45s ease; }
-.tile-card:not([data-open]):not(:hover) .tile-blurb,
-.tilegrid:hover > .tile-card[data-open]:not(:hover) .tile-blurb { color: var(--ink-80); }
+.tile-card:not([data-open]) .tile-blurb { color: var(--ink-80); }
 
-/* Below the desktop breakpoint the open-follows-cursor accordions have no
-   affordance — there is no pointer to hover and the rows are not focusable —
-   so their bodies would be permanently collapsed and their copy unreachable.
-   On touch widths every panel is simply shown. */
+/* Below the desktop breakpoint these panels have no affordance — there is no
+   pointer to move between the rows — so all but one body would stay collapsed
+   and its copy unreachable. On touch widths every panel is simply shown. */
 @media (max-width: 1023px) {
-  .acc .acc-body,
-  .acc:hover > .acc-row[data-open]:not(:hover) .acc-body,
-  .acc:focus-within > .acc-row[data-open]:not(:focus-within) .acc-body {
+  .acc .acc-body {
     max-height: none;
     opacity: 1;
     margin-top: 0.5rem;
   }
-  .cond .cond-detail,
-  .condrow:hover .cond[data-open]:not(:hover) .cond-detail,
-  .condrow:focus-within .cond[data-open]:not(:focus-within) .cond-detail {
+  .cond .cond-detail {
     max-height: none;
     opacity: 1;
   }

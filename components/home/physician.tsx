@@ -1,4 +1,5 @@
 import { BlueButton, Kicker } from "@/components/ui";
+import { PhysicianPoints } from "@/components/home/physician-points";
 import { physician } from "@/lib/home-content";
 
 /** "Meet your physician" — Figma node 1:1776. */
@@ -37,22 +38,7 @@ export function Physician() {
             <BlueButton href="/contact">Schedule a Consultation</BlueButton>
           </div>
 
-          <div className="acc flex w-full flex-col">
-            {physician.points.map((p, i) => (
-              <div
-                key={p.title}
-                {...(i === 0 ? { "data-open": "" } : {})}
-                className="acc-row flex w-full flex-col py-5"
-              >
-                <h3 className="text-lg leading-6 text-[var(--ink)]">{p.title}</h3>
-                {p.body && (
-                  <p className="acc-body text-base leading-[22px] text-[var(--ink-60)]">
-                    {p.body}
-                  </p>
-                )}
-              </div>
-            ))}
-          </div>
+          <PhysicianPoints points={physician.points} />
         </div>
       </div>
     </section>
