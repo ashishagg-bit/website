@@ -30,6 +30,7 @@ const OVERLAY_ROUTES = [
   "/service/sleep",
   "/service/allergy-sensitivity",
   "/service/wellness-preventive-medicine",
+  "/service/mineral-heavy-metal-testing",
   "/vip",
   "/contact",
 ];

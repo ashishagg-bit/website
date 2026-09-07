@@ -77,10 +77,13 @@ export const serviceTiles = [
     image: "/images/scraped/4FVQUutQWdB7NtLwRY17tioTIY0.jpg",
   },
   {
+    // 2256:1769 titles this tile "Mineral Heavy Metal Testing"; the older
+    // "Oligoscan" layer beside it (2256:1754) is hidden. The blurb is the
+    // frame's own and still describes allergens — flagged to the client.
     n: "07",
-    title: "Oligoscan",
+    title: "Mineral & Heavy Metal Testing",
     blurb: "OligoScan helps identify allergens, allowing you to avoid allergy triggers.",
-    href: "/services",
+    href: "/service/mineral-heavy-metal-testing/",
     image: "/images/scraped/VfRH12CL491NDPBxF2q2K2kyP1w.jpg",
   },
 ];

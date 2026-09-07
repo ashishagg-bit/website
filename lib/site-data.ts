@@ -38,6 +38,16 @@ export const services = [
     accent: "from-indigo-100 to-sky-100",
     image: "/images/scraped/lUTBzERr53jnyvWA0CLFiJn62c.png",
   },
+  {
+    slug: "mineral-heavy-metal-testing",
+    title: "Mineral & Heavy Metal Testing",
+    blurb:
+      "A quick, painless scan of your palm reads the minerals your cells have taken up and the heavy metals they have stored.",
+    accent: "from-slate-100 to-sky-100",
+    // Interim, as on the page itself: the frame's photograph is not in the
+    // repository yet.
+    image: "/images/figma/wellness-hero.jpg",
+  },
 ];
 
 export const promises = [
