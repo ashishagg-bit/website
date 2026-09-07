@@ -35,9 +35,10 @@ const OVERLAY_ROUTES = [
   "/contact",
 ];
 
-/** 4px dot flanking the announcement copy (Figma I64:10192;57:9479 / 9481). */
+/** 4px dot flanking the announcement copy (Figma I64:10192;57:9479 / 9481).
+    --ink for the same reason as the copy beside it — see the bar below. */
 function Dot() {
-  return <span className="size-1 shrink-0 rounded-full bg-white/70" />;
+  return <span className="size-1 shrink-0 rounded-full bg-[var(--ink)]/60" />;
 }
 
 function Chevron() {
@@ -123,7 +124,16 @@ export function SiteHeader() {
           className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,#c6d5f7_0%,#dcd6f7_38%,#d9def9_62%,#c6d5f7_100%)]"
         />
         <Dot />
-        <p className="relative text-center font-[family-name:var(--font-manrope)] text-sm font-medium leading-[1.2] tracking-[-0.14px] text-white">
+        {/* --ink, not the frame's white. 2256:6333 sets white type on this
+            light lilac-to-blue gradient, which measures 1.33:1 against its
+            lightest stop where WCAG AA wants 4.5:1 for body text — the copy is
+            close to unreadable on a bright screen, and this is a medical
+            practice. Changing only the type keeps the bar's colour exactly as
+            drawn and brings it to about 11:1. Deliberate deviation, raised
+            with the client: if the ellipse artwork behind this bar turns out
+            to be dark, white becomes correct again and this reverts to
+            text-white. */}
+        <p className="relative text-center font-[family-name:var(--font-manrope)] text-sm font-medium leading-[1.2] tracking-[-0.14px] text-[var(--ink)]">
           Health is something you participate in, choose, and cultivate. The
           healing has always been possible. We help you find the path at The
           Healing Dawn.
