@@ -71,11 +71,8 @@ export function Conditions({
   );
   items.forEach((card, i) => columns[i % COLS].push({ card, i }));
 
-  // The heading sits 64px above the cards at desktop, per the review. The
-  // mobile gap stays smaller, as it does in every other section here — the
-  // frames are drawn at desktop width and the page steps down from them.
   return (
-    <section className="flex w-full flex-col items-center gap-10 overflow-clip bg-[var(--ink)] px-6 py-16 sm:px-14 lg:gap-16 lg:py-24">
+    <section className="flex w-full flex-col items-center gap-10 overflow-clip bg-[var(--ink)] px-6 py-16 sm:px-14 lg:gap-14 lg:py-24">
       <header className="flex w-full max-w-[700px] flex-col items-center gap-3 text-center text-white">
         <Kicker className="!text-white">Conditions</Kicker>
         <Display>{title}</Display>
