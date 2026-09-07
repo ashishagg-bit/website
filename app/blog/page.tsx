@@ -3,6 +3,7 @@ import { ClosingCta } from "@/components/closing-cta";
 import Link from "next/link";
 import { getAllPosts } from "@/lib/posts";
 import { ArchiveCard, FeaturedCard } from "@/components/blog-card";
+import { BlogPager, POSTS_PER_PAGE } from "@/components/blog-pager";
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -18,10 +19,22 @@ export const metadata: Metadata = {
  * a hairline rule, then the "All Blogs" 3-column grid.
  */
 
-export default function BlogIndex() {
+export default async function BlogIndex({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
   const posts = getAllPosts();
   const featured = posts.slice(0, 2);
   const rest = posts.slice(2);
+
+  // ?page=N drives the grid. Anything that is not a page that exists reads as
+  // page 1, so a hand-edited or stale URL shows the archive rather than an
+  // empty grid.
+  const pages = Math.max(1, Math.ceil(rest.length / POSTS_PER_PAGE));
+  const raw = Number((await searchParams).page);
+  const page = Number.isInteger(raw) && raw >= 1 && raw <= pages ? raw : 1;
+  const shown = rest.slice((page - 1) * POSTS_PER_PAGE, page * POSTS_PER_PAGE);
 
   return (
     <>
@@ -69,15 +82,19 @@ export default function BlogIndex() {
             <h2 className="font-kalice text-[34px] leading-[44px] tracking-[1px] text-[var(--ink)]">
               All Articles
             </h2>
+            {/* The count is what this grid holds. It read posts.length before,
+                which included the two featured above it and so named a number
+                the cards below never came to. */}
             <p className="eyebrow text-[var(--ink-60)]">
-              {posts.length} {posts.length === 1 ? "article" : "articles"}
+              {rest.length} {rest.length === 1 ? "article" : "articles"}
             </p>
           </div>
           <div className="mt-10 grid gap-x-8 gap-y-12 md:grid-cols-2 lg:grid-cols-3 lg:gap-y-20">
-            {rest.map((post) => (
+            {shown.map((post) => (
               <ArchiveCard key={post.slug} post={post} />
             ))}
           </div>
+          <BlogPager page={page} pages={pages} />
         </div>
       </section>
 
