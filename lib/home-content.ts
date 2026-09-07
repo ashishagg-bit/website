@@ -39,7 +39,10 @@ export const serviceTiles = [
     // tile's 44px leading, which is what this title sets to.
     n: "01",
     title: "Holistic Pulmonary: lungs and Breathing",
-    blurb: "Your lungs are essential to delivering vital oxygen to every cell in your body.",
+    // 2256:1718, which misspells Los Angeles as "Los Angels" — corrected here
+    // at the client's instruction, unlike the title's lowercase "lungs".
+    blurb:
+      "We invite you to meet with our expert Pulmonologist conveniently located in Los Angeles, in the heart of Beverly Hills.",
     href: "/service/lungs",
     image: "/images/scraped/Ok6cd4z826F0Gks9sFfcGFjFzY.jpg",
   },
@@ -111,11 +114,18 @@ export const healingDawnTile = {
 
 /**
  * Where 2256:6331 words a tile differently from the home frame, the services
- * page follows its own: tile 01 is the plain "Lungs and Breathing" there
- * (2256:7151), and tile 03 carries the shorter Wellness blurb.
+ * page follows its own: tile 01 keeps the plain "Lungs and Breathing" and the
+ * lungs blurb there (2256:7151 / 7152), and tile 03 carries the shorter
+ * Wellness blurb.
  */
 export const servicesPageTiles = serviceTiles.map((t) => {
-  if (t.n === "01") return { ...t, title: "Lungs and Breathing" };
+  if (t.n === "01")
+    return {
+      ...t,
+      title: "Lungs and Breathing",
+      blurb:
+        "Your lungs are essential to delivering vital oxygen to every cell in your body.",
+    };
   if (t.n === "03")
     return {
       ...t,
