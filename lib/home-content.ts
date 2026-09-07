@@ -84,11 +84,19 @@ export const serviceTiles = [
   },
   {
     // 2256:1769 titles this tile "Mineral Heavy Metal Testing"; the older
-    // "Oligoscan" layer beside it (2256:1754) is hidden. The blurb is the
-    // frame's own and still describes allergens — flagged to the client.
+    // "Oligoscan" layer beside it (2256:1754) is hidden.
+    //
+    // Its blurb layer, 2256:1773, still reads "OligoScan helps identify
+    // allergens, allowing you to avoid allergy triggers" — the allergy tile's
+    // line, left behind when the tile was retitled. There is no correct copy
+    // in the frame to take, so this is written from the page's own hero, which
+    // describes "a quick, painless, non-invasive scan of your palm" reading
+    // "the minerals your cells have taken up and the heavy metals they have
+    // stored". It makes no claim the page does not, and it sets to the two
+    // lines of the frame's 268x48 blurb box.
     n: "07",
     title: "Mineral & Heavy Metal Testing",
-    blurb: "OligoScan helps identify allergens, allowing you to avoid allergy triggers.",
+    blurb: "A painless scan of your palm reads the minerals and heavy metals inside.",
     href: "/service/mineral-heavy-metal-testing/",
     image: "/images/scraped/VfRH12CL491NDPBxF2q2K2kyP1w.jpg",
   },
