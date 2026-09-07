@@ -1,7 +1,15 @@
 import Link from "next/link";
 
-/** Archive cards per page — the frame lays "All Articles" out as three rows of three. */
-export const POSTS_PER_PAGE = 9;
+/**
+ * Archive cards per page.
+ *
+ * The frame lays "All Articles" out as three rows of three, so its own number
+ * is 9. The client has six archive articles, which at 9 — or at 6 — comes to a
+ * single page and renders no pager at all. Three is a full row of the grid and
+ * puts those six across two pages, so the control is visible now. Raise it
+ * toward the frame's 9 as they publish.
+ */
+export const POSTS_PER_PAGE = 3;
 
 /**
  * Blog archive pager — Figma 2256:32717.
