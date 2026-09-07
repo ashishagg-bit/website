@@ -53,7 +53,12 @@ export function Approach({
   const hasList = Boolean(bullets && bullets.length > 0) && !hasCards;
   return (
     <section className="flex w-full flex-col items-center justify-center gap-12 overflow-clip bg-white px-6 py-16 sm:px-14 lg:flex-row lg:items-stretch lg:gap-[120px] lg:px-20 lg:py-[104px]">
-      <div className="flex w-full flex-col items-center gap-10 lg:flex-1 lg:gap-16">
+      {/* Capped at the 580 the frames give this column. On the four pages
+         with a checklist beside it, two flex-1 columns in the 1280 row with
+         its 120 gap already come to 580 each; Wellness has no checklist, so
+         flex-1 handed it the whole 1280 and ran the headline across the page.
+         2256:23879 keeps it at 580 there too and leaves the rest empty. */}
+      <div className="flex w-full flex-col items-center gap-10 lg:max-w-[580px] lg:flex-1 lg:gap-16">
         {/* The frames stack eyebrow, headline, button and body 12 / 24 / 64
             apart, and hold that on every service page — the column sits at the
             top of the band and the space below it is simply empty, which is

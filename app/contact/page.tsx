@@ -50,12 +50,19 @@ export default function ContactPage() {
       />
 
       <section className="flex w-full flex-col items-center bg-white px-6 py-16 sm:px-14 sm:py-[104px]">
-        <div className="grid w-full max-w-[1328px] gap-12 lg:grid-cols-12 lg:gap-16">
-          {/* The frame divides this band 5/7 with Appointments on the LEFT
-              and the form on the RIGHT (2256:9208). The form stays first in
-              the DOM — it is what the page is for — and takes its column
-              explicitly, so reading order and visual order can differ. */}
-          <div className="lg:col-start-6 lg:col-span-7">
+        {/* 1280, not the 1328 most bands use: this one sits on 80 of side
+           padding in the frame (80..1360), and that is what makes the three
+           parts come to 292 + 104 + 104 + 780. */}
+        <div className="flex w-full max-w-[1280px] flex-col gap-12 lg:flex-row lg:gap-0">
+          {/* 2256:9208 sets Appointments 80..372 (292 wide), a rule at 476, and
+              the form 580..1360 (780) — not the even split a 5/7 grid gives,
+              which handed the contact details 516 and squeezed the form to 748.
+              The 104 either side of the rule is the frame's own spacing.
+
+              The form stays first in the DOM — it is what the page is for, and
+              what a keyboard or a screen reader should reach first — and is
+              ordered to the right visually instead. */}
+          <div className="lg:order-2 lg:flex-1 lg:border-l lg:border-[var(--hairline)] lg:pl-[104px]">
             <div className="flex flex-col gap-3">
               <Kicker>contact us</Kicker>
               <Display className="text-[var(--ink)]">Send a Message</Display>
@@ -65,7 +72,7 @@ export default function ContactPage() {
             </div>
           </div>
 
-          <aside className="flex flex-col gap-8 lg:row-start-1 lg:col-start-1 lg:col-span-5 lg:border-r lg:border-[var(--hairline)] lg:pr-16">
+          <aside className="flex flex-col gap-8 lg:order-1 lg:mr-[104px] lg:w-[292px] lg:shrink-0">
             <div className="flex flex-col gap-3">
               <Kicker>Appointments</Kicker>
               <h2 className="font-kalice text-[clamp(1.5rem,1.2rem+1vw,2rem)] leading-[1.25] tracking-[1px] text-[var(--ink)]">
