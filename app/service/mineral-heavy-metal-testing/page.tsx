@@ -1,12 +1,21 @@
 import { Metadata } from "next";
 import { PageHero } from "@/components/page-hero";
-import { CellCards, SplitApproach } from "@/components/mineral/sections";
+import {
+  CellCards,
+  AppointmentSteps,
+  HowItWorks,
+  SplitApproach,
+  WhatWeTest,
+} from "@/components/mineral/sections";
 import { VipBand } from "@/components/vip-band";
 import { ClosingCta } from "@/components/closing-cta";
 import {
+  mineralAppointment,
   mineralApproach,
   mineralCells,
   mineralHero,
+  mineralHow,
+  mineralPanel,
 } from "@/lib/mineral-content";
 
 export const metadata: Metadata = {
@@ -49,6 +58,27 @@ export default function MineralTestingPage() {
         cards={mineralCells.cards}
         caption={mineralCells.caption}
         cta={mineralCells.cta}
+      />
+
+      <HowItWorks
+        eyebrow={mineralHow.eyebrow}
+        title={mineralHow.title}
+        lead={mineralHow.lead}
+        paragraphs={mineralHow.paragraphs}
+      />
+
+      <WhatWeTest
+        eyebrow={mineralPanel.eyebrow}
+        title={mineralPanel.title}
+        paragraphs={mineralPanel.paragraphs}
+        cta={mineralPanel.cta}
+        groups={mineralPanel.groups}
+      />
+
+      <AppointmentSteps
+        eyebrow={mineralAppointment.eyebrow}
+        title={mineralAppointment.title}
+        steps={mineralAppointment.steps}
       />
 
       <VipBand />

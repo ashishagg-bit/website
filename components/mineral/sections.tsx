@@ -1,3 +1,4 @@
+import { PuzzlePiece } from "@/components/puzzle";
 import { BlueButton, Display, Kicker } from "@/components/ui";
 
 const HAIRLINE = "border-[rgba(21,32,50,0.1)]";
@@ -135,6 +136,249 @@ export function CellCards({
       <div className="flex w-full max-w-[676px] flex-col items-center gap-6 text-center">
         <p className="text-base leading-6 text-[var(--ink-60)]">{caption}</p>
         <BlueButton href={cta.href}>{cta.label}</BlueButton>
+      </div>
+    </section>
+  );
+}
+
+/**
+ * "A minute of light. A deeper look within." — Figma 2417:2025.
+ *
+ * The one dark band on the page: a 774 column centred in 120 of padding, with
+ * a puzzle piece bleeding off each of two opposite corners (2417:2274 at the
+ * foot on the left, 2417:2278 off the right edge at the top, both 180).
+ *
+ * The pieces are the file's own artwork and are not in the repository, so the
+ * site's PuzzlePiece stands in at the frame's size and placement.
+ */
+export function HowItWorks({
+  eyebrow,
+  title,
+  lead,
+  paragraphs,
+}: {
+  eyebrow: string;
+  title: string[];
+  lead: { before: string; strong: string; after: string };
+  paragraphs: string[];
+}) {
+  return (
+    <section className="relative flex w-full flex-col items-center overflow-clip bg-[var(--dark)] px-6 py-16 sm:px-14 lg:py-[120px]">
+      <PuzzlePiece
+        className="pointer-events-none absolute -left-6 bottom-10 size-[180px] text-[var(--blue)] lg:left-10"
+        color="var(--blue)"
+        opacity={0.5}
+      />
+      <PuzzlePiece
+        className="pointer-events-none absolute -right-10 top-10 size-[180px] text-[var(--blue)]"
+        color="var(--blue)"
+        opacity={0.5}
+        rotate={12}
+      />
+
+      <div className="relative flex w-full max-w-[774px] flex-col items-center gap-10 text-center">
+        <div className="flex w-full flex-col items-center gap-3">
+          <Kicker className="!text-white/70">{eyebrow}</Kicker>
+          <Display className="text-white">
+            {title.map((line) => (
+              <span key={line} className="block">
+                {line}
+              </span>
+            ))}
+          </Display>
+        </div>
+
+        <div className="flex w-full flex-col gap-6 text-base leading-6 text-white/70">
+          <p>
+            {lead.before}
+            <strong className="font-semibold text-white">{lead.strong}</strong>
+            {lead.after}
+          </p>
+          {paragraphs.map((t) => (
+            <p key={t.slice(0, 24)}>{t}</p>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Tick() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden
+         className="shrink-0 text-[var(--blue)]">
+      <path d="M5 12.5l4.5 4.5L19 7" stroke="currentColor" strokeWidth="2.4"
+            strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+/**
+ * "What the scan shows you" — Figma 2417:2282.
+ *
+ * A split header over three columns of what the scan reads. 2417:2524 is 1280
+ * by 233 and the panel 2417:2539 is 1280 by 560, 104 apart, on the same 1280
+ * the contact band uses rather than the 1328 most others do.
+ *
+ * The chips wrap as a row rather than sitting on a grid: the lists are 11, 8
+ * and 7 long and the frame lets them find their own lines, so a longer list
+ * from the client will not break the column.
+ */
+export function WhatWeTest({
+  eyebrow,
+  title,
+  paragraphs,
+  cta,
+  groups,
+}: {
+  eyebrow: string;
+  title: string[];
+  paragraphs: string[];
+  cta: { href: string; label: string };
+  groups: { title: string; body?: string; items: string[]; more?: boolean }[];
+}) {
+  return (
+    <section className="flex w-full flex-col items-center overflow-clip bg-white px-6 py-16 sm:px-14 sm:py-[104px]">
+      <div className="flex w-full max-w-[1280px] flex-col gap-12 lg:flex-row lg:gap-[120px]">
+        <div className="flex flex-col items-start gap-6 lg:max-w-[580px] lg:flex-1">
+          <div className="flex flex-col gap-3 text-[var(--ink)]">
+            <Kicker>{eyebrow}</Kicker>
+            <Display>
+              {title.map((line) => (
+                <span key={line} className="block">
+                  {line}
+                </span>
+              ))}
+            </Display>
+          </div>
+          <BlueButton href={cta.href}>{cta.label}</BlueButton>
+        </div>
+        <div className="flex flex-col gap-6 text-base leading-6 text-[var(--ink-80)] lg:max-w-[580px] lg:flex-1">
+          {paragraphs.map((t) => (
+            <p key={t.slice(0, 24)}>{t}</p>
+          ))}
+        </div>
+      </div>
+
+      <div
+        className={`mt-12 grid w-full max-w-[1280px] overflow-clip rounded-2xl border sm:grid-cols-2 lg:mt-[104px] lg:h-[560px] lg:grid-cols-3 ${HAIRLINE}`}
+      >
+        {groups.map((g, i) => (
+          <div
+            key={g.title}
+            className={`flex flex-col gap-6 border-b p-8 lg:border-b-0 ${
+              i < groups.length - 1 ? `lg:border-r ${HAIRLINE}` : ""
+            } ${HAIRLINE}`}
+          >
+            <h3 className="font-kalice text-[clamp(1.5rem,1.1rem+1vw,32px)] leading-[1.25] tracking-[1px] text-[var(--ink)]">
+              {g.title}
+            </h3>
+            {g.body && (
+              <p className="text-base leading-6 text-[var(--ink-60)]">{g.body}</p>
+            )}
+            <div className="mt-auto flex flex-col gap-3">
+              <p className="text-base leading-6 text-[var(--ink-60)]">Including:</p>
+              <ul className="flex flex-wrap items-center gap-2">
+                {g.items.map((it) => (
+                  <li
+                    key={it}
+                    className={`flex items-center gap-2 rounded-lg border px-3 py-2 text-sm leading-5 text-[var(--ink)] ${HAIRLINE}`}
+                  >
+                    <Tick />
+                    {it}
+                  </li>
+                ))}
+                {g.more && (
+                  <li>
+                    <span className="px-2 text-sm leading-5 font-medium text-[var(--blue)]">
+                      View All →
+                    </span>
+                  </li>
+                )}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+/** Column and row for each of the four steps, and the rules between them. */
+const PLACE = [
+  `lg:col-start-1 lg:row-start-1 lg:row-span-2 lg:border-r border-[rgba(21,32,50,0.1)]`,
+  `lg:col-start-2 lg:row-start-1 lg:border-b lg:border-r border-[rgba(21,32,50,0.1)]`,
+  `lg:col-start-2 lg:row-start-2 lg:border-r border-[rgba(21,32,50,0.1)]`,
+  `lg:col-start-3 lg:row-start-1 lg:row-span-2`,
+];
+
+const FILL =
+  "bg-[radial-gradient(120%_120%_at_78%_18%,#dfe8fb_0%,#8fb0f0_34%,#3f77e6_72%,#2a5fd6_100%)] text-white";
+
+/**
+ * "One simple scan. A much bigger picture." — Figma 2417:2706.
+ *
+ * Four steps in three columns: the questionnaire and the review run the whole
+ * height on the outside, and the scan and its results share the middle. The
+ * frame fills the first, which is the only step the patient has to do anything
+ * about before they arrive.
+ *
+ * Below lg the columns unwrap into one, which puts the steps back in their
+ * numbered order — the middle column is the only thing that made 02 and 03
+ * sit beside 01 rather than after it.
+ */
+export function AppointmentSteps({
+  eyebrow,
+  title,
+  steps,
+}: {
+  eyebrow: string;
+  title: string[];
+  steps: { n: string; title: string; body: string[]; filled?: boolean; tall?: boolean }[];
+}) {
+  return (
+    <section className="flex w-full flex-col items-center overflow-clip bg-white px-6 py-16 sm:px-14 sm:py-[104px]">
+      <header className="flex w-full max-w-[960px] flex-col items-center text-center">
+        <Kicker>{eyebrow}</Kicker>
+        <Display className="mt-2 text-[var(--ink)]">
+          {title.map((line) => (
+            <span key={line} className="block">
+              {line}
+            </span>
+          ))}
+        </Display>
+      </header>
+
+      <div
+        /* 570, per 2417:2957 — at 396 the review column ran out of room and
+           its last paragraph was clipped. */
+        className={`mt-12 grid w-full max-w-[1328px] overflow-clip rounded-2xl border lg:mt-20 lg:h-[570px] lg:grid-cols-3 lg:grid-rows-2 ${HAIRLINE}`}
+      >
+        {steps.map((st, i) => (
+          <div
+            key={st.n}
+            /* Placed rather than flowed: 02 and 03 share the middle column, so
+               auto-placement would push 03 into the third one and leave the
+               review stranded. */
+            className={`flex flex-col justify-between gap-8 border-b p-8 lg:border-b-0 ${HAIRLINE} ${
+              PLACE[i]
+            } ${st.filled ? FILL : "text-[var(--ink)]"}`}
+          >
+            <div className="flex flex-col gap-6">
+              <p className={`eyebrow ${st.filled ? "!text-white/70" : "text-[var(--ink-60)]"}`}>
+                {st.n}
+              </p>
+              <h3 className="font-kalice text-[clamp(1.375rem,1rem+0.9vw,30px)] leading-[1.25] tracking-[1px]">
+                {st.title}
+              </h3>
+            </div>
+            <div className={`flex flex-col gap-4 text-base leading-6 ${st.filled ? "text-white/85" : "text-[var(--ink-60)]"}`}>
+              {st.body.map((t) => (
+                <p key={t.slice(0, 20)}>{t}</p>
+              ))}
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   );
