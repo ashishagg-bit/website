@@ -67,7 +67,9 @@ export default function ContactPage() {
               <Kicker>contact us</Kicker>
               <Display className="text-[var(--ink)]">Send a Message</Display>
             </div>
-            <div className="mt-8">
+            {/* 40 between the heading block and the fields (2256:9496 ends at
+                70, 2256:9499 starts at 110). */}
+            <div className="mt-10">
               <ContactForm />
             </div>
           </div>

@@ -49,13 +49,16 @@ export function ContactForm() {
     );
   }
 
+  // 2256:9501: a field is 21 of label, 12, then a 56 input whose placeholder
+  // sits 24 in and 16 down. The inputs were coming out 46, which is where
+  // the band lost its 28 against the frame across three rows.
   const inputCls =
-    "mt-2 w-full rounded-xl border border-[var(--hairline)] bg-white px-4 py-3 text-sm text-[var(--ink)] placeholder:text-[var(--ink-60)] focus:border-[var(--blue)] focus:outline-none focus:ring-2 focus:ring-[var(--blue)]/20 transition";
+    "mt-3 h-14 w-full rounded-xl border border-[var(--hairline)] bg-white px-6 text-sm text-[var(--ink)] placeholder:text-[var(--ink-60)] focus:border-[var(--blue)] focus:outline-none focus:ring-2 focus:ring-[var(--blue)]/20 transition";
   // The frame labels the fields in sentence case at the body size — "Full
   // Name", not "FULL NAME". The uppercase eyebrow treatment belongs to the
   // section kickers, and using it here made the form read as a different
   // typeface to the one beside it.
-  const labelCls = "mb-2 block text-base leading-6 text-[var(--ink)]";
+  const labelCls = "block text-base leading-[21px] text-[var(--ink)]";
   const checkboxCls =
     "mt-0.5 size-4 shrink-0 rounded border-[var(--hairline)] text-[var(--blue)] focus:ring-2 focus:ring-[var(--blue)]/20";
 
@@ -65,7 +68,7 @@ export function ContactForm() {
       /* The frame sets the form straight on the page, divided from the
          Appointments column by a rule; the bordered, shadowed card was an
          invention and boxed the fields in a second frame. */
-      className="space-y-5"
+      className="space-y-6"
     >
       {/* The frame runs Full Name across the whole width, then pairs Email
           with Phone beneath it. The pairing was Name+Email over a full-width
@@ -116,7 +119,8 @@ export function ContactForm() {
           name="message"
           required
           rows={5}
-          className={inputCls + " resize-y"}
+          // 153 for the whole field in 2256:9560 - 21 label, 12, 120 box.
+          className={inputCls + " h-[120px] resize-y py-4"}
           placeholder="Please share anything you’d like us to know"
         />
       </label>
