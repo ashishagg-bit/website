@@ -167,8 +167,11 @@ export function ContactForm() {
         disabled={status === "submitting"}
         /* The frame draws Submit in --blue on an 8px radius, the same pill
            the rest of the site uses for a primary action; this was --ink on a
-           full round, which read as a different button. */
-        className="inline-flex items-center justify-center gap-2 rounded-lg bg-[var(--blue)] px-7 py-3 text-sm font-medium text-white transition-all hover:bg-[var(--blue-hover)] disabled:opacity-60"
+           full round, which read as a different button.
+           Metrics are BlueButton's, not its own: px-5 py-2.5 at 15/21 comes to
+           the 41 high that 2256:9576 draws, where px-7 py-3 at 14 made it 44
+           and set the label a size down from every other primary button. */
+        className="inline-flex items-center justify-center gap-2 rounded-lg bg-[var(--blue)] px-5 py-2.5 text-[15px] leading-[21px] text-white transition-colors hover:bg-[var(--blue-hover)] disabled:opacity-60"
       >
         {status === "submitting" ? "Submitting…" : "Submit"}
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
