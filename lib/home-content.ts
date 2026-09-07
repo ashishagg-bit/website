@@ -34,8 +34,11 @@ export const methodItems = [
 /** "Our services" bento — node 1:964. `image` set = photo tile, else text tile. */
 export const serviceTiles = [
   {
+    // 2256:1717. The lowercase "lungs" is the frame's own — confirmed with the
+    // client rather than corrected here. Its box is 268x176, four lines at the
+    // tile's 44px leading, which is what this title sets to.
     n: "01",
-    title: "Lungs and Breathing",
+    title: "Holistic Pulmonary: lungs and Breathing",
     blurb: "Your lungs are essential to delivering vital oxygen to every cell in your body.",
     href: "/service/lungs",
     image: "/images/scraped/Ok6cd4z826F0Gks9sFfcGFjFzY.jpg",
@@ -106,15 +109,20 @@ export const healingDawnTile = {
   href: "/vip",
 };
 
-/** The services page shortens the Wellness blurb (node 74:22082). */
-export const servicesPageTiles = serviceTiles.map((t) =>
-  t.n === "03"
-    ? {
-        ...t,
-        blurb: "Wellness and prevention connect to form the picture of your wellbeing.",
-      }
-    : t
-);
+/**
+ * Where 2256:6331 words a tile differently from the home frame, the services
+ * page follows its own: tile 01 is the plain "Lungs and Breathing" there
+ * (2256:7151), and tile 03 carries the shorter Wellness blurb.
+ */
+export const servicesPageTiles = serviceTiles.map((t) => {
+  if (t.n === "01") return { ...t, title: "Lungs and Breathing" };
+  if (t.n === "03")
+    return {
+      ...t,
+      blurb: "Wellness and prevention connect to form the picture of your wellbeing.",
+    };
+  return t;
+});
 
 /** "Our values" — node 1:1498. The first promise is the wide blue card. */
 export const homePromises = [
