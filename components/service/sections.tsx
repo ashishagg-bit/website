@@ -54,20 +54,24 @@ export function Approach({
   return (
     <section className="flex w-full flex-col items-center justify-center gap-12 overflow-clip bg-white px-6 py-16 sm:px-14 lg:flex-row lg:items-stretch lg:gap-[120px] lg:px-20 lg:py-[104px]">
       <div className="flex w-full flex-col items-center gap-10 lg:flex-1 lg:gap-16">
-        {/* Eyebrow, headline and button sit at the top; the body sinks to the
-            bottom. The frames stack them 12 / 24 / 64 apart and land the body's
-            last line level with the checklist card, so whichever column is
-            naturally taller sets the section height and the gap above the body
-            absorbs the rest — 64px on Lungs, where the copy is the taller
-            column, and 147px on Sleep, where eight checklist rows are. Fixing
-            that gap at one number gets one page right and skews every other. */}
-        <div className="flex w-full flex-col items-start justify-center gap-6 lg:h-full">
+        {/* The frames stack eyebrow, headline, button and body 12 / 24 / 64
+            apart, and hold that on every service page — the column sits at the
+            top of the band and the space below it is simply empty, which is
+            what 2256:11810 draws: 293 of content in a 573 column.
+
+            The body used to take mt-auto and sink to the bottom, so the 64
+            stretched to whatever was left once the checklist beside it set the
+            height — 64 on Lungs, where the copy is the taller column, but a
+            230px hole on Sleep and Allergy, where eight checklist rows are.
+            gap-6 and pt-10 already sum to the 64 the frame asks for; the
+            stretch was the only thing breaking it. */}
+        <div className="flex w-full flex-col items-start justify-start gap-6 lg:h-full">
           <div className="flex w-full flex-col gap-3 text-[var(--ink)]">
             <Kicker>Our Approach</Kicker>
             <Display>{title}</Display>
           </div>
           <BlueButton href={cta.href}>{cta.label}</BlueButton>
-          <div className="flex flex-col gap-4 text-base leading-6 text-black/60 lg:mt-auto lg:pt-10 [&>p]:mb-0">
+          <div className="flex flex-col gap-4 text-base leading-6 text-black/60 lg:pt-10 [&>p]:mb-0">
             {paragraphs?.map((t) => <p key={t.slice(0, 24)}>{t}</p>)}
             {body}
             {/* On the allergy frame the checks are chips under the copy — a
