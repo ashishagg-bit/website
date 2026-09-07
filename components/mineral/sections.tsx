@@ -1,3 +1,4 @@
+import { BeyondRows } from "@/components/mineral/beyond-rows";
 import { PuzzlePiece } from "@/components/puzzle";
 import { BlueButton, Display, Kicker } from "@/components/ui";
 
@@ -379,6 +380,111 @@ export function AppointmentSteps({
             </div>
           </div>
         ))}
+      </div>
+    </section>
+  );
+}
+
+/**
+ * "When \u0022normal\u0022 doesn't tell the whole story." — Figma 2417:3005.
+ *
+ * The page's second dark band: a centred header over six reasons in a bordered
+ * two-column panel, then the action. The frame reads the six across the
+ * columns rather than down them, so the grid flows in rows.
+ */
+export function WhoItsFor({
+  eyebrow,
+  title,
+  standfirst,
+  items,
+  cta,
+}: {
+  eyebrow: string;
+  title: string[];
+  standfirst: string;
+  items: string[];
+  cta: { href: string; label: string };
+}) {
+  const EDGE = "border-white/12";
+  return (
+    <section className="flex w-full flex-col items-center gap-10 overflow-clip bg-[var(--dark)] px-6 py-16 sm:px-14 sm:py-[104px]">
+      <header className="flex w-full max-w-[900px] flex-col items-center text-center">
+        <Kicker className="!text-white/70">{eyebrow}</Kicker>
+        <Display className="mt-2 text-white">
+          {title.map((line) => (
+            <span key={line} className="block">
+              {line}
+            </span>
+          ))}
+        </Display>
+        <p className="mt-4 text-base leading-6 text-white/60">{standfirst}</p>
+      </header>
+
+      <ul className={`grid w-full max-w-[1180px] overflow-clip rounded-2xl border sm:grid-cols-2 ${EDGE}`}>
+        {items.map((t, i) => (
+          <li
+            key={t}
+            className={`flex items-start gap-3 border-b p-8 text-base leading-6 text-white/80 ${EDGE} ${
+              i % 2 === 0 ? `sm:border-r ${EDGE}` : ""
+            } ${i >= items.length - 2 ? "sm:border-b-0" : ""}`}
+          >
+            <Tick />
+            <span>{t}</span>
+          </li>
+        ))}
+      </ul>
+
+      <BlueButton href={cta.href}>{cta.label}</BlueButton>
+    </section>
+  );
+}
+
+/**
+ * "Your results are only the beginning." — Figma 2417:3286.
+ *
+ * Copy and an accordion on the left, the portrait on the right. The rows hold
+ * the one the cursor last entered, the same as every other row on the site —
+ * see components/hold-open.ts.
+ */
+export function BeyondScan({
+  eyebrow,
+  title,
+  body,
+  rows,
+  image,
+}: {
+  eyebrow: string;
+  title: string[];
+  body: string;
+  rows: { n: string; title: string; lead: string; body: string[] }[];
+  image: string;
+}) {
+  return (
+    <section className="flex w-full flex-col items-center justify-center gap-12 overflow-clip bg-white px-6 py-16 sm:px-14 lg:flex-row lg:items-start lg:gap-[120px] lg:px-20 lg:py-[104px]">
+      <div className="flex w-full flex-col gap-8 lg:max-w-[580px] lg:flex-1">
+        <div className="flex flex-col gap-3 text-[var(--ink)]">
+          <Kicker>{eyebrow}</Kicker>
+          <Display>
+            {title.map((line) => (
+              <span key={line} className="block">
+                {line}
+              </span>
+            ))}
+          </Display>
+        </div>
+        <p className="text-base leading-6 text-[var(--ink-80)]">{body}</p>
+        <BeyondRows rows={rows} />
+      </div>
+
+      <div className="relative w-full overflow-clip rounded-2xl lg:max-w-[580px] lg:flex-1">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          loading="lazy"
+          decoding="async"
+          src={image}
+          alt=""
+          className="h-full w-full object-cover"
+        />
       </div>
     </section>
   );

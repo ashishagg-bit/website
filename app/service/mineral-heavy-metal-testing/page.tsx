@@ -1,21 +1,27 @@
 import { Metadata } from "next";
 import { PageHero } from "@/components/page-hero";
 import {
-  CellCards,
   AppointmentSteps,
+  BeyondScan,
+  CellCards,
   HowItWorks,
   SplitApproach,
   WhatWeTest,
+  WhoItsFor,
 } from "@/components/mineral/sections";
+import { Faqs } from "@/components/mineral/faq";
 import { VipBand } from "@/components/vip-band";
 import { ClosingCta } from "@/components/closing-cta";
 import {
   mineralAppointment,
   mineralApproach,
+  mineralBeyond,
   mineralCells,
+  mineralFaqs,
   mineralHero,
   mineralHow,
   mineralPanel,
+  mineralWhoFor,
 } from "@/lib/mineral-content";
 
 export const metadata: Metadata = {
@@ -81,7 +87,29 @@ export default function MineralTestingPage() {
         steps={mineralAppointment.steps}
       />
 
+      <WhoItsFor
+        eyebrow={mineralWhoFor.eyebrow}
+        title={mineralWhoFor.title}
+        standfirst={mineralWhoFor.standfirst}
+        items={mineralWhoFor.items}
+        cta={mineralWhoFor.cta}
+      />
+
+      <BeyondScan
+        eyebrow={mineralBeyond.eyebrow}
+        title={mineralBeyond.title}
+        body={mineralBeyond.body}
+        rows={mineralBeyond.rows}
+        image={mineralBeyond.image}
+      />
+
       <VipBand />
+
+      <Faqs
+        eyebrow={mineralFaqs.eyebrow}
+        title={mineralFaqs.title}
+        items={mineralFaqs.items}
+      />
 
       <ClosingCta />
     </>

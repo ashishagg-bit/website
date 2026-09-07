@@ -517,3 +517,18 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .press-marquee { animation: none; }
 }
+
+/* "Your results are only the beginning" (Figma 2417:3286): the open row shows
+   its lead and body, the others just their heading. Driven by data-open alone,
+   which BeyondRows sets in state — see components/hold-open.ts for why the
+   :hover pattern the other rows used to carry was replaced. */
+.beyond-row .beyond-body {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.45s ease, opacity 0.35s ease;
+}
+.beyond-row[data-open] .beyond-body {
+  max-height: 26rem;
+  opacity: 1;
+}

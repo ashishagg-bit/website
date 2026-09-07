@@ -143,3 +143,76 @@ export const mineralAppointment = {
     },
   ],
 };
+
+
+/** "When \u0022normal\u0022 doesn\u2019t tell the whole story." \u2014 2417:3005, dark band. */
+export const mineralWhoFor = {
+  eyebrow: "Who it's for",
+  title: ["When \u0022normal\u0022 doesn't", "tell the whole story."],
+  standfirst: "This assessment may be useful if:",
+  cta: { href: "/contact", label: "Request Appointment" },
+  /** The frame reads these across the two columns, not down them. */
+  items: [
+    "You don't feel well, but your standard lab work keeps coming back normal.",
+    "You're experiencing fatigue, brain fog, stubborn weight, hormone or thyroid symptoms, or persistent digestive concerns.",
+    "You've been taking supplements consistently but can't tell whether they're helping.",
+    "You're preparing to begin a detoxification or nutritional protocol and want a measurable starting point.",
+    "You have known exposure through older amalgam fillings, industrial or trade work, well water, years of bottled water, or repeated MRI contrast.",
+    "You feel well and want to take a more proactive approach to staying that way.",
+  ],
+};
+
+/** "Your results are only the beginning." \u2014 2417:3286. */
+export const mineralBeyond = {
+  eyebrow: "Beyond the scan",
+  title: ["Your results are", "only the beginning."],
+  body: "The scan gives us a clearer starting point. From there, we can track change, understand your results in context, and look at your health as part of a bigger picture.",
+  /** Interim: the frame's own portrait is not in the repository yet. */
+  image: "/images/scraped/piPOUcGww89HYaJTpCR7kEFYeLk.webp",
+  rows: [
+    {
+      n: "01",
+      title: "Track Your Progress",
+      lead: "Don't just make changes. See if they're working.",
+      body: [
+        "One scan gives you a snapshot. Follow-up scans allow us to compare your results over time and see whether changes to your nutrition, supplements, water, dental work, or other aspects of your routine are actually registering in your tissue.",
+        "We recommend repeating the scan four to eight weeks after beginning your recommended changes.",
+      ],
+    },
+    {
+      n: "02",
+      title: "Understand the Bigger Picture",
+      lead: "One piece of a more complete health picture.",
+      body: [
+        "This scan is a nutritional and exposure assessment designed to identify patterns, trends, and outliers in mineral status, heavy metal load, and the relationships between them. It is not a diagnosis and does not replace blood work, imaging, or other recommended testing. It also cannot determine the amount of a particular metal within a specific organ.",
+        "Small variations between scans are normal, so we focus on overall patterns rather than individual numbers. Used alongside your history, symptoms, and other results, the scan provides another piece of information to help us understand your health more completely.",
+      ],
+    },
+    {
+      n: "03",
+      title: "Look Beyond the Numbers",
+      lead: "Health is more than a set of results.",
+      body: [
+        "Minerals and metals give us a measurable view of the physical layer of your health. But physical health doesn't exist in isolation. Stress and emotional well-being can also influence how the body functions, rests, and repairs.",
+        "We begin with the physical because it gives us something tangible to measure. For patients looking for a broader view of their well-being, our comprehensive wellness assessment also considers physical, emotional, and spiritual layers.",
+      ],
+    },
+  ],
+};
+
+/** "Have Questions?" \u2014 2417:3815. The frame rests with the first one open. */
+export const mineralFaqs = {
+  eyebrow: "FAQs",
+  title: "Have Questions?",
+  items: [
+    { q: "Does the scan hurt?", a: "No. A sensor simply rests on your open palm and reads light. You won't feel anything." },
+    { q: "How long does it take?", a: "The scan itself usually takes less than a minute. Please allow additional time for the questionnaire beforehand and review of your results afterward." },
+    { q: "Is there anything I need to bring?", a: "You'll need to know your blood type before your appointment. It's used to calculate your reference ranges, and the scan cannot be run accurately without it." },
+    { q: "Do I need to fast or stop taking my supplements?", a: "No fasting is required. We'll let you know if anything needs to be adjusted before your appointment." },
+    { q: "When will I get my results?", a: "Your initial report is available the same day. Your comprehensive report is usually provided and reviewed with you within 48 hours." },
+    { q: "Can I have the scan if I'm pregnant or have an implant or pacemaker?", a: "Yes. Nothing enters your body and no electrical current is applied. The assessment can also be used during pregnancy to look at mineral status, when nutritional demands may increase." },
+    { q: "How is this different from a blood test for heavy metals?", a: "Blood testing shows what's circulating in your bloodstream at that moment. Heavy metals can leave the bloodstream and settle into tissue within days. This scan looks at intracellular uptake through tissue rather than only what's currently circulating." },
+    { q: "How often should I repeat the scan?", a: "We recommend repeating the assessment four to eight weeks after beginning your recommended changes so there is enough time to evaluate whether your patterns have shifted." },
+    { q: "Is it covered by insurance?", a: "No. Mineral and heavy metal testing is offered as a wellness assessment." },
+  ],
+};
