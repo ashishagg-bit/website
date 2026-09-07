@@ -33,7 +33,9 @@ export function Faqs({
         <Display className="text-[var(--ink)]">{title}</Display>
       </header>
 
-      <ul className="flex w-full max-w-[800px] flex-col">
+      {/* -my-6 cancels the first row's top padding and the last row's bottom:
+          2417:3820 puts its 24s between the rows, not around the column. */}
+      <ul className="-my-6 flex w-full max-w-[800px] flex-col">
         {items.map((it, i) => {
           const on = i === open;
           return (
@@ -61,7 +63,7 @@ export function Faqs({
               </button>
               <div
                 className={`grid transition-all duration-300 ${
-                  on ? "grid-rows-[1fr] pb-6 opacity-100" : "grid-rows-[0fr] opacity-0"
+                  on ? "grid-rows-[1fr] pb-2 opacity-100" : "grid-rows-[0fr] opacity-0"
                 }`}
               >
                 <p className="overflow-hidden text-base leading-6 text-[var(--ink-60)]">
