@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { BlogToc } from "@/components/blog-toc";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Eyebrow, PrimaryButton } from "@/components/ui";
@@ -94,22 +95,7 @@ export default async function BlogPostPage(props: PageProps<"/blog/[slug]">) {
           {/* 360 contents rail beside an 848 measure, 120 apart. */}
           <div className="mt-16 flex flex-col gap-12 lg:mt-20 lg:flex-row lg:gap-[120px]">
             <aside className="w-full shrink-0 lg:sticky lg:top-24 lg:h-fit lg:w-[360px]">
-              {headings.length > 0 && (
-                <nav aria-label="On this page">
-                  <ul className="flex flex-col">
-                    {headings.map((h) => (
-                      <li key={h.id}>
-                        <a
-                          href={`#${h.id}`}
-                          className="block py-2 text-base leading-6 text-[var(--ink-60)] transition-colors hover:text-[var(--blue)]"
-                        >
-                          {h.text}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </nav>
-              )}
+              <BlogToc headings={headings} />
               <div className="mt-10 flex flex-col gap-5">
                 <p className="eyebrow text-[var(--ink-60)]">share</p>
                 <div className="flex flex-wrap items-center gap-4 text-base leading-6">
@@ -176,7 +162,10 @@ export default async function BlogPostPage(props: PageProps<"/blog/[slug]">) {
       {others.length > 0 && (
         <section className="w-full bg-white px-6 pb-20 pt-12 sm:px-14 lg:pb-[120px] lg:pt-20">
           <div className="mx-auto w-full max-w-[1328px]">
-            <div className="flex flex-wrap items-baseline gap-x-10 gap-y-3">
+            {/* 2256:34461 sets the heading at the left edge and the link at
+               the right one, not next to each other: the link sits at 1252
+               of the 1328, hard against the column. */}
+            <div className="flex w-full flex-wrap items-baseline justify-between gap-x-10 gap-y-3">
               <h2 className="font-kalice text-[clamp(2rem,1.4rem+2vw,48px)] leading-[1.25] tracking-[1px] text-[var(--ink)]">
                 Discover our other articles
               </h2>
