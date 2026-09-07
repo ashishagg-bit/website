@@ -37,7 +37,7 @@ export type ServicePageData = {
   conditions: Condition[];
   diagnostics: {
     title: string;
-    tiles: { n: string; title: string; blurb: string }[];
+    tiles: { n: string; title: string; blurb: string; href?: string }[];
   };
   closing: { title: string; body: string; image: string };
 };
@@ -140,7 +140,13 @@ export const lungs: ServicePageData = {
       },
     ],
   },
-  closing: { ...CLOSING, image: "/images/scraped/1xImPKfaVIwVWRaj2OXuBmLUT2E.jpg" },
+  // 2256:12820 / 12821 — the lungs frame is the only one of the five that
+  // extends this band's title and body beyond the shared wording.
+  closing: {
+    title: "Schedule Your Evaluation with our board-certified Pulmonologist.",
+    body: "Reach out to Dr. Avi Ishaaya Center to schedule a comprehensive evaluation. Early intervention can make a significant difference. We are conveniently located in the heart of Beverly Hills.",
+    image: "/images/scraped/1xImPKfaVIwVWRaj2OXuBmLUT2E.jpg",
+  },
 };
 
 /** Cardiovascular — frame 103:29892. */
@@ -433,7 +439,10 @@ export const wellness: ServicePageData = {
     title: APPROACH_TITLE,
     paragraphs: [
       "Wellness and prevention are where each piece connects to form the complete picture of how you can attain your optimal wellbeing. By working holistically, we can consider the full picture of your physical, mental, emotional, and spiritual health, and provide patient-centered care that identifies the root causes of illnesses.",
-      "From foundational annual exams to advanced longevity diagnostics like full-body MRI and telomere testing, our preventive program is designed for patients who want more than reactive medicine.",
+      // 2256:23892. The shorter wording this replaced is 2256:23889, which is
+      // hidden in the frame — a superseded draft sitting directly above the
+      // live one, and the build had picked it up.
+      "From foundational annual exams to advanced longevity diagnostics like thermography studies, full-body MRI, micronutrient, microbiome, mycotoxin (mold) testing, food sensitivity and allergy testing, and mineral and heavy metal testing, our preventive program is designed for patients who want more than reactive medicine.",
     ],
     bullets: [],
   },
@@ -448,7 +457,7 @@ export const wellness: ServicePageData = {
       },
       {
         n: "02",
-        title: "PNOĒ for Wellness & Prevention",
+        title: "PNOĒ for Wellness and Prevention",
         blurb: "Precision Wellness Through the Power of Breath.",
       },
       {
@@ -463,7 +472,7 @@ export const wellness: ServicePageData = {
       },
       {
         n: "05",
-        title: "Micronutrient Testing & Personalized Supplements",
+        title: "Micronutrient Testing and Personalized Supplements",
         blurb: "A Scientific Approach to Nutritional Health.",
       },
       {
@@ -503,7 +512,7 @@ export const wellness: ServicePageData = {
       },
       {
         n: "13",
-        title: "Emsculpt & TruSculpt flex",
+        title: "Emsculpt and TruSculpt flex",
         blurb: "Advanced Muscle Stimulation & Strengthening.",
       },
       {
@@ -518,13 +527,34 @@ export const wellness: ServicePageData = {
       },
       {
         n: "16",
-        title: "Emsculpt NEO & TruSculpt iD",
+        title: "Emsculpt NEO and TruSculpt iD",
         blurb: "Advanced Body Contouring Solutions.",
       },
       {
         n: "17",
         title: "Advanced Microneedling RF",
         blurb: "Revolutionary Skin Rejuvenation Technology.",
+      },
+      // 2256:24735 / 24740 / 24745. The grid stopped at 17, which left its
+      // last row holding a single tile where the frame fills all four.
+      {
+        n: "18",
+        title: "Thermography",
+        blurb: "Thermography is essential for wellness and prevention for optimal health.",
+      },
+      {
+        n: "19",
+        title: "Mineral & Heavy Metal Testing",
+        // 2256:24744 strands the allergy line here as it does on the bento;
+        // this is the same replacement, written from the page it links to.
+        blurb: "A painless scan of your palm reads the minerals and heavy metals inside.",
+        href: "/service/mineral-heavy-metal-testing/",
+      },
+      {
+        n: "20",
+        title: "Addressing the deeper layer",
+        blurb: "Explore four wellness packages at The Healing Dawn tailored to your goals — from basic health screenings to advanced diagnostics.",
+        href: "/vip",
       },
     ],
   },
