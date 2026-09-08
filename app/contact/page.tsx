@@ -127,7 +127,7 @@ export default function ContactPage() {
         /* Interim: the frame's own photograph is not in the repository yet.
            This is a treatment room from the scraped library — the closest thing
            to the practice's own space. Swap it when the real one arrives. */
-        image="/images/scraped/EUHKdtt4LEj5EAli0JMrqZJAwg.jpg"
+        image="/images/scraped/EUHKdtt4LEj5EAli0JMrqZJAwgo.jpg"
         body={
           <address className="not-italic">
             9230 W Olympic Blvd, 2nd Floor
