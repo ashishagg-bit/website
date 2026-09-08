@@ -3,13 +3,12 @@ import Link from "next/link";
 /**
  * Archive cards per page.
  *
- * The frame lays "All Articles" out as three rows of three, so its own number
- * is 9. The client has six archive articles, which at 9 — or at 6 — comes to a
- * single page and renders no pager at all. Three is a full row of the grid and
- * puts those six across two pages, so the control is visible now. Raise it
- * toward the frame's 9 as they publish.
+ * Twelve, per the review ("have up to 12 blogs per page before moving to
+ * next page"): four full rows of the three-up grid. The frame mocks three
+ * rows, and the build had been paging at three so the pager showed on the
+ * client's six posts; the pager now appears once they publish a thirteenth.
  */
-export const POSTS_PER_PAGE = 3;
+export const POSTS_PER_PAGE = 12;
 
 /**
  * Blog archive pager — Figma 2256:32717.

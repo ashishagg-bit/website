@@ -562,3 +562,8 @@ body {
   max-height: 26rem;
   opacity: 1;
 }
+
+/* A post's first heading sits on the column's top edge, level with the first
+   row of the contents rail beside it (2512:34351 starts both at the same y).
+   With the heading's own top margin it hung 20px lower than the rail. */
+.prose-article > :first-child { margin-top: 0; }

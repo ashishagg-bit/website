@@ -6,8 +6,11 @@ import { useEffect, useState } from "react";
  * The contents rail on a post — Figma 2256:34412.
  *
  * The frame draws the row the reader is in with a rule down its left edge and
- * the text in full ink; the others sit in --ink-60 with no rule. Rows are 46
- * tall (12 / 22 / 12) and the text is inset 24, which is where the rule goes.
+ * the text in full ink; the others sit in --ink-60. Rows are 46 tall
+ * (12 / 22 / 12) and the text is inset 24, which is where the rule goes. Every
+ * row carries the rule as a hairline, so the rail reads as one track with the
+ * current row marked in ink — with the rule on the current row alone, the
+ * rest of the list read as though its line were missing (review note).
  *
  * Which row that is has to follow the reading position, so the rail observes
  * the headings rather than marking the first one and leaving it there. The
@@ -64,7 +67,7 @@ export function BlogToc({
                 className={`block border-l-2 py-3 pl-[22px] text-base leading-[22px] transition-colors ${
                   on
                     ? "border-[var(--ink)] font-medium text-[var(--ink)]"
-                    : "border-transparent text-[var(--ink-60)] hover:text-[var(--blue)]"
+                    : "border-[var(--hairline)] text-[var(--ink-60)] hover:text-[var(--blue)]"
                 }`}
               >
                 {h.text}

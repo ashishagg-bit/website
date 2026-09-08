@@ -2,7 +2,8 @@ import { Metadata } from "next";
 import { BlogToc } from "@/components/blog-toc";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Eyebrow, PrimaryButton } from "@/components/ui";
+import { PrimaryButton } from "@/components/ui";
+import { ShareIcons } from "@/components/share-icons";
 import { ArchiveCard } from "@/components/blog-card";
 import { ClosingCta } from "@/components/closing-cta";
 import { getAllPosts, getHeadings, getPost, renderMarkdown } from "@/lib/posts";
@@ -64,8 +65,10 @@ export default async function BlogPostPage(props: PageProps<"/blog/[slug]">) {
       {/* Hero — Figma 2256:33853: 160 under the nav, an 880 measure, and the
           byline 32 above the title. The breadcrumb, the "Article" eyebrow and
           the avatar disc that stood here are not in the frame. */}
+      {/* Centred, per the review ("text should be centre aligned"): the
+          byline and the title sit on the page's centre line. */}
       <header className="w-full bg-[var(--cream)] px-6 pt-12 sm:px-14 lg:pt-[67px]">
-        <div className="mx-auto flex w-full max-w-[880px] flex-col gap-8">
+        <div className="mx-auto flex w-full max-w-[880px] flex-col items-center gap-8 text-center">
           <p className="eyebrow text-[var(--ink-60)]">
             {post.author} · {post.date}
           </p>
@@ -98,30 +101,10 @@ export default async function BlogPostPage(props: PageProps<"/blog/[slug]">) {
               <BlogToc headings={headings} />
               <div className="mt-10 flex flex-col gap-5">
                 <p className="eyebrow text-[var(--ink-60)]">share</p>
-                <div className="flex flex-wrap items-center gap-4 text-base leading-6">
-                  <a
-                    className="text-[var(--blue)] transition-colors hover:text-[var(--ink)]"
-                    href={`https://x.com/intent/tweet?url=${shareUrl}&text=${shareTitle}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    X
-                  </a>
-                  <a
-                    className="text-[var(--blue)] transition-colors hover:text-[var(--ink)]"
-                    href={`https://www.linkedin.com/sharing/share-offsite/?url=${shareUrl}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    LinkedIn
-                  </a>
-                  <a
-                    className="text-[var(--blue)] transition-colors hover:text-[var(--ink)]"
-                    href={`mailto:?subject=${shareTitle}&body=${shareUrl}`}
-                  >
-                    Email
-                  </a>
-                </div>
+                {/* 2512:34351 draws these as 36px bordered icon buttons, not
+                    text links. Instagram, which the frame shows, has no web
+                    share target, so LinkedIn and email stand in its place. */}
+                <ShareIcons url={shareUrl} title={shareTitle} />
               </div>
             </aside>
 
