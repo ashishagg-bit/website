@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { services } from "@/lib/site-data";
 
 const nav = [
@@ -93,13 +93,26 @@ function Dropdown({
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  // The header is sticky on every route. On overlay routes it starts
+  // transparent over the dark hero, so once it pins to the top it has to turn
+  // solid — otherwise the white nav floats over cream page content. 40px is
+  // about where the bar reaches the viewport edge below the announcement bar.
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
   const pathname = usePathname();
   // `trailingSlash: true` means usePathname() returns "/vip/", which never
   // matched the unslashed entries above — the overlay had silently never
   // applied on any route. Compare without the trailing slash.
   const overlay = OVERLAY_ROUTES.includes(pathname.replace(/\/+$/, "") || "/");
+  // Transparent-over-hero only while the page is at the top.
+  const glass = overlay && !scrolled;
 
-  const linkColor = overlay
+  const linkColor = glass
     ? "text-white hover:text-white/70"
     : "text-[var(--ink)] hover:text-[var(--blue)]";
 
@@ -141,14 +154,19 @@ export function SiteHeader() {
         <Dot />
       </div>
 
-      <header className="relative z-50">
-        {/* Nav — Figma I64:10192;57:9726 */}
+      <header className={`sticky top-0 z-50 ${overlay ? "-mb-[92px]" : ""}`}>
+        {/* Nav — Figma I64:10192;57:9726. Once pinned, both looks converge
+            on the same solid cream bar with a hairline underneath. */}
         <div
-        className={
-          overlay
-            ? "relative z-[2] -mb-[92px] h-[92px] bg-transparent"
-            : "relative z-[2] rounded-t-3xl bg-[var(--cream)]"
-        }
+        className={`relative z-[2] transition-[background-color,box-shadow] duration-300 ${
+          glass
+            ? "h-[92px] bg-transparent"
+            : overlay
+              ? "h-[92px] bg-[var(--cream)] shadow-[0_1px_0_var(--hairline)]"
+              : scrolled
+                ? "bg-[var(--cream)] shadow-[0_1px_0_var(--hairline)]"
+                : "rounded-t-3xl bg-[var(--cream)]"
+        }`}
       >
         <div className="mx-auto flex w-full max-w-[1440px] items-center justify-between px-6 py-6 sm:px-14">
           <Link href="/" className="flex w-[190px] shrink-0 items-start">
@@ -158,8 +176,8 @@ export function SiteHeader() {
               alt="Dr. Avi Ishaaya Center"
               width={155}
               height={28}
-              className={`h-7 w-[155px] object-contain object-left ${
-                overlay ? "brightness-0 invert" : ""
+              className={`h-7 w-[155px] object-contain object-left transition-[filter] duration-300 ${
+                glass ? "brightness-0 invert" : ""
               }`}
             />
           </Link>
@@ -215,7 +233,7 @@ export function SiteHeader() {
           <button
             aria-label="Toggle menu"
             aria-expanded={open}
-            className={`-m-2 p-2 lg:hidden ${overlay ? "text-white" : "text-[var(--ink)]"}`}
+            className={`-m-2 p-2 lg:hidden ${glass ? "text-white" : "text-[var(--ink)]"}`}
             onClick={() => setOpen(!open)}
           >
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
