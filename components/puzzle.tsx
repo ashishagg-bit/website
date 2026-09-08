@@ -46,3 +46,42 @@ export function PuzzleBackdrop({ className = "" }: { className?: string }) {
     </div>
   );
 }
+
+/**
+ * A puzzle tile as the mineral page's "How it works" band draws it
+ * (2512:39545): a rounded square with a round knob on top and one on the
+ * right, blue at the knob fading to the band's navy at the foot. `flip`
+ * mirrors it so the side knob points left.
+ *
+ * `id` keys the gradient — two tiles on one page must not share a gradient id.
+ */
+export function PuzzleTile({
+  id,
+  className = "",
+  flip = false,
+}: {
+  id: string;
+  className?: string;
+  flip?: boolean;
+}) {
+  return (
+    <svg
+      viewBox="0 0 130 120"
+      className={className}
+      style={flip ? { transform: "scaleX(-1)" } : undefined}
+      aria-hidden
+    >
+      <defs>
+        <linearGradient id={`puzzle-${id}`} x1="0" y1="0" x2="0.2" y2="1">
+          <stop offset="0" stopColor="#3d7cec" />
+          <stop offset="0.55" stopColor="#2a56b8" />
+          <stop offset="1" stopColor="#1a2f55" stopOpacity="0.9" />
+        </linearGradient>
+      </defs>
+      <path
+        fill={`url(#puzzle-${id})`}
+        d="M20 38q0-8 8-8h22c0-6-4-10-4-15a14 14 0 0 1 28 0c0 5-4 9-4 15h22q8 0 8 8v12c6 0 10-4 14-4a14 14 0 0 1 0 28c-4 0-8-4-14-4v32q0 8-8 8H28q-8 0-8-8z"
+      />
+    </svg>
+  );
+}

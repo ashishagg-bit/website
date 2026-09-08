@@ -90,17 +90,20 @@ export const mineralPanel = {
       title: "21 minerals and trace elements",
       body: "These minerals and trace elements support functions including energy, hormones, immune response, and detoxification.",
       items: ["Magnesium","Zinc","Iodine","Selenium","Chromium","Iron","Lithium","Calcium","Silicon","Phosphorus","Sodium"],
-      more: true,
+      // The frame shows only the first eleven and a "View All →". These are
+      // the rest of the OligoScan mineral panel, which is the 21 the heading
+      // counts; not in the file, so worth the client's eye.
+      more: ["Potassium","Copper","Manganese","Vanadium","Boron","Cobalt","Molybdenum","Germanium","Sulfur","Fluorine"],
     },
     {
       title: "16 heavy metals",
       items: ["Aluminium (Al)","Antimony (Sb)","Silver (Ag)","Arsenic (As)","Barium (Ba)","Beryllium (Be)","Bismuth (Bi)","Tin (Sn)"],
-      more: true,
+      // As above: the remaining eight of the panel's sixteen heavy metals.
+      more: ["Cadmium (Cd)","Mercury (Hg)","Nickel (Ni)","Platinum (Pt)","Lead (Pb)","Thallium (Tl)","Thorium (Th)","Gadolinium (Gd)"],
     },
     {
       title: "Seven vitamin indicators",
       items: ["Vitamin A","Vitamin B6","Vitamin B9","Vitamin B12","Vitamin C","Vitamin D","Vitamin E"],
-      more: false,
     },
   ],
 };

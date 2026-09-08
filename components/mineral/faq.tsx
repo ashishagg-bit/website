@@ -47,7 +47,12 @@ export function Faqs({
                 type="button"
                 aria-expanded={on}
                 onClick={() => setOpen(on ? -1 : i)}
-                className="flex w-full items-center justify-between gap-6 py-6 text-left"
+                // Open, the answer follows the question by 8 (2512:41335: the
+                // question line at 291, the answer at 323) and the row keeps
+                // its 24 under the answer; the build had 24 above and 8 under.
+                className={`flex w-full items-center justify-between gap-6 pt-6 text-left ${
+                  on ? "pb-2" : "pb-6"
+                }`}
               >
                 <span className="text-lg leading-6 text-[var(--ink)]">{it.q}</span>
                 {/* One bar, plus a second rotated to make the cross — the open
@@ -63,7 +68,7 @@ export function Faqs({
               </button>
               <div
                 className={`grid transition-all duration-300 ${
-                  on ? "grid-rows-[1fr] pb-2 opacity-100" : "grid-rows-[0fr] opacity-0"
+                  on ? "grid-rows-[1fr] pb-6 opacity-100" : "grid-rows-[0fr] opacity-0"
                 }`}
               >
                 <p className="overflow-hidden text-base leading-6 text-[var(--ink-60)]">

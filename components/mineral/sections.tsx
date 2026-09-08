@@ -1,5 +1,7 @@
 import { BeyondRows } from "@/components/mineral/beyond-rows";
-import { PuzzlePiece } from "@/components/puzzle";
+import { TestGroups } from "@/components/mineral/test-groups";
+import { WhoForCells } from "@/components/mineral/who-cells";
+import { PuzzleTile } from "@/components/puzzle";
 import { BlueButton, Display, Kicker } from "@/components/ui";
 
 const HAIRLINE = "border-[rgba(21,32,50,0.1)]";
@@ -9,8 +11,8 @@ const HAIRLINE = "border-[rgba(21,32,50,0.1)]";
  *
  * Two 580 columns 120 apart, the same measure the service Approach uses, but
  * the right one carries the argument rather than a checklist. The button sits
- * at the foot of the left column (2417:1707 opens at 463 of its 504) rather
- * than under the headline, so the two columns end level.
+ * 24 under the standfirst (2512:38979: standfirst at 367, button at 403), not
+ * at the foot of the column — pinned there it drifted 300px below the copy.
  */
 export function SplitApproach({
   eyebrow,
@@ -27,7 +29,7 @@ export function SplitApproach({
 }) {
   return (
     <section className="flex w-full flex-col items-center justify-center gap-12 overflow-clip bg-white px-6 py-16 sm:px-14 lg:flex-row lg:items-stretch lg:gap-[120px] lg:px-20 lg:py-[104px]">
-      <div className="flex w-full flex-col items-start gap-10 lg:max-w-[580px] lg:flex-1">
+      <div className="flex w-full flex-col items-start gap-6 lg:max-w-[580px] lg:flex-1">
         <div className="flex w-full flex-col gap-3 text-[var(--ink)]">
           <Kicker>{eyebrow}</Kicker>
           <Display>
@@ -39,17 +41,12 @@ export function SplitApproach({
             ))}
           </Display>
           {standfirst && (
-            <p className="mt-1 text-base leading-6 text-[var(--ink-80)]">
+            <p className="mt-3 text-base leading-6 text-[var(--ink-80)]">
               {standfirst}
             </p>
           )}
         </div>
-        {/* mt-auto rather than a fixed gap: the frame lands this level with the
-            last line of the column beside it, and that column's length is the
-            copy's, not a number we can fix here. */}
-        <div className="lg:mt-auto">
-          <BlueButton href={cta.href}>{cta.label}</BlueButton>
-        </div>
+        <BlueButton href={cta.href}>{cta.label}</BlueButton>
       </div>
 
       <div className="flex w-full flex-col gap-6 text-base leading-6 text-[var(--ink-80)] lg:max-w-[580px] lg:flex-1">
@@ -149,8 +146,11 @@ export function CellCards({
  * a puzzle piece bleeding off each of two opposite corners (2417:2274 at the
  * foot on the left, 2417:2278 off the right edge at the top, both 180).
  *
- * The pieces are the file's own artwork and are not in the repository, so the
- * site's PuzzlePiece stands in at the frame's size and placement.
+ * The pieces are the file's own artwork and are not in the repository. They
+ * are simple enough to draw: a square tile with two round knobs, blue at the
+ * knob shading into the band's navy at the foot (PuzzleTile), placed as the
+ * frame places them — bottom-left with its knobs up and right, top-right
+ * mirrored with its knobs up and left, both bleeding off the edge.
  */
 export function HowItWorks({
   eyebrow,
@@ -165,16 +165,14 @@ export function HowItWorks({
 }) {
   return (
     <section className="relative flex w-full flex-col items-center overflow-clip bg-[var(--dark)] px-6 py-16 sm:px-14 lg:py-[120px]">
-      <PuzzlePiece
-        className="pointer-events-none absolute -left-6 bottom-10 size-[180px] text-[var(--blue)] lg:left-10"
-        color="var(--blue)"
-        opacity={0.5}
+      <PuzzleTile
+        id="how-left"
+        className="pointer-events-none absolute -bottom-2 -left-4 w-[200px] lg:left-10"
       />
-      <PuzzlePiece
-        className="pointer-events-none absolute -right-10 top-10 size-[180px] text-[var(--blue)]"
-        color="var(--blue)"
-        opacity={0.5}
-        rotate={12}
+      <PuzzleTile
+        id="how-right"
+        flip
+        className="pointer-events-none absolute -right-4 top-10 w-[200px]"
       />
 
       <div className="relative flex w-full max-w-[774px] flex-col items-center gap-10 text-center">
@@ -204,15 +202,6 @@ export function HowItWorks({
   );
 }
 
-function Tick() {
-  return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden
-         className="shrink-0 text-[var(--blue)]">
-      <path d="M5 12.5l4.5 4.5L19 7" stroke="currentColor" strokeWidth="2.4"
-            strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
 
 /**
  * "What the scan shows you" — Figma 2417:2282.
@@ -236,7 +225,7 @@ export function WhatWeTest({
   title: string[];
   paragraphs: string[];
   cta: { href: string; label: string };
-  groups: { title: string; body?: string; items: string[]; more?: boolean }[];
+  groups: { title: string; body?: string; items: string[]; more?: string[] }[];
 }) {
   return (
     <section className="flex w-full flex-col items-center overflow-clip bg-white px-6 py-16 sm:px-14 sm:py-[104px]">
@@ -261,46 +250,7 @@ export function WhatWeTest({
         </div>
       </div>
 
-      <div
-        className={`mt-12 grid w-full max-w-[1280px] overflow-clip rounded-2xl border sm:grid-cols-2 lg:mt-[104px] lg:h-[560px] lg:grid-cols-3 ${HAIRLINE}`}
-      >
-        {groups.map((g, i) => (
-          <div
-            key={g.title}
-            className={`flex flex-col gap-6 border-b p-8 lg:border-b-0 ${
-              i < groups.length - 1 ? `lg:border-r ${HAIRLINE}` : ""
-            } ${HAIRLINE}`}
-          >
-            <h3 className="font-kalice text-[clamp(1.5rem,1.1rem+1vw,32px)] leading-[1.25] tracking-[1px] text-[var(--ink)]">
-              {g.title}
-            </h3>
-            {g.body && (
-              <p className="text-base leading-6 text-[var(--ink-60)]">{g.body}</p>
-            )}
-            <div className="mt-auto flex flex-col gap-3">
-              <p className="text-base leading-6 text-[var(--ink-60)]">Including:</p>
-              <ul className="flex flex-wrap items-center gap-2">
-                {g.items.map((it) => (
-                  <li
-                    key={it}
-                    className={`flex items-center gap-2 rounded-lg border px-3 py-2 text-sm leading-5 text-[var(--ink)] ${HAIRLINE}`}
-                  >
-                    <Tick />
-                    {it}
-                  </li>
-                ))}
-                {g.more && (
-                  <li>
-                    <span className="px-2 text-sm leading-5 font-medium text-[var(--blue)]">
-                      View All →
-                    </span>
-                  </li>
-                )}
-              </ul>
-            </div>
-          </div>
-        ))}
-      </div>
+      <TestGroups groups={groups} />
     </section>
   );
 }
@@ -405,7 +355,6 @@ export function WhoItsFor({
   items: string[];
   cta: { href: string; label: string };
 }) {
-  const EDGE = "border-white/12";
   return (
     <section className="flex w-full flex-col items-center gap-10 overflow-clip bg-[var(--dark)] px-6 py-16 sm:px-14 sm:py-[104px]">
       <header className="flex w-full max-w-[900px] flex-col items-center text-center">
@@ -420,19 +369,7 @@ export function WhoItsFor({
         <p className="mt-4 text-base leading-6 text-white/60">{standfirst}</p>
       </header>
 
-      <ul className={`grid w-full max-w-[1180px] overflow-clip rounded-2xl border sm:grid-cols-2 ${EDGE}`}>
-        {items.map((t, i) => (
-          <li
-            key={t}
-            className={`flex items-start gap-3 border-b p-8 text-base leading-6 text-white/80 ${EDGE} ${
-              i % 2 === 0 ? `sm:border-r ${EDGE}` : ""
-            } ${i >= items.length - 2 ? "sm:border-b-0" : ""}`}
-          >
-            <Tick />
-            <span>{t}</span>
-          </li>
-        ))}
-      </ul>
+      <WhoForCells items={items} />
 
       <BlueButton href={cta.href}>{cta.label}</BlueButton>
     </section>
@@ -460,7 +397,7 @@ export function BeyondScan({
   image: string;
 }) {
   return (
-    <section className="flex w-full flex-col items-center justify-center gap-12 overflow-clip bg-white px-6 py-16 sm:px-14 lg:flex-row lg:items-start lg:gap-[120px] lg:px-20 lg:py-[104px]">
+    <section className="flex w-full flex-col items-center justify-center gap-12 overflow-clip bg-white px-6 py-16 sm:px-14 lg:flex-row lg:items-stretch lg:gap-[120px] lg:px-20 lg:py-[104px]">
       <div className="flex w-full flex-col gap-8 lg:max-w-[580px] lg:flex-1">
         <div className="flex flex-col gap-3 text-[var(--ink)]">
           <Kicker>{eyebrow}</Kicker>
@@ -476,14 +413,18 @@ export function BeyondScan({
         <BeyondRows rows={rows} />
       </div>
 
-      <div className="relative w-full overflow-clip rounded-2xl lg:max-w-[580px] lg:flex-1">
+      {/* The frame draws copy and portrait the same height (624x674 each in
+          2512:40806). The column's height is the copy's — it changes with the
+          open row — so the portrait fills whatever that is, cropping rather
+          than stretching. Below lg it keeps the frame's own proportion. */}
+      <div className="relative w-full overflow-clip rounded-2xl aspect-[624/674] lg:aspect-auto lg:max-w-[580px] lg:flex-1">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           loading="lazy"
           decoding="async"
           src={image}
           alt=""
-          className="h-full w-full object-cover"
+          className="absolute inset-0 h-full w-full object-cover"
         />
       </div>
     </section>

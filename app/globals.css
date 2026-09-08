@@ -371,6 +371,14 @@ body {
    32px, highlighted or not, and nudging the text right on hover made the list
    jitter as the cursor moved down it. */
 
+/* Dark-band cells (mineral "Who it's for", 2512:40525): the held cell takes a
+   blue wash rising to the right, the ink-band cousin of the checklist row. */
+.darkrow > .darkcell { transition: background 0.4s ease, color 0.4s ease; }
+.darkrow > .darkcell[data-open] {
+  background: linear-gradient(90deg, rgba(51, 118, 235, 0) 0%, rgba(51, 118, 235, 0.35) 55%, rgba(51, 118, 235, 0.75) 100%);
+  color: #ffffff;
+}
+
 /* Conditions cards — the open card reveals its Symptoms / Risk / Testing
    detail (Figma 92:27676 on the service frames). Unlike the rows above, which
    open on :hover, this one is driven entirely by the data-open attribute that
