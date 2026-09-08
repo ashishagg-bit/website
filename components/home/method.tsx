@@ -50,7 +50,9 @@ export function Method() {
                 draggable={false}
                 className="absolute inset-0 size-full object-cover"
               />
-              <div aria-hidden className="puzzle-lines absolute inset-0" />
+              {!("artwork" in item && item.artwork) && (
+                <div aria-hidden className="puzzle-lines absolute inset-0" />
+              )}
             </div>
             <div className="flex flex-col gap-2 pr-10">
               <h3 className="text-lg leading-6 text-[var(--ink)]">{item.title}</h3>

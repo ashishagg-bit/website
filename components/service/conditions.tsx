@@ -71,6 +71,56 @@ export function Conditions({
   );
   items.forEach((card, i) => columns[i % COLS].push({ card, i }));
 
+  // Lungs and Sleep list plain names with nothing to open, and their frames
+  // set those out as wrapped rows with the last row centred — ten cards on
+  // Lungs end 3/3/3/1 with the one in the middle, Sleep's two sit side by
+  // side in the centre. Dealing them into three columns instead left the
+  // last card hanging on the left edge. The columns are only needed where a
+  // card can open and push the ones beneath it.
+  const anyDetail = items.some((c) => c.details && c.details.length > 0);
+
+  const renderCard = (c: Condition, i: number, className = "") => {
+    const hasDetail = Boolean(c.details && c.details.length > 0);
+    return (
+      <li
+        key={c.name}
+        {...hold(i, { claimable: hasDetail })}
+        className={`cond flex flex-col rounded-2xl p-2 ${className}`}
+      >
+        <div className="flex items-center gap-3">
+          {/* The frame uses a small illustrated tile here (55px, 8px
+              radius, hairline border); this gradient chip stands in
+              until those icons can be exported. */}
+          <span className="flex size-[55px] shrink-0 items-center justify-center rounded-lg border border-white/15 bg-[linear-gradient(135deg,rgba(255,255,255,0.22),rgba(51,118,235,0.55))] font-kalice text-base text-white">
+            {c.name.charAt(0)}
+          </span>
+          <span className="flex-1 pr-1 text-sm leading-[21px] text-white">
+            {c.name}
+          </span>
+          {hasDetail && <Chevron className="cond-chevron mr-2" />}
+        </div>
+
+        {hasDetail && (
+          <dl className="cond-detail flex flex-col gap-2 rounded-b-2xl lg:flex-row">
+            {c.details!.map((d) => (
+              <div
+                key={d.label}
+                className="flex flex-1 flex-col gap-0.5 rounded-xl bg-white/10 p-3"
+              >
+                <dt className="text-[13px] leading-[21px] text-white/50">
+                  {d.label}
+                </dt>
+                <dd className="text-sm leading-[21px] text-white/80">
+                  {d.value}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        )}
+      </li>
+    );
+  };
+
   return (
     <section className="flex w-full flex-col items-center gap-10 overflow-clip bg-[var(--ink)] px-6 py-16 sm:px-14 lg:gap-14 lg:py-24">
       <header className="flex w-full max-w-[700px] flex-col items-center gap-3 text-center text-white">
@@ -85,53 +135,21 @@ export function Conditions({
           Columns also fill top-to-bottom, which would deal this row-major list
           out in the wrong order. Three flex columns fix both, and each still
           grows on its own, so an open card pushes only the cards beneath it. */}
-      <div className="condrow flex w-full max-w-[1328px] flex-col gap-2 lg:flex-row">
-        {columns.map((col, ci) => (
-          <ul key={ci} className="flex min-w-0 flex-col gap-2 lg:flex-1">
-            {col.map(({ card: c, i }) => {
-              const hasDetail = Boolean(c.details && c.details.length > 0);
-              return (
-                <li
-                  key={c.name}
-                  {...hold(i, { claimable: hasDetail })}
-                  className="cond flex flex-col rounded-2xl p-2"
-                >
-                  <div className="flex items-center gap-3">
-                    {/* The frame uses a small illustrated tile here (55px, 8px
-                        radius, hairline border); this gradient chip stands in
-                        until those icons can be exported. */}
-                    <span className="flex size-[55px] shrink-0 items-center justify-center rounded-lg border border-white/15 bg-[linear-gradient(135deg,rgba(255,255,255,0.22),rgba(51,118,235,0.55))] font-kalice text-base text-white">
-                      {c.name.charAt(0)}
-                    </span>
-                    <span className="flex-1 pr-1 text-sm leading-[21px] text-white">
-                      {c.name}
-                    </span>
-                    {hasDetail && <Chevron className="cond-chevron mr-2" />}
-                  </div>
-
-                  {hasDetail && (
-                    <dl className="cond-detail flex flex-col gap-2 rounded-b-2xl lg:flex-row">
-                      {c.details!.map((d) => (
-                        <div
-                          key={d.label}
-                          className="flex flex-1 flex-col gap-0.5 rounded-xl bg-white/10 p-3"
-                        >
-                          <dt className="text-[13px] leading-[21px] text-white/50">
-                            {d.label}
-                          </dt>
-                          <dd className="text-sm leading-[21px] text-white/80">
-                            {d.value}
-                          </dd>
-                        </div>
-                      ))}
-                    </dl>
-                  )}
-                </li>
-              );
-            })}
-          </ul>
-        ))}
-      </div>
+      {anyDetail ? (
+        <div className="condrow flex w-full max-w-[1328px] flex-col gap-2 lg:flex-row">
+          {columns.map((col, ci) => (
+            <ul key={ci} className="flex min-w-0 flex-col gap-2 lg:flex-1">
+              {col.map(({ card: c, i }) => renderCard(c, i))}
+            </ul>
+          ))}
+        </div>
+      ) : (
+        <ul className="condrow flex w-full max-w-[1328px] flex-wrap justify-center gap-2">
+          {items.map((c, i) =>
+            renderCard(c, i, "w-full lg:w-[calc((100%-1rem)/3)]")
+          )}
+        </ul>
+      )}
     </section>
   );
 }

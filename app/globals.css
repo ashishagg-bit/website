@@ -469,10 +469,30 @@ body {
   transition: background 0.45s ease, color 0.45s ease;
   color: var(--ink);
 }
+/* The open tile is a "1k+" frame in every service bento (2512:6730 and its
+   siblings): #3376EB under the same grainy puzzle-illustration raster the open
+   promise card carries, not a flat radial gradient. The raster rides a
+   pseudo-element so it can fade with the colour — a background-image cannot
+   transition, and switching it off before the blue had faded flashed a flat
+   blue card on every close. */
+.tilegrid > .tile-card {
+  position: relative;
+  isolation: isolate;
+}
+.tilegrid > .tile-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: url("/images/figma/promise-texture.jpg") center / cover no-repeat;
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
 .tilegrid > .tile-card[data-open] {
-  background: radial-gradient(120% 110% at 72% 12%, #e2ebfc 0%, #93b2ef 42%, #3376eb 100%);
+  background: #3376eb;
   color: #ffffff;
 }
+.tilegrid > .tile-card[data-open]::before { opacity: 1; }
 /* eyebrow and blurb ride the card's colour */
 .tile-card .tile-eyebrow,
 .tile-card .tile-blurb { color: inherit; transition: color 0.45s ease; }

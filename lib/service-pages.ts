@@ -306,7 +306,9 @@ export const sleep: ServicePageData = {
     "Board-certified sleep medicine in Beverly Hills — in-lab and at-home sleep studies for apnea, insomnia, restless leg syndrome and narcolepsy.",
   hero: {
     title: "Make sleep part of your health.",
-    body: "Good sleep is essential for both your physical and mental well-being. During sleep, your brain processes the day\u2019s information and consolidates memories.",
+    // 2512:26487 in full. The build had stopped after the second sentence.
+    // "Los Angels" is the frame's own; corrected as it is everywhere else.
+    body: "Good sleep is essential for both your physical and mental well-being. During sleep, your brain processes the day’s information and consolidates memories. Meet with our board-certified sleep doctor to evaluate your sleep concern and schedule your sleep testing. Serving Beverly Hills and the greater Los Angeles area.",
     image: "/images/figma/sleep-hero.jpg",
   },
   approach: {
@@ -449,6 +451,17 @@ export const wellness: ServicePageData = {
   conditions: [],
   diagnostics: {
     title: "Diagnostics and care",
+    // Row order follows 2512:6730, five rows of four: the imaging and testing
+    // rows come first, the body-contouring row last. The build had the
+    // Microneedling / Thermography / Mineral / Deeper-layer row at the bottom
+    // where the frame puts it third, and everything after it shifted up.
+    //
+    // The frame numbers Telomere Testing "06" (2512:6730, first row) — a slip,
+    // since 05 and 06 both follow it; numbered in sequence here.
+    //
+    // Mineral & Heavy Metal Testing's blurb: the frame strands the allergy
+    // line here as it does on the bento; this is the same replacement,
+    // written from the page it links to.
     tiles: [
       {
         n: "01",
@@ -492,69 +505,65 @@ export const wellness: ServicePageData = {
       },
       {
         n: "09",
-        title: "Diagnostic Ultrasound",
-        blurb: "Non-Invasive Imaging for Comprehensive Assessment.",
-      },
-      {
-        n: "10",
-        title: "Allergy Testing",
-        blurb: "Identify Your Triggers, Transform Your Life.",
-      },
-      {
-        n: "11",
-        title: "Food Sensitivity Testing",
-        blurb: "Uncover Your Hidden Triggers.",
-      },
-      {
-        n: "12",
-        title: "At-Home Sleep Studies",
-        blurb: "Professional Sleep Testing in the Comfort of Home.",
-      },
-      {
-        n: "13",
-        title: "Emsculpt and TruSculpt flex",
-        blurb: "Advanced Muscle Stimulation & Strengthening.",
-      },
-      {
-        n: "14",
-        title: "EMSELLA",
-        blurb: "Advanced Pelvic Floor Strengthening.",
-      },
-      {
-        n: "15",
-        title: "EmFace Treatment",
-        blurb: "Facial Muscle Stimulation: The Foundation of Natural Rejuvenation.",
-      },
-      {
-        n: "16",
-        title: "Emsculpt NEO and TruSculpt iD",
-        blurb: "Advanced Body Contouring Solutions.",
-      },
-      {
-        n: "17",
         title: "Advanced Microneedling RF",
         blurb: "Revolutionary Skin Rejuvenation Technology.",
       },
-      // 2256:24735 / 24740 / 24745. The grid stopped at 17, which left its
-      // last row holding a single tile where the frame fills all four.
       {
-        n: "18",
+        n: "10",
         title: "Thermography",
         blurb: "Thermography is essential for wellness and prevention for optimal health.",
       },
       {
-        n: "19",
+        n: "11",
         title: "Mineral & Heavy Metal Testing",
-        // 2256:24744 strands the allergy line here as it does on the bento;
-        // this is the same replacement, written from the page it links to.
         blurb: "A painless scan of your palm reads the minerals and heavy metals inside.",
         href: "/service/mineral-heavy-metal-testing/",
       },
       {
-        n: "20",
+        n: "12",
         title: "Addressing the deeper layer",
         blurb: "Explore four wellness packages at The Healing Dawn tailored to your goals — from basic health screenings to advanced diagnostics.",
         href: "/vip",
+      },
+      {
+        n: "13",
+        title: "Diagnostic Ultrasound",
+        blurb: "Non-Invasive Imaging for Comprehensive Assessment.",
+      },
+      {
+        n: "14",
+        title: "Allergy Testing",
+        blurb: "Identify Your Triggers, Transform Your Life.",
+      },
+      {
+        n: "15",
+        title: "Food Sensitivity Testing",
+        blurb: "Uncover Your Hidden Triggers.",
+      },
+      {
+        n: "16",
+        title: "At-Home Sleep Studies",
+        blurb: "Professional Sleep Testing in the Comfort of Home.",
+      },
+      {
+        n: "17",
+        title: "Emsculpt and TruSculpt flex",
+        blurb: "Advanced Muscle Stimulation & Strengthening.",
+      },
+      {
+        n: "18",
+        title: "EMSELLA",
+        blurb: "Advanced Pelvic Floor Strengthening.",
+      },
+      {
+        n: "19",
+        title: "EmFace Treatment",
+        blurb: "Facial Muscle Stimulation: The Foundation of Natural Rejuvenation.",
+      },
+      {
+        n: "20",
+        title: "Emsculpt NEO and TruSculpt iD",
+        blurb: "Advanced Body Contouring Solutions.",
       },
     ],
   },

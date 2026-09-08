@@ -1,5 +1,4 @@
-import Link from "next/link";
-import { Checklist } from "@/components/service/checklist";
+import { ApproachCards, Checklist } from "@/components/service/checklist";
 import { BlueButton, Display, Kicker } from "@/components/ui";
 
 import { TileCards } from "@/components/service/tile-cards";
@@ -53,6 +52,11 @@ export function Approach({
 }) {
   const hasCards = Boolean(cards && cards.length > 0);
   const hasList = Boolean(bullets && bullets.length > 0) && !hasCards;
+  // Wellness (2512:5815) has neither a checklist nor cards: its frame puts the
+  // copy in the right-hand column, 580 wide, level with the eyebrow, and
+  // leaves the left column to the headline and the button. With the copy
+  // stacked under the button instead, the band read as a half-empty page.
+  const copyAside = !hasCards && !hasList;
   return (
     <section className="flex w-full flex-col items-center justify-center gap-12 overflow-clip bg-white px-6 py-16 sm:px-14 lg:flex-row lg:items-stretch lg:gap-[120px] lg:px-20 lg:py-[104px]">
       {/* Capped at the 580 the frames give this column. On the four pages
@@ -78,7 +82,16 @@ export function Approach({
             <Display>{title}</Display>
           </div>
           <BlueButton href={cta.href}>{cta.label}</BlueButton>
-          <div className="flex flex-col gap-4 text-base leading-6 text-black/60 lg:pt-10 [&>p]:mb-0">
+          {/* Beside a checklist the copy sits on the column's bottom edge,
+              level with the last row (Sleep, 2512:26797: the paragraphs end
+              where the list does). Where the copy is the taller column, as
+              on Lungs, the auto margin has nothing to take and the 64
+              (gap-6 + pt-10) is what remains. */}
+          <div
+            className={`flex flex-col gap-4 text-base leading-6 text-black/60 [&>p]:mb-0 ${
+              copyAside ? "lg:hidden" : "lg:pt-10"
+            } ${hasList ? "lg:mt-auto" : ""}`}
+          >
             {paragraphs?.map((t) => <p key={t.slice(0, 24)}>{t}</p>)}
             {body}
             {/* On the allergy frame the checks are chips under the copy — a
@@ -104,24 +117,8 @@ export function Approach({
       </div>
 
       {hasCards && (
-        <div className="flex w-full flex-col lg:flex-1">
-          <ul
-            className={`flex flex-col overflow-clip rounded-2xl border ${HAIRLINE}`}
-          >
-            {cards!.map((c, i) => (
-              <li
-                key={c.title}
-                className={`flex flex-col gap-3 p-8 ${
-                  i < cards!.length - 1 ? `border-b ${HAIRLINE}` : ""
-                }`}
-              >
-                <h3 className="text-base leading-6 text-[var(--ink)]">
-                  {c.title}
-                </h3>
-                <p className="text-base leading-6 text-black/60">{c.body}</p>
-              </li>
-            ))}
-          </ul>
+        <div className="w-full lg:flex-1">
+          <ApproachCards cards={cards!} highlight={highlight} />
         </div>
       )}
 
@@ -129,6 +126,14 @@ export function Approach({
       <div className="w-full lg:flex-1">
         <Checklist bullets={bullets!} highlight={highlight} />
       </div>
+      )}
+
+      {copyAside && (
+        // The frame starts this column 14px below the eyebrow's top edge.
+        <div className="hidden w-full flex-col gap-6 text-base leading-6 text-black/60 lg:flex lg:max-w-[580px] lg:flex-1 lg:pt-3.5 [&>p]:mb-0">
+          {paragraphs?.map((t) => <p key={t.slice(0, 24)}>{t}</p>)}
+          {body}
+        </div>
       )}
     </section>
   );

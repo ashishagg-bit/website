@@ -41,7 +41,13 @@ export function PageHero({
       <div className="relative flex w-full max-w-[725px] flex-col items-start justify-end gap-6">
         <div className="flex w-full flex-col gap-3">
           <p className="eyebrow !text-white">{eyebrow}</p>
-          <h1 className="font-kalice text-[clamp(2.25rem,1.3rem+3vw,3.5rem)] leading-[1.21] tracking-[1px] text-white">
+          {/* The frames set the headline nowrap (2512:20800, 2512:26486 and
+              the allergy hero): "A healthier heart starts here." and "Make
+              sleep part of your health." sit on one line at 56px, wider than
+              the 725 column the rest of the copy keeps to. So from xl the
+              headline runs to its own width instead of wrapping inside the
+              column; below that the viewport is too narrow to hold it. */}
+          <h1 className="font-kalice text-[clamp(2.25rem,1.3rem+3vw,3.5rem)] leading-[1.21] tracking-[1px] text-white xl:w-max xl:max-w-none xl:whitespace-nowrap">
             {title}
           </h1>
           {body && <p className="text-base leading-6 text-white/80">{body}</p>}

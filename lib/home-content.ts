@@ -8,6 +8,13 @@
  */
 
 /** "our method" — node 1:674 */
+/**
+ * The frame's cards (2512:11678–11709) carry a puzzle-line illustration
+ * soft-lit over the photograph. Cards 2–4 are the designer's exports of that
+ * artwork (Frame 1597881279 / 1597881280); `artwork` marks them so the CSS
+ * stand-in overlay is not drawn on top. Card 1 is still awaiting its export
+ * and keeps the stand-in.
+ */
 export const methodItems = [
   {
     title: "Piecing Together Your Health",
@@ -17,17 +24,20 @@ export const methodItems = [
   {
     title: "Dimensions of Wholeness",
     body: "As spiritual beings in a physical world, true wellness thrives when we nurture every aspect of our existence — body, mind, and spirit. Each element is vital to your unique wellness journey.",
-    image: "/images/figma/method-2.jpg",
+    image: "/images/figma/method-2.png",
+    artwork: true,
   },
   {
     title: "Your Unique Health Puzzle",
     body: "Your health journey is uniquely yours. We develop personalized care plans that cater to your specific needs, as standardized methods can't address the complexity of individual wellness.",
-    image: "/images/figma/method-3.jpg",
+    image: "/images/figma/method-3.png",
+    artwork: true,
   },
   {
     title: "Partnership in Transformation",
     body: "At Dr. Avi Ishaaya Centers, we support you on your journey to lasting health transformation, offering the expertise and guidance needed to connect all pieces of your wellness puzzle.",
-    image: "/images/figma/method-4.jpg",
+    image: "/images/figma/method-4.png",
+    artwork: true,
   },
 ];
 
@@ -121,6 +131,11 @@ export const healingDawnTile = {
   blurb:
     "Explore four wellness packages tailored to your goals — from basic health screenings to advanced diagnostics.",
   href: "/vip",
+  // 2512:16081 draws this tile closed, so the frame never shows what it opens
+  // on; without a photograph the open state was white copy on cream, which
+  // read as a missing image. The VIP band's photograph, since that is where
+  // the tile leads.
+  image: "/images/scraped/V2qDs1D0pO2ja4K49KWNNzfDHe0.png",
 };
 
 /**

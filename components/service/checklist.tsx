@@ -62,3 +62,35 @@ export function Checklist({
     </ul>
   );
 }
+
+/**
+ * Allergy's explainer cards (2512:24170) — the same bordered column as the
+ * checklist, and the same highlight: the frame draws the middle card on the
+ * blue gradient, and the card the cursor last entered keeps it.
+ */
+export function ApproachCards({
+  cards,
+  highlight = 1,
+}: {
+  cards: { title: string; body: string }[];
+  highlight?: number;
+}) {
+  const { hold } = useHoldOpen(highlight);
+
+  return (
+    <ul className={`checkrow flex h-full flex-col overflow-clip rounded-2xl border ${HAIRLINE}`}>
+      {cards.map((c, i) => (
+        <li
+          key={c.title}
+          {...hold(i)}
+          className={`checkitem flex flex-1 flex-col justify-center gap-3 p-8 ${
+            i < cards.length - 1 ? `border-b ${HAIRLINE}` : ""
+          }`}
+        >
+          <h3 className="text-base leading-6 text-[var(--ink)]">{c.title}</h3>
+          <p className="text-base leading-6 text-black/60">{c.body}</p>
+        </li>
+      ))}
+    </ul>
+  );
+}
