@@ -287,6 +287,18 @@ body {
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
+/* A thin, quiet scrollbar for rows that overrun the viewport on purpose. */
+.scroll-thin {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(21, 32, 50, 0.25) transparent;
+}
+.scroll-thin::-webkit-scrollbar { height: 4px; }
+.scroll-thin::-webkit-scrollbar-track { background: transparent; }
+.scroll-thin::-webkit-scrollbar-thumb {
+  background: rgba(21, 32, 50, 0.25);
+  border-radius: 999px;
+}
+
 /* --- Hover-expanding tabs ---------------------------------------------
    The services bento, the five promises and the service-page checklist all
    use one interaction: a row of collapsed tabs where the hovered one opens.
@@ -424,7 +436,12 @@ body {
   margin-top: 0.5rem;
   margin-bottom: auto;
 }
-.tab.promise .promise-body { margin-top: auto; }
+/* Collapsed the body is 0 tall, but an `auto` margin on it still claims half
+   the free space — which is what held the collapsed titles mid-card instead
+   of on the bottom edge the frame (2512:13083) puts them on. Only the open
+   card gives the body an auto margin. */
+.tab.promise .promise-body { margin-top: 0; }
+.tabrow > .tab[data-open].promise .promise-body { margin-top: auto; }
 
 /* "Meet your physician" points — an accordion separated by hairlines, with the
    open row showing its body (Figma 1:1776). Which row is open is held in

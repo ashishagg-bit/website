@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { TabRow, type Tile } from "@/components/home/service-tabrow";
+import { TabRows, type Tile } from "@/components/home/service-tabrow";
 import { BlueButton, Display, Kicker } from "@/components/ui";
 import { serviceTiles, vipTile } from "@/lib/home-content";
 
@@ -74,17 +74,14 @@ export function Services({
         className={`w-full max-w-[1328px] overflow-clip rounded-2xl border bg-[var(--cream)] ${HAIRLINE}`}
       >
         {/* The frame captures tile 03 open, so it is the first row's default */}
-        {bands.map((band, i) => (
-          <TabRow
-            key={i}
-            tiles={band}
-            defaultOpen={i === 0 ? 2 : -1}
-            evenWidths={evenWidths}
-            className={
-              i < bands.length - 1 || lastTile ? `border-b ${HAIRLINE}` : ""
-            }
-          />
-        ))}
+        <TabRows
+          bands={bands}
+          defaultOpens={bands.map((_, i) => (i === 0 ? 2 : -1))}
+          evenWidths={evenWidths}
+          rowClassNames={bands.map((_, i) =>
+            i < bands.length - 1 || lastTile ? `border-b ${HAIRLINE}` : ""
+          )}
+        />
 
         {/* Full-width closing tile — homepage frame only */}
         {lastTile && (

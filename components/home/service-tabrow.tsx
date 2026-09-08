@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { useHoldOpen } from "@/components/hold-open";
 
 const HAIRLINE = "border-[rgba(21,32,50,0.1)]";
@@ -88,6 +89,8 @@ export function TabRow({
   defaultOpen = -1,
   className = "",
   evenWidths = false,
+  active = true,
+  onActivate,
 }: {
   tiles: Tile[];
   defaultOpen?: number;
@@ -95,14 +98,27 @@ export function TabRow({
   /** Hold every tile at the same width; the open one still takes the
       photograph and the pill, it just does not widen. */
   evenWidths?: boolean;
+  /** False while the cursor is in a sibling row: the row lets go of whatever
+      it was holding and rests on `defaultOpen` again. */
+  active?: boolean;
+  /** Called when the cursor enters one of this row's tiles. */
+  onActivate?: () => void;
 }) {
-  const { hold } = useHoldOpen(defaultOpen);
+  const { hold, reset } = useHoldOpen(defaultOpen);
+
+  useEffect(() => {
+    if (!active) reset();
+    // `reset` is a fresh closure each render; it only ever sets `defaultOpen`.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [active]);
 
   return (
     <div
       className={`tabrow flex flex-col lg:flex-row ${
         evenWidths ? "tabrow-even" : ""
       } ${className}`}
+      onMouseEnter={onActivate}
+      onFocus={onActivate}
     >
       {tiles.map((t, i) => (
         <ServiceTab
@@ -115,5 +131,45 @@ export function TabRow({
         />
       ))}
     </div>
+  );
+}
+
+/**
+ * The bento's rows together. Each row holds the tile the cursor last entered,
+ * but only while the cursor is in that row: moving into the next row puts the
+ * one above back on the tile the frame captures (03 on the first row, none on
+ * the others) — otherwise every row the reader had crossed stayed open on its
+ * last tile and the grid ended up with one photograph per row.
+ */
+export function TabRows({
+  bands,
+  defaultOpens,
+  evenWidths = false,
+  rowClassNames,
+}: {
+  bands: Tile[][];
+  /** Per row, the tile the frame captures open; -1 for none. Plain arrays,
+      not callbacks: Services is a server component and cannot hand a
+      function across to this one. */
+  defaultOpens: number[];
+  evenWidths?: boolean;
+  rowClassNames: string[];
+}) {
+  const [activeRow, setActiveRow] = useState(-1);
+
+  return (
+    <>
+      {bands.map((band, i) => (
+        <TabRow
+          key={i}
+          tiles={band}
+          defaultOpen={defaultOpens[i] ?? -1}
+          evenWidths={evenWidths}
+          className={rowClassNames[i] ?? ""}
+          active={activeRow === -1 || activeRow === i}
+          onActivate={() => setActiveRow(i)}
+        />
+      ))}
+    </>
   );
 }

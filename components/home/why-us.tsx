@@ -36,6 +36,9 @@ import {
 /** Viewport-heights of scroll given to each state. */
 const VH_PER_STATE = 80;
 
+/** How long the closed puzzle holds before it dissolves into the photograph. */
+const DISSOLVE_MS = 700;
+
 const clamp = (v: number, lo: number, hi: number) =>
   v < lo ? lo : v > hi ? hi : v;
 
@@ -47,7 +50,11 @@ export function WhyUs() {
   const rightImgRef = useRef<SVGImageElement | null>(null);
   const [index, setIndex] = useState(0);
   const [reduced, setReduced] = useState(false);
+  const dissolve = useRef(0);
   const last = whyUsStates.length - 1;
+  /** The last scroll-driven state: the puzzle closed, no copy. From there the
+      resolved state arrives on its own — see the scroll handler. */
+  const closed = last - 1;
 
   /** The clip travels with its half while the photograph is pushed back by the
       same amount, so the picture stays registered to the frame and only the
@@ -93,24 +100,44 @@ export function WhyUs() {
         const span = track.offsetHeight - window.innerHeight;
         const p = span > 0 ? clamp(-track.getBoundingClientRect().top / span, 0, 1) : 0;
 
-        // p maps across the whole sequence; `i` is the state the reader is in
-        // and `t` how far through it, so the halves interpolate between stops
-        // instead of jumping.
+        // p maps across the scroll-driven states; `i` is the state the reader
+        // is in and `t` how far through it, so the halves interpolate between
+        // stops instead of jumping.
         //
-        // Scaled by the number of states, not the number of gaps between them:
-        // over `last` the final state exists only at exactly p === 1, so the
-        // closing copy and its call to action were unreachable — a pixel of
-        // rounding at the bottom of the track left the reader on state 5.
-        const raw = p * whyUsStates.length;
-        const i = clamp(Math.floor(raw), 0, last);
+        // Scroll only drives the sequence as far as the closed puzzle. The
+        // resolved state (photograph, closing copy, call to action) is not a
+        // further stop the reader has to scroll to: it used to be, and the
+        // page sat on the blank closed puzzle until they scrolled once more.
+        // Now the closed state holds for DISSOLVE_MS and dissolves into the
+        // photograph by itself. Scaled by `closed + 1` segments so that the
+        // closed state is a real span at the end of the track, not a single
+        // pixel at p === 1.
+        const raw = p * (closed + 1);
+        const i = clamp(Math.floor(raw), 0, closed);
         const t = clamp(raw - i, 0, 1);
         const a = PUZZLE_STOPS[i];
         const b = PUZZLE_STOPS[Math.min(i + 1, last)];
         write(a.left + (b.left - a.left) * t, a.right + (b.right - a.right) * t);
 
-        // The copy belongs to the state being entered, so it swaps at the
-        // boundary rather than trailing a frame behind the artwork.
-        setIndex((prev) => (prev === i ? prev : i));
+        if (i === closed) {
+          if (!dissolve.current) {
+            dissolve.current = window.setTimeout(() => {
+              dissolve.current = 0;
+              setIndex(last);
+            }, DISSOLVE_MS);
+          }
+          // Once resolved, stay resolved while the puzzle is closed — a few
+          // pixels of scroll must not flicker the copy back off.
+          setIndex((prev) => (prev === last || prev === i ? prev : i));
+        } else {
+          if (dissolve.current) {
+            clearTimeout(dissolve.current);
+            dissolve.current = 0;
+          }
+          // The copy belongs to the state being entered, so it swaps at the
+          // boundary rather than trailing a frame behind the artwork.
+          setIndex((prev) => (prev === i ? prev : i));
+        }
       });
     };
 
@@ -119,10 +146,14 @@ export function WhyUs() {
     window.addEventListener("resize", onScroll);
     return () => {
       if (frame) cancelAnimationFrame(frame);
+      if (dissolve.current) {
+        clearTimeout(dissolve.current);
+        dissolve.current = 0;
+      }
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
     };
-  }, [reduced, last]);
+  }, [reduced, last, closed]);
 
   // Derived rather than pushed into state from the effect: with reduced motion
   // the sequence never runs, so the resolved state is simply what it renders.
@@ -135,7 +166,10 @@ export function WhyUs() {
     <div
       ref={trackRef}
       className="relative"
-      style={{ height: reduced ? undefined : `${VH_PER_STATE * last + 100}vh` }}
+      style={{
+        // One span per scroll-driven state; the resolved state takes none.
+        height: reduced ? undefined : `${VH_PER_STATE * closed + 100}vh`,
+      }}
     >
       {/* The pinned stage fills the viewport and the section fills the stage.
           Holding the section at its 800px design height inside an h-screen
@@ -207,7 +241,7 @@ export function WhyUs() {
               behind the copy and falls to nothing at both edges. */}
           <div
             aria-hidden
-            className={`pointer-events-none absolute inset-0 isolate transition-opacity duration-500 ease-out ${
+            className={`pointer-events-none absolute inset-0 isolate transition-opacity duration-700 ease-out ${
               onPhoto ? "opacity-100" : "opacity-0"
             }`}
           >

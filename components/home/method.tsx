@@ -1,3 +1,4 @@
+import { DragScroll } from "@/components/drag-scroll";
 import { Display, Kicker } from "@/components/ui";
 import { methodItems } from "@/lib/home-content";
 
@@ -23,7 +24,11 @@ export function Method() {
         </Display>
       </header>
 
-      <ul className="no-scrollbar -mx-6 flex w-[calc(100%+3rem)] snap-x snap-mandatory scroll-px-6 sm:scroll-px-14 items-start gap-2 overflow-x-auto px-6 sm:-mx-14 sm:w-[calc(100%+7rem)] sm:px-14">
+      {/* Scrolls natively (trackpad, touch, shift-wheel), drags with a mouse,
+          and shows a thin scrollbar so the run-off reads as scrollable rather
+          than cut off. Proximity snapping, not mandatory: mandatory snapping
+          fights a drag and throws the row to the nearest card on release. */}
+      <DragScroll className="scroll-thin -mx-6 flex w-[calc(100%+3rem)] snap-x snap-proximity scroll-px-6 sm:scroll-px-14 items-start gap-2 overflow-x-auto px-6 pb-4 sm:-mx-14 sm:w-[calc(100%+7rem)] sm:px-14">
         {methodItems.map((item) => (
           <li
             key={item.title}
@@ -42,6 +47,7 @@ export function Method() {
                 decoding="async"
                 src={item.image}
                 alt=""
+                draggable={false}
                 className="absolute inset-0 size-full object-cover"
               />
               <div aria-hidden className="puzzle-lines absolute inset-0" />
@@ -54,7 +60,7 @@ export function Method() {
             </div>
           </li>
         ))}
-      </ul>
+      </DragScroll>
     </section>
   );
 }
