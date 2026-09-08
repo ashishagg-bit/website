@@ -98,17 +98,17 @@ export function TabRow({
   /** Hold every tile at the same width; the open one still takes the
       photograph and the pill, it just does not widen. */
   evenWidths?: boolean;
-  /** False while the cursor is in a sibling row: the row lets go of whatever
-      it was holding and rests on `defaultOpen` again. */
+  /** False while the cursor is in a sibling row: the row closes completely,
+      so only one tile in the whole bento is ever open. */
   active?: boolean;
   /** Called when the cursor enters one of this row's tiles. */
   onActivate?: () => void;
 }) {
-  const { hold, reset } = useHoldOpen(defaultOpen);
+  const { hold, close } = useHoldOpen(defaultOpen);
 
   useEffect(() => {
-    if (!active) reset();
-    // `reset` is a fresh closure each render; it only ever sets `defaultOpen`.
+    if (!active) close();
+    // `close` is a fresh closure each render; it only ever sets -1.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [active]);
 
@@ -136,10 +136,16 @@ export function TabRow({
 
 /**
  * The bento's rows together. Each row holds the tile the cursor last entered,
- * but only while the cursor is in that row: moving into the next row puts the
- * one above back on the tile the frame captures (03 on the first row, none on
- * the others) — otherwise every row the reader had crossed stayed open on its
- * last tile and the grid ended up with one photograph per row.
+ * but only while the cursor is in that row: moving into the next row closes
+ * the one above completely, so exactly one tile in the bento is open at a
+ * time.
+ *
+ * Closing rather than reverting to the frame's default is the point. Row 1
+ * rests on tile 03 and row 2 on nothing (2512:16019), and an earlier pass put
+ * an inactive row back on that default — which left tile 03's photograph open
+ * above whichever tile the cursor was on below it, two open cells at once,
+ * which is what the review reported. The default now applies only before the
+ * reader has touched the bento at all.
  */
 export function TabRows({
   bands,

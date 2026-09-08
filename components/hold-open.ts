@@ -27,9 +27,10 @@ type HoldProps = {
  */
 export function useHoldOpen(initial: number) {
   const [openIndex, setOpenIndex] = useState(initial);
-  /** Put the row back on the item the frame captures open. Rows that share a
-      band (the services bento) call this on every row the cursor is not in. */
-  const reset = () => setOpenIndex(initial);
+  /** Close the row entirely — nothing open, not even the frame's default.
+      Rows that share a band (the services bento) call this on every row the
+      cursor is not in, so the band never shows two open items at once. */
+  const close = () => setOpenIndex(-1);
 
   function hold(
     i: number,
@@ -53,5 +54,5 @@ export function useHoldOpen(initial: number) {
     };
   }
 
-  return { openIndex, hold, reset };
+  return { openIndex, hold, close };
 }
